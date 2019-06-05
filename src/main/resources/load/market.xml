@@ -1,0 +1,9 @@
+<market>
+    <apple>
+        <color>red</color>
+        <price>100</price>
+    </apple>
+    <egg>
+        <weight>200</weight>
+    </egg>
+</market>

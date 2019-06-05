@@ -1,0 +1,4 @@
+<Factory>
+          <!--相应的造车工厂的类全名，现在的程序可以选dynamic.test.BMWFactory或dynamic.test.BYDFactory -->
+          <Factroy-Name>com.test.load.demo01.BMWCar</Factroy-Name>
+</Factory>

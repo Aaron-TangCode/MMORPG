@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.mapper.MapMapper">
+    <select id="getMapById" resultType="com.game.map.ConcreteMap">
+        select * from map where id = #{id}
+    </select>
+
+    <select id="getMapIdByMapName" resultType="com.game.map.ConcreteMap">
+        select * from map where name=#{name}
+    </select>
+    <select id="getMap_Mapping" resultType="com.game.map.Map_Mapping">
+        select id,src_map,dest_map from map_mapping;
+    </select>
+    <select id="getIdByName" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select id from map where name=#{name}
+    </select>
+</mapper>

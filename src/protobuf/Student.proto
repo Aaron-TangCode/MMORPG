@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package com.AaronTang;
+
+option java_package = "com.hailintang.protobuf_netty";
+option java_outer_classname = "PersonInfo";
+
+message Student {
+  required string name = 1;
+  required int32 age = 2;
+  optional string address = 3;
+}
