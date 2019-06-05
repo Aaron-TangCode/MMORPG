@@ -1,7 +1,7 @@
 package com.test;
 
+import com.game.data.MapMapping;
 import com.game.map.bean.ConcreteMap;
-import com.game.map.Map_Mapping;
 import com.game.mapper.MapMapper;
 import com.game.mapper.RoleMapper;
 import com.game.mapper.UserMapper;
@@ -85,27 +85,8 @@ public class Main {
             session.close();
         }
     }
-    @Test
-    public void test06() throws IOException {
-        SqlSession session = SqlUtils.getSession();
-        try {
-            MapMapper mapper = session.getMapper(MapMapper.class);
-            List<Map_Mapping> map_mapping = mapper.getMap_Mapping();
-            Iterator<Map_Mapping> iterator = map_mapping.iterator();
-            while(iterator.hasNext()){
-                Map_Mapping mapMapping = iterator.next();
-//                System.out.println(mapMapping.getId()+","+mapMapping.getSrc_map()+","+mapMapping.getDest_map());
-                MapUtils.getListRole().add(mapMapping);
-            }
-            Iterator<Map_Mapping> iterator1 = MapUtils.getListRole().iterator();
-            while(iterator1.hasNext()){
-                Map_Mapping map_mapping1 = iterator1.next();
-                System.out.println(map_mapping1.getId()+","+map_mapping1.getSrc_map()+","+map_mapping1.getDest_map());
-            }
-        }finally {
-            session.close();
-        }
-    }
+
+
 
     public static void main(String[] args) {
         System.out.println(System.getProperty("java.class.path"));//系统的classpaht路径

@@ -1,21 +1,31 @@
 package com.game.role.bean;
 
-import com.game.State.ConcreteState;
 import com.game.map.bean.ConcreteMap;
 
 /**
  * @ClassName ConcreteRole
- * @Description TODO
+ * @Description 游戏角色实体类
  * @Author DELL
  * @Date 2019/5/3015:14
  * @Version 1.0
  */
 public class ConcreteRole {
+    /**
+     * 角色id
+     */
     private int id;
+    /**
+     * 角色name
+     */
     private String name;
+    /**
+     * 角色所在地图map
+     */
     private ConcreteMap concreteMap;
-    private ConcreteState concreteState;
-    private int hp = 100;//血量
+    /**
+     * 角色血量
+     */
+    private int hp = 100;
 
     public int getHp() {
         return hp;
@@ -49,14 +59,10 @@ public class ConcreteRole {
         this.concreteMap = concreteMap;
     }
 
-    public ConcreteState getConcreteState() {
-        return concreteState;
-    }
-
-    public void setConcreteState(ConcreteState concreteState) {
-        this.concreteState = concreteState;
-    }
-
+    /**
+     * 返回角色状态
+     * @return
+     */
     public String getState(){
        return getHp()>0?"生存":"死亡";
     }

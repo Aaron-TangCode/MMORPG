@@ -10,8 +10,8 @@
     <select id="getMapIdByMapName" resultType="com.game.map.bean.ConcreteMap">
         select * from map where name=#{name}
     </select>
-    <select id="getMap_Mapping" resultType="com.game.map.Map_Mapping">
-        select id,src_map,dest_map from map_mapping;
+    <select id="getMap_Mapping" resultType="com.game.data.MapMapping">
+        select id,srcMap,destMap from map_mapping;
     </select>
     <select id="getIdByName" resultType="java.lang.Integer" parameterType="java.lang.String">
         select id from map where name=#{name}

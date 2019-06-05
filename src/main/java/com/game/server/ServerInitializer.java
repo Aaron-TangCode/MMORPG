@@ -9,7 +9,7 @@ import io.netty.util.CharsetUtil;
 
 /**
  * @ClassName ServerInitializer
- * @Description TODO
+ * @Description 服务端initializer
  * @Author DELL
  * @Date 2019/5/2714:13
  * @Version 1.0

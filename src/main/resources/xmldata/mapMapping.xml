@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employees>
+    <employee>
+        <id>1</id>
+        <srcMap>1</srcMap>
+        <destMap>2</destMap>
+    </employee>
+    <employee>
+        <id>2</id>
+        <srcMap>2</srcMap>
+        <destMap>1</destMap>
+    </employee>
+
+    <employee>
+        <id>3</id>
+        <srcMap>2</srcMap>
+        <destMap>3</destMap>
+    </employee>
+    <employee>
+        <id>4</id>
+        <srcMap>2</srcMap>
+        <destMap>4</destMap>
+    </employee>
+    <employee>
+        <id>5</id>
+        <srcMap>3</srcMap>
+        <destMap>2</destMap>
+    </employee>
+    <employee>
+        <id>6</id>
+        <srcMap>3</srcMap>
+        <destMap>5</destMap>
+    </employee>
+    <employee>
+        <id>7</id>
+        <srcMap>4</srcMap>
+        <destMap>2</destMap>
+    </employee>
+    <employee>
+        <id>8</id>
+        <srcMap>5</srcMap>
+        <destMap>3</destMap>
+
+    </employee>
+</employees>

@@ -12,7 +12,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResultDTO {
 
-    private String code;//访问代码  200  成功  404 找不到资源  500 服务器异常
+    /**
+     * 访问代码  200  成功  404 找不到资源  500 服务器异常
+     */
+    private String code;
+    /**
+     * 消息内容
+     */
     private String msg;
     private static ResultDTO dto = new ResultDTO();
 

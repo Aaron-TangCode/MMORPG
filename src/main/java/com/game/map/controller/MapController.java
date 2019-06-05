@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @ClassName MapController
- * @Description TODO
+ * @Description 地图控制类
  * @Author DELL
  * @Date 2019/5/2921:07
  * @Version 1.0
@@ -28,11 +28,22 @@ public class MapController {
     @Autowired
     private RoleService roleService;
 
+    /**
+     * 获取当前地图
+     * @param id
+     * @return
+     */
     @RequestAnnotation("/getMap")
     public ConcreteMap getMap(int id){
         return mapService.getMap(id);
     }
 
+    /**
+     * 切换地图
+     * @param username
+     * @param dest
+     * @return
+     */
     @RequestAnnotation("/moveTo")
     public String moveTo(String username,String dest) {
         //获取角色信息
@@ -57,17 +68,4 @@ public class MapController {
         }
     }
 
-    /**
-     * 打印当前地图的所有上线的角色信息
-     * @param mname 地图名
-     * @return
-     */
-    @RequestAnnotation("/aoi")
-    public List<ConcreteRole> printOnLineRole(String  mname){
-        //mid地图id
-        int mid = mapService.getMapIdByMapName(mname);
-        //根据地图id找到对应以上线的role，返回一个list
-        List<ConcreteRole> list = roleService.getOnlineRole(mid);
-        return list;
-    }
 }

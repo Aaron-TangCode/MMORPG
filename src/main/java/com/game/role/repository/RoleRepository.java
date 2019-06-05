@@ -10,14 +10,18 @@ import java.util.List;
 
 /**
  * @ClassName RoleRepository
- * @Description TODO
+ * @Description 角色repository
  * @Author DELL
  * @Date 2019/5/2920:41
  * @Version 1.0
  */
 @Repository("RoleRepository")
 public class RoleRepository {
-
+    /**
+     * 获取角色
+     * @param id
+     * @return
+     */
     public ConcreteRole getRole(int id) {
         SqlSession session = SqlUtils.getSession();
         try {
@@ -29,6 +33,11 @@ public class RoleRepository {
         }
     }
 
+    /**
+     * 通过角色名roleName获取地图map
+     * @param roleName
+     * @return
+     */
     public String getMapByRoleName(String roleName) {
         SqlSession session = SqlUtils.getSession();
         try {
@@ -40,6 +49,12 @@ public class RoleRepository {
         }
     }
 
+    /**
+     * 更新角色所在地图
+     * @param roleName
+     * @param dest
+     * @return
+     */
     public boolean updateMap(String roleName, Integer dest) {
         SqlSession session = SqlUtils.getSession();
         try {
@@ -52,17 +67,11 @@ public class RoleRepository {
         }
     }
 
-    public List<ConcreteRole> getOnlineRole(int mid) {
-        SqlSession session = SqlUtils.getSession();
-        try {
-            RoleMapper mapper = session.getMapper(RoleMapper.class);
-            List<ConcreteRole> list = mapper.getOnlineRole(mid);
-            return list;
-        }finally {
-            session.close();
-        }
-    }
-
+    /**
+     * 创建角色
+     * @param name
+     * @return
+     */
     public boolean registerRole(String name) {
         SqlSession session = SqlUtils.getSession();
         try {
@@ -90,15 +99,15 @@ return false;
     }
 
     /**
-     * 根据is获取name
-     * @param map_id
+     * 根据id获取name
+     * @param mapId
      * @return
      */
-    public String getMapNameByMapId(int map_id) {
+    public String getMapNameByMapId(int mapId) {
         SqlSession session = SqlUtils.getSession();
         try {
             RoleMapper mapper = session.getMapper(RoleMapper.class);
-            String name = mapper.getMapNameByMapId(map_id);
+            String name = mapper.getMapNameByMapId(mapId);
             return name;
         }finally {
             session.close();

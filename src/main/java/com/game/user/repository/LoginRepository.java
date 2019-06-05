@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @ClassName LoginRepository
- * @Description TODO
+ * @Description 用户登录repository
  * @Author DELL
  * @Date 2019/5/2716:34
  * @Version 1.0

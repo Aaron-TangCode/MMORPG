@@ -26,11 +26,17 @@ import java.util.*;
  */
 @Component
 public class MyAnnotationUtil {
-    //装类+方法资源名-->类+方法的缓存
+    /**
+     * 装类+方法资源名-->类+方法的缓存
+     */
     private static Map<String,ClassAndMethodDTO> map = new HashMap<>();
-    //控制器是否单例
-    private static boolean isSingle = true;//默认为true
-    //控制器类对象
+    /**
+     * 控制器是否单例
+     */
+    private static boolean isSingle = true;
+    /**
+     * 控制器类对象
+     */
     private static Map<Class,Object> controllerClasses =new HashMap<>();
 
     /**
@@ -120,11 +126,11 @@ public class MyAnnotationUtil {
     /**
      * 供外部调用的方法,具备如下功能
      * A.传进来一个加密的字符串,解析出需要的如下内容：
-     * 1.请求资源  找到那个控制器类的那个方法
-     * 2.参数 对应类的对应方法需要的参数
-     * B.通过反射创建对应控制器对象
-     * C.调用控制器类的方法
-     *
+     *  1.请求资源  找到那个控制器类的那个方法
+     *   2.参数 对应类的对应方法需要的参数
+     *  B.通过反射创建对应控制器对象
+     *  C.调用控制器类的方法
+     * @param content
      * @return
      */
     public static String requestService(String content) {

@@ -8,13 +8,19 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @ClassName RegisterRepository
- * @Description TODO
+ * @Description 用户注册repository
  * @Author DELL
  * @Date 2019/5/2716:35
  * @Version 1.0
  */
 @Repository("RegisterRepository")
 public class RegisterRepository {
+    /**
+     * 用户注册
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean register(String username,String password){
         SqlSession session = SqlUtils.getSession();
         try {
@@ -37,6 +43,5 @@ public class RegisterRepository {
         }finally {
             session.close();
         }
-
     }
 }

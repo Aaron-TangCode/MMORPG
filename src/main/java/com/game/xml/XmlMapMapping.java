@@ -1,29 +1,24 @@
 package com.game.xml;
 
-import com.game.map.Map_Mapping;
+import com.game.data.MapMapping;
 import com.game.utils.MapUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.dom4j.io.XMLWriter;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 import java.util.Iterator;
 @XmlAnnotation
 @Component
-public class Dom4jDemo {
-    private static final String PATH = "src/main/resources/xmldata/employees.xml";
+public class XmlMapMapping {
+    private static final String PATH = "src/main/resources/xmldata/mapMapping.xml";
     @XmlAnnotation
     public static void parserXml() {
         File inputXml = new File(PATH);
         SAXReader saxReader = new SAXReader();
-        Map_Mapping mapMapping = null;
+        MapMapping mapMapping = null;
         try {
             Document document = saxReader.read(inputXml);
             Element employees = document.getRootElement();
@@ -32,12 +27,12 @@ public class Dom4jDemo {
                 for (Iterator j = employee.elementIterator(); j.hasNext(); ) {
                     Element node = (Element) j.next();
                     System.out.println(node.getName() + ":" + node.getText());
-                    mapMapping = new Map_Mapping();
+                    mapMapping = new MapMapping();
                     mapMapping.setId(Integer.parseInt(node.getText()));
                     node = (Element) j.next();
-                    mapMapping.setSrc_map(Integer.parseInt(node.getText()));
+                    mapMapping.setSrcMap(Integer.parseInt(node.getText()));
                     node = (Element) j.next();
-                    mapMapping.setDest_map(Integer.parseInt(node.getText()));
+                    mapMapping.setDestMap(Integer.parseInt(node.getText()));
 
                 }
                 MapUtils.getListRole().add(mapMapping);

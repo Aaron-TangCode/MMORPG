@@ -8,14 +8,12 @@ import com.game.role.service.RoleService;
 import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-
 /**
- * 自定义注解：用来给Spring扫描（扫描）
+ * 用户controller
  */
 @RequestAnnotation("/user")
 @Component
@@ -30,7 +28,7 @@ public class UserController {
 	private RoleService roleService;
 
 	/**
-	 * 登录
+	 * 用户登录
 	 * @param username
 	 * @param password
 	 * @return
@@ -40,7 +38,6 @@ public class UserController {
 		boolean isSuccess = login.login(username,password);
 		ConcreteRole role = this.getRoleAfterLoginSuccess(username);
 		if(isSuccess){
-			System.out.println("登录成功1111111111");
 			MapUtils.getMapRole().put(username,role);
 			return role.getName()+"上线了";
 		}else{
@@ -50,7 +47,7 @@ public class UserController {
 	}
 
 	/**
-	 * 登出
+	 * 用户登出
 	 * @param username
 	 * @return
 	 */

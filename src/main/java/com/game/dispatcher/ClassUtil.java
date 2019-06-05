@@ -7,12 +7,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * 这个类是根据一个公共父级包得到所有子级包下所有控制器类的全限定名的工具类
- *功能：
- *1.获取一个父级包下所有类的全限定名封装的Class对象
+ * @Author Dell
+ * * 这个类是根据一个公共父级包得到所有子级包下所有控制器类的全限定名的工具类
+ *  *功能：
+ *  *1.获取一个父级包下所有类的全限定名封装的Class对象
+ *
  */
-@SuppressWarnings("rawtypes")//去掉泛型警告
+@SuppressWarnings("rawtypes")
 @Component
 public class ClassUtil {
 	public static List<Class> parseAllController(String basePackage){

@@ -1,6 +1,6 @@
 package com.test.load.demo02;
 
-import com.game.map.Map_Mapping;
+import com.game.data.MapMapping;
 import com.game.utils.MapUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -40,7 +40,7 @@ public class Dom4jDemo{
     public static void parserXml(String fileName) {
         File inputXml = new File(PATH+fileName);
         SAXReader saxReader = new SAXReader();
-        Map_Mapping mapMapping = null;
+        MapMapping mapMapping = null;
         try {
             Document document = saxReader.read(inputXml);
             Element employees = document.getRootElement();
@@ -49,12 +49,12 @@ public class Dom4jDemo{
                 for (Iterator j = employee.elementIterator(); j.hasNext(); ) {
                     Element node = (Element) j.next();
                     System.out.println(node.getName() + ":" + node.getText());
-                    mapMapping = new Map_Mapping();
+                    mapMapping = new MapMapping();
                     mapMapping.setId(Integer.parseInt(node.getText()));
                     node = (Element) j.next();
-                    mapMapping.setSrc_map(Integer.parseInt(node.getText()));
+                    mapMapping.setSrcMap(Integer.parseInt(node.getText()));
                     node = (Element) j.next();
-                    mapMapping.setDest_map(Integer.parseInt(node.getText()));
+                    mapMapping.setDestMap(Integer.parseInt(node.getText()));
 
                 }
                 MapUtils.getListRole().add(mapMapping);
@@ -67,12 +67,12 @@ public class Dom4jDemo{
     }
 
     public static void main(String[] args) {
-//        createXml("employees.xml");
-        parserXml("employees.xml");
-        Iterator<Map_Mapping> iterator = MapUtils.getListRole().iterator();
+//        createXml("mapMapping.xml");
+        parserXml("mapMapping.xml");
+        Iterator<MapMapping> iterator = MapUtils.getListRole().iterator();
         while(iterator.hasNext()){
-            Map_Mapping next = iterator.next();
-            System.out.println(next.getId()+":"+next.getSrc_map()+":"+next.getDest_map());
+            MapMapping next = iterator.next();
+            System.out.println(next.getId()+":"+next.getSrcMap()+":"+next.getDestMap());
         }
     }
 } 

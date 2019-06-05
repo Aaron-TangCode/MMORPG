@@ -11,7 +11,7 @@ import java.io.InputStream;
 
 /**
  * @ClassName SqlUtils
- * @Description TODO
+ * @Description 数据库工具类
  * @Author DELL
  * @Date 2019/5/2717:18
  * @Version 1.0

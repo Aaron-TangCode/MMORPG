@@ -1,6 +1,6 @@
 package com.game.utils;
 
-import com.game.map.Map_Mapping;
+import com.game.data.MapMapping;
 import com.game.role.bean.ConcreteRole;
 
 import java.util.*;
@@ -14,7 +14,7 @@ import java.util.*;
  */
 public class MapUtils {
     private static volatile Map<String,ConcreteRole> mapRole = null;
-    private static volatile List<Map_Mapping> listRole = null;
+    private static volatile List<MapMapping> listRole = null;
     private static volatile Map<String,String> reslutCollections = null;
     private MapUtils(){
     }
@@ -39,7 +39,7 @@ public class MapUtils {
      * 地图映射列表
      * @return 地图Map_Mapping实体
      */
-    public static List<Map_Mapping> getListRole() {
+    public static List<MapMapping> getListRole() {
         if(listRole==null){
             synchronized (MapUtils.class){
                 if (listRole==null){
@@ -58,10 +58,10 @@ public class MapUtils {
      * @return
      */
     public static  boolean isReach(int src_id,int dest_id){
-        Iterator<Map_Mapping> iterator = getListRole().iterator();
+        Iterator<MapMapping> iterator = getListRole().iterator();
         while(iterator.hasNext()){
-            Map_Mapping mapMapping = iterator.next();
-            if(mapMapping.getSrc_map()==src_id&&mapMapping.getDest_map()==dest_id){
+            MapMapping mapMapping = iterator.next();
+            if(mapMapping.getSrcMap()==src_id&&mapMapping.getDestMap()==dest_id){
                 return true;
             }
         }

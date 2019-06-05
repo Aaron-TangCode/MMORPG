@@ -2,7 +2,7 @@ package com.game.dispatcher;
 
 /**
  * @ClassName DataCodeor
- * @Description TODO
+ * @Description 编码器、解码器
  * @Author DELL
  * @Date 2019/5/2815:06
  * @Version 1.0
