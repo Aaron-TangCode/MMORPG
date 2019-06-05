@@ -1,6 +1,6 @@
-package com.game.repository;
+package com.game.map.repository;
 
-import com.game.map.ConcreteMap;
+import com.game.map.bean.ConcreteMap;
 import com.game.map.Map_Mapping;
 import com.game.mapper.MapMapper;
 import com.game.utils.SqlUtils;

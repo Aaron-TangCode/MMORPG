@@ -1,8 +1,7 @@
 package com.game.utils;
 
 import com.game.map.Map_Mapping;
-import com.game.role.ConcreteRole;
-import com.hailintang.gameserver2.map.MapInfo;
+import com.game.role.bean.ConcreteRole;
 
 import java.util.*;
 

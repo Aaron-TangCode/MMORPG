@@ -1,12 +1,12 @@
 package com.test;
 
-import com.game.map.ConcreteMap;
+import com.game.map.bean.ConcreteMap;
 import com.game.map.Map_Mapping;
 import com.game.mapper.MapMapper;
 import com.game.mapper.RoleMapper;
 import com.game.mapper.UserMapper;
-import com.game.role.ConcreteRole;
-import com.game.user.User;
+import com.game.role.bean.ConcreteRole;
+import com.game.user.bean.User;
 import com.game.utils.MapUtils;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;

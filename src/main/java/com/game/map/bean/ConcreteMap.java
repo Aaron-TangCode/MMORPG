@@ -1,13 +1,13 @@
-package com.game.State;
+package com.game.map.bean;
 
 /**
- * @ClassName ConcreteState
+ * @ClassName ConcreteMap
  * @Description TODO
  * @Author DELL
- * @Date 2019/5/3015:13
+ * @Date 2019/5/3015:09
  * @Version 1.0
  */
-public class ConcreteState {
+public class ConcreteMap {
     private int id;
     private String name;
 
@@ -29,7 +29,7 @@ public class ConcreteState {
 
     @Override
     public String toString() {
-        return "ConcreteState{" +
+        return "ConcreteMap{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

@@ -1,7 +1,7 @@
-package com.game.service;
+package com.game.role.service;
 
-import com.game.repository.RoleRepository;
-import com.game.role.ConcreteRole;
+import com.game.role.repository.RoleRepository;
+import com.game.role.bean.ConcreteRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

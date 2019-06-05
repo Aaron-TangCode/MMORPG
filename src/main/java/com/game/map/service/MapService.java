@@ -1,7 +1,7 @@
-package com.game.service;
+package com.game.map.service;
 
-import com.game.map.ConcreteMap;
-import com.game.repository.MapRepository;
+import com.game.map.bean.ConcreteMap;
+import com.game.map.repository.MapRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

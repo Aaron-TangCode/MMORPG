@@ -1,331 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9153da14-e4c8-4a27-b93d-8a851b3ef2c3" name="Default Changelist" comment="MMORPG&#10;构建世界&#10;请求分发（模仿SpringMVC）">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/SpringMain/SpringMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/State/ConcreteState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/client/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/client/ClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/client/ClientInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/controller/MapController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/controller/RoleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/ClassAndMethodDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/ClassUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/DataCodeor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/HandleThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/MyAnnotationUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/ReqThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/RequestAnnotation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/ResultDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/StringUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/map/ConcreteMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/map/Map_Mapping.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/mapper/MapMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/mapper/RoleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/repository/LoginRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/repository/MapRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/repository/RegisterRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/repository/RoleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/role/ConcreteRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/role/LoginReq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/role/RoleOpration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/role/RoleState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/ServerInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/service/Login.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/service/MapService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/service/RegisterService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/service/RoleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/user/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/utils/SqlUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/utils/ThreadUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/xml/Dom4jDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/xml/XmlAnnotation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintan/protobuf/DataInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintan/protobuf/TestProto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameclient2/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameclient2/ClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameclient2/ClientInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/Main/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/State/AliveState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/State/DeadState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/State/ForbidState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/State/State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/map/Castle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/map/CentralMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/map/Forest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/map/Map.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/map/MapInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/map/Origin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/map/Village.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/role/ParentRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/role/Role_01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/role/Role_02.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/server/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/server/ServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/gameserver2/server/ServerInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/map/Map.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/map/Origin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/netty_http_test/TestHttpServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/netty_http_test/TestServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/netty_http_test/TestServerInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/protobuf_netty/MyClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/protobuf_netty/MyClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/protobuf_netty/MyClientInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/protobuf_netty/MyServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/protobuf_netty/MyServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/protobuf_netty/MyServerInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/protobuf_netty/PersonInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/read_write_monitor/MyHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/read_write_monitor/MyInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/read_write_monitor/MyServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/service/Login.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/service/Register.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_chat_server_multiclient/client/MyChatClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_chat_server_multiclient/client/MyChatClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_chat_server_multiclient/client/MyChatClientInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_chat_server_multiclient/server/MyChatInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_chat_server_multiclient/server/MyChatServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_chat_server_multiclient/server/MyChatServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_client/MyClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_client/MyClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_client/MyClientInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_client/MyServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_client/MyServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_client/MyServerInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_multiclient/MyClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_multiclient/MyClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_multiclient/MyClientInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_multiclient/MyServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_multiclient/MyServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/socket_server_multiclient/MyServerInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/web_socket_demo01/MyTextWebSocketFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/web_socket_demo01/MyWebSocketInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hailintang/web_socket_demo01/MyWebSocketServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/BusinessLogic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/Todo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/TodoReport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/io/AIO/AioServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/io/BIO/BioServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/io/BIO/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/io/NIO/NioServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/jdk8/lambda/Demo01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/AbstractConfigLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/AppleConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/ConfigProviderFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/EggConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/IConfigLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/IConfigProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/MarketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/MarketConfigLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/OwnerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/OwnerConfigLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/demo01/BMWCar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/demo01/BYDCar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/demo01/ICarFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/demo01/TestMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/load/demo02/Dom4jDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/ActionBeanPostProcessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/ActionMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/ActionMapUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/ClientTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/Header.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/MessageDecoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/MessageEncoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/NettyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/ServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/TimeServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/testgameserverclient/UserAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/applicationcontext.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/config/mybatis-config.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/load/factory.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/load/market.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/load/owner.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/MapMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/StateMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/my.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/xmldata/employees.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/protobuf/Student.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/webapp/test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/testdemo.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/SpringMain/SpringMain.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/State/ConcreteState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/client/Client.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/client/ClientHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/client/ClientInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/controller/MapController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/controller/RoleController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/dispatcher/ClassAndMethodDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/dispatcher/ClassUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/dispatcher/DataCodeor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/dispatcher/HandleThread.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/dispatcher/MyAnnotationUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/dispatcher/ReqThread.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/dispatcher/RequestAnnotation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/dispatcher/ResultDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/dispatcher/StringUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/map/ConcreteMap.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/map/Map_Mapping.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/mapper/MapMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/mapper/RoleMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/mapper/UserMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/repository/LoginRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/repository/MapRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/repository/RegisterRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/repository/RoleRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/role/ConcreteRole.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/role/LoginReq.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/role/RoleOpration.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/role/RoleState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/server/Server.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/server/ServerHandler$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/server/ServerHandler$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/server/ServerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/server/ServerInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/service/Login.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/service/MapService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/service/RegisterService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/service/RoleService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/user/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/utils/MapUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/utils/SqlUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/utils/ThreadUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/xml/Dom4jDemo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/game/xml/XmlAnnotation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student$Builder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$StudentOrBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/TestProto.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/Client.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/ClientHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/ClientInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/Main/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/State/AliveState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/State/DeadState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/State/ForbidState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/State/State.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/Castle.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/CentralMap.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/Forest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/Map.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/MapInfo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/Origin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/Village.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/role/ParentRole.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/role/Role_01.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/role/Role_02.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/Server.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/ServerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/ServerInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/map/Map.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/map/Origin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestHttpServerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestServerInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClient.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClientHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClientInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServerInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student$Builder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$StudentOrBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyHandler$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/service/Login.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/service/Register.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClient.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClientHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClientInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClient.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClientHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClientInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServerInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClient.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClientHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClientInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServerInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyTextWebSocketFrame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyWebSocketInitializer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyWebSocketServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/annotation/BusinessLogic.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/annotation/Todo$Priority.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/annotation/Todo$Status.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/annotation/Todo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/annotation/TodoReport.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/io/BIO/BioServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/io/BIO/Client.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/io/NIO/NioServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/jdk8/lambda/Demo01.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/AbstractConfigLoader.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/AppleConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/ConfigProviderFactory.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/EggConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/IConfigLoader.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/IConfigProvider.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/MarketConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/MarketConfigLoader.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/OwnerConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/OwnerConfigLoader.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/demo01/BMWCar.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/demo01/BYDCar.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/demo01/ICarFactory.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/demo01/TestMain.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/load/demo02/Dom4jDemo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/Action.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ActionBeanPostProcessor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ActionMap.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ActionMapUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ClientTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/Header.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/Message.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/MessageDecoder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/MessageEncoder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/NettyController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ServerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/Test.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/TimeServer$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/TimeServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/UserAction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testdemo.iml" afterDir="false" />
+    <list default="true" id="9153da14-e4c8-4a27-b93d-8a851b3ef2c3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/SpringMain/SpringMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/server/SpringMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/State/ConcreteState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/controller/MapController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/map/controller/MapController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/role/controller/RoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/MyAnnotationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/dispatcher/MyAnnotationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/map/ConcreteMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/map/bean/ConcreteMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/mapper/MapMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/mapper/MapMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/mapper/RoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/mapper/RoleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/repository/LoginRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/user/repository/LoginRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/repository/MapRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/map/repository/MapRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/repository/RegisterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/user/repository/RegisterRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/role/repository/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/role/ConcreteRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/role/bean/ConcreteRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/role/LoginReq.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/role/RoleOpration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/role/RoleState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/service/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/user/service/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/service/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/map/service/MapService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/user/service/RegisterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/role/service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/user/bean/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/MapMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/MapMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/game/controller/MapController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/controller/MapController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/game/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/game/map/ConcreteMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/game/mapper/MapMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/mapper/MapMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/game/repository/MapRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/repository/MapRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/game/role/ConcreteRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/role/ConcreteRole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/game/service/MapService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/service/MapService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/Main.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -348,28 +61,73 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/repository/MapRepository.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/service/Login.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+            <state relative-caret-position="142">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/controller/MapController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/service/RegisterService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
+            <state relative-caret-position="142">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/service/MapService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/repository/LoginRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="7" column="3" lean-forward="true" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+            <state relative-caret-position="142">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/repository/RegisterRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/Server.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="30" column="34" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/SpringMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/mapper/MapMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/repository/RoleRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -378,68 +136,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/service/RegisterService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/bean/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            <state relative-caret-position="142">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/service/RoleService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+            <state relative-caret-position="142">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
               <folding>
-                <element signature="e#765#766#0" expanded="true" />
-                <element signature="e#827#828#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/mapper/RoleMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/repository/RoleRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="4" column="31" lean-forward="true" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/load/owner.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/dispatcher/RequestAnnotation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/test/load/demo02/Dom4jDemo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -475,12 +187,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/game/utils/ThreadUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/role/ConcreteRole.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/controller/UserController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/map/Map.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/test/annotation/BusinessLogic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/controller/RoleController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/dispatcher/ClassUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/load/MarketConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/load/AppleConfig.java" />
@@ -524,8 +230,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/game/service/RoleService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/State/DeadState.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/mapper/RoleMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/repository/RoleRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/controller/StateController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/map/controller/MapController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/map/service/MapService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/repository/RoleRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/role/controller/RoleController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/role/service/RoleService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/user/service/RegisterService.java" />
       </list>
     </option>
   </component>
@@ -570,6 +282,41 @@
             <path>
               <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
               <item name="testdemo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -636,11 +383,11 @@
       </method>
     </configuration>
     <configuration name="SpringMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.game.SpringMain.SpringMain" />
+      <option name="MAIN_CLASS_NAME" value="com.game.server.SpringMain" />
       <module name="testdemo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.game.SpringMain.*" />
+          <option name="PATTERN" value="com.game.server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -751,6 +498,14 @@
       <option name="presentableId" value="Default" />
       <updated>1558419416918</updated>
     </task>
+    <task id="LOCAL-00001" summary="MMORPG&#10;构建世界&#10;请求分发（模仿SpringMVC）">
+      <created>1559730773505</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1559730773505</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -806,12 +561,12 @@
       <window_info id="Structure" order="6" sideWeight="0.40545455" side_tool="true" weight="0.25938338" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.38755304" />
       <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.50402147" side_tool="true" weight="0.28429985" />
-      <window_info anchor="bottom" id="Messages" order="2" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Messages" order="2" weight="0.3286119" />
       <window_info anchor="bottom" id="FindBugs-IDEA" order="3" sideWeight="0.49932975" weight="0.32956153" />
       <window_info anchor="bottom" id="Version Control" order="4" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.32956153" />
-      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49597856" weight="0.3592645" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49597856" visible="true" weight="0.35835695" />
       <window_info anchor="bottom" id="Debug" order="8" sideWeight="0.49597856" weight="0.24328147" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
@@ -835,7 +590,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/game/controller/UserController.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java</url>
           <line>39</line>
           <properties />
           <option name="timeStamp" value="33" />
@@ -847,13 +602,13 @@
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/game/controller/UserController.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java</url>
           <line>73</line>
           <properties />
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/game/controller/MapController.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/game/map/controller/MapController.java</url>
           <line>39</line>
           <properties />
           <option name="timeStamp" value="43" />
@@ -898,82 +653,10 @@
     </SUITE>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final-sources.jar!/io/netty/channel/SimpleChannelInboundHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/dispatcher/MyAnnotationUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="155" selection-start-line="155" selection-end-line="155" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/my.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/xml/XmlAnnotation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/xml/Dom4jDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="28" column="58" lean-forward="true" selection-start-line="28" selection-start-column="58" selection-end-line="28" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final-sources.jar!/io/netty/handler/codec/string/StringDecoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="69" column="11" selection-start-line="69" selection-start-column="11" selection-end-line="69" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/ServerInitializer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="20" column="53" lean-forward="true" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/controller/RoleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/repository/RegisterRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -987,31 +670,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="30" column="34" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/repository/LoginRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="36" column="7" selection-start-line="36" selection-start-column="7" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/protobuf/Student.proto">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
           <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/mapper/MapMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1083,13 +745,6 @@
     <entry file="file://$PROJECT_DIR$/testdemo.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/SpringMain/SpringMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="41" column="37" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/MapInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
@@ -1132,31 +787,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/ConcreteMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="75" column="52" lean-forward="true" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/repository/MapRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -1167,45 +801,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/controller/MapController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/service/MapService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="7" column="3" lean-forward="true" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/service/RegisterService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/test/load/demo02/Dom4jDemo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/service/RoleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
-          <folding>
-            <element signature="e#765#766#0" expanded="true" />
-            <element signature="e#827#828#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1254,13 +853,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/repository/RoleRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="4" column="31" lean-forward="true" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/load/owner.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="56">
@@ -1270,8 +862,173 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/dispatcher/RequestAnnotation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+        <state relative-caret-position="242">
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/bean/ConcreteMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/controller/MapController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/service/MapService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/repository/MapRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="21" column="51" lean-forward="true" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/RoleState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/RoleOpration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/LoginReq.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/bean/ConcreteRole.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/controller/RoleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/service/RoleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/repository/RoleRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/bean/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/service/Login.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/service/RegisterService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/repository/LoginRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/repository/RegisterRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="30" column="34" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/State/ConcreteState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/SpringMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/mapper/MapMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
         </state>
       </provider>
     </entry>

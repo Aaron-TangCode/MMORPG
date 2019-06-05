@@ -1,6 +1,6 @@
 package com.game.mapper;
 
-import com.game.role.ConcreteRole;
+import com.game.role.bean.ConcreteRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

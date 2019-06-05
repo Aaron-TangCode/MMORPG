@@ -1,4 +1,4 @@
-package com.game.SpringMain;
+package com.game.server;
 
 import com.game.dispatcher.*;
 import com.game.server.Server;

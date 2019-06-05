@@ -1,6 +1,6 @@
-package com.game.service;
+package com.game.user.service;
 
-import com.game.repository.RegisterRepository;
+import com.game.user.repository.RegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

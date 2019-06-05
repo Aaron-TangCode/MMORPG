@@ -1,11 +1,8 @@
-package com.game.service;
+package com.game.user.service;
 
-import com.game.dispatcher.RequestAnnotation;
-import com.game.repository.LoginRepository;
+import com.game.user.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 /**
  * @ClassName Login

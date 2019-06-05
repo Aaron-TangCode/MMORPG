@@ -1,8 +1,7 @@
 package com.game.mapper;
 
-import com.game.map.ConcreteMap;
+import com.game.map.bean.ConcreteMap;
 import com.game.map.Map_Mapping;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

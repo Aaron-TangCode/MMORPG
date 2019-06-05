@@ -1,7 +1,6 @@
 package com.game.mapper;
 
-import com.game.user.User;
-import org.apache.ibatis.annotations.Param;
+import com.game.user.bean.User;
 
 /**
  * @ClassName UserMapper

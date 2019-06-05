@@ -2,7 +2,7 @@ package com.game.dispatcher;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.game.SpringMain.SpringMain;
+import com.game.server.SpringMain;
 import org.apache.ibatis.javassist.ClassPool;
 import org.apache.ibatis.javassist.CtClass;
 import org.apache.ibatis.javassist.CtMethod;

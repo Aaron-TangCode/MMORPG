@@ -1,7 +1,7 @@
-package com.game.repository;
+package com.game.role.repository;
 
 import com.game.mapper.RoleMapper;
-import com.game.role.ConcreteRole;
+import com.game.role.bean.ConcreteRole;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;

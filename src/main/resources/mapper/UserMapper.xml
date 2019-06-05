@@ -3,16 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.game.mapper.UserMapper">
-    <select id="selectUserById" resultType="com.game.user.User">
+    <select id="selectUserById" resultType="com.game.user.bean.User">
     select * from user where id = #{id}
     </select>
     <select id="getUserRoleIdByUsername" parameterType="java.lang.String" resultType="java.lang.Integer">
         select role_id from user where username = #{username}
     </select>
-    <insert id="addUser" parameterType="com.game.user.User">
+    <insert id="addUser" parameterType="com.game.user.bean.User">
         insert into user(username,password) values(#{username},#{password})
     </insert>
-    <select id="selectUserByUsername" resultType="com.game.user.User">
+    <select id="selectUserByUsername" resultType="com.game.user.bean.User">
         select * from user where username=#{username}
     </select>
 </mapper>

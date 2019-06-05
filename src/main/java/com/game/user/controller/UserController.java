@@ -1,10 +1,10 @@
-package com.game.controller;
+package com.game.user.controller;
 
 import com.game.dispatcher.RequestAnnotation;
-import com.game.role.ConcreteRole;
-import com.game.service.Login;
-import com.game.service.RegisterService;
-import com.game.service.RoleService;
+import com.game.role.bean.ConcreteRole;
+import com.game.user.service.Login;
+import com.game.user.service.RegisterService;
+import com.game.role.service.RoleService;
 import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

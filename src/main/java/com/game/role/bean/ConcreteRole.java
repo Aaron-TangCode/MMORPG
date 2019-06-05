@@ -1,8 +1,7 @@
-package com.game.role;
+package com.game.role.bean;
 
 import com.game.State.ConcreteState;
-import com.game.map.ConcreteMap;
-import org.springframework.context.annotation.Bean;
+import com.game.map.bean.ConcreteMap;
 
 /**
  * @ClassName ConcreteRole

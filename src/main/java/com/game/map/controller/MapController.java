@@ -1,10 +1,10 @@
-package com.game.controller;
+package com.game.map.controller;
 
 import com.game.dispatcher.RequestAnnotation;
-import com.game.map.ConcreteMap;
-import com.game.role.ConcreteRole;
-import com.game.service.MapService;
-import com.game.service.RoleService;
+import com.game.map.bean.ConcreteMap;
+import com.game.role.bean.ConcreteRole;
+import com.game.map.service.MapService;
+import com.game.role.service.RoleService;
 import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

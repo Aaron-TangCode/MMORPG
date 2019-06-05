@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.game.mapper.RoleMapper">
-    <resultMap id="roleMap" type="com.game.role.ConcreteRole">
+    <resultMap id="roleMap" type="com.game.role.bean.ConcreteRole">
         <id column="role_id" property="id"></id>
         <result column="role_name" property="name"></result>
         <result column="map_id" property="concreteMap.id"></result>

@@ -1,4 +1,4 @@
-package com.game.user;
+package com.game.user.bean;
 
 /**
  * @ClassName User

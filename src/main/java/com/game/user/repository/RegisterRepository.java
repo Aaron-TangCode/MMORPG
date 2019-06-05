@@ -1,7 +1,7 @@
-package com.game.repository;
+package com.game.user.repository;
 
 import com.game.mapper.UserMapper;
-import com.game.user.User;
+import com.game.user.bean.User;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
