@@ -1,44 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="26638e92-5c45-4e48-8c5e-15d3c05ce239" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/testdemo.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student$Builder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/MapInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/MapInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student$Builder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyWebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyWebSocketServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/BIO/BioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/BIO/BioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/BIO/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/BIO/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/NIO/NioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/NIO/NioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/load/demo01/TestMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/load/demo01/TestMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ClientTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ClientTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/TimeServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/TimeServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdemo.iml" beforeDir="false" />
-    </list>
+    <list default="true" id="26638e92-5c45-4e48-8c5e-15d3c05ce239" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,6 +44,18 @@
           <entry key="JAVA" value="2" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="12" />
+          <entry key="txt" value="8" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="12" />
+          <entry key="PLAIN_TEXT" value="8" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
@@ -97,8 +72,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/SpringMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+            <state relative-caret-position="318">
+              <caret line="40" column="22" lean-forward="true" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -117,6 +92,13 @@
         <entry key="$USER_HOME$/eclipse-workspace/blog-comment" value="PREVIEW" />
         <entry key="$USER_HOME$/eclipse-workspace/new-star-blog" value="PREVIEW" />
       </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/game/server/SpringMain.java" />
+      </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -215,7 +197,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559789274651" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559790024017" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -310,12 +292,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1559788549028</updated>
-      <workItem from="1559788550307" duration="723000" />
+      <workItem from="1559788550307" duration="1467000" />
     </task>
+    <task id="LOCAL-00001" summary="来自mac的问候">
+      <created>1559789455544</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1559789455544</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="723000" />
+    <option name="totallyTimeSpent" value="1467000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="805" extended-state="6" />
@@ -332,10 +322,10 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" sideWeight="0.5007153" side_tool="true" weight="0.3289855" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3289855" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.3289855" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -345,7 +335,7 @@
       <window_info anchor="right" id="Capture Analysis" />
       <window_info anchor="right" id="Palette&#9;" />
       <window_info anchor="right" id="Database" weight="0.3297568" />
-      <window_info anchor="right" id="Maven Projects" visible="true" weight="0.3297568" />
+      <window_info anchor="right" id="Maven Projects" weight="0.3297568" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -357,6 +347,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="来自mac的问候" />
+    <option name="LAST_COMMIT_MESSAGE" value="来自mac的问候" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -367,8 +361,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/SpringMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+        <state relative-caret-position="318">
+          <caret line="40" column="22" lean-forward="true" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
         </state>
       </provider>
     </entry>
