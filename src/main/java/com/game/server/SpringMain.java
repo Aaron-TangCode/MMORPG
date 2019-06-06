@@ -24,6 +24,7 @@ public class SpringMain {
 
     /**
      * 服务端启动前加载静态数据
+     * 来自Mac的问候
      */
         static {
             applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
