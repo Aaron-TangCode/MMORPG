@@ -2,7 +2,9 @@ package com.game.user.repository;
 
 import com.game.mapper.UserMapper;
 import com.game.user.bean.User;
+import com.game.user.task.UserRegisterTask;
 import com.game.utils.SqlUtils;
+import com.game.utils.ThreadPoolUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -21,26 +23,23 @@ public class RegisterRepository {
      * @param password
      * @return
      */
-    public boolean register(String username,String password){
+    public boolean register(String username,String password) {
         SqlSession session = SqlUtils.getSession();
         try {
 
             UserMapper mapper = session.getMapper(UserMapper.class);
             //查找用户名是否存在
             User user = mapper.selectUserByUsername(username);
-            if(user==null){
-                User  new_user = new User();
-                new_user.setUsername(username);
-                new_user.setPassword(password);
-                //注册用户
-                mapper.addUser(new_user);
-                session.commit();
+            //交给线程处理
+            if (user == null) {
+                UserRegisterTask task = new UserRegisterTask(username, password, user);
+                ThreadPoolUtils.getThreadPool().execute(task);
                 return true;
-            }else{
-                System.out.println(username+"已经存在");
+            } else {
+                System.out.println(username + "已经存在");
                 return false;
             }
-        }finally {
+        } finally {
             session.close();
         }
     }

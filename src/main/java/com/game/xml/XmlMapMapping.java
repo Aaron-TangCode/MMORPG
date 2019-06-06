@@ -26,7 +26,6 @@ public class XmlMapMapping {
                 Element employee = (Element) i.next();
                 for (Iterator j = employee.elementIterator(); j.hasNext(); ) {
                     Element node = (Element) j.next();
-                    System.out.println(node.getName() + ":" + node.getText());
                     mapMapping = new MapMapping();
                     mapMapping.setId(Integer.parseInt(node.getText()));
                     node = (Element) j.next();
@@ -37,11 +36,10 @@ public class XmlMapMapping {
                 }
                 MapUtils.getListRole().add(mapMapping);
             }
-            System.out.println(MapUtils.getListRole().size());
         } catch (DocumentException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("dom4j parserXml牛逼");
+        System.out.println("静态数据--地图映射加载完毕");
     }
 
 

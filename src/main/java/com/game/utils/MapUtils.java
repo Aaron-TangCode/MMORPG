@@ -13,20 +13,31 @@ import java.util.*;
  * @Version 1.0
  */
 public class MapUtils {
-    private static volatile Map<String,ConcreteRole> mapRole = null;
+    /**
+     * 角色缓存
+     */
+    private static volatile Map<String, ConcreteRole> mapRole = null;
+    /**
+     * 地图缓存
+     */
     private static volatile List<MapMapping> listRole = null;
-    private static volatile Map<String,String> reslutCollections = null;
-    private MapUtils(){
+    /**
+     * 任务缓存
+     */
+    private static volatile Map<String, RequestTask> taskMap = null;
+
+    private MapUtils() {
     }
 
     /**
      * 地图角色map
+     *
      * @return 用户名(非角色名)，role实体
      */
-    public static Map<String,ConcreteRole> getMapRole() {
-        if(mapRole==null){
-            synchronized (MapUtils.class){
-                if (mapRole==null){
+    public static Map<String, ConcreteRole> getMapRole() {
+        if (mapRole == null) {
+            synchronized (MapUtils.class) {
+                if (mapRole == null) {
                     mapRole = new HashMap<>();
                     return mapRole;
                 }
@@ -36,13 +47,28 @@ public class MapUtils {
     }
 
     /**
+     * 获取任务缓存对象
+     * @return
+     */
+    public static Map<String, RequestTask> getTaskMap() {
+        if (taskMap == null) {
+            synchronized (MapUtils.class) {
+                if (taskMap == null) {
+                    taskMap = new HashMap<>();
+                }
+            }
+        }
+        return taskMap;
+    }
+    /**
      * 地图映射列表
+     *
      * @return 地图Map_Mapping实体
      */
     public static List<MapMapping> getListRole() {
-        if(listRole==null){
-            synchronized (MapUtils.class){
-                if (listRole==null){
+        if (listRole == null) {
+            synchronized (MapUtils.class) {
+                if (listRole == null) {
                     listRole = new ArrayList<>();
                     return listRole;
                 }
@@ -53,35 +79,19 @@ public class MapUtils {
 
     /**
      * 切换地图是否可达
+     *
      * @param src_id
      * @param dest_id
      * @return
      */
-    public static  boolean isReach(int src_id,int dest_id){
+    public static boolean isReach(int src_id, int dest_id) {
         Iterator<MapMapping> iterator = getListRole().iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             MapMapping mapMapping = iterator.next();
-            if(mapMapping.getSrcMap()==src_id&&mapMapping.getDestMap()==dest_id){
+            if (mapMapping.getSrcMap() == src_id && mapMapping.getDestMap() == dest_id) {
                 return true;
             }
         }
         return false;
-    }
-
-    /**
-     * 第一个String：存放客户端的socket
-     * 第二个String:存放返回客户端的内容
-     * @return
-     */
-    public static Map<String,String> getResultCollectionsInstance(){
-        if(reslutCollections==null){
-            synchronized (MapUtils.class){
-                if(reslutCollections==null){
-                    reslutCollections = new  HashMap<String,String>();
-                    return reslutCollections;
-                }
-            }
-        }
-        return reslutCollections;
     }
 }

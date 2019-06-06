@@ -1,11 +1,9 @@
 package com.game.role.service;
 
-import com.game.role.repository.RoleRepository;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @ClassName RoleService
@@ -44,8 +42,8 @@ public class RoleService {
      * @param dest
      * @return
      */
-    public boolean updateMap(String roleName, Integer dest) {
-        return roleRepository.updateMap(roleName,dest);
+    public void updateMap(String roleName, Integer dest) {
+         roleRepository.updateMap(roleName,dest);
     }
 
 

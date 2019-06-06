@@ -2,11 +2,11 @@ package com.game.role.repository;
 
 import com.game.mapper.RoleMapper;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.task.RoleUpdateTask;
 import com.game.utils.SqlUtils;
+import com.game.utils.ThreadPoolUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @ClassName RoleRepository
@@ -55,18 +55,10 @@ public class RoleRepository {
      * @param dest
      * @return
      */
-    public boolean updateMap(String roleName, Integer dest) {
-        SqlSession session = SqlUtils.getSession();
-        try {
-            RoleMapper mapper = session.getMapper(RoleMapper.class);
-            boolean isSuccess = mapper.updateMap(roleName,dest);
-            session.commit();
-            return isSuccess;
-        }finally {
-            session.close();
-        }
+    public void updateMap(String roleName, Integer dest) {
+        RoleUpdateTask task = new RoleUpdateTask(roleName,dest);
+        ThreadPoolUtils.getThreadPool().execute(task);
     }
-
     /**
      * 创建角色
      * @param name
@@ -76,7 +68,7 @@ public class RoleRepository {
         SqlSession session = SqlUtils.getSession();
         try {
             RoleMapper mapper = session.getMapper(RoleMapper.class);
-return false;
+            return false;
         }finally {
             session.close();
         }

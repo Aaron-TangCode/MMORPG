@@ -44,4 +44,13 @@ public class MapMapping {
     public void setDestMap(Integer destMap) {
         this.destMap = destMap;
     }
+
+    @Override
+    public String toString() {
+        return "MapMapping{" +
+                "id=" + id +
+                ", srcMap=" + srcMap +
+                ", destMap=" + destMap +
+                '}';
+    }
 }

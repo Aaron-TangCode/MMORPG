@@ -1,19 +1,14 @@
 package com.game.server;
 
-import com.game.data.MapMapping;
-import com.game.dispatcher.DataCodeor;
-import com.game.dispatcher.MyAnnotationUtil;
-import com.game.mapper.MapMapper;
 import com.game.utils.MapUtils;
-import com.game.utils.SqlUtils;
+import com.game.utils.RequestTask;
+import com.game.utils.ThreadPoolUtils;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.*;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @ClassName ServerHandler
@@ -24,25 +19,10 @@ import java.util.concurrent.*;
  */
 @Component("ServerHandler")
 public class ServerHandler extends SimpleChannelInboundHandler<Object> {
-    private final static ExecutorService workerThreadService = newBlockingExecutorsUseCallerRun(Runtime.getRuntime().availableProcessors() * 2);
     /**
-     *  自定义线程池
-     * @param size
-     * @return
+     * 获取线程池
      */
-    public static ExecutorService newBlockingExecutorsUseCallerRun(int size) {
-        return new ThreadPoolExecutor(size, size, 0L, TimeUnit.MILLISECONDS, new SynchronousQueue<Runnable>(),
-                new RejectedExecutionHandler() {
-                    @Override
-                    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-                        try {
-                            executor.getQueue().put(r);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                });
-    }
+    private final static ExecutorService workerThreadService = ThreadPoolUtils.getThreadPool();
 
     /**
      * channelActive
@@ -65,19 +45,11 @@ public class ServerHandler extends SimpleChannelInboundHandler<Object> {
         //接收请求
         String content = (String)msg;
         //处理请求
-        workerThreadService.execute(new Runnable() {
-            @Override
-            public void run() {
-                //业务逻辑处理
-                String result = MyAnnotationUtil.requestService(content);
-                //加密
-                result = DataCodeor.enCodeor(result);
-               //写出
-                if (result!=null){
-                    ctx.channel().writeAndFlush(result);
-                }
-            }
-        });
+        RequestTask requestTask = new RequestTask(content,ctx);
+        String socket = ctx.channel().remoteAddress().toString();
+        Map<String, RequestTask> taskMap = MapUtils.getTaskMap();
+        taskMap.put(socket, requestTask);
+        workerThreadService.execute(requestTask);
     }
 
     /**
