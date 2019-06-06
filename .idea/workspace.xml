@@ -2,59 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26638e92-5c45-4e48-8c5e-15d3c05ce239" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/excel/ReadExcel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/role/task/RoleUpdateTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/user/task/UserRegisterTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/utils/RequestTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/utils/ThreadPoolUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/firstexample/House.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/firstexample/Meal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/firstexample/MealContainer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/firstexample/MyAnnotation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/firstexample/MyHouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/data/MapMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/data/MapMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/role/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/role/repository/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/role/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/role/service/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/user/repository/RegisterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/user/repository/RegisterRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/xml/XmlMapMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/xml/XmlMapMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/server/ServerHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/server/ServerHandler$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/server/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/server/ServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/utils/MapUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/utils/MapUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student$Builder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/MapInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/MapInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student$Builder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyWebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyWebSocketServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/BIO/BioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/BIO/BioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/BIO/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/BIO/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/NIO/NioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/NIO/NioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/load/demo01/TestMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/load/demo01/TestMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ClientTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ClientTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/TimeServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/TimeServer.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -98,8 +46,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/game/excel/ReadExcel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="74" column="40" lean-forward="true" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+            <state relative-caret-position="-920">
+              <caret line="19" column="57" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -172,18 +120,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1064">
               <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/task/UserRegisterTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="19" column="74" selection-start-line="19" selection-start-column="74" selection-end-line="19" selection-end-column="74" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -299,34 +235,7 @@
               <item name="testdemo" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="excel" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -341,13 +250,19 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559790474184" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/excel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\DELL\IdeaProjects\testdemo\src\main\resources" />
+      <recent name="C:\Users\DELL\IdeaProjects\testdemo\src\main\resources\excel" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -481,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1559791190216</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="用excel替换xml">
+      <created>1559815934234</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1559815934235</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -491,7 +413,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978903" weight="0.25268096" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4978903" visible="true" weight="0.25268096" />
       <window_info id="Structure" order="1" sideWeight="0.5021097" side_tool="true" weight="0.25268096" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -501,7 +423,7 @@
       <window_info anchor="bottom" id="FindBugs-IDEA" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -564,7 +486,8 @@
     <MESSAGE value="来自mac的问候" />
     <MESSAGE value="来自mac的问候2" />
     <MESSAGE value="来自windows的问候" />
-    <option name="LAST_COMMIT_MESSAGE" value="来自windows的问候" />
+    <MESSAGE value="用excel替换xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="用excel替换xml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -838,10 +761,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Readme.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/excel/ReadExcel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="74" column="40" lean-forward="true" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+        <state relative-caret-position="-920">
+          <caret line="19" column="57" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
