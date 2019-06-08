@@ -7,6 +7,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
@@ -44,12 +45,23 @@ public class ServerHandler extends SimpleChannelInboundHandler<Object> {
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         //接收请求
         String content = (String)msg;
-        //处理请求
+        //封装任务
+
         RequestTask requestTask = new RequestTask(content,ctx);
+        //客户端的唯一标识（ip+port）
         String socket = ctx.channel().remoteAddress().toString();
-        Map<String, RequestTask> taskMap = MapUtils.getTaskMap();
-        taskMap.put(socket, requestTask);
-        workerThreadService.execute(requestTask);
+
+        Map<String, ArrayList<RequestTask>> taskMap = MapUtils.getTaskMap();
+        //客户端所对应的任务列表是否已经存在
+        if(taskMap.containsKey(socket)){
+            taskMap.get(socket).add(requestTask);
+        }else{
+            ArrayList<RequestTask> requestTaskList = new ArrayList<>();
+            requestTaskList.add(requestTask);
+            taskMap.put(socket,requestTaskList);
+        }
+        //执行任务
+        workerThreadService.invokeAll(taskMap.get(socket));
     }
 
     /**

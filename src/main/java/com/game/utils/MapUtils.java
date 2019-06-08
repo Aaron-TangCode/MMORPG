@@ -1,6 +1,6 @@
 package com.game.utils;
 
-import com.game.data.MapMapping;
+import com.game.excel.bean.MapMapping;
 import com.game.role.bean.ConcreteRole;
 
 import java.util.*;
@@ -24,10 +24,12 @@ public class MapUtils {
     /**
      * 任务缓存
      */
-    private static volatile Map<String, RequestTask> taskMap = null;
+    private static volatile Map<String, ArrayList<RequestTask>> taskMap = null;
+
 
     private MapUtils() {
     }
+
 
     /**
      * 地图角色map
@@ -50,7 +52,7 @@ public class MapUtils {
      * 获取任务缓存对象
      * @return
      */
-    public static Map<String, RequestTask> getTaskMap() {
+    public static Map<String, ArrayList<RequestTask>> getTaskMap() {
         if (taskMap == null) {
             synchronized (MapUtils.class) {
                 if (taskMap == null) {

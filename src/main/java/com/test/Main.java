@@ -1,20 +1,16 @@
 package com.test;
 
-import com.game.data.MapMapping;
 import com.game.map.bean.ConcreteMap;
 import com.game.mapper.MapMapper;
 import com.game.mapper.RoleMapper;
 import com.game.mapper.UserMapper;
 import com.game.role.bean.ConcreteRole;
 import com.game.user.bean.User;
-import com.game.utils.MapUtils;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
 
 
 /**

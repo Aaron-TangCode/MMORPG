@@ -10,7 +10,7 @@
     <select id="getMapIdByMapName" resultType="com.game.map.bean.ConcreteMap">
         select * from map where name=#{name}
     </select>
-    <select id="getMap_Mapping" resultType="com.game.data.MapMapping">
+    <select id="getMap_Mapping" resultType="com.game.excel.bean.MapMapping">
         select id,srcMap,destMap from map_mapping;
     </select>
     <select id="getIdByName" resultType="java.lang.Integer" parameterType="java.lang.String">

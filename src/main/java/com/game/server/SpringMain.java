@@ -1,7 +1,9 @@
 package com.game.server;
 
-import com.game.dispatcher.*;
-import com.game.xml.XmlAnnotation;
+import com.game.dispatcher.ClassUtil;
+import com.game.dispatcher.MyAnnotationUtil;
+import com.game.dispatcher.StringUtil;
+import com.game.excel.annotation.ExcelAnnotation;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -24,15 +26,13 @@ public class SpringMain {
 
     /**
      * 服务端启动前加载静态数据
-     * 来自Mac的问候123123123123123123
-     * 来自windows的问候
      */
         static {
             applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
             //解析资源文件得到资源对象
             Properties prop = MyAnnotationUtil.parsePackAgeByProperties("src/main/resources/my.properties");
             //得到基础控制器包
-            String basePackage=prop.getProperty("xml.file");
+            String basePackage=prop.getProperty("excel.file");
             //解析失败
             if (!StringUtil.isNotNullOrEmpty(basePackage)) {
                 throw new RuntimeException("解析properties资源文件失败,请检查是否是properties文件路径有错或资源文件中属性名是否是my.controller.package");
@@ -42,14 +42,14 @@ public class SpringMain {
             //迭代所有全限定名
             for (Class clz : clzes) {
                 //判断是否有自定义注解
-                if(clz.isAnnotationPresent(XmlAnnotation.class)) {
+                if(clz.isAnnotationPresent(ExcelAnnotation.class)) {
                     try {
                         //獲取對象
                         Object obj = applicationContext.getBean(clz);
                         //獲取所有方法
                         Method[] methods = clz.getMethods();
                         for (Method method:methods){
-                            if(method.isAnnotationPresent(XmlAnnotation.class)) {
+                            if(method.isAnnotationPresent(ExcelAnnotation.class)) {
                                 //回調方法
                                 method.invoke(obj);
                             }

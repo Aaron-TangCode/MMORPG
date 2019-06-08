@@ -1,6 +1,6 @@
 package com.game.xml;
 
-import com.game.data.MapMapping;
+import com.game.excel.bean.MapMapping;
 import com.game.utils.MapUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;

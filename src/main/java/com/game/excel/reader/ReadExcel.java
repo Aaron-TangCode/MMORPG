@@ -1,30 +1,33 @@
-package com.game.excel;
+package com.game.excel.reader;
 
-import com.game.data.MapMapping;
+import com.game.excel.annotation.ExcelAnnotation;
+import com.game.excel.bean.MapMapping;
+import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * 读取Excel文件的方法
+ * 读取Excel文件
  * @author lmb
  * @date 2017-3-15
  *
  */
+@ExcelAnnotation
+@Component
 public class ReadExcel {
-	private static String xlsx2007 = "src/main/resources/excel/MapMapping.xls";
+	private static final String FILEPATH = "src/main/resources/excel/MapMapping.xls";
 
-	/**
-	 * 读取Excel（单个sheet）
-	 * @param filePath
-	 * @return
-	 */
-	public static List<MapMapping> readFromXLSX2007(String filePath) {
+    /**
+     * 读取excel
+     * @return
+     */
+	@ExcelAnnotation
+	public static void readFromXLSX2007() {
 
          //Excel文件对象
         File excelFile = null;
@@ -32,19 +35,17 @@ public class ReadExcel {
         InputStream is = null;
          //单元格，最终按字符串处理
         String cellStr = null;
-        //返回封装数据的List
-        List<MapMapping> studentList = new ArrayList<>();
         //每一个雇员信息对象
         MapMapping mapMapping = null;
         try {
             // 获取文件输入流
-            excelFile = new File(filePath);  
+            excelFile = new File(FILEPATH);
             is = new FileInputStream(excelFile);
             Workbook workbook = WorkbookFactory.create(is);
             Sheet sheet = workbook.getSheetAt(0);
             // 开始循环遍历行，表头不处理，从1开始
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-                // 实例化Student对象
+                // 实例化对象
             	mapMapping = new MapMapping();
                 // 获取行对象
             	Row row = sheet.getRow(i);
@@ -79,8 +80,11 @@ public class ReadExcel {
                     }
                 }
                 // 数据装入List
-                studentList.add(mapMapping);
-            }  
+                MapUtils.getListRole().add(mapMapping);
+
+            }
+            System.out.println("MapMapping静态数据加载完毕");
+            System.out.println(MapUtils.getListRole().size());
         } catch (IOException e) {
             e.printStackTrace();
         }  catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {
@@ -95,13 +99,9 @@ public class ReadExcel {
                 }  
             }  
         }  
-        return studentList;  
     }
 
     public static void main(String[] args) {
-        List<MapMapping> list2007 = readFromXLSX2007(xlsx2007);
-        for (MapMapping employee : list2007) {
-            System.out.println(employee);  
-        }
+        System.out.println(MapUtils.getListRole().size());
     }
 }  
