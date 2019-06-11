@@ -2,52 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26638e92-5c45-4e48-8c5e-15d3c05ce239" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/user/threadpool/UserThreadPool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/stackoverflow/Question01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/stackoverflow/Question02.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/stackoverflow/Question03.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/stackoverflow/Question04.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/stackoverflow/Question05.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/npc/bean/ConcreteNPC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/npc/bean/MapNPCMapping.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/npc/controller/NPCController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/npc/excel/ReadMapNPCMapping.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/npc/excel/ReadNPC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/utils/ExcelUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/excel/NPC.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/excel/map_npc_mapping.xls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/excel/reader/ReadExcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/excel/reader/ReadExcel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/excel/reader/ReadExcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/excel/reader/ReadMapMapping.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/game/map/controller/MapController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/map/controller/MapController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/role/bean/ConcreteRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/role/bean/ConcreteRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/role/controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/role/controller/RoleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/user/threadpool/UserThreadPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/user/threadpool/UserThreadPool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/utils/RequestTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/utils/RequestTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/server/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/server/ServerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/my.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/my.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/game/utils/MapUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/utils/MapUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student$Builder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintan/protobuf/DataInfo$Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/MapInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/MapInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student$Builder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyWebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyWebSocketServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/BIO/BioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/BIO/BioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/BIO/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/BIO/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/NIO/NioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/NIO/NioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/load/demo01/TestMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/load/demo01/TestMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ClientTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ClientTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/TimeServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/TimeServer.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -79,37 +50,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/controller/RoleController.java">
+        <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final-sources.jar!/io/netty/handler/codec/MessageToMessageDecoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="9" column="3" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+            <state relative-caret-position="2065">
+              <caret line="101" selection-start-line="101" selection-end-line="101" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/npc/controller/NPCController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="55" column="34" lean-forward="true" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final-sources.jar!/io/netty/channel/SimpleChannelInboundHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1561">
-              <caret line="104" column="30" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/utils/RequestTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="24" column="46" lean-forward="true" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
+            <state relative-caret-position="181">
+              <caret line="29" column="53" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,20 +73,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/game/dispatcher/MyAnnotationUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1099">
-              <caret line="135" column="25" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="25" />
+            <state relative-caret-position="125">
+              <caret line="63" selection-start-line="63" selection-end-line="63" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/threadpool/UserThreadPool.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/utils/RequestTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+            <state relative-caret-position="209">
+              <caret line="31" selection-start-line="31" selection-end-line="31" />
               <folding>
-                <element signature="e#708#709#0" expanded="true" />
-                <element signature="e#759#760#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -142,8 +94,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
+            <state relative-caret-position="125">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/Readme.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="28" column="18" lean-forward="true" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/controller/MapController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="261">
+              <caret line="60" column="48" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/npc/excel/ReadMapNPCMapping.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="63" column="52" lean-forward="true" selection-start-line="63" selection-start-column="52" selection-end-line="63" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -151,26 +139,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="67" column="31" selection-start-line="67" selection-start-column="31" selection-end-line="67" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/SpringMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/client/Client.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-521">
-              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+            <state relative-caret-position="532">
+              <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -216,7 +186,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/game/data/MapMapping.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/server/SpringMain.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/excel/annotation/ExcelBeanAnnotation.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/my.properties" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/excel/ExcelReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/excel/test/ResourceReader.java" />
@@ -230,12 +199,21 @@
         <option value="$PROJECT_DIR$/src/main/java/com/test/stackoverflow/Question04.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/test/stackoverflow/Question05.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/role/bean/ConcreteRole.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/role/controller/RoleController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/utils/RequestTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/user/threadpool/UserThreadPool.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/npc/bean/ConcreteNPC.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/my.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/utils/ExcelUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/npc/excel/ReadNPC.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/npc/bean/MapNPCMapping.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/npc/excel/ReadMapNPCMapping.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/Readme.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/npc/controller/NPCController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/map/controller/MapController.java" />
       </list>
     </option>
   </component>
@@ -330,7 +308,47 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="npc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="npc" type="462c0819:PsiDirectoryNode" />
+              <item name="bean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="npc" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="npc" type="462c0819:PsiDirectoryNode" />
+              <item name="excel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="testdemo" type="b2602c69:ProjectViewProjectNode" />
@@ -351,7 +369,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560007961053" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/excel" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -361,9 +379,12 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.game.npc.excel" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\DELL\IdeaProjects\testdemo\src\main\resources" />
       <recent name="C:\Users\DELL\IdeaProjects\testdemo\src\main\resources\excel" />
+      <recent name="C:\Users\DELL\IdeaProjects\testdemo\src\main\resources" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -513,7 +534,14 @@
       <option name="project" value="LOCAL" />
       <updated>1559815934235</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="修改用户线程在同一个线程">
+      <created>1560219229855</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1560219229855</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -531,7 +559,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.27903682" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49865952" visible="true" weight="0.24645892" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.398017" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -540,7 +568,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50067025" side_tool="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5013405" side_tool="true" weight="0.27903682" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32719547" />
       <window_info anchor="bottom" id="FindBugs-IDEA" order="13" weight="0.3286119" />
       <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.32961586" />
@@ -556,37 +584,38 @@
       <window_info anchor="right" id="Maven" order="9" weight="0.12868632" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978903" visible="true" weight="0.25268096" />
-      <window_info id="Structure" order="1" sideWeight="0.5021097" side_tool="true" visible="true" weight="0.25268096" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4950884" visible="true" weight="0.25603217" />
+      <window_info id="Structure" order="1" sideWeight="0.5049116" side_tool="true" weight="0.25603217" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="FindBugs-IDEA" order="0" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.49928468" visible="true" weight="0.3286119" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.39943343" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Spring" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5007153" side_tool="true" weight="0.3289855" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.3286119" />
-      <window_info anchor="right" id="Maven" order="0" visible="true" weight="0.12868632" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.3297568" />
-      <window_info anchor="right" id="Theme Preview" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Maven Projects" order="9" weight="0.3297568" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49865952" weight="0.24645892" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.398017" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49932975" weight="0.3286119" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Spring" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5013405" side_tool="true" weight="0.27903682" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32719547" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" order="13" weight="0.3286119" />
+      <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.32961586" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Database" order="5" weight="0.3297568" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.3297568" />
+      <window_info anchor="right" id="Maven" order="9" weight="0.12868632" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,7 +626,8 @@
     <MESSAGE value="来自mac的问候2" />
     <MESSAGE value="来自windows的问候" />
     <MESSAGE value="用excel替换xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="用excel替换xml" />
+    <MESSAGE value="修改用户线程在同一个线程" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改用户线程在同一个线程" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -610,76 +640,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java</url>
-          <line>55</line>
+          <line>50</line>
           <properties />
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/game/npc/controller/NPCController.java</url>
+          <line>28</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/game/dispatcher/MyAnnotationUtil.java</url>
+          <line>153</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/game/dispatcher/MyAnnotationUtil.java</url>
+          <line>63</line>
+          <properties />
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/repository/MapRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/service/RoleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1064">
-          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
-          <folding>
-            <element signature="e#1017#1018#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.17/poi-3.17.jar!/org/apache/poi/hssf/usermodel/HSSFRow.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5292">
-          <caret line="217" selection-start-line="217" selection-end-line="217" />
-          <folding>
-            <element signature="e#7588#7589#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.17/poi-3.17.jar!/org/apache/poi/ss/usermodel/Cell.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2856">
-          <caret line="110" column="11" selection-start-line="110" selection-start-column="4" selection-end-line="110" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Readme.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/xml/XmlMapMapping.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="784">
-          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/xml/XmlAnnotation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="7" column="35" lean-forward="true" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.17/poi-3.17.jar!/org/apache/poi/ss/usermodel/Row.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/excel/annotation/ExcelAnnotation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -693,13 +679,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/excel/annotation/ExcelBeanAnnotation.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/excel/test/ResourceReader.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/excel/test/ExcelReader.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/my.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1316">
@@ -724,30 +703,6 @@
             <element signature="e#448#449#0" expanded="true" />
             <element signature="e#486#487#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/excel/reader/ReadExcel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="89" column="32" lean-forward="true" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final-sources.jar!/io/netty/handler/codec/MessageToMessageDecoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final-sources.jar!/io/netty/channel/AbstractChannelHandlerContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="368" selection-start-line="368" selection-end-line="368" />
         </state>
       </provider>
     </entry>
@@ -949,13 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="67" column="31" selection-start-line="67" selection-start-column="31" selection-end-line="67" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/controller/RoleController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
@@ -970,52 +918,165 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/threadpool/UserThreadPool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/utils/RequestTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="24" column="46" lean-forward="true" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
+        <state relative-caret-position="446">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/dispatcher/MyAnnotationUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/excel/reader/ReadMapMapping.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1099">
-          <caret line="135" column="25" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="25" />
+        <state relative-caret-position="441">
+          <caret line="100" column="5" selection-start-line="22" selection-end-line="100" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/utils/ExcelUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/my.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/npc/excel/ReadNPC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="10" column="48" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final-sources.jar!/io/netty/channel/SimpleChannelInboundHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1561">
-          <caret line="104" column="30" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
+        <state relative-caret-position="125">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final-sources.jar!/io/netty/channel/AbstractChannelHandlerContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="352" selection-start-line="352" selection-end-line="352" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/npc/bean/ConcreteNPC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/npc/bean/MapNPCMapping.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+          <folding>
+            <element signature="e#359#360#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#421#422#0" expanded="true" />
+            <element signature="e#449#450#0" expanded="true" />
+            <element signature="e#482#483#0" expanded="true" />
+            <element signature="e#510#511#0" expanded="true" />
+            <element signature="e#553#554#0" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#648#649#0" expanded="true" />
+            <element signature="e#691#692#0" expanded="true" />
+            <element signature="e#725#726#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/npc/excel/ReadMapNPCMapping.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="63" column="52" lean-forward="true" selection-start-line="63" selection-start-column="52" selection-end-line="63" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.36.Final/netty-all-4.1.36.Final-sources.jar!/io/netty/handler/codec/MessageToMessageDecoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2065">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/utils/MapUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/utils/RequestTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/ServerHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="55" column="34" lean-forward="true" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
+        <state relative-caret-position="160">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/user/threadpool/UserThreadPool.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/dispatcher/MyAnnotationUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+        <state relative-caret-position="125">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/npc/controller/NPCController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="29" column="53" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="53" />
           <folding>
-            <element signature="e#708#709#0" expanded="true" />
-            <element signature="e#759#760#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/controller/MapController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="60" column="48" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Readme.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="28" column="18" lean-forward="true" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
         </state>
       </provider>
     </entry>

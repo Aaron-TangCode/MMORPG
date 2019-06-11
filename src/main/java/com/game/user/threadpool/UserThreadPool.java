@@ -1,6 +1,11 @@
 package com.game.user.threadpool;
 
-import java.util.concurrent.*;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName UserThreadPool
@@ -14,13 +19,11 @@ public class UserThreadPool {
     public static final ThreadPoolExecutor[] ACCOUNT_SERVICE = new ThreadPoolExecutor[DEFAULT_THREAD_POOL_SIZE];
 
     static {
+
+        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("userThread-%d").build();
         for (int i = 0; i < ACCOUNT_SERVICE.length; i++) {
-            ACCOUNT_SERVICE[i] = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.SECONDS, new SynchronousQueue<>(), new ThreadFactory() {
-                @Override
-                public Thread newThread(Runnable r) {
-                    return null;
-                }
-            });
+            ACCOUNT_SERVICE[i] = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.SECONDS, new SynchronousQueue<>());
         }
     }
 }
+

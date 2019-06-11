@@ -58,6 +58,7 @@ public class MapController {
             //从src移动到dest,更新数据库
             roleService.updateMap(role.getName(),dest_id);
             role.getConcreteMap().setName(dest);
+            role.getConcreteMap().setId(dest_id);
             //更新本地缓存
             MapUtils.getMapUsername_Role().put(username,role);
             return role.getName()+"从"+src+"移动到"+dest;

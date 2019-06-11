@@ -1,6 +1,8 @@
 package com.game.utils;
 
 import com.game.excel.bean.MapMapping;
+import com.game.npc.bean.ConcreteNPC;
+import com.game.npc.bean.MapNPCMapping;
 import com.game.role.bean.ConcreteRole;
 
 import java.util.*;
@@ -13,6 +15,7 @@ import java.util.*;
  * @Version 1.0
  */
 public class MapUtils {
+    private MapUtils() {}
     /**
      * 用户名-角色缓存
      */
@@ -25,16 +28,52 @@ public class MapUtils {
      * 地图缓存
      */
     private static volatile List<MapMapping> listRole = null;
+
     /**
-     * 任务缓存
+     * NPC容器
      */
-    private static volatile Map<String, ArrayList<RequestTask>> taskMap = null;
+    private static volatile Map<Integer,ConcreteNPC> npcMap = null;
+    /**
+     *
+     * map和npc的映射容器
+     */
+    private static volatile List<MapNPCMapping> mapNPCMappingList = null;
 
 
-    private MapUtils() {
+    /**
+     * map<mapId,list<npcId>>
+     */
+    public static Map<Integer,List<Integer>> mapIdnpcIdMap(){
+        Iterator<MapNPCMapping> iterator = getMapNPCMappingList().iterator();
+        Map<Integer,List<Integer>> mapID_npcId_Map = new HashMap<>();
+        List<Integer> list = null;
+        while(iterator.hasNext()){
+            MapNPCMapping mapNPCMapping = iterator.next();
+            if (mapID_npcId_Map.containsKey(mapNPCMapping.getMapId())) {
+                list.add(mapNPCMapping.getNpcId());
+                mapID_npcId_Map.put(mapNPCMapping.getMapId(),list);
+            }else{
+                list = new ArrayList<>();
+                list.add(mapNPCMapping.getNpcId());
+                mapID_npcId_Map.put(mapNPCMapping.getMapId(),list);
+            }
+        }
+        return mapID_npcId_Map;
     }
-
-
+    /**
+     * 地图map和npc的映射容器
+     * @return
+     */
+    public static List<MapNPCMapping> getMapNPCMappingList(){
+        if(mapNPCMappingList==null){
+            synchronized (MapUtils.class){
+                if(mapNPCMappingList==null){
+                    mapNPCMappingList = new ArrayList<>();
+                }
+            }
+        }
+        return mapNPCMappingList;
+    }
     /**
      * 地图角色map
      * @return 用户名(非角色名)，role实体
@@ -67,20 +106,7 @@ public class MapUtils {
         }
         return mapRolename_Role;
     }
-    /**
-     * 获取任务缓存对象
-     * @return
-     */
-    public static Map<String, ArrayList<RequestTask>> getTaskMap() {
-        if (taskMap == null) {
-            synchronized (MapUtils.class) {
-                if (taskMap == null) {
-                    taskMap = new HashMap<>();
-                }
-            }
-        }
-        return taskMap;
-    }
+
     /**
      * 地图映射列表
      *
@@ -91,13 +117,26 @@ public class MapUtils {
             synchronized (MapUtils.class) {
                 if (listRole == null) {
                     listRole = new ArrayList<>();
-                    return listRole;
                 }
             }
         }
         return listRole;
     }
 
+    /**
+     * NPC容器
+     * @return
+     */
+    public static Map<Integer, ConcreteNPC> getNpcMap(){
+        if(npcMap==null){
+            synchronized (MapUtils.class){
+                if(npcMap==null){
+                    npcMap = new HashMap<>();
+                }
+            }
+        }
+        return npcMap;
+    }
     /**
      * 切换地图是否可达
      *

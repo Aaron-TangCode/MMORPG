@@ -19,7 +19,7 @@ import java.io.InputStream;
  */
 @ExcelAnnotation
 @Component
-public class ReadExcel {
+public class ReadMapMapping {
 	private static final String FILEPATH = "src/main/resources/excel/MapMapping.xls";
 
     /**

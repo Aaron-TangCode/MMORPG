@@ -4,12 +4,10 @@
 {type:"/user/login",username:"456",password:"123"}
 //注册用户
 {type:"/user/registerService",username:"890",password:"123",ackpassword:"123"}
-
 //注册角色
 {type:"/role/register",name:"role7"}
 //登出
 {type:"/user/logout",username:"123"}
-
 //根据roleName获取它所在的地图
 {type:"/role/getMap",roleName:"role4"}
 //获取当前地图角色信息
@@ -21,3 +19,11 @@
 //获取当前地图
 {type:"/map/moveTo",username:"123",dest:"森林"}
 {type:"/map/moveTo",username:"123",dest:"村子"}
+//获取某个角色的状态信息
+{type:"/role/getRoleState",roleName:"role4"}
+//给某个角色加血
+{type:"/role/roleByAddBlood",roleName:"role4"}
+//给某个角色减血
+{type:"/role/roleByHurted",roleName:"role4"}
+//和某个NPC谈话
+{type:"/npc/taklwithnpc",rolename:"role4",npcname:"NPC1"}
