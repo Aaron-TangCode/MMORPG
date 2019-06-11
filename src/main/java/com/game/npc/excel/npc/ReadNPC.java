@@ -1,4 +1,4 @@
-package com.game.npc.excel;
+package com.game.npc.excel.npc;
 
 import com.game.excel.annotation.ExcelAnnotation;
 import com.game.npc.bean.ConcreteNPC;

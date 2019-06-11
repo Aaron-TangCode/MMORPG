@@ -1,8 +1,10 @@
 package com.game.utils;
 
 import com.game.excel.bean.MapMapping;
+import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.ConcreteNPC;
 import com.game.npc.bean.MapNPCMapping;
+import com.game.npc.bean.MonsterMapMapping;
 import com.game.role.bean.ConcreteRole;
 
 import java.util.*;
@@ -38,6 +40,46 @@ public class MapUtils {
      * map和npc的映射容器
      */
     private static volatile List<MapNPCMapping> mapNPCMappingList = null;
+    /**
+     * key:monster的id
+     * value:ConcreteMonster
+     * 怪兽容器
+     */
+    private static volatile Map<Integer, ConcreteMonster> monsterMap = null;
+    /**
+     *map和monster映射容器
+     */
+    private static volatile List<MonsterMapMapping> monsterMapMappingList = null;
+
+    /**
+     * map和monster映射容器
+     * @return
+     */
+    public static List<MonsterMapMapping> getMonsterMapMappingList(){
+        if(monsterMapMappingList==null){
+            synchronized (MapUtils.class){
+                if(monsterMapMappingList==null){
+                    monsterMapMappingList = new ArrayList<>();
+                }
+            }
+        }
+        return monsterMapMappingList;
+    }
+
+    /**
+     * 怪兽容器
+     * @return
+     */
+    public static Map<Integer, ConcreteMonster> getMonsterMap(){
+        if(monsterMap==null){
+            synchronized (MapUtils.class){
+                if (monsterMap==null){
+                    monsterMap = new HashMap<>();
+                }
+            }
+        }
+        return monsterMap;
+    }
 
 
     /**

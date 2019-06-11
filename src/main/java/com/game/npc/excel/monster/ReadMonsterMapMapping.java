@@ -1,7 +1,7 @@
-package com.game.npc.excel;
+package com.game.npc.excel.monster;
 
 import com.game.excel.annotation.ExcelAnnotation;
-import com.game.npc.bean.MapNPCMapping;
+import com.game.npc.bean.MonsterMapMapping;
 import com.game.utils.ExcelUtils;
 import com.game.utils.MapUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 /**
- * @ClassName ReadNPC
- * @Description 读取Map-NPC的映射数据
+ * @ClassName ReadMonsterMapMapping
+ * @Description 读取Map-Monster的映射数据
  * @Author DELL
  * @Date 2019/6/11 11:23
  * @Version 1.0
  */
 @ExcelAnnotation
 @Component
-public class ReadMapNPCMapping {
-    private static final String FILEPATH = "src/main/resources/excel/map_npc_mapping.xls";
+public class ReadMonsterMapMapping {
+    private static final String FILEPATH = "src/main/resources/excel/monster_map_mapping.xls";
     /**
      * 读取excel
      * @return
@@ -43,7 +43,7 @@ public class ReadMapNPCMapping {
                 String cellStr = null;
                 // 循环遍历单元格(每一列)
                 //实例化对象
-                MapNPCMapping mapNPCMapping = new MapNPCMapping();
+                MonsterMapMapping monsterMapMapping = new MonsterMapMapping();
                 for (int j = 0; j < row.getLastCellNum(); j++) {
                     // 获取单元格对象
                     Cell cell = row.getCell(j);
@@ -51,16 +51,16 @@ public class ReadMapNPCMapping {
                     cellStr = ExcelUtils.returnCellStr(cell);
                     // 封装数据到bean
                     if (j == 0) {
-                        mapNPCMapping.setId(new Double(cellStr).intValue());
+                        monsterMapMapping.setId(new Double(cellStr).intValue());
                     } else if (j == 1) {
-                        mapNPCMapping.setMapId(new Double(cellStr).intValue());
+                        monsterMapMapping.setMonsterId(new Double(cellStr).intValue());
                     } else if (j == 2) {
-                        mapNPCMapping.setNpcId(new Double(cellStr).intValue());
+                        monsterMapMapping.setMapId(new Double(cellStr).intValue());
                     }
                 }
                 // 数据装入List
-                MapUtils.getMapNPCMappingList().add(mapNPCMapping);
+                MapUtils.getMonsterMapMappingList().add(monsterMapMapping);
             }
-            System.out.println("Map-NPC映射静态数据加载完毕");
+            System.out.println("Map-Monster映射静态数据加载完毕");
         }
 }
