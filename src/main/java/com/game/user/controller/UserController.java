@@ -38,7 +38,10 @@ public class UserController {
 		boolean isSuccess = login.login(username,password);
 		ConcreteRole role = this.getRoleAfterLoginSuccess(username);
 		if(isSuccess){
-			MapUtils.getMapRole().put(username,role);
+			//加用户名-角色对象
+			MapUtils.getMapUsername_Role().put(username,role);
+			//加角色名-角色对象
+			MapUtils.getMapRolename_Role().put(role.getName(),role);
 			return role.getName()+"上线了";
 		}else{
 			System.out.println("登录失败");
@@ -54,9 +57,9 @@ public class UserController {
 	@RequestAnnotation("/logout")
 	public String logout(String username) {
 		//通过username找到map中的role
-		ConcreteRole role = MapUtils.getMapRole().get(username);
+		ConcreteRole role = MapUtils.getMapUsername_Role().get(username);
 		//移除角色信息，下线
-		MapUtils.getMapRole().remove(username);
+		MapUtils.getMapUsername_Role().remove(username);
 		return role.getName()+"下线了";
 	}
 
@@ -68,7 +71,7 @@ public class UserController {
 	@RequestAnnotation("/getRoleInfo")
 	public String getRoleInfo(String mapname) {
 		//获取当前场景的所有角色信息
-		Map<String,ConcreteRole> map = MapUtils.getMapRole();
+		Map<String,ConcreteRole> map = MapUtils.getMapUsername_Role();
 		return returnRoleInfo(map,mapname);
 	}
 

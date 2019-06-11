@@ -4,8 +4,6 @@ import com.game.dispatcher.DataCodeor;
 import com.game.dispatcher.MyAnnotationUtil;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.util.concurrent.Callable;
-
 /**
  * @ClassName RequestTask
  * @Description 任务处理类
@@ -13,7 +11,7 @@ import java.util.concurrent.Callable;
  * @Date 2019/6/6 15:02
  * @Version 1.0
  */
-public class RequestTask implements Callable<String> {
+public class RequestTask implements Runnable {
     private String content;
     private ChannelHandlerContext ctx;
     public RequestTask(String content, ChannelHandlerContext ctx){
@@ -22,7 +20,7 @@ public class RequestTask implements Callable<String> {
     }
 
     @Override
-    public String call() throws Exception {
+    public void run() {
         //业务逻辑处理
         String result = MyAnnotationUtil.requestService(content);
         //加密
@@ -31,6 +29,5 @@ public class RequestTask implements Callable<String> {
         if (result!=null){
             ctx.channel().writeAndFlush(result);
         }
-        return null;
     }
 }

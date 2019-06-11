@@ -9,8 +9,6 @@ import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 /**
  * @ClassName MapController
  * @Description 地图控制类
@@ -47,8 +45,8 @@ public class MapController {
     @RequestAnnotation("/moveTo")
     public String moveTo(String username,String dest) {
         //获取角色信息
-        System.out.println(MapUtils.getMapRole().size());
-        ConcreteRole role = MapUtils.getMapRole().get(username);
+        System.out.println(MapUtils.getMapUsername_Role().size());
+        ConcreteRole role = MapUtils.getMapUsername_Role().get(username);
         //获取角色的原地点
         String src = role.getConcreteMap().getName();
         //获取源地点和目的地点的id
@@ -61,7 +59,7 @@ public class MapController {
             roleService.updateMap(role.getName(),dest_id);
             role.getConcreteMap().setName(dest);
             //更新本地缓存
-            MapUtils.getMapRole().put(username,role);
+            MapUtils.getMapUsername_Role().put(username,role);
             return role.getName()+"从"+src+"移动到"+dest;
         }else{
             return "不能从"+src+"直接移动到"+dest;

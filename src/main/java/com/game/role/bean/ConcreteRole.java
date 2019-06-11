@@ -1,6 +1,7 @@
 package com.game.role.bean;
 
 import com.game.map.bean.ConcreteMap;
+import org.springframework.stereotype.Component;
 
 /**
  * @ClassName ConcreteRole
@@ -9,6 +10,7 @@ import com.game.map.bean.ConcreteMap;
  * @Date 2019/5/3015:14
  * @Version 1.0
  */
+@Component
 public class ConcreteRole {
     /**
      * 角色id
@@ -59,11 +61,4 @@ public class ConcreteRole {
         this.concreteMap = concreteMap;
     }
 
-    /**
-     * 返回角色状态
-     * @return
-     */
-    public String getState(){
-       return getHp()>0?"生存":"死亡";
-    }
 }

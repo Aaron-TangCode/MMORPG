@@ -84,7 +84,6 @@ public class ReadExcel {
 
             }
             System.out.println("MapMapping静态数据加载完毕");
-            System.out.println(MapUtils.getListRole().size());
         } catch (IOException e) {
             e.printStackTrace();
         }  catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {

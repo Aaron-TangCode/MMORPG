@@ -1,7 +1,9 @@
 package com.game.role.controller;
 
 import com.game.dispatcher.RequestAnnotation;
+import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
+import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -48,7 +50,21 @@ public class RoleController {
      */
     @RequestAnnotation("/roleByHurted")
     public String roleByHurted(String roleName){
-        return null;
+        ConcreteRole concreteRole = MapUtils.getMapRolename_Role().get(roleName);
+        if(concreteRole==null){
+            return roleName+"还没登录，请先登录";
+        }
+        if(concreteRole.getHp()>0){
+            if(concreteRole.getHp()-10>0){
+                concreteRole.setHp(concreteRole.getHp()-10);
+                return roleName+"受到伤害，生命值减10";
+            }else{
+                concreteRole.setHp(0);
+                return roleName+"受到伤害，生命值减为0";
+            }
+        }else{
+            return "已死亡";
+        }
     }
 
     /**
@@ -58,11 +74,33 @@ public class RoleController {
      */
     @RequestAnnotation("/roleByAddBlood")
     public String roleByAddBlood(String roleName){
-        return null;
+        ConcreteRole concreteRole = MapUtils.getMapRolename_Role().get(roleName);
+        if(concreteRole==null){
+            return roleName+"还没登录，请先登录";
+        }
+        if(concreteRole.getHp()>=100){
+            return "已满血";
+        }else{
+            if(concreteRole.getHp()+10>=100){
+                concreteRole.setHp(100);
+            }else{
+                concreteRole.setHp(concreteRole.getHp()+10);
+            }
+            return roleName+"的血量已加10Hp";
+        }
     }
-//    @RequestAnnotation("/register")
-//    public String register(String name){
-//        //
-//       return roleService.registerRole(name);
-//    }
+
+    /**
+     * 通过rolename获取角色状态信息
+     * @param roleName
+     * @return
+     */
+    @RequestAnnotation("/getRoleState")
+    public String getRoleState(String roleName){
+        ConcreteRole concreteRole = MapUtils.getMapRolename_Role().get(roleName);
+        if(concreteRole==null){
+            return roleName+"还没登录，请先登录";
+        }
+        return concreteRole.getHp()>0?"生存":"死亡";
+    }
 }

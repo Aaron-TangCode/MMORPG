@@ -14,9 +14,13 @@ import java.util.*;
  */
 public class MapUtils {
     /**
-     * 角色缓存
+     * 用户名-角色缓存
      */
-    private static volatile Map<String, ConcreteRole> mapRole = null;
+    private static volatile Map<String, ConcreteRole> mapUsername_Role = null;
+    /**
+     * 角色名-角色缓存
+     */
+    private static volatile Map<String,ConcreteRole> mapRolename_Role = null;
     /**
      * 地图缓存
      */
@@ -33,21 +37,36 @@ public class MapUtils {
 
     /**
      * 地图角色map
-     *
      * @return 用户名(非角色名)，role实体
      */
-    public static Map<String, ConcreteRole> getMapRole() {
-        if (mapRole == null) {
+    public static Map<String, ConcreteRole> getMapUsername_Role() {
+        if (mapUsername_Role == null) {
             synchronized (MapUtils.class) {
-                if (mapRole == null) {
-                    mapRole = new HashMap<>();
-                    return mapRole;
+                if (mapUsername_Role == null) {
+                    mapUsername_Role = new HashMap<>();
+                    return mapUsername_Role;
                 }
             }
         }
-        return mapRole;
+        return mapUsername_Role;
     }
 
+    /**
+     * key:rolename角色名
+     * value:Role实体类
+     * @return
+     */
+    public static Map<String, ConcreteRole> getMapRolename_Role() {
+        if (mapRolename_Role == null) {
+            synchronized (MapUtils.class) {
+                if (mapRolename_Role == null) {
+                    mapRolename_Role = new HashMap<>();
+                    return mapRolename_Role;
+                }
+            }
+        }
+        return mapRolename_Role;
+    }
     /**
      * 获取任务缓存对象
      * @return
