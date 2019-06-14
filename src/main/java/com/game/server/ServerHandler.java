@@ -2,12 +2,9 @@ package com.game.server;
 
 import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.RequestTask;
-import com.game.utils.ThreadPoolUtils;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.ExecutorService;
 
 /**
  * @ClassName ServerHandler
@@ -18,11 +15,6 @@ import java.util.concurrent.ExecutorService;
  */
 @Component("ServerHandler")
 public class ServerHandler extends SimpleChannelInboundHandler<Object> {
-    /**
-     * 获取线程池
-     */
-    private final static ExecutorService workerThreadService = ThreadPoolUtils.getThreadPool();
-
     /**
      * channelActive
      * @param ctx
@@ -62,6 +54,4 @@ public class ServerHandler extends SimpleChannelInboundHandler<Object> {
         cause.printStackTrace();
         ctx.channel().closeFuture();
     }
-
-
 }

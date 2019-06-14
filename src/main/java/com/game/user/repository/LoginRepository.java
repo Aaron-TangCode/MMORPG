@@ -1,5 +1,6 @@
 package com.game.user.repository;
 
+import com.game.role.bean.ConcreteRole;
 import com.game.user.mapper.UserMapper;
 import com.game.user.bean.User;
 import com.game.utils.SqlUtils;
@@ -44,6 +45,17 @@ public class LoginRepository {
         try{
             UserMapper mapper = session.getMapper(UserMapper.class);
            return mapper.getUserRoleIdByUsername(username);
+        }finally {
+            session.close();
+        }
+    }
+
+    public ConcreteRole roleLogin(String username, String password) {
+        SqlSession session = SqlUtils.getSession();
+
+        try{
+            UserMapper mapper = session.getMapper(UserMapper.class);
+            return mapper.getRole(username,password);
         }finally {
             session.close();
         }

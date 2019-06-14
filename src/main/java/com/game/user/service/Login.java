@@ -1,5 +1,6 @@
 package com.game.user.service;
 
+import com.game.role.bean.ConcreteRole;
 import com.game.user.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,5 +40,10 @@ public class Login {
      */
     public int getUserRoleIdByUsername(String username) {
         return loginRepository.getUserRoleIdByUsername(username);
+    }
+
+    public ConcreteRole roleLogin(String username, String password) {
+        return loginRepository.roleLogin(username,password);
+
     }
 }

@@ -2,7 +2,10 @@ package com.game.dispatcher;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.game.role.bean.ConcreteRole;
 import com.game.server.SpringMain;
+import com.game.user.service.Login;
+import io.netty.channel.ChannelHandlerContext;
 import org.apache.ibatis.javassist.ClassPool;
 import org.apache.ibatis.javassist.CtClass;
 import org.apache.ibatis.javassist.CtMethod;
@@ -10,6 +13,7 @@ import org.apache.ibatis.javassist.bytecode.CodeAttribute;
 import org.apache.ibatis.javassist.bytecode.LocalVariableAttribute;
 import org.apache.ibatis.javassist.bytecode.MethodInfo;
 import org.springframework.stereotype.Component;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -133,11 +137,22 @@ public class MyAnnotationUtil {
      * @param content
      * @return
      */
-    public static String requestService(String content) {
+    public static String requestService(String content, ChannelHandlerContext ctx) {
         //转换JSON对象
         JSONObject json = (JSONObject)JSON.parse(content);
+
+
         //获取 资源名
         String type= (String)json.get("type");
+        if(type.contains("/user/login")){
+            String username = json.getString("username");
+            String password = json.getString("password");
+            Login login = new Login();
+            ConcreteRole role = login.roleLogin(username,password);
+            if(role!=null){
+                role.setCtx(ctx);
+            }
+        }
         //将类的资源名和方法的进行拼接
         ClassAndMethodDTO dto = map.get(type);
         if (dto==null) {
@@ -237,10 +252,6 @@ public class MyAnnotationUtil {
             e.printStackTrace();
         }
         return null;
-    }
-    public static void main(String[] args) {
-        String s = MyAnnotationUtil.requestService("{type:\"/user/register\",username:\"123\",password:\"123\",ackpassword:\"123\"}");
-        System.err.println(s);
     }
 }
 

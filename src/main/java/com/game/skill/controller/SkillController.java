@@ -1,6 +1,7 @@
 package com.game.skill.controller;
 
 import com.game.dispatcher.RequestAnnotation;
+import com.game.notice.NoticeUtils;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.MonsterMapMapping;
 import com.game.role.bean.ConcreteRole;
@@ -139,16 +140,19 @@ public class SkillController {
         Integer costMp = concreteSkill.getMp();
         //判断是否具备释放技能的条件
         if(costMp>leftMp){
-            return "角色的mp值不够释放节能"+"角色mp值="+leftMp+"\t"+"技能需消耗的mp值="+costMp;
+            return "角色的mp值不够c释放节能"+"角色mp值="+leftMp+"\t"+"技能需消耗的mp值="+costMp;
         }
         //技能的伤害值
         Integer hurt = concreteSkill.getHurt();
         //技能消耗角色的mp值
-        concreteRole.setMp(concreteRole.getHp()-costMp);
+        concreteRole.setMp(leftMp-costMp);
         Integer monsterHp = monster.getHp();
         //怪兽的生命值减少
         monster.setHp(monster.getHp()-hurt);
-
+        //怪兽死亡，通知该地图所有玩家
+        if(monster.getHp()<=0){
+            NoticeUtils.notifyAllRoles(monster);
+        }
         return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+concreteRole.getMp()+
                 "\n"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
     }

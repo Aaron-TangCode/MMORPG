@@ -2,6 +2,7 @@ package com.game.role.bean;
 
 import com.game.map.bean.ConcreteMap;
 import com.game.skill.bean.ConcreteSkill;
+import io.netty.channel.ChannelHandlerContext;
 import org.springframework.stereotype.Component;
 
 /**
@@ -35,6 +36,16 @@ public class ConcreteRole {
     private int mp = 100;
 
     private ConcreteSkill concreteSkill;
+
+    private ChannelHandlerContext ctx;
+
+    public ChannelHandlerContext getCtx() {
+        return ctx;
+    }
+
+    public void setCtx(ChannelHandlerContext ctx) {
+        this.ctx = ctx;
+    }
 
     public int getMp() {
         return mp;
