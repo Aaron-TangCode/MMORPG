@@ -1,6 +1,6 @@
 package com.game.user.repository;
 
-import com.game.mapper.UserMapper;
+import com.game.user.mapper.UserMapper;
 import com.game.user.bean.User;
 import com.game.user.task.UserRegisterTask;
 import com.game.utils.SqlUtils;

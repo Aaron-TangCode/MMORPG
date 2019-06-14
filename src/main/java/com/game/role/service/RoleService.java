@@ -73,4 +73,12 @@ public class RoleService {
     public String getMapNameByMapId(int map_id) {
         return roleRepository.getMapNameByMapId(map_id);
     }
+
+    public ConcreteRole getRoleByRoleName(String rolename) {
+        return roleRepository.getRoleByRoleName(rolename);
+    }
+
+    public void updateRole(ConcreteRole concreteRole) {
+        roleRepository.updateRole(concreteRole);
+    }
 }

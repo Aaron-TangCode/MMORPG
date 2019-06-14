@@ -1,11 +1,9 @@
 package com.test;
 
-import com.game.map.bean.ConcreteMap;
-import com.game.mapper.MapMapper;
-import com.game.mapper.RoleMapper;
-import com.game.mapper.UserMapper;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.mapper.RoleMapper;
 import com.game.user.bean.User;
+import com.game.user.mapper.UserMapper;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -74,9 +72,10 @@ public class Main {
     public void test05() throws IOException {
         SqlSession session = SqlUtils.getSession();
         try {
-            MapMapper mapper = session.getMapper(MapMapper.class);
-            ConcreteMap map = mapper.getMapById(1);
-            System.out.println(map);
+            RoleMapper mapper = session.getMapper(RoleMapper.class);
+            ConcreteRole role = mapper.getRoleByRoleName("role4");
+            System.out.println(role.getConcreteSkill().getId());
+            System.out.println(role.getName());
         } finally {
             session.close();
         }

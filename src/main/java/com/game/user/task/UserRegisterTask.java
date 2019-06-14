@@ -1,6 +1,6 @@
 package com.game.user.task;
 
-import com.game.mapper.UserMapper;
+import com.game.user.mapper.UserMapper;
 import com.game.user.bean.User;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;

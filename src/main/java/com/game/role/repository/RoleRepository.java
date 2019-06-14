@@ -1,8 +1,9 @@
 package com.game.role.repository;
 
-import com.game.mapper.RoleMapper;
+import com.game.role.mapper.RoleMapper;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.task.RoleUpdateTask;
+import com.game.skill.task.RoleTask;
 import com.game.utils.SqlUtils;
 import com.game.utils.ThreadPoolUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -104,5 +105,30 @@ public class RoleRepository {
         }finally {
             session.close();
         }
+    }
+
+    /**
+     * 根据rolename获取role
+     * @param rolename
+     * @return
+     */
+    public ConcreteRole getRoleByRoleName(String rolename) {
+        SqlSession session = SqlUtils.getSession();
+        try {
+            RoleMapper mapper = session.getMapper(RoleMapper.class);
+            ConcreteRole role = mapper.getRoleByRoleName(rolename);
+            return role;
+        }finally {
+            session.close();
+        }
+    }
+
+    /**
+     * 更新角色
+     * @param concreteRole
+     */
+    public void updateRole(ConcreteRole concreteRole) {
+        RoleTask roleTask = new RoleTask(concreteRole);
+        ThreadPoolUtils.getThreadPool().execute(roleTask);
     }
 }

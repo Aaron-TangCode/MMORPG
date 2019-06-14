@@ -1,4 +1,5 @@
 ﻿#客户端的输入指令
+```
 //登录操作
 {type:"/user/login",username:"123",password:"123"}
 {type:"/user/login",username:"456",password:"123"}
@@ -27,3 +28,9 @@
 {type:"/role/roleByHurted",roleName:"role4"}
 //和某个NPC谈话
 {type:"/npc/taklwithnpc",rolename:"role4",npcname:"NPC1"}
+//某个角色学习某个技能
+{type:"/skill/studyskill",rolename:"role4",skillname:"噬魂之手"}
+{type:"/skill/studyskill",rolename:"role4",skillname:"血之狂暴"}
+//某个角色用某个技能攻击某个怪兽
+{type:"/skill/useskill",roleName:"role4",skillName:"血之狂暴",monsterName:"怪兽4号"}
+```

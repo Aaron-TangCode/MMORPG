@@ -2,35 +2,61 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.game.mapper.RoleMapper">
+<mapper namespace="com.game.role.mapper.RoleMapper">
+
+    <resultMap id="roleSkill" type="com.game.role.bean.ConcreteRole">
+        <result column="name" property="name"></result>
+        <result column="skill" property="concreteSkill.id"></result>
+        <result column="map_id" property="concreteMap.id"></result>
+    </resultMap>
+
+    <select id="getRoleByRoleName" resultMap="roleSkill">
+        select name,skill,map_id from role where name=#{name}
+    </select>
+
     <resultMap id="roleMap" type="com.game.role.bean.ConcreteRole">
         <id column="role_id" property="id"></id>
         <result column="role_name" property="name"></result>
         <result column="map_id" property="concreteMap.id"></result>
         <result column="map_name" property="concreteMap.name"></result>
     </resultMap>
-
+<!--    通过id查询role-->
     <select id="getRoleById" resultMap="roleMap">
         SELECT r.id role_id,r.name role_name,m.id map_id,m.name map_name from role r,map m where r.map_id=m.id and r.id = #{id};
     </select>
 
-
-
     <resultMap id="getMapName" type="java.lang.String">
         <result column="mapname" property="concreteMap.name"></result>
     </resultMap>
-
+<!--通过rolename查询map-->
     <select id="getMapByRoleName" resultMap="getMapName">
         SELECT m.name mapname from role r,map m where r.mapid=m.id and r.name = #{roleName}
     </select>
-
+<!--更新map的id-->
     <update id="updateMap">
         update role set map_id = #{dest} where name = #{roleName}
     </update>
+<!--    通过rolename查询map的id-->
     <select id="getMapIdByRoleName" resultType="java.lang.Integer">
         select map_id from role where name=#{roleName}
     </select>
+<!--    通过map_id查询map_name-->
     <select id="getMapNameByMapId" resultType="java.lang.String">
         select name from map where id=#{id}
     </select>
+
+    <resultMap id="uRoleResultMap" type="com.game.role.bean.ConcreteRole">
+        <result column="name" property="name"></result>
+        <result column="skill" property="concreteSkill.id"></result>
+    </resultMap>
+
+    <parameterMap id="uRole" type="com.game.role.bean.ConcreteRole">
+        <parameter property="name" resultMap="uRoleResultMap"></parameter>
+        <parameter property="concreteSkill.id" resultMap="uRoleResultMap"></parameter>
+    </parameterMap>
+
+    <update id="updateRole" parameterMap="uRole">
+        update role set name=#{name},skill=#{concreteSkill.id} where name = #{name}
+    </update>
+
 </mapper>

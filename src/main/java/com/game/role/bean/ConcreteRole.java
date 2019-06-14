@@ -1,6 +1,7 @@
 package com.game.role.bean;
 
 import com.game.map.bean.ConcreteMap;
+import com.game.skill.bean.ConcreteSkill;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,6 +29,28 @@ public class ConcreteRole {
      * 角色血量
      */
     private int hp = 100;
+    /**
+     * 角色魔法值
+     */
+    private int mp = 100;
+
+    private ConcreteSkill concreteSkill;
+
+    public int getMp() {
+        return mp;
+    }
+
+    public void setMp(int mp) {
+        this.mp = mp;
+    }
+
+    public ConcreteSkill getConcreteSkill() {
+        return concreteSkill;
+    }
+
+    public void setConcreteSkill(ConcreteSkill concreteSkill) {
+        this.concreteSkill = concreteSkill;
+    }
 
     public int getHp() {
         return hp;

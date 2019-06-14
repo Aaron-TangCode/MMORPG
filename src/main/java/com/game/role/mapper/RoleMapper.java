@@ -1,8 +1,7 @@
-package com.game.mapper;
+package com.game.role.mapper;
 
 import com.game.role.bean.ConcreteRole;
 import org.apache.ibatis.annotations.Param;
-import java.util.List;
 
 /**
  * @ClassName RoleMapper
@@ -54,4 +53,17 @@ public interface RoleMapper {
      * @return
      */
     public String getMapNameByMapId(Integer id);
+
+    /**
+     * 通过rolename获取role
+     * @param rolename
+     * @return
+     */
+    public ConcreteRole getRoleByRoleName(String rolename);
+
+    /**
+     * 更新role
+     * @param concreteRole
+     */
+    public void updateRole(ConcreteRole concreteRole);
 }

@@ -1,7 +1,7 @@
 package com.game.map.repository;
 
 import com.game.map.bean.ConcreteMap;
-import com.game.mapper.MapMapper;
+import com.game.map.mapper.MapMapper;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;

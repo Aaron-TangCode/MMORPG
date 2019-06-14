@@ -1,31 +1,29 @@
-package com.game.role.task;
+package com.game.skill.task;
 
+import com.game.role.bean.ConcreteRole;
 import com.game.role.mapper.RoleMapper;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 
 /**
- * @ClassName RoleUpdateTask
- * @Description 角色更新任务类
+ * @ClassName RoleTask
+ * @Description TODO
  * @Author DELL
- * @Date 2019/6/6 16:13
+ * @Date 2019/6/13 16:20
  * @Version 1.0
  */
-public class RoleUpdateTask implements Runnable {
-    private String roleName;
-    private Integer dest;
+public class RoleTask implements Runnable {
+    private ConcreteRole concreteRole;
 
-    public RoleUpdateTask(String roleName, Integer dest) {
-        this.roleName = roleName;
-        this.dest = dest;
+    public RoleTask(ConcreteRole concreteRole){
+        this.concreteRole = concreteRole;
     }
-
     @Override
     public void run() {
         SqlSession session = SqlUtils.getSession();
         try {
             RoleMapper mapper = session.getMapper(RoleMapper.class);
-            boolean isSuccess = mapper.updateMap(roleName,dest);
+            mapper.updateRole(concreteRole);
             session.commit();
         }finally {
             session.close();

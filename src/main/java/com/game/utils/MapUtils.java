@@ -6,6 +6,7 @@ import com.game.npc.bean.ConcreteNPC;
 import com.game.npc.bean.MapNPCMapping;
 import com.game.npc.bean.MonsterMapMapping;
 import com.game.role.bean.ConcreteRole;
+import com.game.skill.bean.ConcreteSkill;
 
 import java.util.*;
 
@@ -50,6 +51,46 @@ public class MapUtils {
      *map和monster映射容器
      */
     private static volatile List<MonsterMapMapping> monsterMapMappingList = null;
+
+
+    /**
+     * key:技能id
+     * value:ConcreteSkill
+     */
+    private static volatile Map<String, ConcreteSkill> skillMap = null;
+    /**
+     * key:技能name
+     * value:ConcreteSkill
+     */
+    private static volatile Map<String, ConcreteSkill> skillMap2 = null;
+    /**
+     * 技能map容器
+     * @return
+     */
+    public static Map<String,ConcreteSkill> getSkillMap_keyName(){
+        if(skillMap2==null){
+            synchronized (MapUtils.class){
+                if(skillMap2==null){
+                    skillMap2 = new HashMap<>();
+                }
+            }
+        }
+        return skillMap2;
+    }
+    /**
+     * 技能map容器
+     * @return
+     */
+    public static Map<String,ConcreteSkill> getSkillMap_keyId(){
+        if(skillMap==null){
+           synchronized (MapUtils.class){
+               if(skillMap==null){
+                   skillMap = new HashMap<>();
+               }
+           }
+        }
+        return skillMap;
+    }
 
     /**
      * map和monster映射容器
@@ -195,5 +236,18 @@ public class MapUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * 打印map
+     * @param map
+     */
+    public static void printMap(Map map){
+        Set set = map.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            Map.Entry next = (Map.Entry) iterator.next();
+            System.out.println(next.getKey()+":"+next.getValue());
+        }
     }
 }

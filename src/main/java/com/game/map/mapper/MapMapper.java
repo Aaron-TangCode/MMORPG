@@ -1,4 +1,4 @@
-package com.game.mapper;
+package com.game.map.mapper;
 
 import com.game.map.bean.ConcreteMap;
 

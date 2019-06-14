@@ -1,4 +1,4 @@
-package com.game.mapper;
+package com.game.user.mapper;
 
 import com.game.user.bean.User;
 
