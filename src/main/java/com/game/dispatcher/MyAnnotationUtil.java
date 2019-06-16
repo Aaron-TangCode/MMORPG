@@ -3,6 +3,7 @@ package com.game.dispatcher;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.service.RoleService;
 import com.game.server.SpringMain;
 import com.game.user.service.Login;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,6 +13,7 @@ import org.apache.ibatis.javassist.CtMethod;
 import org.apache.ibatis.javassist.bytecode.CodeAttribute;
 import org.apache.ibatis.javassist.bytecode.LocalVariableAttribute;
 import org.apache.ibatis.javassist.bytecode.MethodInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
@@ -30,6 +32,11 @@ import java.util.*;
  */
 @Component
 public class MyAnnotationUtil {
+    @Autowired
+    private static Login login;
+
+    @Autowired
+    private static RoleService roleService;
     /**
      * 装类+方法资源名-->类+方法的缓存
      */
@@ -141,15 +148,16 @@ public class MyAnnotationUtil {
         //转换JSON对象
         JSONObject json = (JSONObject)JSON.parse(content);
 
-
+        String path = "/user/login";
         //获取 资源名
         String type= (String)json.get("type");
-        if(type.contains("/user/login")){
+        if(type.contains(path)){
             String username = json.getString("username");
             String password = json.getString("password");
-            Login login = new Login();
-            ConcreteRole role = login.roleLogin(username,password);
-            if(role!=null){
+            final boolean isSuccess = login.login(username,password);
+            if(isSuccess){
+                int roleId = login.getUserRoleIdByUsername(username);
+                ConcreteRole role = roleService.getRole(roleId);
                 role.setCtx(ctx);
             }
         }

@@ -1,6 +1,5 @@
 package com.game.user.mapper;
 
-import com.game.role.bean.ConcreteRole;
 import com.game.user.bean.User;
 
 /**
@@ -38,6 +37,4 @@ public interface UserMapper {
      * @return
      */
     public boolean addUser(User user);
-
-    public ConcreteRole getRole(String username, String password);
 }

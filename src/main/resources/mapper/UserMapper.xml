@@ -15,8 +15,4 @@
     <select id="selectUserByUsername" resultType="com.game.user.bean.User">
         select * from user where username=#{username}
     </select>
-
-    <select id="getRole">
-        select (select role_id from user where username=#{username} and password=#{password})
-    </select>
 </mapper>
