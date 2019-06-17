@@ -34,4 +34,6 @@
 {type:"/skill/studyskill",rolename:"role4",skillname:"血之狂暴"}
 //某个角色用某个技能攻击某个怪兽
 {type:"/skill/useskill",roleName:"role4",skillName:"血之狂暴",monsterName:"怪兽4号"}
+//某个角色获取某个物品
+{type:"/backpack/getGoods",roleName:"role4",goodsName:"血包"}
 ```

@@ -1,5 +1,7 @@
 package com.game.utils;
 
+import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.Type;
 import com.game.excel.bean.MapMapping;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.ConcreteNPC;
@@ -52,7 +54,11 @@ public class MapUtils {
      */
     private static volatile List<MonsterMapMapping> monsterMapMappingList = null;
 
-
+    /**
+     * key:id
+     * value:goods
+     */
+    private static volatile Map<Integer, Goods> goodsMap = null;
     /**
      * key:技能id
      * value:ConcreteSkill
@@ -63,6 +69,41 @@ public class MapUtils {
      * value:ConcreteSkill
      */
     private static volatile Map<String, ConcreteSkill> skillMap2 = null;
+    /**
+     * key:id
+     * values:type
+     */
+    private static volatile Map<Integer, Type> typeMap = null;
+
+    /**
+     * 物品类型map
+     * @return
+     */
+    public static Map<Integer, Goods> getGoodsMap(){
+        if(goodsMap==null){
+            synchronized (MapUtils.class){
+                if(goodsMap==null){
+                    goodsMap = new HashMap<>();
+                }
+            }
+        }
+        return goodsMap;
+    }
+
+    /**
+     * 物品类型map
+     * @return
+     */
+    public static Map<Integer, Type> getTypeMap(){
+        if(typeMap==null){
+            synchronized (MapUtils.class){
+                if(typeMap==null){
+                    typeMap = new HashMap<>();
+                }
+            }
+        }
+        return typeMap;
+    }
     /**
      * 技能map容器
      * @return

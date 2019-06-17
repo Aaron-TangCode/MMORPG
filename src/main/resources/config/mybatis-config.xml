@@ -20,5 +20,6 @@
         <mapper resource="mapper/RoleMapper.xml"/>
         <mapper resource="mapper/StateMapper.xml"/>
         <mapper resource="mapper/MapMapper.xml"/>
+        <mapper resource="mapper/BackpackMapper.xml"/>
     </mappers>
 </configuration>
