@@ -3,9 +3,10 @@ package com.game.dispatcher;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.game.role.bean.ConcreteRole;
-import com.game.role.service.RoleService;
+import com.game.role.repository.RoleRepository;
 import com.game.server.SpringMain;
-import com.game.user.service.Login;
+import com.game.user.repository.LoginRepository;
+import com.game.utils.MapUtils;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.ibatis.javassist.ClassPool;
 import org.apache.ibatis.javassist.CtClass;
@@ -13,7 +14,6 @@ import org.apache.ibatis.javassist.CtMethod;
 import org.apache.ibatis.javassist.bytecode.CodeAttribute;
 import org.apache.ibatis.javassist.bytecode.LocalVariableAttribute;
 import org.apache.ibatis.javassist.bytecode.MethodInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
@@ -32,11 +32,6 @@ import java.util.*;
  */
 @Component
 public class MyAnnotationUtil {
-    @Autowired
-    private static Login login;
-
-    @Autowired
-    private static RoleService roleService;
     /**
      * 装类+方法资源名-->类+方法的缓存
      */
@@ -154,11 +149,16 @@ public class MyAnnotationUtil {
         if(type.contains(path)){
             String username = json.getString("username");
             String password = json.getString("password");
-            final boolean isSuccess = login.login(username,password);
+            LoginRepository loginRepository = new LoginRepository();
+            final boolean isSuccess = loginRepository.login(username,password);
             if(isSuccess){
-                int roleId = login.getUserRoleIdByUsername(username);
-                ConcreteRole role = roleService.getRole(roleId);
+                RoleRepository roleRepository = new RoleRepository();
+                int roleId = loginRepository.getUserRoleIdByUsername(username);
+                ConcreteRole role = roleRepository.getRole(roleId);
                 role.setCtx(ctx);
+                //加角色名-角色对象
+                MapUtils.getMapRolename_Role().put(role.getName(),role);
+                System.out.println(MapUtils.getMapRolename_Role().size());
             }
         }
         //将类的资源名和方法的进行拼接

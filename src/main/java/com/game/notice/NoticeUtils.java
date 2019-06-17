@@ -1,7 +1,5 @@
 package com.game.notice;
 
-import com.alibaba.fastjson.JSONObject;
-import com.game.dispatcher.MyAnnotationUtil;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.role.bean.ConcreteRole;
 import com.game.utils.MapUtils;
@@ -39,22 +37,11 @@ public class NoticeUtils {
             int id = name.getValue().getConcreteMap().getId();
             //id匹配，通知玩家
             if(mapId==id){
-                //调用反射方法/monster/getState
-                notifyRole(name.getKey(),monster.getId());
+                String msg = monster.getName()+"状态:"+monster.getState();
+                ConcreteRole role = name.getValue();
+                //玩家收到通知
+                role.getCtx().channel().writeAndFlush(msg);
             }
-
         }
-        //玩家收到通知
-
     }
-
-    private static String notifyRole(String roleName, Integer id) {
-        ConcreteRole concreteRole = MapUtils.getMapRolename_Role().get(roleName);
-        JSONObject object = new JSONObject(true);
-        object.put("type","/monster/getState");
-        object.put("roleName",roleName);
-        object.put("monsterId",id);
-        return MyAnnotationUtil.requestService(object.toJSONString(),concreteRole.getCtx());
-    }
-
 }

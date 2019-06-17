@@ -3,6 +3,7 @@
 //登录操作
 {type:"/user/login",username:"123",password:"123"}
 {type:"/user/login",username:"456",password:"123"}
+{type:"/user/login",username:"789",password:"123"}
 //注册用户
 {type:"/user/registerService",username:"890",password:"123",ackpassword:"123"}
 //注册角色

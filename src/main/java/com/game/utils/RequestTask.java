@@ -2,11 +2,7 @@ package com.game.utils;
 
 import com.game.dispatcher.DataCodeor;
 import com.game.dispatcher.MyAnnotationUtil;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @ClassName RequestTask
@@ -16,7 +12,6 @@ import java.util.Map;
  * @Version 1.0
  */
 public class RequestTask implements Runnable {
-    public static Map<String, Channel> stringChannelMap = new HashMap<>();
     private String content;
     private ChannelHandlerContext ctx;
     public RequestTask(String content, ChannelHandlerContext ctx){

@@ -44,4 +44,12 @@ public class ConcreteMonster {
     public void setHp(Integer hp) {
         this.hp = hp;
     }
+
+    /**
+     * monster的状态
+     * @return
+     */
+    public String getState(){
+        return getHp()>0?"生存":"死亡";
+    }
 }

@@ -41,8 +41,6 @@ public class UserController {
 		if(isSuccess){
 			//加用户名-角色对象
 			MapUtils.getMapUsername_Role().put(username,role);
-			//加角色名-角色对象
-			MapUtils.getMapRolename_Role().put(role.getName(),role);
 			return role.getName()+"上线了";
 		}else{
 			System.out.println("登录失败");

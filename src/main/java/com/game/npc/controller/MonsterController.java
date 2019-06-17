@@ -13,15 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 @RequestAnnotation("/monster")
 public class MonsterController {
-
     /**
      * 获取怪兽状态
      * @return
      */
     @RequestAnnotation("/getState")
-    public String getState(String roleName,Integer monsterId){
+    public String getState(Integer monsterId){
         String name = MapUtils.getMonsterMap().get(monsterId).getName();
         Integer hp = MapUtils.getMonsterMap().get(monsterId).getHp();
-        return roleName+":"+ name+"的状态是："+(hp>0?"生存":"死亡");
+        return name+"的状态是："+(hp>0?"生存":"死亡");
     }
 }

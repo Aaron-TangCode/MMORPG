@@ -127,7 +127,7 @@ public class SkillController {
      * @return
      */
     private String attack(ConcreteMonster monster,String skillName,String roleName,String monsterName) {
-        ConcreteRole concreteRole = roleService.getRoleByRoleName(roleName);
+        ConcreteRole concreteRole = MapUtils.getMapRolename_Role().get(roleName);
         if(monster==null){
             return "地图："+concreteRole.getConcreteMap().getName()+"没怪兽:"+monsterName;
         }
@@ -140,7 +140,7 @@ public class SkillController {
         Integer costMp = concreteSkill.getMp();
         //判断是否具备释放技能的条件
         if(costMp>leftMp){
-            return "角色的mp值不够c释放节能"+"角色mp值="+leftMp+"\t"+"技能需消耗的mp值="+costMp;
+            return "角色的mp值不够c释放节能"+"角色mp值:"+leftMp+"\t"+"技能需消耗的mp值:"+costMp;
         }
         //技能的伤害值
         Integer hurt = concreteSkill.getHurt();
@@ -154,7 +154,7 @@ public class SkillController {
             NoticeUtils.notifyAllRoles(monster);
         }
         return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+concreteRole.getMp()+
-                "\n"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
+                ";"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
     }
 
     /**
