@@ -55,10 +55,10 @@ public class MapUtils {
     private static volatile List<MonsterMapMapping> monsterMapMappingList = null;
 
     /**
-     * key:id
+     * key:name
      * value:goods
      */
-    private static volatile Map<Integer, Goods> goodsMap = null;
+    private static volatile Map<String, Goods> goodsMap = null;
     /**
      * key:技能id
      * value:ConcreteSkill
@@ -79,7 +79,7 @@ public class MapUtils {
      * 物品类型map
      * @return
      */
-    public static Map<Integer, Goods> getGoodsMap(){
+    public static Map<String, Goods> getGoodsMap(){
         if(goodsMap==null){
             synchronized (MapUtils.class){
                 if(goodsMap==null){

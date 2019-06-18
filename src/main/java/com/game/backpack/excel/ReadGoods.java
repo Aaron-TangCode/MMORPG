@@ -74,7 +74,7 @@ public class ReadGoods {
                     }
                 }
                 // 数据装入List
-                MapUtils.getGoodsMap().put(goods.getId(),goods);
+                MapUtils.getGoodsMap().put(goods.getName(),goods);
             }
             System.out.println("Goods静态数据加载完毕");
         } catch (IOException e) {

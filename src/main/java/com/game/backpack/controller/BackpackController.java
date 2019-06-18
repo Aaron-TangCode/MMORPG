@@ -33,8 +33,63 @@ public class BackpackController {
         return msg;
     }
     private String handleGoods(String goodsName,ConcreteRole role,String roleName) {
-        //根据角色id查询是否具有物品
+        //在数据库查询，根据角色id查询是否具有物品
         List<Goods> list = backpackService.getGoodsByRoleId(role.getId());
+        //找物品
+        Goods goods =findGoods(list,goodsName);
+        //选择添加或更新方式
+        String msg = chooseWay(list,goods,roleName,goodsName,role);
+        //返回信息
+        return msg;
+    }
+
+    private String chooseWay(List<Goods> list,Goods goods,String roleName,String goodsName,ConcreteRole role) {
+        //角色拥有物品的数量
+        int existedGoods = list.size();
+
+        //不存在，就增加一行;存在且物品数量已满，就增加一行
+        boolean flag = (goods==null||goods.getCount()==Goods.GOODS_MAXCOUNT)&&(existedGoods<Goods.ROLE_MAXGOODS);
+        boolean flag2 = goods!=null&&goods.getCount()<Goods.GOODS_MAXCOUNT&&existedGoods<Goods.ROLE_MAXGOODS;
+        boolean flag3 = goods!=null&&goods.getCount()<Goods.GOODS_MAXCOUNT&&existedGoods==Goods.ROLE_MAXGOODS;
+        if(flag){
+            //在本地缓存拿装备的详细信息,在数据库中没信息，依赖roleName在本地缓存中查询
+            Goods localGoods = MapUtils.getGoodsMap().get(goodsName);
+            if(localGoods==null){
+                return "装备不存在本地缓存";
+            }
+            localGoods.setRoleId(role.getId());
+            backpackService.insertGoods(localGoods);
+            return roleName+"获得物品："+goodsName;
+        }else if (flag2){
+            if(goods.getType()!=0){
+                //如果物品是装备，不能叠加，直接添加
+                backpackService.insertGoods(goods);
+            }else{
+                //存在且物品数量未满，就更新数量
+                backpackService.updateGoodsByRoleId(role.getId(),goods.getId());
+            }
+            return roleName+"获得物品："+goodsName;
+        }else if(flag3){
+            if(goods.getType()!=0){
+                return roleName+"的背包已满";
+            }else{
+                //存在且物品数量未满，就更新数量
+                backpackService.updateGoodsByRoleId(role.getId(),goods.getId());
+                return roleName+"获得物品："+goodsName;
+            }
+        }else {
+            //如果获得的物品在背包中不存在或叠加数已满，且没有剩余的格子则返回背包已满的提示
+            return roleName+"的背包已满";
+        }
+    }
+
+    /**
+     * 匹配物品
+     * @param list
+     * @param goodsName
+     * @return
+     */
+    private Goods findGoods(List<Goods> list,String goodsName) {
         Goods goods = null;
         //遍历物品
         for (int i = 0; i < list.size(); i++) {
@@ -42,25 +97,7 @@ public class BackpackController {
                 goods = list.get(i);
             }
         }
-        //角色拥有物品的数量
-        int existedGoods = list.size();
-        //不存在，就增加一行;存在且物品数量已满，就增加一行
-        boolean flag = (goods==null||goods.getCount()==Goods.GOODS_MAXCOUNT)&&(existedGoods<Goods.ROLE_MAXGOODS);
-        if(flag){
-            Goods newGoods = new Goods();
-            newGoods.setCount(1);
-            newGoods.setName(goodsName);
-            newGoods.setRoleId(role.getId());
-            backpackService.insertGoods(newGoods);
-            return roleName+"获得物品："+goodsName;
-        }else if (goods!=null&&goods.getCount()<Goods.GOODS_MAXCOUNT){
-            //存在且物品数量未满，就更新数量
-            backpackService.updateGoodsByRoleId(role.getId(),goods.getId());
-            return roleName+"获得物品："+goodsName;
-        }else {
-            //如果获得的物品在背包中不存在或叠加数已满，且没有剩余的格子则返回背包已满的提示
-            return roleName+"的背包已满";
-        }
+        return goods;
     }
 
 

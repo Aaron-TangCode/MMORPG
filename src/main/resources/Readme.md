@@ -35,5 +35,8 @@
 //某个角色用某个技能攻击某个怪兽
 {type:"/skill/useskill",roleName:"role4",skillName:"血之狂暴",monsterName:"怪兽4号"}
 //某个角色获取某个物品
-{type:"/backpack/getGoods",roleName:"role4",goodsName:"血包"}
+{type:"/backpack/getGoods",roleName:"role4",goodsName:"小血瓶"}
+{type:"/backpack/getGoods",roleName:"role4",goodsName:"小蓝瓶"}
+{type:"/backpack/getGoods",roleName:"role4",goodsName:"太刀"}
+{type:"/backpack/getGoods",roleName:"role4",goodsName:"手枪"}
 ```

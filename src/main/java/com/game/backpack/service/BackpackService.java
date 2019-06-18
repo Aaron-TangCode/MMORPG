@@ -31,7 +31,4 @@ public class BackpackService {
         backpackRepository.updateGoodsByRoleId(roleId,goodsId);
     }
 
-    public int getExistedGoodsCountsByRoleId(int roleId) {
-        return backpackRepository.getExistedGoodsCountsByRoleId(roleId);
-    }
 }
