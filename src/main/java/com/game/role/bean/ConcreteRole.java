@@ -1,5 +1,6 @@
 package com.game.role.bean;
 
+import com.game.equipment.bean.EquipmentBox;
 import com.game.map.bean.ConcreteMap;
 import com.game.skill.bean.ConcreteSkill;
 import io.netty.channel.ChannelHandlerContext;
@@ -38,6 +39,16 @@ public class ConcreteRole {
     private ConcreteSkill concreteSkill;
 
     private ChannelHandlerContext ctx;
+
+    private EquipmentBox equipment;
+
+    public EquipmentBox getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(EquipmentBox equipment) {
+        this.equipment = equipment;
+    }
 
     public ChannelHandlerContext getCtx() {
         return ctx;

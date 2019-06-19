@@ -2,7 +2,11 @@ package com.game.backpack.repository;
 
 import com.game.backpack.bean.Goods;
 import com.game.backpack.mapper.BackpackMapper;
+import com.game.backpack.task.BackpackInserTask;
+import com.game.backpack.task.BackpackUpdateDelTask;
+import com.game.backpack.task.BackpackUpdateTask;
 import com.game.utils.SqlUtils;
+import com.game.utils.ThreadPoolUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -33,29 +37,17 @@ public class BackpackRepository {
      * @param newGoods
      */
     public void insertGoods(Goods newGoods) {
-        SqlSession session = SqlUtils.getSession();
-        try{
-            BackpackMapper mapper = session.getMapper(BackpackMapper.class);
-            mapper.insertGoods(newGoods);
-            session.commit();
-        }finally {
-            session.close();
-        }
+        BackpackInserTask task = new BackpackInserTask(newGoods);
+        ThreadPoolUtils.getThreadPool().execute(task);
     }
 
     /**
-     * 更新物品数量
+     * 更新物品数量(加)
      * @param roleId
      */
     public void updateGoodsByRoleId(int roleId,int goodsId) {
-        SqlSession session = SqlUtils.getSession();
-        try{
-            BackpackMapper mapper = session.getMapper(BackpackMapper.class);
-           mapper.updateGoodsByRoleId(roleId,goodsId);
-           session.commit();
-        }finally {
-            session.close();
-        }
+        BackpackUpdateTask task = new BackpackUpdateTask(roleId,goodsId);
+        ThreadPoolUtils.getThreadPool().execute(task);
     }
 
     /**
@@ -72,5 +64,15 @@ public class BackpackRepository {
         }finally {
             session.close();
         }
+    }
+
+    /**
+     * 更新物品数量（减）
+     * @param roleId
+     * @param goodsId
+     */
+    public void updateGoodsByRoleIdDel(int roleId, Integer goodsId) {
+        BackpackUpdateDelTask task = new BackpackUpdateDelTask(roleId,goodsId);
+        ThreadPoolUtils.getThreadPool().execute(task);
     }
 }

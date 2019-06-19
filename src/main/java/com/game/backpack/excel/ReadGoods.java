@@ -68,7 +68,7 @@ public class ReadGoods {
                     }else if (j == 4) {
                         goods.setCount(new Double(cellStr).intValue());
                     }else if (j == 5) {
-                        goods.setProperty(new Double(cellStr).intValue());
+                        goods.setProperty(cellStr);
                     }else if (j == 6) {
                         goods.setDurability(new Double(cellStr).intValue());
                     }

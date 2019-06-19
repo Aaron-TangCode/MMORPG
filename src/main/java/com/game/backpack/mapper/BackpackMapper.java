@@ -27,7 +27,7 @@ public interface BackpackMapper {
     public void insertGoods(Goods newGoods);
 
     /**
-     * 更新物品
+     * 更新物品（加）
      * @param roleId
      */
     public void updateGoodsByRoleId(@Param("roleId") int roleId,@Param("goodsId") int goodsId);
@@ -37,5 +37,12 @@ public interface BackpackMapper {
      * @param roleId
      */
     public int getExistedGoodsCountsByRoleId(int roleId);
+
+    /**
+     * 更新物品数量（减）
+     * @param roleId
+     * @param goodsId
+     */
+    public void updateGoodsByRoleIdDel(@Param("roleId") int roleId,@Param("goodsId") int goodsId);
 
 }

@@ -11,9 +11,13 @@
     <insert id="insertGoods" parameterType="com.game.backpack.bean.Goods">
         insert into backpack(name,count,role_id,type) values(#{name},#{count},#{roleId},#{type})
     </insert>
-<!--    更新物品数量-->
+<!--    更新物品数量(加)-->
     <update id="updateGoodsByRoleId" parameterType="java.lang.Integer">
         update backpack set count=count+1 where role_id=#{roleId} and id=#{goodsId}
+    </update>
+    <!--    更新物品数量（减）-->
+    <update id="updateGoodsByRoleIdDel" parameterType="java.lang.Integer">
+        update backpack set count=count-1 where role_id=#{roleId} and id=#{goodsId}
     </update>
 <!--查询角色拥有的物品数量-->
     <select id="getExistedGoodsCountsByRoleId" parameterType="java.lang.Integer" resultType="java.lang.Integer">

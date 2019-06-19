@@ -24,5 +24,6 @@
         <mapper resource="mapper/StateMapper.xml"/>
         <mapper resource="mapper/MapMapper.xml"/>
         <mapper resource="mapper/BackpackMapper.xml"/>
+        <mapper resource="mapper/EquipmentMapper.xml"/>
     </mappers>
 </configuration>

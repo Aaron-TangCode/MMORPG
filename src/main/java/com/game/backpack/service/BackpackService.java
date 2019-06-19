@@ -31,4 +31,7 @@ public class BackpackService {
         backpackRepository.updateGoodsByRoleId(roleId,goodsId);
     }
 
+    public void updateGoodsByRoleIdDel(int roleId, Integer goodsId) {
+        backpackRepository.updateGoodsByRoleIdDel(roleId,goodsId);
+    }
 }

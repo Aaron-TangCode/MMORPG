@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.equipment.mapper.EquipmentMapper">
+<!--    增加装备栏-->
+    <insert id="insertEquipment" parameterType="com.game.equipment.bean.EquipmentBox">
+        insert into equipment(role_id,equipment_box) values(#{roleId},#{equipmentPart})
+    </insert>
+<!--更新装备栏-->
+    <update id="updateEquipment" parameterType="com.game.equipment.bean.EquipmentBox">
+        update equipment set equipment_box =#{equipmentPart} where role_id=#{roleId}
+    </update>
+<!--查找装备-->
+    <select id="getEquipment" resultType="com.game.equipment.bean.EquipmentBox">
+        select id,role_id,equipment_box from equipment where role_id=#{roleId}
+    </select>
+</mapper>

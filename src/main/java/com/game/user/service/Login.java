@@ -24,7 +24,6 @@ public class Login {
      * @return
      */
     public boolean login(String username,String password){
-        System.out.println("loginsevice");
         if(username!=null&&password!=null){
             return loginRepository.login(username,password);
         }else{

@@ -40,7 +40,7 @@ public class Goods {
     /**
      *物品属性
      */
-    private Integer property;
+    private String property;
 
 
 
@@ -69,11 +69,11 @@ public class Goods {
         this.durability = durability;
     }
 
-    public Integer getProperty() {
+    public String getProperty() {
         return property;
     }
 
-    public void setProperty(Integer property) {
+    public void setProperty(String property) {
         this.property = property;
     }
 

@@ -39,4 +39,9 @@
 {type:"/backpack/getGoods",roleName:"role4",goodsName:"小蓝瓶"}
 {type:"/backpack/getGoods",roleName:"role4",goodsName:"太刀"}
 {type:"/backpack/getGoods",roleName:"role4",goodsName:"手枪"}
+//某个角色使用某个物品
+{type:"/role/roleUseGoods",roleName:"role4",goodsName:"手枪"}
+{type:"/role/roleUseGoods",roleName:"role4",goodsName:"太刀"}
+{type:"/role/roleUseGoods",roleName:"role4",goodsName:"小血瓶"}
+{type:"/role/roleUseGoods",roleName:"role4",goodsName:"小蓝瓶"}
 ```

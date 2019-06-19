@@ -32,6 +32,14 @@ public class BackpackController {
         String msg = handleGoods(goodsName,role,roleName);
         return msg;
     }
+
+    /**
+     * 逻辑处理
+     * @param goodsName 物品名
+     * @param role 角色
+     * @param roleName 角色名
+     * @return 字符串
+     */
     private String handleGoods(String goodsName,ConcreteRole role,String roleName) {
         //在数据库查询，根据角色id查询是否具有物品
         List<Goods> list = backpackService.getGoodsByRoleId(role.getId());
@@ -43,6 +51,15 @@ public class BackpackController {
         return msg;
     }
 
+    /**
+     * 选择增加或更新物品方式
+     * @param list 角色已拥有的物品列表
+     * @param goods 物品
+     * @param roleName 角色名
+     * @param goodsName 物品名
+     * @param role 角色
+     * @return 字符串
+     */
     private String chooseWay(List<Goods> list,Goods goods,String roleName,String goodsName,ConcreteRole role) {
         //角色拥有物品的数量
         int existedGoods = list.size();
@@ -61,7 +78,7 @@ public class BackpackController {
             backpackService.insertGoods(localGoods);
             return roleName+"获得物品："+goodsName;
         }else if (flag2){
-            if(goods.getType()!=0){
+            if(goods.getType()>1){
                 //如果物品是装备，不能叠加，直接添加
                 backpackService.insertGoods(goods);
             }else{
@@ -70,7 +87,7 @@ public class BackpackController {
             }
             return roleName+"获得物品："+goodsName;
         }else if(flag3){
-            if(goods.getType()!=0){
+            if(goods.getType()>1){
                 return roleName+"的背包已满";
             }else{
                 //存在且物品数量未满，就更新数量
@@ -100,11 +117,20 @@ public class BackpackController {
         return goods;
     }
 
-
+    /**
+     * 返回角色
+     * @param roleName
+     * @return
+     */
     private ConcreteRole getRole(String roleName) {
         return MapUtils.getMapRolename_Role().get(roleName);
     }
 
+    /**
+     * 丢掉物品
+     * todo
+     * @return
+     */
     public String discardGoods(){
         return null;
     }
