@@ -2,6 +2,7 @@ package com.game.utils;
 
 import com.game.backpack.bean.Goods;
 import com.game.backpack.bean.Type;
+import com.game.buff.bean.ConcreteBuff;
 import com.game.excel.bean.MapMapping;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.ConcreteNPC;
@@ -74,7 +75,27 @@ public class MapUtils {
      * values:type
      */
     private static volatile Map<Integer, Type> typeMap = null;
+    /**
+     * key:id
+     * value:ConcreteBuff
+     */
+    private static volatile Map<Integer, ConcreteBuff> buffMap = null;
 
+
+    /**
+     * buff的map
+     * @return
+     */
+    public static Map<Integer, ConcreteBuff>  getBuffMap(){
+        if(buffMap==null){
+            synchronized (MapUtils.class){
+                if(buffMap==null){
+                    buffMap = new HashMap<>();
+                }
+            }
+        }
+        return buffMap;
+    }
     /**
      * 物品类型map
      * @return

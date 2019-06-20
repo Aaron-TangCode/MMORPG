@@ -1,5 +1,6 @@
 package com.game.user.controller;
 
+import com.game.buff.controller.BuffController;
 import com.game.dispatcher.RequestAnnotation;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
@@ -28,6 +29,8 @@ public class UserController {
 	@Autowired
 	private RoleService roleService;
 
+	@Autowired
+	private BuffController buffController;
 	/**
 	 * 用户登录
 	 * @param username
@@ -41,6 +44,7 @@ public class UserController {
 		if(isSuccess){
 			//加用户名-角色对象
 			MapUtils.getMapUsername_Role().put(username,role);
+			buffController.executeBuff(role.getName());
 			return role.getName()+"上线了";
 		}else{
 			System.out.println("登录失败");
