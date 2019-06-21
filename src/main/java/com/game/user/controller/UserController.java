@@ -92,7 +92,7 @@ public class UserController {
 			String name = iterator.next();
 			String map_name = map.get(name).getConcreteMap().getName();
 			if (map_name.equals(mapname)){
-				sb.append(map.get(name).getName()+","+map.get(name).getConcreteMap().getName()+","+map.get(name).getHp());
+				sb.append(map.get(name).getName()+","+map.get(name).getConcreteMap().getName()+","+map.get(name).getCurHp());
 			}
 			if(iterator.hasNext()){
 				sb.append(";");

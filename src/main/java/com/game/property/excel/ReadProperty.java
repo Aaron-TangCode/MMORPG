@@ -1,7 +1,8 @@
-package com.game.backpack.excel;
+package com.game.property.excel;
 
-import com.game.backpack.bean.Goods;
 import com.game.excel.annotation.ExcelAnnotation;
+import com.game.property.bean.Property;
+import com.game.property.manager.PropertyManager;
 import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,8 @@ import java.io.InputStream;
  */
 @ExcelAnnotation
 @Component
-public class ReadGoods {
-	private static final String FILEPATH = "src/main/resources/excel/goods.xls";
+public class ReadProperty {
+	private static final String FILEPATH = "src/main/resources/excel/property.xls";
 
     /**
      * 读取excel
@@ -43,7 +44,7 @@ public class ReadGoods {
             // 开始循环遍历行，表头不处理，从1开始
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 // 实例化对象
-                Goods goods = new Goods();
+                Property property = new Property();
                 // 获取行对象
             	Row row = sheet.getRow(i);
                 // 如果为空，不处理
@@ -58,31 +59,21 @@ public class ReadGoods {
                     cellStr =  getResult(cell);
                     // 下面按照数据出现位置封装到bean中
                     if(j == 0) {
-                        goods.setId(new Double(cellStr).intValue());
+                        property.setLevel(new Double(cellStr).intValue());
                     }else if (j == 1) {
-                        goods.setName(cellStr);
+                        property.setHp(new Double(cellStr).intValue());
                     }else if (j == 2) {
-                        goods.setType(new Double(cellStr).intValue());
+                        property.setMp(new Double(cellStr).intValue());
                     }else if (j == 3) {
-                        goods.setDescription(cellStr);
+                        property.setAttack(new Double(cellStr).intValue());
                     }else if (j == 4) {
-                        goods.setCount(new Double(cellStr).intValue());
-                    }else if (j == 5) {
-                        goods.setDefend(cellStr);
-                    }else if (j == 6) {
-                        goods.setDurability(new Double(cellStr).intValue());
-                    } else if (j == 7) {
-                        goods.setMp(cellStr);
-                    } else if (j == 8) {
-                        goods.setHp(cellStr);
-                    }else if (j == 9) {
-                        goods.setAttack(cellStr);
+                        property.setDefend(new Double(cellStr).intValue());
                     }
                 }
                 // 数据装入List
-                MapUtils.getGoodsMap().put(goods.getName(),goods);
+                PropertyManager.getMap().put(property.getLevel(),property);
             }
-            System.out.println("Goods静态数据加载完毕");
+            System.out.println("property静态数据加载完毕");
         } catch (IOException e) {
             e.printStackTrace();
         }  catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {

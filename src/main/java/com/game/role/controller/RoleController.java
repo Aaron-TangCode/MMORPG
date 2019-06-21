@@ -3,6 +3,8 @@ package com.game.role.controller;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.service.BackpackService;
 import com.game.dispatcher.RequestAnnotation;
+import com.game.property.bean.Property;
+import com.game.property.manager.PropertyManager;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.utils.MapUtils;
@@ -60,12 +62,12 @@ public class RoleController {
         if(concreteRole==null){
             return roleName+"还没登录，请先登录";
         }
-        if(concreteRole.getHp()>0){
-            if(concreteRole.getHp()-10>0){
-                concreteRole.setHp(concreteRole.getHp()-10);
+        if(concreteRole.getCurHp()>0){
+            if(concreteRole.getCurHp()-10>0){
+                concreteRole.setHp();
                 return roleName+"受到伤害，生命值减10";
             }else{
-                concreteRole.setHp(0);
+                concreteRole.setHp();
                 return roleName+"受到伤害，生命值减为0";
             }
         }else{
@@ -84,16 +86,23 @@ public class RoleController {
         if(concreteRole==null){
             return roleName+"还没登录，请先登录";
         }
-        if(concreteRole.getHp()>=100){
+        if(concreteRole.getCurHp()>=100){
             return "已满血";
         }else{
-            if(concreteRole.getHp()+10>=100){
-                concreteRole.setHp(100);
-            }else{
-                concreteRole.setHp(concreteRole.getHp()+10);
-            }
+            handleHp(concreteRole);
             return roleName+"的血量已加10Hp";
         }
+    }
+
+    private void handleHp(ConcreteRole concreteRole) {
+        if(concreteRole.getCurHp()+10>=100){
+            Property property = PropertyManager.getMap().get(concreteRole.getLevel());
+            property.setHp(property.getHp());
+            concreteRole.setHp();
+        }else{
+            concreteRole.setHp();
+        }
+
     }
 
     /**
@@ -103,11 +112,12 @@ public class RoleController {
      */
     @RequestAnnotation("/getRoleState")
     public String getRoleState(String roleName){
-        ConcreteRole concreteRole = MapUtils.getMapRolename_Role().get(roleName);
-        if(concreteRole==null){
+        ConcreteRole role = MapUtils.getMapRolename_Role().get(roleName);
+        if(role==null){
             return roleName+"还没登录，请先登录";
         }
-        return concreteRole.getHp()>0?"生存":"死亡";
+        Property property = PropertyManager.getMap().get(role.getLevel());
+        return roleName+"血量："+property.getHp()+"\t魔法值："+property.getMp()+"\t攻击力："+property.getAttack()+"\t防御力："+property.getDefend();
     }
     @RequestAnnotation("/roleUseGoods")
     public String roleUseGoods(String roleName,String goodsName){
@@ -148,18 +158,26 @@ public class RoleController {
                 if(isFull){
                     return "血已满，无需使用"+localGoods.getName();
                 }
-                double pro = Double.parseDouble(localGoods.getProperty());
-                role.setHp(role.getHp()+(int)(role.getHp()*pro));
-                System.out.println("加血后："+role.getHp());
+                double pro = Double.parseDouble(localGoods.getHp());
+
+                Property property = PropertyManager.getMap().get(role.getLevel());
+                property.setHp(role.getCurHp()+(int)(role.getCurHp()*pro));
+                role.setHp();
+
+                System.out.println("加血后："+role.getCurHp());
                 MapUtils.getMapRolename_Role().put(role.getName(),role);
             }else{
                 boolean isFull = checkFullMagic(role);
                 if(isFull){
                     return "蓝已满，无需使用"+localGoods.getName();
                 }
-                double pro = Double.parseDouble(localGoods.getProperty());
-                role.setMp(role.getMp()+(int)(role.getMp()*pro));
-                System.out.println("加蓝后："+role.getMp());
+                double pro = Double.parseDouble(localGoods.getHp());
+
+                Property property = PropertyManager.getMap().get(role.getLevel());
+                property.setMp(role.getCurMp()+(int)(role.getCurMp()*pro));
+                role.setMp();
+
+                System.out.println("加蓝后："+role.getCurMp());
                 MapUtils.getMapRolename_Role().put(role.getName(),role);
             }
             //更新物品数据库信息
@@ -171,11 +189,11 @@ public class RoleController {
     }
 
     private boolean checkFullMagic(ConcreteRole role) {
-        return role.getMp()>=100?true:false;
+        return role.getCurMp()>=100?true:false;
     }
 
     private boolean checkFullBoold(ConcreteRole role) {
-        return role.getHp()>=100?true:false;
+        return role.getCurHp()>=100?true:false;
     }
 
     /**

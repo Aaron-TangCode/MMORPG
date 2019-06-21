@@ -38,12 +38,21 @@ public class Goods {
      */
     private Integer durability;
     /**
-     *物品属性
+     *物品hp
      */
-    private String property;
-
-
-
+    private String hp;
+    /**
+     *物品mp
+     */
+    private String mp;
+    /**
+     *物品attack
+     */
+    private String attack;
+    /**
+     *物品defend
+     */
+    private String defend;
     /**
      * 物品最大数量
      */
@@ -69,12 +78,36 @@ public class Goods {
         this.durability = durability;
     }
 
-    public String getProperty() {
-        return property;
+    public String getHp() {
+        return hp;
     }
 
-    public void setProperty(String property) {
-        this.property = property;
+    public void setHp(String hp) {
+        this.hp = hp;
+    }
+
+    public String getMp() {
+        return mp;
+    }
+
+    public void setMp(String mp) {
+        this.mp = mp;
+    }
+
+    public String getAttack() {
+        return attack;
+    }
+
+    public void setAttack(String attack) {
+        this.attack = attack;
+    }
+
+    public String getDefend() {
+        return defend;
+    }
+
+    public void setDefend(String defend) {
+        this.defend = defend;
     }
 
     public Integer getRoleId() {

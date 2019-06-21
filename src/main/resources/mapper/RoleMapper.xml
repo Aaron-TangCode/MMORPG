@@ -22,7 +22,7 @@
     </resultMap>
 <!--    通过id查询role-->
     <select id="getRoleById" resultMap="roleMap">
-        SELECT r.id role_id,r.name role_name,m.id map_id,m.name map_name from role r,map m where r.map_id=m.id and r.id = #{id};
+        SELECT r.id role_id,r.name role_name,r.level level,m.id map_id,m.name map_name from role r,map m where r.map_id=m.id and r.id = #{id};
     </select>
 
     <resultMap id="getMapName" type="java.lang.String">

@@ -1,11 +1,8 @@
 package com.game.equipment.bean;
 
-import com.game.equipment.observer.EquipmentObserver;
-import com.game.equipment.observer.Subject;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,7 +12,7 @@ import java.util.Map;
  * @Date 2019/6/18 20:04
  * @Version 1.0
  */
-public class EquipmentBox implements Subject {
+public class EquipmentBox {
     private int id;
     private int roleId;
     private String equipmentBox;
@@ -60,25 +57,5 @@ public class EquipmentBox implements Subject {
         this.equipmentBox = equipmentBox;
     }
 
-    /**
-     * 观察者列表
-     */
-    private List<EquipmentObserver> observers
-            = new ArrayList<>();
-    @Override
-    public void addObserver(EquipmentObserver obj) {
-        observers.add(obj);
-    }
 
-    @Override
-    public void deleteObserver(EquipmentObserver obj) {
-        observers.remove(obj);
-    }
-
-    @Override
-    public void notifyObserver() {
-        for (EquipmentObserver observer : observers) {
-            observer.update();
-        }
-    }
 }

@@ -4,6 +4,8 @@ import com.game.dispatcher.RequestAnnotation;
 import com.game.notice.NoticeUtils;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.MonsterMapMapping;
+import com.game.property.bean.Property;
+import com.game.property.manager.PropertyManager;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.skill.bean.ConcreteSkill;
@@ -134,7 +136,7 @@ public class SkillController {
         //获取技能和使用技能
         ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyName().get(skillName);
         //角色剩下的mp值
-        int leftMp = concreteRole.getMp();
+        int leftMp = concreteRole.getCurMp();
 
         //技能需要消耗的mp值
         Integer costMp = concreteSkill.getMp();
@@ -145,7 +147,10 @@ public class SkillController {
         //技能的伤害值
         Integer hurt = concreteSkill.getHurt();
         //技能消耗角色的mp值
-        concreteRole.setMp(leftMp-costMp);
+        Property property = PropertyManager.getMap().get(concreteRole.getLevel());
+        property.setMp(leftMp-costMp);
+
+        concreteRole.setMp();
         Integer monsterHp = monster.getHp();
         //怪兽的生命值减少
         monster.setHp(monster.getHp()-hurt);
@@ -153,7 +158,7 @@ public class SkillController {
         if(monster.getHp()<=0){
             NoticeUtils.notifyAllRoles(monster);
         }
-        return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+concreteRole.getMp()+
+        return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+concreteRole.getCurMp()+
                 ";"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
     }
 

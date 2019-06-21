@@ -48,4 +48,7 @@
 {type:"/role/roleUseGoods",roleName:"role4",goodsName:"太刀"}
 {type:"/role/roleUseGoods",roleName:"role4",goodsName:"小血瓶"}
 {type:"/role/roleUseGoods",roleName:"role4",goodsName:"小蓝瓶"}
+
+//把某个装备添加到装备栏
+{type:"/equipment/addEquipment",roleName:"role4",goodsName:"太刀"}
 ```

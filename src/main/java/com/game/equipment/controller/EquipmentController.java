@@ -7,6 +7,8 @@ import com.game.dispatcher.RequestAnnotation;
 import com.game.equipment.bean.Equipment;
 import com.game.equipment.bean.EquipmentBox;
 import com.game.equipment.service.EquipmentService;
+import com.game.property.bean.Property;
+import com.game.property.manager.PropertyManager;
 import com.game.role.bean.ConcreteRole;
 import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ import java.util.List;
  * @Date 2019/6/18 21:11
  * @Version 1.0
  */
-@RequestAnnotation("/quipment")
+@RequestAnnotation("/equipment")
 @Component
 public class EquipmentController {
     @Autowired
@@ -45,7 +47,9 @@ public class EquipmentController {
         //选择装备，装配在装备栏
         if(equipmentBox!=null){
             Equipment equipment = JSON.parseObject(equipmentBox.getEquipmentBox(),Equipment.class);
+            //
             JSON json = setEquipmentValueAndReturnJson(eName, equipment, goods);
+            //
             equipmentBox.setEquipmentBox(json.toJSONString());
             //更新装备栏
            equipmentService.updateEquipment(equipmentBox);
@@ -59,14 +63,27 @@ public class EquipmentController {
             //添加装备栏
             equipmentService.insertEquipment(equipmentBox);
         }
-        //角色属性发生变化
-        
-        //装备栏信息，落地到数据库
 
+        //获取角色等级
+        int level = role.getLevel();
+        //获取角色属性
+        Property property = PropertyManager.getMap().get(level);
+        //根据角色的装备类型去增加相应属性
+        property.changeProperty(goods);
+        //通知角色属性发生变化
+        adviseRole(role,property);
         //背包减少装备
-
-        return null;
+        backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
+        return roleName+"成功把装备："+goodsName+"添加到装备栏";
     }
+
+    private void adviseRole(ConcreteRole role,Property property) {
+        role.setMp();
+        role.setAttack();
+        role.setDefend();
+        role.setHp();
+    }
+
 
     private JSON setEquipmentValueAndReturnJson(String eName,Equipment equipment,Goods goods) {
         switch (eName){

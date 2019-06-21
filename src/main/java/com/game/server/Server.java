@@ -5,8 +5,6 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 /**
@@ -46,8 +44,8 @@ public class Server {
             serverBootstrap.group(bossGroup,workerGroup).channel(NioServerSocketChannel.class)
                     .childHandler(new ServerInitializer());
 
-            ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
-            channelFuture.channel().closeFuture().sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(port);
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
