@@ -44,8 +44,8 @@ public class Server {
             serverBootstrap.group(bossGroup,workerGroup).channel(NioServerSocketChannel.class)
                     .childHandler(new ServerInitializer());
 
-            ChannelFuture channelFuture = serverBootstrap.bind(port);
-
+            ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
+            channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

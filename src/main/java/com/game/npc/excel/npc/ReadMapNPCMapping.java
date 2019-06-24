@@ -1,6 +1,6 @@
 package com.game.npc.excel.npc;
 
-import com.game.excel.annotation.ExcelAnnotation;
+import com.game.annotation.ExcelAnnotation;
 import com.game.npc.bean.MapNPCMapping;
 import com.game.utils.ExcelUtils;
 import com.game.utils.MapUtils;
@@ -22,7 +22,7 @@ import java.io.IOException;
 @ExcelAnnotation
 @Component
 public class ReadMapNPCMapping {
-    private static final String FILEPATH = "src/main/resources/excel/map_npc_mapping.xls";
+    private static final String FILEPATH = "src/main/resources/resource/map_npc_mapping.xls";
     /**
      * 读取excel
      * @return

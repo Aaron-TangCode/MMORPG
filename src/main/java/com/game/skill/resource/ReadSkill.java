@@ -1,6 +1,6 @@
-package com.game.skill.excel;
+package com.game.skill.resource;
 
-import com.game.excel.annotation.ExcelAnnotation;
+import com.game.annotation.ExcelAnnotation;
 import com.game.skill.bean.ConcreteSkill;
 import com.game.utils.ExcelUtils;
 import com.game.utils.MapUtils;
@@ -22,7 +22,7 @@ import java.io.IOException;
 @ExcelAnnotation
 @Component
 public class ReadSkill {
-    private static final String FILEPATH = "src/main/resources/excel/skill.xls";
+    private static final String FILEPATH = "src/main/resources/resource/skill.xls";
     /**
      * 读取excel
      * @return
@@ -62,11 +62,15 @@ public class ReadSkill {
                         concreteSkill.setHurt(new Double(cellStr).intValue());
                     }else if (j == 5) {
                         concreteSkill.setDescription(cellStr);
+                    }else if(j==6){
+                        concreteSkill.setLevel(new Double(cellStr).intValue());
+                    }else if(j==7){
+                        concreteSkill.setCondition(cellStr);
                     }
                 }
                 // 数据装入List
                 MapUtils.getSkillMap_keyId().put(concreteSkill.getId(),concreteSkill);
-                MapUtils.getSkillMap_keyName().put(concreteSkill.getName(),concreteSkill);
+                MapUtils.getSkillMap_keyName().put(concreteSkill.getName()+concreteSkill.getLevel(),concreteSkill);
             }
             System.out.println("Skill静态数据加载完毕");
         }

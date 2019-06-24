@@ -54,6 +54,10 @@ public class Goods {
      */
     private String defend;
     /**
+     * 物品可重复最大数量
+     */
+    private Integer repeat;
+    /**
      * 物品最大数量
      */
     public static final int GOODS_MAXCOUNT = 99;
@@ -149,5 +153,13 @@ public class Goods {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(Integer repeat) {
+        this.repeat = repeat;
     }
 }

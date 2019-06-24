@@ -1,6 +1,6 @@
 package com.game.npc.excel.monster;
 
-import com.game.excel.annotation.ExcelAnnotation;
+import com.game.annotation.ExcelAnnotation;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.utils.ExcelUtils;
 import com.game.utils.MapUtils;
@@ -22,7 +22,7 @@ import java.io.IOException;
 @ExcelAnnotation
 @Component
 public class ReadMonster {
-    private static final String FILEPATH = "src/main/resources/excel/Monster.xls";
+    private static final String FILEPATH = "src/main/resources/resource/Monster.xls";
     /**
      * 读取excel
      * @return

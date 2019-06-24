@@ -54,6 +54,19 @@ public class ConcreteRole {
     private Integer attack;
 
     private Integer defend;
+    /**
+     * 角色的背包容量
+     */
+    private Integer backpackCapacity;
+
+
+    public Integer getBackpackCapacity() {
+        return backpackCapacity;
+    }
+
+    public void setBackpackCapacity(Integer backpackCapacity) {
+        this.backpackCapacity = backpackCapacity;
+    }
 
     public Integer getAttack() {
         return attack;

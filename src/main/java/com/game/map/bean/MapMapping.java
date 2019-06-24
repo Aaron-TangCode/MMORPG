@@ -1,4 +1,4 @@
-package com.game.excel.bean;
+package com.game.map.bean;
 
 /**
  * @ClassName MapMapping

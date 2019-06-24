@@ -32,7 +32,14 @@ public class ConcreteSkill {
      * 技能描述
      */
     private String description;
-
+    /**
+     * 技能等级
+     */
+    private Integer level;
+    /**
+     * 技能升级条件
+     */
+    private String condition;
 
     public String getDescription() {
         return description;
@@ -80,5 +87,21 @@ public class ConcreteSkill {
 
     public void setHurt(Integer hurt) {
         this.hurt = hurt;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
     }
 }

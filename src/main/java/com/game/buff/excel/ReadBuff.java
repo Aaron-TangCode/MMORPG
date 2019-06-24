@@ -1,7 +1,7 @@
 package com.game.buff.excel;
 
 import com.game.buff.bean.ConcreteBuff;
-import com.game.excel.annotation.ExcelAnnotation;
+import com.game.annotation.ExcelAnnotation;
 import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ import java.io.InputStream;
 @ExcelAnnotation
 @Component
 public class ReadBuff {
-	private static final String FILEPATH = "src/main/resources/excel/buff.xls";
+	private static final String FILEPATH = "src/main/resources/resource/buff.xls";
 
     /**
      * 读取excel

@@ -1,7 +1,7 @@
 package com.game.backpack.excel;
 
 import com.game.backpack.bean.Goods;
-import com.game.excel.annotation.ExcelAnnotation;
+import com.game.annotation.ExcelAnnotation;
 import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ import java.io.InputStream;
 @ExcelAnnotation
 @Component
 public class ReadGoods {
-	private static final String FILEPATH = "src/main/resources/excel/goods.xls";
+	private static final String FILEPATH = "src/main/resources/resource/goods.xls";
 
     /**
      * 读取excel
@@ -77,6 +77,8 @@ public class ReadGoods {
                         goods.setHp(cellStr);
                     }else if (j == 9) {
                         goods.setAttack(cellStr);
+                    }else if(j == 10){
+                        goods.setRepeat(new Double(cellStr).intValue());
                     }
                 }
                 // 数据装入List

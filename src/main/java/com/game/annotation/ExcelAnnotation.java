@@ -1,4 +1,4 @@
-package com.game.excel.annotation;
+package com.game.annotation;
 
 import org.springframework.stereotype.Component;
 

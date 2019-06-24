@@ -1,6 +1,6 @@
 package com.game.property.excel;
 
-import com.game.excel.annotation.ExcelAnnotation;
+import com.game.annotation.ExcelAnnotation;
 import com.game.property.bean.Property;
 import com.game.property.manager.PropertyManager;
 import com.game.utils.MapUtils;
@@ -21,7 +21,7 @@ import java.io.InputStream;
 @ExcelAnnotation
 @Component
 public class ReadProperty {
-	private static final String FILEPATH = "src/main/resources/excel/property.xls";
+	private static final String FILEPATH = "src/main/resources/resource/property.xls";
 
     /**
      * 读取excel

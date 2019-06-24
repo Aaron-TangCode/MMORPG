@@ -1,6 +1,6 @@
 package com.game.npc.excel.npc;
 
-import com.game.excel.annotation.ExcelAnnotation;
+import com.game.annotation.ExcelAnnotation;
 import com.game.npc.bean.ConcreteNPC;
 import com.game.utils.ExcelUtils;
 import com.game.utils.MapUtils;
@@ -21,7 +21,7 @@ import java.io.IOException;
 @ExcelAnnotation
 @Component
 public class ReadNPC {
-    private static final String FILEPATH = "src/main/resources/excel/NPC.xls";
+    private static final String FILEPATH = "src/main/resources/resource/NPC.xls";
     /**
      * 读取excel
      * @return

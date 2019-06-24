@@ -3,7 +3,7 @@ package com.game.server;
 import com.game.dispatcher.ClassUtil;
 import com.game.dispatcher.MyAnnotationUtil;
 import com.game.dispatcher.StringUtil;
-import com.game.excel.annotation.ExcelAnnotation;
+import com.game.annotation.ExcelAnnotation;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;

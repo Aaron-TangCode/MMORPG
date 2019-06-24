@@ -1,7 +1,7 @@
-package com.game.excel.reader;
+package com.game.map.reader;
 
-import com.game.excel.annotation.ExcelAnnotation;
-import com.game.excel.bean.MapMapping;
+import com.game.annotation.ExcelAnnotation;
+import com.game.map.bean.MapMapping;
 import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ import java.io.InputStream;
 @ExcelAnnotation
 @Component
 public class ReadMapMapping {
-	private static final String FILEPATH = "src/main/resources/excel/MapMapping.xls";
+	private static final String FILEPATH = "src/main/resources/resource/MapMapping.xls";
 
     /**
      * 读取excel

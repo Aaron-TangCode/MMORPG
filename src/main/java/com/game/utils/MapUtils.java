@@ -3,7 +3,7 @@ package com.game.utils;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.bean.Type;
 import com.game.buff.bean.ConcreteBuff;
-import com.game.excel.bean.MapMapping;
+import com.game.map.bean.MapMapping;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.ConcreteNPC;
 import com.game.npc.bean.MapNPCMapping;
@@ -66,7 +66,7 @@ public class MapUtils {
      */
     private static volatile Map<String, ConcreteSkill> skillMap = null;
     /**
-     * key:技能name
+     * key:技能name+技能level
      * value:ConcreteSkill
      */
     private static volatile Map<String, ConcreteSkill> skillMap2 = null;

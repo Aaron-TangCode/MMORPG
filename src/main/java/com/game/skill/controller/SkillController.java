@@ -1,5 +1,7 @@
 package com.game.skill.controller;
 
+import com.game.backpack.bean.Goods;
+import com.game.backpack.service.BackpackService;
 import com.game.dispatcher.RequestAnnotation;
 import com.game.notice.NoticeUtils;
 import com.game.npc.bean.ConcreteMonster;
@@ -31,14 +33,104 @@ public class SkillController {
     @Autowired
     private RoleService roleService;
 
-    @RequestAnnotation("/studyskill")
-    public String studySkill(String rolename,String skillname){
-        //获取角色
-        ConcreteRole concreteRole = roleService.getRoleByRoleName(rolename);
-        //判断角色是否已经拥有该技能或判断角色是否达到学习该技能的条件
-        return checkAndLearn(concreteRole,skillname);
+    @Autowired
+    private BackpackService backpackService;
+    /**
+     * 升级技能
+     * @param roleName
+     * @param skillName
+     * @return
+     */
+    @RequestAnnotation("/upgradeskill")
+    public String upgradeSkill(String roleName,String skillName){
+        //判断角色有没有技能包
+        ConcreteRole role = getRole(roleName);
+        Goods consumeGoods = findGoods(role);
+        if(consumeGoods==null){
+            return roleName+"没技能包";
+        }
+        //获取技能(from db)
+        ConcreteSkill skill = role.getConcreteSkill();
+       return handleSkill(skill,skillName,role,consumeGoods);
     }
 
+    private String handleSkill(ConcreteSkill skill,String skillName,ConcreteRole role,Goods consumeGoods) {
+        if(skill!=null){
+            //skill:1,2,3
+            final String[] skills = skill.getId().split(",");
+            //找出具体技能且升级
+            return handleSkills(skills,skillName,role,consumeGoods);
+        }else{
+            //报错，返回信息
+            return role.getName()+"没技能:"+skillName+";如需升级技能，请先学习技能";
+        }
+    }
+
+    private String handleSkills(String[] skills, String skillName,ConcreteRole role,Goods consumeGoods) {
+        ConcreteSkill lowSkill = findSkill(skills,skillName);
+        if(lowSkill!=null){
+            //升级技能
+            return upSkill(lowSkill,role,skillName,consumeGoods);
+        }else{
+            return role.getName()+"没技能:"+skillName+";如需升级技能，请先学习技能";
+        }
+    }
+
+    /**
+     * 升级技能
+     * @param lowSkill
+     * @param role
+     * @param skillName
+     * @param consumeGoods
+     * @return
+     */
+    private String upSkill(ConcreteSkill lowSkill,ConcreteRole role,String skillName,Goods consumeGoods) {
+        if(lowSkill.getLevel()==2){
+            return role.getName()+"的"+skillName+"技能等级已满";
+        }
+        ConcreteSkill highSkill = MapUtils.getSkillMap_keyName().get(lowSkill.getName() + (lowSkill.getLevel()+1));
+        //修改技能id
+        updateSkillId(role,highSkill);
+        role.setConcreteSkill(highSkill);
+        roleService.updateRole(role);
+        //消耗一本技能包
+        backpackService.updateGoodsByRoleIdDel(role.getId(),consumeGoods.getId());
+        return role.getName()+"成功升级技能："+skillName;
+    }
+
+
+
+    /**
+     * 找技能包
+     * @param role
+     * @return
+     */
+    private Goods findGoods(ConcreteRole role) {
+        List<Goods> goods = backpackService.getGoodsByRoleId(role.getId());
+        Goods consumeGoods = null;
+        for (int i = 0; i < goods.size(); i++) {
+            if (goods.get(i).getName().equals("技能包")) {
+                consumeGoods = goods.get(i);
+            }
+        }
+        return consumeGoods;
+    }
+
+
+    @RequestAnnotation("/studyskill")
+    public String studySkill(String roleName,String skillName){
+        //获取角色
+        ConcreteRole concreteRole = getRole(roleName);
+        //判断角色是否已经拥有该技能或判断角色是否达到学习该技能的条件
+        return checkAndLearn(concreteRole,skillName);
+    }
+
+    /**
+     * 判断角色是否已经拥有该技能或判断角色是否达到学习该技能的条件
+     * @param concreteRole
+     * @param skillname
+     * @return
+     */
     private String checkAndLearn(ConcreteRole concreteRole, String skillname) {
         String rolename = concreteRole.getName();
         ConcreteSkill skill = concreteRole.getConcreteSkill();
@@ -55,7 +147,6 @@ public class SkillController {
         boolean learned = false;
         //有技能时，不能学习已有技能
         for (int i = 0; i < skills.length; i++) {
-            System.out.println(MapUtils.getSkillMap_keyId().size());
             MapUtils.printMap(MapUtils.getSkillMap_keyId());
             ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyId().get(skills[i]);
             if(Objects.equals(concreteSkill.getName(),skillname)){
@@ -66,6 +157,7 @@ public class SkillController {
             return "已经学了技能："+skillname+",不能再学了！！";
         }else{
             ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyName().get(skillname);
+            //修改技能id
             updateSkillId(concreteRole,concreteSkill);
             concreteRole.setConcreteSkill(concreteSkill);
 
@@ -129,12 +221,15 @@ public class SkillController {
      * @return
      */
     private String attack(ConcreteMonster monster,String skillName,String roleName,String monsterName) {
-        ConcreteRole concreteRole = MapUtils.getMapRolename_Role().get(roleName);
+        ConcreteRole concreteRole = roleService.getRoleByRoleName(roleName);
         if(monster==null){
             return "地图："+concreteRole.getConcreteMap().getName()+"没怪兽:"+monsterName;
         }
         //获取技能和使用技能
-        ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyName().get(skillName);
+        ConcreteSkill skill = concreteRole.getConcreteSkill();
+        String[] skills = skill.getId().split(",");
+        ConcreteSkill concreteSkill = findSkill(skills, skillName);
+
         //角色剩下的mp值
         int leftMp = concreteRole.getCurMp();
 
@@ -181,5 +276,31 @@ public class SkillController {
             }
         }
         return monsterList;
+    }
+
+    /**
+     * 获取角色
+     */
+    public ConcreteRole getRole(String roleName){
+       return roleService.getRoleByRoleName(roleName);
+    }
+
+    /**
+     * 找技能
+     * @param skills
+     * @param skillName
+     * @return
+     */
+    private ConcreteSkill findSkill(String[] skills,String skillName) {
+        ConcreteSkill lowSkill = null;
+        //有技能时，不能学习已有技能
+        for (int i = 0; i < skills.length; i++) {
+            MapUtils.printMap(MapUtils.getSkillMap_keyId());
+            ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyId().get(skills[i]);
+            if(Objects.equals(concreteSkill.getName(),skillName)){
+                lowSkill = concreteSkill;
+            }
+        }
+        return lowSkill;
     }
 }
