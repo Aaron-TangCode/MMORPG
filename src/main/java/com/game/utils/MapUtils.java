@@ -82,6 +82,21 @@ public class MapUtils {
     private static volatile Map<Integer, ConcreteBuff> buffMap = null;
 
 
+
+    private static volatile List<Goods> mapList = null;
+
+
+    public static List<Goods> getMapList(){
+        if(mapList==null){
+            synchronized (MapUtils.class){
+                if(mapList==null){
+                    mapList = new ArrayList<>();
+                }
+            }
+        }
+        return mapList;
+    }
+
     /**
      * buff的map
      * @return

@@ -96,10 +96,12 @@ public class InjectProperty {
             }
         }
 
+
+
         //每一件装备
         for (Goods goods : ownEquipmentList) {
             //每一件装备的每一个属性
-            for (Map.Entry<PropertyType,Integer>  entry:goods.getGoodsPropertyMap().entrySet()) {
+            for (Map.Entry<PropertyType,Integer>  entry:goods.getPropertyMap().entrySet()) {
                 // 拿出玩家属性，加上装备属性，放回去
                 ConcreteRole.getTotalPropertyMap().put(
                         entry.getKey(),
@@ -107,29 +109,6 @@ public class InjectProperty {
             }
 
         }
-//        for (int i = 0; i < ownEquipmentList.size(); i++) {
-//            //装备栏的装给
-//            Goods goods = ownEquipmentList.get(i);
-//            String mp = goods.getMp();
-//            String hp = goods.getHp();
-//            String defend = goods.getDefend();
-//            String attack = goods.getAttack();
-//            //基础属性
-//            Integer totalHp = PropertyManager.getTotalPropertyMap().get(PropertyType.HP);
-//            Integer totalMp = PropertyManager.getTotalPropertyMap().get(PropertyType.MP);
-//            Integer totalAttack = PropertyManager.getTotalPropertyMap().get(PropertyType.ATTACK);
-//            Integer totalDefend = PropertyManager.getTotalPropertyMap().get(PropertyType.DEFEND);
-//            //总值=基础值+装备值
-//            totalHp = totalHp + Integer.parseInt(hp);
-//            totalMp = totalMp + Integer.parseInt(mp);
-//            totalAttack = totalAttack + Integer.parseInt(attack);
-//            totalDefend = totalDefend + Integer.parseInt(defend);
-//            //存储
-//            PropertyManager.getTotalPropertyMap().put(PropertyType.HP,totalHp);
-//            PropertyManager.getTotalPropertyMap().put(PropertyType.MP,totalMp);
-//            PropertyManager.getTotalPropertyMap().put(PropertyType.ATTACK,totalAttack);
-//            PropertyManager.getTotalPropertyMap().put(PropertyType.DEFEND,totalDefend);
-//        }
         //把总值复制到当前值
         Set<Map.Entry<PropertyType, Integer>> entrySet = role.getTotalPropertyMap().entrySet();
         Iterator<Map.Entry<PropertyType, Integer>> iterator1 = entrySet.iterator();

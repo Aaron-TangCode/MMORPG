@@ -1,8 +1,9 @@
 package com.game.backpack.excel;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.game.annotation.ExcelAnnotation;
 import com.game.backpack.bean.Goods;
+import com.game.property.bean.PropertyType;
 import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 读取Excel文件
@@ -69,9 +74,9 @@ public class ReadGoods {
                     }else if (j == 4) {
                         goods.setCount(new Double(cellStr).intValue());
                     }else if (j == 5) {
-                        goods.setProperty(JSON.parseObject(cellStr));
-                    }else if(j == 6){
                         goods.setRepeat(new Double(cellStr).intValue());
+                    }else if(j == 6){
+                        goods.setProperty(JSONObject.parseObject(cellStr));
                     }else if(j == 7){
                         goods.setDurability(new Double(cellStr).intValue());
                     }
@@ -79,6 +84,17 @@ public class ReadGoods {
                 // 数据装入List
                 MapUtils.getGoodsMap().put(goods.getName(),goods);
             }
+
+            Map<String, Goods> goodsMap = MapUtils.getGoodsMap();
+            Set<Map.Entry<String, Goods>> entries = goodsMap.entrySet();
+            Iterator<Map.Entry<String, Goods>> iterator = entries.iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<String, Goods> next = iterator.next();
+                Map<PropertyType,Integer> map = new HashMap<>();
+                next.getValue().setPropertyMap(map);
+            }
+
+
             System.out.println("Goods静态数据加载完毕");
         } catch (IOException e) {
             e.printStackTrace();

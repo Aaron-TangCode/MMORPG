@@ -3,7 +3,6 @@ package com.game.backpack.bean;
 import com.alibaba.fastjson.JSONObject;
 import com.game.property.bean.PropertyType;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -48,12 +47,22 @@ public class Goods {
      * 物品属性
      */
     private JSONObject property;
+
+
     /**
      * 物品耐久度
      */
     private Integer durability;
 
-    private static volatile Map<PropertyType,Integer> goodsPropertyMap = null;
+    private Map<PropertyType,Integer> propertyMap;
+
+    public Map<PropertyType, Integer> getPropertyMap() {
+        return propertyMap;
+    }
+
+    public void setPropertyMap(Map<PropertyType, Integer> propertyMap) {
+        this.propertyMap = propertyMap;
+    }
 
     public String getDescription() {
         return description;
@@ -127,7 +136,5 @@ public class Goods {
     public void setDurability(Integer durability) {
         this.durability = durability;
     }
-    public static Map<PropertyType,Integer> getGoodsPropertyMap(){
-        return new HashMap<>();
-    }
+
 }
