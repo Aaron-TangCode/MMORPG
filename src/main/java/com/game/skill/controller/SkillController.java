@@ -6,8 +6,6 @@ import com.game.dispatcher.RequestAnnotation;
 import com.game.notice.NoticeUtils;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.MonsterMapMapping;
-import com.game.property.bean.Property;
-import com.game.property.manager.PropertyManager;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.skill.bean.ConcreteSkill;
@@ -242,10 +240,10 @@ public class SkillController {
         //技能的伤害值
         Integer hurt = concreteSkill.getHurt();
         //技能消耗角色的mp值
-        Property property = PropertyManager.getMap().get(concreteRole.getLevel());
-        property.setMp(leftMp-costMp);
+//        Property property = PropertyManager.getMap().get(concreteRole.getLevel());
+//        property.setMp(leftMp-costMp);
 
-        concreteRole.setMp();
+//        concreteRole.setMp();
         Integer monsterHp = monster.getHp();
         //怪兽的生命值减少
         monster.setHp(monster.getHp()-hurt);

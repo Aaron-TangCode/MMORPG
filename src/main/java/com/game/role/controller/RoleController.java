@@ -3,8 +3,6 @@ package com.game.role.controller;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.service.BackpackService;
 import com.game.dispatcher.RequestAnnotation;
-import com.game.property.bean.Property;
-import com.game.property.manager.PropertyManager;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.utils.MapUtils;
@@ -64,10 +62,10 @@ public class RoleController {
         }
         if(concreteRole.getCurHp()>0){
             if(concreteRole.getCurHp()-10>0){
-                concreteRole.setHp();
+//                concreteRole.setHp();
                 return roleName+"受到伤害，生命值减10";
             }else{
-                concreteRole.setHp();
+//                concreteRole.setHp();
                 return roleName+"受到伤害，生命值减为0";
             }
         }else{
@@ -96,11 +94,11 @@ public class RoleController {
 
     private void handleHp(ConcreteRole concreteRole) {
         if(concreteRole.getCurHp()+10>=100){
-            Property property = PropertyManager.getMap().get(concreteRole.getLevel());
-            property.setHp(property.getHp());
-            concreteRole.setHp();
+//            Property property = PropertyManager.getMap().get(concreteRole.getLevel());
+//            property.setHp(property.getHp());
+//            concreteRole.setHp();
         }else{
-            concreteRole.setHp();
+//            concreteRole.setHp();
         }
 
     }
@@ -116,9 +114,11 @@ public class RoleController {
         if(role==null){
             return roleName+"还没登录，请先登录";
         }
-        Property property = PropertyManager.getMap().get(role.getLevel());
-        return roleName+"血量："+property.getHp()+"\t魔法值："+property.getMp()+"\t攻击力："+property.getAttack()+"\t防御力："+property.getDefend();
+//        Property property = PropertyManager.getMap().get(role.getLevel());
+//        return roleName+"血量："+property.getHp()+"\t魔法值："+property.getMp()+"\t攻击力："+property.getAttack()+"\t防御力："+property.getDefend();
+        return null;
     }
+
     @RequestAnnotation("/roleUseGoods")
     public String roleUseGoods(String roleName,String goodsName){
         //获取角色
@@ -158,11 +158,11 @@ public class RoleController {
                 if(isFull){
                     return "血已满，无需使用"+localGoods.getName();
                 }
-                double pro = Double.parseDouble(localGoods.getHp());
+//                double pro = Double.parseDouble(localGoods.getHp());
 
-                Property property = PropertyManager.getMap().get(role.getLevel());
-                property.setHp(role.getCurHp()+(int)(role.getCurHp()*pro));
-                role.setHp();
+//                Property property = PropertyManager.getMap().get(role.getLevel());
+//                property.setHp(role.getCurHp()+(int)(role.getCurHp()*pro));
+//                role.setHp();
 
                 System.out.println("加血后："+role.getCurHp());
                 MapUtils.getMapRolename_Role().put(role.getName(),role);
@@ -171,11 +171,11 @@ public class RoleController {
                 if(isFull){
                     return "蓝已满，无需使用"+localGoods.getName();
                 }
-                double pro = Double.parseDouble(localGoods.getHp());
+//                double pro = Double.parseDouble(localGoods.getHp());
 
-                Property property = PropertyManager.getMap().get(role.getLevel());
-                property.setMp(role.getCurMp()+(int)(role.getCurMp()*pro));
-                role.setMp();
+//                Property property = PropertyManager.getMap().get(role.getLevel());
+//                property.setMp(role.getCurMp()+(int)(role.getCurMp()*pro));
+//                role.setMp();
 
                 System.out.println("加蓝后："+role.getCurMp());
                 MapUtils.getMapRolename_Role().put(role.getName(),role);

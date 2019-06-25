@@ -2,6 +2,7 @@ package com.game.user.controller;
 
 import com.game.buff.controller.BuffController;
 import com.game.dispatcher.RequestAnnotation;
+import com.game.property.manager.InjectProperty;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.user.service.Login;
@@ -31,6 +32,9 @@ public class UserController {
 
 	@Autowired
 	private BuffController buffController;
+
+	@Autowired
+	private InjectProperty injectProperty;
 	/**
 	 * 用户登录
 	 * @param username
@@ -45,6 +49,7 @@ public class UserController {
 			//加用户名-角色对象
 			MapUtils.getMapUsername_Role().put(username,role);
 			buffController.executeBuff(role.getName());
+			injectProperty.initProperty(role.getName());
 			return role.getName()+"上线了";
 		}else{
 			System.out.println("登录失败");

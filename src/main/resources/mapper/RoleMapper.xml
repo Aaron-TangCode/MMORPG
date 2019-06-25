@@ -11,7 +11,7 @@
     </resultMap>
 
     <select id="getRoleByRoleName" resultMap="roleSkill">
-        select id,name,skill,map_id from role where name=#{name}
+        select id,name,skill,map_id,level from role where name=#{name}
     </select>
 
     <resultMap id="roleMap" type="com.game.role.bean.ConcreteRole">

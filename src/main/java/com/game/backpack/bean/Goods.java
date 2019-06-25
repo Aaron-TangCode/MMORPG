@@ -1,5 +1,11 @@
 package com.game.backpack.bean;
 
+import com.alibaba.fastjson.JSONObject;
+import com.game.property.bean.PropertyType;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @ClassName Goods
  * @Description 商品实体类
@@ -33,38 +39,21 @@ public class Goods {
      * 物品数量
      */
     private Integer count;
-    /**
-     * 耐久度
-     */
-    private Integer durability;
-    /**
-     *物品hp
-     */
-    private String hp;
-    /**
-     *物品mp
-     */
-    private String mp;
-    /**
-     *物品attack
-     */
-    private String attack;
-    /**
-     *物品defend
-     */
-    private String defend;
+
     /**
      * 物品可重复最大数量
      */
     private Integer repeat;
     /**
-     * 物品最大数量
+     * 物品属性
      */
-    public static final int GOODS_MAXCOUNT = 99;
+    private JSONObject property;
     /**
-     * 角色拥有物品最大数量
+     * 物品耐久度
      */
-    public static final int ROLE_MAXGOODS = 10;
+    private Integer durability;
+
+    private static volatile Map<PropertyType,Integer> goodsPropertyMap = null;
 
     public String getDescription() {
         return description;
@@ -74,45 +63,6 @@ public class Goods {
         this.description = description;
     }
 
-    public Integer getDurability() {
-        return durability;
-    }
-
-    public void setDurability(Integer durability) {
-        this.durability = durability;
-    }
-
-    public String getHp() {
-        return hp;
-    }
-
-    public void setHp(String hp) {
-        this.hp = hp;
-    }
-
-    public String getMp() {
-        return mp;
-    }
-
-    public void setMp(String mp) {
-        this.mp = mp;
-    }
-
-    public String getAttack() {
-        return attack;
-    }
-
-    public void setAttack(String attack) {
-        this.attack = attack;
-    }
-
-    public String getDefend() {
-        return defend;
-    }
-
-    public void setDefend(String defend) {
-        this.defend = defend;
-    }
 
     public Integer getRoleId() {
         return roleId;
@@ -125,7 +75,6 @@ public class Goods {
     public Integer getId() {
         return id;
     }
-
 
     public void setId(Integer id) {
         this.id = id;
@@ -161,5 +110,24 @@ public class Goods {
 
     public void setRepeat(Integer repeat) {
         this.repeat = repeat;
+    }
+
+    public JSONObject getProperty() {
+        return property;
+    }
+
+    public void setProperty(JSONObject property) {
+        this.property = property;
+    }
+
+    public Integer getDurability() {
+        return durability;
+    }
+
+    public void setDurability(Integer durability) {
+        this.durability = durability;
+    }
+    public static Map<PropertyType,Integer> getGoodsPropertyMap(){
+        return new HashMap<>();
     }
 }

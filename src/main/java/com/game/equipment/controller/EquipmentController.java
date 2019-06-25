@@ -7,8 +7,6 @@ import com.game.dispatcher.RequestAnnotation;
 import com.game.equipment.bean.Equipment;
 import com.game.equipment.bean.EquipmentBox;
 import com.game.equipment.service.EquipmentService;
-import com.game.property.bean.Property;
-import com.game.property.manager.PropertyManager;
 import com.game.role.bean.ConcreteRole;
 import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,12 @@ public class EquipmentController {
 
     @Autowired
     private BackpackService backpackService;
-
+    /**
+     * 添加装备到装备栏
+     * @param roleName
+     * @param goodsName
+     * @return
+     */
     @RequestAnnotation("/addEquipment")
     public String addEquipment(String roleName,String goodsName){
         //获取角色
@@ -67,21 +70,14 @@ public class EquipmentController {
         //获取角色等级
         int level = role.getLevel();
         //获取角色属性
-        Property property = PropertyManager.getMap().get(level);
+//        Property property = PropertyManager.getMap().get(level);
         //根据角色的装备类型去增加相应属性
-        property.changeProperty(goods);
+//        property.changeProperty(goods);
         //通知角色属性发生变化
-        adviseRole(role,property);
+//        adviseRole(role,property);
         //背包减少装备
         backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
         return roleName+"成功把装备："+goodsName+"添加到装备栏";
-    }
-
-    private void adviseRole(ConcreteRole role,Property property) {
-        role.setMp();
-        role.setAttack();
-        role.setDefend();
-        role.setHp();
     }
 
 

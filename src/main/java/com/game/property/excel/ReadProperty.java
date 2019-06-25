@@ -1,8 +1,9 @@
 package com.game.property.excel;
 
+import com.alibaba.fastjson.JSONObject;
 import com.game.annotation.ExcelAnnotation;
 import com.game.property.bean.Property;
-import com.game.property.manager.PropertyManager;
+import com.game.role.bean.ConcreteRole;
 import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
@@ -59,19 +60,13 @@ public class ReadProperty {
                     cellStr =  getResult(cell);
                     // 下面按照数据出现位置封装到bean中
                     if(j == 0) {
-                        property.setLevel(new Double(cellStr).intValue());
+                        property.setId(new Double(cellStr).intValue());
                     }else if (j == 1) {
-                        property.setHp(new Double(cellStr).intValue());
-                    }else if (j == 2) {
-                        property.setMp(new Double(cellStr).intValue());
-                    }else if (j == 3) {
-                        property.setAttack(new Double(cellStr).intValue());
-                    }else if (j == 4) {
-                        property.setDefend(new Double(cellStr).intValue());
+                        property.setPropertyJson(JSONObject.parseObject(cellStr));
                     }
                 }
                 // 数据装入List
-                PropertyManager.getMap().put(property.getLevel(),property);
+                ConcreteRole.getBasicPropertyMap().put(property.getId(),property.getPropertyJson());
             }
             System.out.println("property静态数据加载完毕");
         } catch (IOException e) {
