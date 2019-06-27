@@ -219,24 +219,20 @@ public class SkillController {
      * @return
      */
     private String attack(ConcreteMonster monster,String skillName,String roleName,String monsterName) {
-        //从db获取role
-        ConcreteRole dbRole = roleService.getRoleByRoleName(roleName);
         //从local获取本地角色
         ConcreteRole localRole = MapUtils.getMapRolename_Role().get(roleName);
-        //注入属性数据dbrole
-        dbRole.setTotalMap(localRole.getTotalMap());
-        dbRole.setCurMap(localRole.getCurMap());
         //检查当期地图是否存在怪兽
         if(monster==null){
-            return "地图："+dbRole.getConcreteMap().getName()+"没怪兽:"+monsterName;
+            return "地图："+localRole.getConcreteMap().getName()+"没怪兽:"+monsterName;
         }
         //获取技能和使用技能
-        ConcreteSkill skill = dbRole.getConcreteSkill();
+        ConcreteSkill skill = localRole.getConcreteSkill();
         String[] skills = skill.getId().split(",");
+        //在技能集合中选出指定技能
         ConcreteSkill concreteSkill = findSkill(skills, skillName);
 
         //角色剩下的mp值
-        int leftMp = dbRole.getCurMp();
+        int leftMp = localRole.getCurMp();
 
         //技能需要消耗的mp值
         Integer costMp = concreteSkill.getMp();
@@ -246,19 +242,21 @@ public class SkillController {
         }
         //技能的伤害值
         Integer hurt = concreteSkill.getHurt();
+        //玩家的自身攻击力
+        Integer attack = localRole.getAttack();
+        //总攻击力
+        Integer totalAttack = hurt + attack;
         //技能消耗角色的mp值
-//        Property property = PropertyManager.getMap().get(concreteRole.getLevel());
-//        property.setMp(leftMp-costMp);
-
-//        concreteRole.setMp();
+        localRole.setCurMp(leftMp-costMp);
+        //获取怪兽的生命值
         Integer monsterHp = monster.getHp();
         //怪兽的生命值减少
-        monster.setHp(monster.getHp()-hurt);
+        monster.setHp(monster.getHp()-totalAttack);
         //怪兽死亡，通知该地图所有玩家
         if(monster.getHp()<=0){
             NoticeUtils.notifyAllRoles(monster);
         }
-        return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+dbRole.getCurMp()+
+        return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+localRole.getCurMp()+
                 ";"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
     }
 

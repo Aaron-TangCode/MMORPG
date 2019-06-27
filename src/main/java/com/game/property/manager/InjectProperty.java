@@ -46,6 +46,9 @@ public class InjectProperty {
 
         //从本地获取role
         ConcreteRole role = MapUtils.getMapRolename_Role().get(roleDB.getName());
+
+        //注入角色的技能属性
+        role.setConcreteSkill(roleDB.getConcreteSkill());
         //获取角色等级
         int level = roleDB.getLevel();
         //获取json
