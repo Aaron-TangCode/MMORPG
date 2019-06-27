@@ -39,19 +39,28 @@ public class ConcreteRole {
      */
     private int level;
     /**
-     * 角色总血量
+     * 角色当前血量
      */
     private int curHp;
     /**
-     * 角色总魔法值
+     * 角色当前魔法值
      */
     private int curMp;
+
+    /**
+     * 角色总血量
+     */
+    private int totalHp;
+    /**
+     * 角色总魔法值
+     */
+    private int totalMp;
 
     private ConcreteSkill concreteSkill;
 
     private ChannelHandlerContext ctx;
 
-    private EquipmentBox equipment;
+    private EquipmentBox equipmentBox;
     @Autowired
     private Property property;
 
@@ -66,6 +75,30 @@ public class ConcreteRole {
     private Map<PropertyType,Integer> totalMap = new HashMap<>();
 
     private Map<PropertyType,Integer> curMap = new HashMap<>();
+
+    public int getTotalHp() {
+        return totalHp;
+    }
+
+    public void setTotalHp(int totalHp) {
+        this.totalHp = totalHp;
+    }
+
+    public int getTotalMp() {
+        return totalMp;
+    }
+
+    public void setTotalMp(int totalMp) {
+        this.totalMp = totalMp;
+    }
+
+    public void setTotalMap(Map<PropertyType, Integer> totalMap) {
+        this.totalMap = totalMap;
+    }
+
+    public void setCurMap(Map<PropertyType, Integer> curMap) {
+        this.curMap = curMap;
+    }
 
     public Map<PropertyType, Integer> getTotalMap() {
         return totalMap;
@@ -137,12 +170,12 @@ public class ConcreteRole {
         this.ctx = ctx;
     }
 
-    public EquipmentBox getEquipment() {
-        return equipment;
+    public EquipmentBox getEquipmentBox() {
+        return equipmentBox;
     }
 
-    public void setEquipment(EquipmentBox equipment) {
-        this.equipment = equipment;
+    public void setEquipmentBox(EquipmentBox equipmentBox) {
+        this.equipmentBox = equipmentBox;
     }
 
     public Property getProperty() {

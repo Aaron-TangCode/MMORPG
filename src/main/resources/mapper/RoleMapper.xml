@@ -8,10 +8,11 @@
         <result column="name" property="name"></result>
         <result column="skill" property="concreteSkill.id"></result>
         <result column="map_id" property="concreteMap.id"></result>
+        <result column="backpack_capacity" property="backpackCapacity"></result>
     </resultMap>
 
     <select id="getRoleByRoleName" resultMap="roleSkill">
-        select id,name,skill,map_id,level from role where name=#{name}
+        select id,name,skill,map_id,level,backpack_capacity from role where name=#{name}
     </select>
 
     <resultMap id="roleMap" type="com.game.role.bean.ConcreteRole">

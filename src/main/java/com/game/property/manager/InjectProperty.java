@@ -9,6 +9,7 @@ import com.game.equipment.bean.EquipmentBox;
 import com.game.equipment.service.EquipmentService;
 import com.game.property.bean.PropertyType;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.manager.InjectRoleProperty;
 import com.game.role.service.RoleService;
 import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,12 @@ public class InjectProperty {
         //总值=基础值+装备值+环境值（暂无）
         Map<Integer, JSONObject> basicPropertyMap = ConcreteRole.getBasicPropertyMap();
         //根据角色名，在db上查找role
-        ConcreteRole role = roleService.getRoleByRoleName(roleName);
+        ConcreteRole roleDB = roleService.getRoleByRoleName(roleName);
+
+        //从本地获取role
+        ConcreteRole role = MapUtils.getMapRolename_Role().get(roleDB.getName());
         //获取角色等级
-        int level = role.getLevel();
+        int level = roleDB.getLevel();
         //获取json
         JSONObject json = basicPropertyMap.get(level);
         //获取Key集合
@@ -63,7 +67,8 @@ public class InjectProperty {
         }
         //todo:注入装备栏属性
         //获取装备栏
-        EquipmentBox equipmentBox = equipmentService.getEquipmet(role.getId());
+        EquipmentBox equipmentBox = equipmentService.getEquipmet(roleDB.getId());
+        role.setEquipmentBox(equipmentBox);
         //获取装备
         Equipment equipment = JSON.parseObject(equipmentBox.getEquipmentBox(),Equipment.class);
         //数据格式："head":"1"--->装备类型：装备id
@@ -120,16 +125,11 @@ public class InjectProperty {
         Iterator<Map.Entry<PropertyType, Integer>> iterator1 = entrySet.iterator();
         while (iterator1.hasNext()) {
             Map.Entry<PropertyType, Integer> map = iterator1.next();
-            role.getTotalMap().put(map.getKey(),map.getValue());
+            role.getCurMap().put(map.getKey(),map.getValue());
         }
-
-
-        Set<Map.Entry<PropertyType, Integer>> entries = role.getTotalMap().entrySet();
-        Iterator<Map.Entry<PropertyType, Integer>> iterator2 = entries.iterator();
-        while (iterator2.hasNext()) {
-            Map.Entry<PropertyType, Integer> next = iterator2.next();
-            System.out.println(next.getKey()+";"+next.getValue());
-        }
-
+        //把属性模块的数据注入角色模块
+        InjectRoleProperty.injectRoleProperty(role);
+        //刷新role的缓存
+        MapUtils.getMapRolename_Role().put(role.getName(), role);
     }
 }

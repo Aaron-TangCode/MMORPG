@@ -219,17 +219,24 @@ public class SkillController {
      * @return
      */
     private String attack(ConcreteMonster monster,String skillName,String roleName,String monsterName) {
-        ConcreteRole concreteRole = roleService.getRoleByRoleName(roleName);
+        //从db获取role
+        ConcreteRole dbRole = roleService.getRoleByRoleName(roleName);
+        //从local获取本地角色
+        ConcreteRole localRole = MapUtils.getMapRolename_Role().get(roleName);
+        //注入属性数据dbrole
+        dbRole.setTotalMap(localRole.getTotalMap());
+        dbRole.setCurMap(localRole.getCurMap());
+        //检查当期地图是否存在怪兽
         if(monster==null){
-            return "地图："+concreteRole.getConcreteMap().getName()+"没怪兽:"+monsterName;
+            return "地图："+dbRole.getConcreteMap().getName()+"没怪兽:"+monsterName;
         }
         //获取技能和使用技能
-        ConcreteSkill skill = concreteRole.getConcreteSkill();
+        ConcreteSkill skill = dbRole.getConcreteSkill();
         String[] skills = skill.getId().split(",");
         ConcreteSkill concreteSkill = findSkill(skills, skillName);
 
         //角色剩下的mp值
-        int leftMp = concreteRole.getCurMp();
+        int leftMp = dbRole.getCurMp();
 
         //技能需要消耗的mp值
         Integer costMp = concreteSkill.getMp();
@@ -251,7 +258,7 @@ public class SkillController {
         if(monster.getHp()<=0){
             NoticeUtils.notifyAllRoles(monster);
         }
-        return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+concreteRole.getCurMp()+
+        return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+dbRole.getCurMp()+
                 ";"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
     }
 
@@ -267,7 +274,9 @@ public class SkillController {
         int mapId = concreteRole.getConcreteMap().getId();
         //获取地图上的怪兽列表
         List<Integer> monsterList = new ArrayList<>();
+        //地图和怪兽的映射列表
         List<MonsterMapMapping> monsterMapMappingList = MapUtils.getMonsterMapMappingList();
+        //遍历找出具体的怪兽列表
         for (int i = 0; i < monsterMapMappingList.size(); i++) {
             if(monsterMapMappingList.get(i).getMapId()==mapId){
                 monsterList.add(monsterMapMappingList.get(i).getMonsterId());

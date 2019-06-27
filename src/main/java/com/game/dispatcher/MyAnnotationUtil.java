@@ -158,7 +158,6 @@ public class MyAnnotationUtil {
                 role.setCtx(ctx);
                 //加角色名-角色对象
                 MapUtils.getMapRolename_Role().put(role.getName(),role);
-                System.out.println(MapUtils.getMapRolename_Role().size());
             }
         }
         //将类的资源名和方法的进行拼接
