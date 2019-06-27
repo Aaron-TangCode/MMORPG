@@ -83,18 +83,18 @@ public class MapUtils {
 
 
 
-    private static volatile List<Goods> mapList = null;
+    private static volatile List<Goods> goodsList = null;
 
 
-    public static List<Goods> getMapList(){
-        if(mapList==null){
+    public static List<Goods> getGoodsList(){
+        if(goodsList==null){
             synchronized (MapUtils.class){
-                if(mapList==null){
-                    mapList = new ArrayList<>();
+                if(goodsList==null){
+                    goodsList = new ArrayList<>();
                 }
             }
         }
-        return mapList;
+        return goodsList;
     }
 
     /**

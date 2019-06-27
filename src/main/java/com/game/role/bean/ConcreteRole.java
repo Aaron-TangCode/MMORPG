@@ -10,7 +10,6 @@ import com.game.skill.bean.ConcreteSkill;
 import io.netty.channel.ChannelHandlerContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +63,16 @@ public class ConcreteRole {
      */
     private Integer backpackCapacity;
 
+    private Map<PropertyType,Integer> totalMap = new HashMap<>();
+
+    private Map<PropertyType,Integer> curMap = new HashMap<>();
+
+    public Map<PropertyType, Integer> getTotalMap() {
+        return totalMap;
+    }
+    public Map<PropertyType, Integer> getCurMap() {
+        return curMap;
+    }
     public int getId() {
         return id;
     }
@@ -168,25 +177,14 @@ public class ConcreteRole {
         this.backpackCapacity = backpackCapacity;
     }
 
-    private static volatile Map<PropertyType,Integer> curPropertyMap = null;
-    private static volatile Map<PropertyType,Integer> totalPropertyMap = null;
     private static volatile Map<Integer, JSONObject> basicPropertyMap = null;
-
-
-    public static void setCurPropertyMap(Map<PropertyType, Integer> curPropertyMap) {
-        ConcreteRole.curPropertyMap = curPropertyMap;
-    }
-
-    public static void setTotalPropertyMap(Map<PropertyType, Integer> totalPropertyMap) {
-        ConcreteRole.totalPropertyMap = totalPropertyMap;
-    }
 
     public static void setBasicPropertyMap(Map<Integer, JSONObject> basicPropertyMap) {
         ConcreteRole.basicPropertyMap = basicPropertyMap;
     }
 
     /**
-     * 存储本地的角色基础值
+     * 存储本地的角色基础值(存excel表的数据)
      * @return
      */
     public static Map<Integer, JSONObject> getBasicPropertyMap(){
@@ -198,34 +196,5 @@ public class ConcreteRole {
             }
         }
         return basicPropertyMap;
-    }
-    /**
-     * 存储当前属性值的map
-     * @return
-     */
-    public static Map<PropertyType,Integer> getCurPropertyMap(){
-        if(curPropertyMap==null){
-            synchronized (PropertyManager.class){
-                if(curPropertyMap==null){
-                    curPropertyMap = new HashMap<>();
-                }
-            }
-        }
-        return curPropertyMap;
-    }
-
-    /**
-     * 存储总属性值的map
-     * @return
-     */
-    public static Map<PropertyType,Integer> getTotalPropertyMap(){
-        if(totalPropertyMap==null){
-            synchronized (PropertyManager.class){
-                if(totalPropertyMap==null){
-                    totalPropertyMap = new HashMap<>();
-                }
-            }
-        }
-        return totalPropertyMap;
     }
 }

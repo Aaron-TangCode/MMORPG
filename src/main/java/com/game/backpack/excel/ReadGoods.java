@@ -12,10 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 读取Excel文件
@@ -84,14 +81,34 @@ public class ReadGoods {
                 // 数据装入List
                 MapUtils.getGoodsMap().put(goods.getName(),goods);
             }
-
+            //获取goodsMap
             Map<String, Goods> goodsMap = MapUtils.getGoodsMap();
+            //获取goodsMap的entries
             Set<Map.Entry<String, Goods>> entries = goodsMap.entrySet();
+            //获取迭代器
             Iterator<Map.Entry<String, Goods>> iterator = entries.iterator();
+
+            //创建一个新List<Goods>
+            List<Goods> goodsList = MapUtils.getGoodsList();
+            //遍历
             while (iterator.hasNext()) {
                 Map.Entry<String, Goods> next = iterator.next();
                 Map<PropertyType,Integer> map = new HashMap<>();
-                next.getValue().setPropertyMap(map);
+                //获取Goods实例
+                Goods goods = next.getValue();
+                goods.setPropertyMap(map);
+                //获取每个goods对象的property属性（json类型）
+                JSONObject jsonObject = goods.getProperty();
+                Set<Map.Entry<String, Object>> set = jsonObject.entrySet();
+                Iterator<Map.Entry<String, Object>> entryIterator = set.iterator();
+                while (entryIterator.hasNext()) {
+                    Map.Entry<String, Object> next1 = entryIterator.next();
+                    String key = next1.getKey();
+                    PropertyType propertyType = PropertyType.map.get(key);
+                    String val = jsonObject.getString(key);
+                    goods.getPropertyMap().put(propertyType,Integer.parseInt(val));
+                }
+                goodsList.add(goods);
             }
 
 

@@ -47,8 +47,6 @@ public class Goods {
      * 物品属性
      */
     private JSONObject property;
-
-
     /**
      * 物品耐久度
      */
@@ -71,7 +69,6 @@ public class Goods {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public Integer getRoleId() {
         return roleId;
@@ -136,5 +133,7 @@ public class Goods {
     public void setDurability(Integer durability) {
         this.durability = durability;
     }
+
+
 
 }

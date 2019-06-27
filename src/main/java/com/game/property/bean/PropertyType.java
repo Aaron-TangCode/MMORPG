@@ -22,9 +22,8 @@ public enum PropertyType {
      */
     HP("hp"),MP("mp"),ATTACK("attack"),DEFEND("defend");
 
-
     String name;
-    public static Map<String,PropertyType> map = new ConcurrentHashMap<>();
+    public static Map<String,PropertyType>  map = new ConcurrentHashMap<>();
 
     PropertyType(String name) {
         this.name = name;
