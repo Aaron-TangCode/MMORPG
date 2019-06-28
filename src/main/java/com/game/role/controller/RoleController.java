@@ -114,9 +114,8 @@ public class RoleController {
         if(role==null){
             return roleName+"还没登录，请先登录";
         }
-//        Property property = PropertyManager.getMap().get(role.getLevel());
-//        return roleName+"血量："+property.getHp()+"\t魔法值："+property.getMp()+"\t攻击力："+property.getAttack()+"\t防御力："+property.getDefend();
-        return null;
+        return "当前总血量/总血量："+role.getCurHp()+"/"+role.getTotalHp()+"\t当前魔法值/总魔法值："+role.getCurMp()+"/"+role.getTotalMp()
+                +"\t攻击力："+role.getAttack()+"\t防御力："+role.getDefend()+"\t装备栏："+role.getEquipmentBox().getEquipmentBox();
     }
 
     @RequestAnnotation("/roleUseGoods")

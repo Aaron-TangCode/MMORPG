@@ -56,4 +56,5 @@
 
 //把某个装备添加到装备栏
 {type:"/equipment/addEquipment",roleName:"role4",goodsName:"太刀"}
+{type:"/equipment/addEquipment",roleName:"role4",goodsName:"手枪"}
 ```

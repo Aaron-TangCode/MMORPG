@@ -202,7 +202,6 @@ public class SkillController {
     private ConcreteMonster findConcreteMonster(List<Integer> monsterList,String monsterName) {
         ConcreteMonster monster = null;
         for (int i = 0; i < monsterList.size(); i++) {
-
             if (Objects.equals(MapUtils.getMonsterMap().get(monsterList.get(i)).getName(),monsterName)) {
                 return MapUtils.getMonsterMap().get(monsterList.get(i));
             }

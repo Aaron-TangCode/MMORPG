@@ -45,4 +45,10 @@ public interface BackpackMapper {
      */
     public void updateGoodsByRoleIdDel(@Param("roleId") int roleId,@Param("goodsId") int goodsId);
 
+    /**
+     * 通过id获取物品
+     * @param roleId
+     * @return
+     */
+    public Goods getGoodsById(int roleId);
 }

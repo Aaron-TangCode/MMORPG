@@ -34,4 +34,8 @@ public class BackpackService {
     public void updateGoodsByRoleIdDel(int roleId, Integer goodsId) {
         backpackRepository.updateGoodsByRoleIdDel(roleId,goodsId);
     }
+
+    public Goods getGoodsById(String goodsId) {
+        return backpackRepository.getGoodsById(goodsId);
+    }
 }

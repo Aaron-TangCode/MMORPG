@@ -2,7 +2,6 @@ package com.game.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -22,6 +21,7 @@ public class Client {
     public static void main(String[] args) {
         Client client = new Client();
         client.start();
+
     }
 
     private void start() {

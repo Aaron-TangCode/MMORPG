@@ -75,4 +75,14 @@ public class BackpackRepository {
         BackpackUpdateDelTask task = new BackpackUpdateDelTask(roleId,goodsId);
         ThreadPoolUtils.getThreadPool().execute(task);
     }
+
+    public Goods getGoodsById(String goodsId) {
+        SqlSession session = SqlUtils.getSession();
+        try{
+            BackpackMapper mapper = session.getMapper(BackpackMapper.class);
+          return mapper.getGoodsById(Integer.parseInt(goodsId));
+        }finally {
+            session.close();
+        }
+    }
 }

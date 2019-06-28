@@ -77,6 +77,33 @@ public class InjectProperty {
         //数据格式："head":"1"--->装备类型：装备id
         List<Goods> goodsList = backpackService.getGoodsByRoleId(role.getId());
 
+        List<Goods> ownEquipmentList = returnOwnEquipmentList(equipment, goodsList);
+
+        //每一件装备
+        for (Goods goods : ownEquipmentList) {
+            //每一件装备的每一个属性
+            for (Map.Entry<PropertyType,Integer>  entry:goods.getPropertyMap().entrySet()) {
+                // 拿出玩家属性，加上装备属性，放回去
+                role.getTotalMap().put(
+                        entry.getKey(),
+                        role.getTotalMap().get(entry.getKey())+entry.getValue());
+            }
+
+        }
+        //把总值复制到当前值
+        Set<Map.Entry<PropertyType, Integer>> entrySet = role.getTotalMap().entrySet();
+        Iterator<Map.Entry<PropertyType, Integer>> iterator1 = entrySet.iterator();
+        while (iterator1.hasNext()) {
+            Map.Entry<PropertyType, Integer> map = iterator1.next();
+            role.getCurMap().put(map.getKey(),map.getValue());
+        }
+        //把属性模块的数据注入角色模块
+        InjectRoleProperty.injectRoleProperty(role);
+        //刷新role的缓存
+        MapUtils.getMapRolename_Role().put(role.getName(), role);
+    }
+
+    public static List<Goods> returnOwnEquipmentList(Equipment equipment,List<Goods> goodsList) {
         String clothes = equipment.getClothes();
         String head = equipment.getHead();
         String pants = equipment.getPants();
@@ -112,27 +139,6 @@ public class InjectProperty {
                 ownEquipmentList.get(i).setPropertyMap(list.get(i).getPropertyMap());
             }
         }
-        //每一件装备
-        for (Goods goods : ownEquipmentList) {
-            //每一件装备的每一个属性
-            for (Map.Entry<PropertyType,Integer>  entry:goods.getPropertyMap().entrySet()) {
-                // 拿出玩家属性，加上装备属性，放回去
-                role.getTotalMap().put(
-                        entry.getKey(),
-                        role.getTotalMap().get(entry.getKey())+entry.getValue());
-            }
-
-        }
-        //把总值复制到当前值
-        Set<Map.Entry<PropertyType, Integer>> entrySet = role.getTotalMap().entrySet();
-        Iterator<Map.Entry<PropertyType, Integer>> iterator1 = entrySet.iterator();
-        while (iterator1.hasNext()) {
-            Map.Entry<PropertyType, Integer> map = iterator1.next();
-            role.getCurMap().put(map.getKey(),map.getValue());
-        }
-        //把属性模块的数据注入角色模块
-        InjectRoleProperty.injectRoleProperty(role);
-        //刷新role的缓存
-        MapUtils.getMapRolename_Role().put(role.getName(), role);
+        return ownEquipmentList;
     }
 }

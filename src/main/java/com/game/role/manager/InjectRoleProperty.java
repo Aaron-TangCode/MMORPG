@@ -2,6 +2,7 @@ package com.game.role.manager;
 
 import com.game.property.bean.PropertyType;
 import com.game.role.bean.ConcreteRole;
+import com.game.utils.MapUtils;
 
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class InjectRoleProperty {
         role.setAttack(attack);
         role.setDefend(defend);
 
-
+        MapUtils.getMapRolename_Role().put(role.getName(),role);
 
     }
 }
