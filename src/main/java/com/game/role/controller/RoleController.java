@@ -1,15 +1,19 @@
 package com.game.role.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.service.BackpackService;
 import com.game.dispatcher.RequestAnnotation;
+import com.game.property.bean.PropertyType;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.manager.InjectRoleProperty;
 import com.game.role.service.RoleService;
 import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName RoleController
@@ -157,12 +161,14 @@ public class RoleController {
                 if(isFull){
                     return "血已满，无需使用"+localGoods.getName();
                 }
-//                double pro = Double.parseDouble(localGoods.getHp());
-
-//                Property property = PropertyManager.getMap().get(role.getLevel());
-//                property.setHp(role.getCurHp()+(int)(role.getCurHp()*pro));
-//                role.setHp();
-
+                //获取属性系统
+                JSONObject property = localGoods.getProperty();
+                String hp = property.getString("hp");
+                Map<PropertyType, Integer> curMap = role.getCurMap();
+                Integer oldHp = curMap.get(PropertyType.HP);
+                curMap.put(PropertyType.HP,oldHp+Integer.parseInt(hp));
+                //通知角色更新
+                InjectRoleProperty.injectRoleProperty(role);
                 System.out.println("加血后："+role.getCurHp());
                 MapUtils.getMapRolename_Role().put(role.getName(),role);
             }else{
@@ -170,12 +176,14 @@ public class RoleController {
                 if(isFull){
                     return "蓝已满，无需使用"+localGoods.getName();
                 }
-//                double pro = Double.parseDouble(localGoods.getHp());
-
-//                Property property = PropertyManager.getMap().get(role.getLevel());
-//                property.setMp(role.getCurMp()+(int)(role.getCurMp()*pro));
-//                role.setMp();
-
+                //获取属性系统
+                Map<PropertyType, Integer> curMap = role.getCurMap();
+                Integer mp = curMap.get(PropertyType.MP);
+                JSONObject property = localGoods.getProperty();
+                String oldMp = property.getString("mp");
+                curMap.put(PropertyType.MP,mp+Integer.parseInt(oldMp));
+                //通知角色更新
+                InjectRoleProperty.injectRoleProperty(role);
                 System.out.println("加蓝后："+role.getCurMp());
                 MapUtils.getMapRolename_Role().put(role.getName(),role);
             }

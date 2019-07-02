@@ -76,6 +76,8 @@ public class ReadGoods {
                         goods.setProperty(JSONObject.parseObject(cellStr));
                     }else if(j == 7){
                         goods.setDurability(new Double(cellStr).intValue());
+                    }else if(j == 8){
+                        goods.setCost(new Double(cellStr).intValue());
                     }
                 }
                 // 数据装入List

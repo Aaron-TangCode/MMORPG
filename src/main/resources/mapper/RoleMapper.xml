@@ -12,7 +12,7 @@
     </resultMap>
 
     <select id="getRoleByRoleName" resultMap="roleSkill">
-        select id,name,skill,map_id,level,backpack_capacity from role where name=#{name}
+        select id,name,skill,map_id,level,backpack_capacity,money from role where name=#{name}
     </select>
 
     <resultMap id="roleMap" type="com.game.role.bean.ConcreteRole">
@@ -24,7 +24,7 @@
     </resultMap>
 <!--    通过id查询role-->
     <select id="getRoleById" resultMap="roleMap">
-        SELECT r.id role_id,r.name role_name,r.level level,r.backpack_capacity backpack_capacity,m.id map_id,m.name map_name from role r,map m where r.map_id=m.id and r.id = #{id};
+        SELECT r.id role_id,r.name role_name,r.level level,r.backpack_capacity backpack_capacity,money,m.id map_id,m.name map_name from role r,map m where r.map_id=m.id and r.id = #{id};
     </select>
 
     <resultMap id="getMapName" type="java.lang.String">
@@ -58,7 +58,7 @@
     </parameterMap>
 
     <update id="updateRole" parameterMap="uRole">
-        update role set name=#{name},skill=#{concreteSkill.id} where name = #{name}
+        update role set name=#{name},skill=#{concreteSkill.id},money=#{money} where name = #{name}
     </update>
 
 </mapper>

@@ -71,6 +71,18 @@ public class ConcreteRole {
      * 角色的背包容量
      */
     private Integer backpackCapacity;
+    /**
+     * 玩家拥有的金币
+     */
+    private Integer money;
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
+    }
 
     private Map<PropertyType,Integer> totalMap = new HashMap<>();
 

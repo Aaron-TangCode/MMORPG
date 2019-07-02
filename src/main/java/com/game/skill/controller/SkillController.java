@@ -6,16 +6,16 @@ import com.game.dispatcher.RequestAnnotation;
 import com.game.notice.NoticeUtils;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.MonsterMapMapping;
+import com.game.property.bean.PropertyType;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.manager.InjectRoleProperty;
 import com.game.role.service.RoleService;
 import com.game.skill.bean.ConcreteSkill;
 import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @ClassName SkillController
@@ -177,7 +177,106 @@ public class SkillController {
         newId.append(oldId).append(",").append(concreteSkill.getId());
         concreteSkill.setId(newId.toString());
     }
+    /**
+     * 使用技能（伤害单个角色）
+     * @return
+     */
+    @RequestAnnotation("/rolePK")
+    public String rokePK(String roleName,String skillName,String targetRoleName){
+        //获取角色--->获取地图id--->获取地图上的角色列表
+        List<ConcreteRole> roleList = prepareForPk(roleName);
+        //找出具体的
+        ConcreteRole role = findRole(roleList,targetRoleName);
+        //获取技能---使用技能---判断是否具备攻击条件--攻击--返回信息
+        String msg = attackPk(role,skillName,roleName,targetRoleName);
+        return msg;
+    }
 
+
+    /**
+     * 准备Pk
+     * @param roleName
+     * @return
+     */
+    private List<ConcreteRole> prepareForPk(String roleName) {
+        //获取角色
+        ConcreteRole concreteRole = getRoleFromDB(roleName);
+        //获取地图id
+        int mapId = concreteRole.getConcreteMap().getId();
+        //创建链表
+        List<ConcreteRole> roleList = new ArrayList<>();
+        //根据角色id来找出其他角色
+        Map<String, ConcreteRole> roleMap = MapUtils.getMapRolename_Role();
+        Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
+        Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, ConcreteRole> next = iterator.next();
+            ConcreteRole role = next.getValue();
+            if(mapId==role.getConcreteMap().getId()){
+                roleList.add(role);
+            }
+        }
+        return roleList;
+    }
+
+    /**
+     * 找具体的角色
+     * @param roleList
+     * @param targetRoleName
+     * @return
+     */
+    private ConcreteRole findRole(List<ConcreteRole> roleList, String targetRoleName) {
+        ConcreteRole role = null;
+        for (int i = 0; i < roleList.size(); i++) {
+            if (Objects.equals(roleList.get(i).getName(),targetRoleName)) {
+                return roleList.get(i);
+            }
+        }
+        return null;
+    }
+
+    private String attackPk(ConcreteRole role, String skillName, String roleName, String targetRoleName) {
+        //从local获取本地角色
+        ConcreteRole localRole = MapUtils.getMapRolename_Role().get(roleName);
+        //检查当期地图是否存在怪兽
+        if(role==null){
+            return "地图："+localRole.getConcreteMap().getName()+"没角色:"+roleName;
+        }
+        //获取技能和使用技能
+        ConcreteSkill skill = localRole.getConcreteSkill();
+        String[] skills = skill.getId().split(",");
+        //在技能集合中选出指定技能
+        ConcreteSkill concreteSkill = findSkill(skills, skillName);
+
+        //角色剩下的mp值
+        int leftMp = localRole.getCurMp();
+
+        //技能需要消耗的mp值
+        Integer costMp = concreteSkill.getMp();
+        //判断是否具备释放技能的条件
+        if(costMp>leftMp){
+            return "角色的mp值不够c释放节能"+"角色mp值:"+leftMp+"\t"+"技能需消耗的mp值:"+costMp;
+        }
+        //技能的伤害值
+        Integer hurt = concreteSkill.getHurt();
+        //玩家的自身攻击力
+        Integer attack = localRole.getAttack();
+        //总攻击力
+        Integer totalAttack = hurt + attack;
+        //技能消耗角色的mp值(更新属性系统和通知角色更新属性)
+        localRole.getCurMap().put(PropertyType.MP,leftMp-costMp);
+        InjectRoleProperty.injectRoleProperty(localRole);
+        //获取怪兽的生命值
+        int curHp = role.getCurHp();
+        //怪兽的生命值减少并通知角色属性更新
+        Map<PropertyType, Integer> curMap = role.getCurMap();
+        //被攻击的角色生命值减少，更新属性模块
+        curMap.put(PropertyType.HP,curHp-totalAttack);
+        InjectRoleProperty.injectRoleProperty(role);
+
+        return roleName+"成功攻击"+targetRoleName+"\n("+roleName+"的mp值从"+leftMp+"变为"+localRole.getCurMp()+
+                ";"+targetRoleName+"的hp值从"+curHp+"变为"+role.getCurHp()+")";
+    }
     /**
      * 使用技能（伤害单个怪兽）
      * @return
@@ -245,8 +344,9 @@ public class SkillController {
         Integer attack = localRole.getAttack();
         //总攻击力
         Integer totalAttack = hurt + attack;
-        //技能消耗角色的mp值
-        localRole.setCurMp(leftMp-costMp);
+        //技能消耗角色的mp值(更新属性系统和通知角色更新属性)
+        localRole.getCurMap().put(PropertyType.MP,leftMp-costMp);
+        InjectRoleProperty.injectRoleProperty(localRole);
         //获取怪兽的生命值
         Integer monsterHp = monster.getHp();
         //怪兽的生命值减少
@@ -266,7 +366,7 @@ public class SkillController {
      */
     private List<Integer> prepareForAttack(String roleName) {
         //获取角色
-        ConcreteRole concreteRole = roleService.getRoleByRoleName(roleName);
+        ConcreteRole concreteRole = getRoleFromDB(roleName);
         //获取地图id
         int mapId = concreteRole.getConcreteMap().getId();
         //获取地图上的怪兽列表
@@ -306,5 +406,14 @@ public class SkillController {
             }
         }
         return lowSkill;
+    }
+
+    /**
+     * 从数据库获取角色
+     * @param roleName
+     * @return
+     */
+    public ConcreteRole getRoleFromDB(String roleName){
+        return roleService.getRoleByRoleName(roleName);
     }
 }

@@ -51,8 +51,21 @@ public class Goods {
      * 物品耐久度
      */
     private Integer durability;
+    /**
+     * 商品价值
+     */
+    private Integer cost;
 
     private Map<PropertyType,Integer> propertyMap;
+
+
+    public Integer getCost() {
+        return cost;
+    }
+
+    public void setCost(Integer cost) {
+        this.cost = cost;
+    }
 
     public Map<PropertyType, Integer> getPropertyMap() {
         return propertyMap;
