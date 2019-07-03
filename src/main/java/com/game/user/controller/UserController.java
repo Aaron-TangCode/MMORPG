@@ -117,10 +117,21 @@ public class UserController {
 	public String registerService(String username,String password,String ackpassword){
 		boolean isSuccess = registerService.register(username,password,ackpassword);
 		if(isSuccess){
-			return "成功注册用户"+username+",请继续注册游戏角色";
+			return returnMsg(username);
+
 		}else{
 			return "注册失败";
 		}
+	}
+
+	private String returnMsg(String username) {
+		String msg = "成功注册用户"+username+",请继续注册游戏角色"+";\n"
+				+"职业描述:\n"
+				+"1、战士:高物理攻击和高防御，可以使用嘲讽技能，成为BOSS优先攻击的目标\n"
+				+"2、牧师:带有治疗的职业，强力的治疗技能需要有吟唱时间\n"
+				+"3、法师:群体法术伤害，可以攻击复数单位\n"
+				+"4、召唤师:能召唤召唤兽协助战斗。宝宝也能释放技能，而且玩家切换场景的时候自动跟随，玩家收到攻击或主动攻击，宝宝也会释放技能。\n";
+		return msg;
 	}
 
 	/**

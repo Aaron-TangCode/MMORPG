@@ -66,4 +66,11 @@ public interface RoleMapper {
      * @param concreteRole
      */
     public void updateRole(ConcreteRole concreteRole);
+
+    /**
+     * 插入role
+     * @param role
+     */
+    public void insertRole(ConcreteRole role);
+
 }

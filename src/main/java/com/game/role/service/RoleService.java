@@ -47,14 +47,7 @@ public class RoleService {
     }
 
 
-    /**
-     * 创建角色role
-     * @param name
-     * @return
-     */
-    public boolean registerRole(String name) {
-        return roleRepository.registerRole(name);
-    }
+
 
     /**
      * 根据角色名roleName获取地图id
@@ -80,5 +73,9 @@ public class RoleService {
 
     public void updateRole(ConcreteRole concreteRole) {
         roleRepository.updateRole(concreteRole);
+    }
+
+    public void insertRole(ConcreteRole role) {
+        roleRepository.insertRole(role);
     }
 }

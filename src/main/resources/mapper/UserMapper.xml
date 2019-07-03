@@ -15,4 +15,30 @@
     <select id="selectUserByUsername" resultType="com.game.user.bean.User">
         select * from user where username=#{username}
     </select>
+
+    <resultMap id="userMap" type="com.game.user.bean.User">
+        <result column="id" property="id"></result>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="role_id" property="role.id"></result>
+    </resultMap>
+<!--    检查用户是否存在-->
+    <select id="checkUser" resultMap="userMap">
+        select * from user where username=#{username}
+    </select>
+<!--更新用户信息-->
+    <resultMap id="uUserResultMap" type="com.game.user.bean.User">
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="role_id" property="role.id"></result>
+    </resultMap>
+
+    <parameterMap id="uUser" type="com.game.user.bean.User">
+        <parameter property="username" resultMap="uUserResultMap"></parameter>
+        <parameter property="password" resultMap="uUserResultMap"></parameter>
+        <parameter property="role.id" resultMap="uUserResultMap"></parameter>
+    </parameterMap>
+    <update id="updateUser" parameterMap="uUser">
+        update user set password=#{password},role_id=#{role.id} where username=#{username}
+    </update>
 </mapper>

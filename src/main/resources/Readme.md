@@ -5,9 +5,9 @@
 {type:"/user/login",username:"456",password:"123"}
 {type:"/user/login",username:"789",password:"123"}
 //注册用户
-{type:"/user/registerService",username:"890",password:"123",ackpassword:"123"}
+{type:"/user/registerService",username:"123",password:"123",ackpassword:"123"}
 //注册角色
-{type:"/role/register",name:"role7"}
+{type:"/register/role",username:"tanghailin",roleName:"role8",occupationId:1}
 //登出
 {type:"/user/logout",username:"123"}
 //根据roleName获取它所在的地图

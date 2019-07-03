@@ -1,5 +1,7 @@
 package com.game.user.bean;
 
+import com.game.role.bean.ConcreteRole;
+
 /**
  * @ClassName User
  * @Description 用户User实体类
@@ -20,6 +22,18 @@ public class User {
      * 密码password
      */
     private String password;
+    /**
+     * 角色
+     */
+    private ConcreteRole role;
+
+    public ConcreteRole getRole() {
+        return role;
+    }
+
+    public void setRole(ConcreteRole role) {
+        this.role = role;
+    }
 
     public Integer getId() {
         return id;

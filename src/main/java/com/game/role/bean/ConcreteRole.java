@@ -3,6 +3,7 @@ package com.game.role.bean;
 import com.alibaba.fastjson.JSONObject;
 import com.game.equipment.bean.EquipmentBox;
 import com.game.map.bean.ConcreteMap;
+import com.game.occupation.bean.Occupation;
 import com.game.property.bean.Property;
 import com.game.property.bean.PropertyType;
 import com.game.property.manager.PropertyManager;
@@ -65,6 +66,10 @@ public class ConcreteRole {
     private Property property;
 
     private Integer attack;
+    /**
+     * 角色职业
+     */
+    private Occupation occupation;
 
     private Integer defend;
     /**
@@ -111,6 +116,7 @@ public class ConcreteRole {
     public void setCurMap(Map<PropertyType, Integer> curMap) {
         this.curMap = curMap;
     }
+
 
     public Map<PropertyType, Integer> getTotalMap() {
         return totalMap;
@@ -241,5 +247,13 @@ public class ConcreteRole {
             }
         }
         return basicPropertyMap;
+    }
+
+    public Occupation getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(Occupation occupation) {
+        this.occupation = occupation;
     }
 }

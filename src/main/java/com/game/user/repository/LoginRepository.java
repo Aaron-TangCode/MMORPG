@@ -48,4 +48,15 @@ public class LoginRepository {
             session.close();
         }
     }
+
+    public User checkUser(String username) {
+        SqlSession session = SqlUtils.getSession();
+
+        try{
+            UserMapper mapper = session.getMapper(UserMapper.class);
+            return mapper.checkUser(username);
+        }finally {
+            session.close();
+        }
+    }
 }

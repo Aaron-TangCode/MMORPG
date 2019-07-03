@@ -37,4 +37,18 @@ public interface UserMapper {
      * @return
      */
     public boolean addUser(User user);
+
+    /**
+     * 检查
+     * @param username
+     * @return
+     */
+    public User checkUser(String username);
+
+    /**
+     * 更新用户信息
+     * @param user
+     */
+    public void updateUser(User user);
+
 }

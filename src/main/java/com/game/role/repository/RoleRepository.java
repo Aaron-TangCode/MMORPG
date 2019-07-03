@@ -60,20 +60,7 @@ public class RoleRepository {
         RoleUpdateTask task = new RoleUpdateTask(roleName,dest);
         ThreadPoolUtils.getThreadPool().execute(task);
     }
-    /**
-     * 创建角色
-     * @param name
-     * @return
-     */
-    public boolean registerRole(String name) {
-        SqlSession session = SqlUtils.getSession();
-        try {
-            RoleMapper mapper = session.getMapper(RoleMapper.class);
-            return false;
-        }finally {
-            session.close();
-        }
-    }
+
 
     /**
      * 根据roleName获取mapid
@@ -130,5 +117,16 @@ public class RoleRepository {
     public void updateRole(ConcreteRole concreteRole) {
         RoleTask roleTask = new RoleTask(concreteRole);
         ThreadPoolUtils.getThreadPool().execute(roleTask);
+    }
+
+    public void insertRole(ConcreteRole role) {
+        SqlSession session = SqlUtils.getSession();
+        try {
+            RoleMapper mapper = session.getMapper(RoleMapper.class);
+            mapper.insertRole(role);
+            session.commit();
+        }finally {
+            session.close();
+        }
     }
 }

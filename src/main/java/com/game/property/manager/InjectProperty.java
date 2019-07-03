@@ -7,6 +7,8 @@ import com.game.backpack.service.BackpackService;
 import com.game.equipment.bean.Equipment;
 import com.game.equipment.bean.EquipmentBox;
 import com.game.equipment.service.EquipmentService;
+import com.game.occupation.bean.Occupation;
+import com.game.occupation.manager.OccupationMap;
 import com.game.property.bean.PropertyType;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.manager.InjectRoleProperty;
@@ -39,7 +41,7 @@ public class InjectProperty {
      * @param roleName
      */
     public void initProperty(String roleName) {
-        //总值=基础值+装备值+环境值（暂无）
+        //总值=基础值+装备值+职业值+环境值（暂无）
         Map<Integer, JSONObject> basicPropertyMap = ConcreteRole.getBasicPropertyMap();
         //根据角色名，在db上查找role
         ConcreteRole roleDB = roleService.getRoleByRoleName(roleName);
@@ -67,6 +69,23 @@ public class InjectProperty {
             String value = json.getString(key);
             //存储基础数据到总值
             role.getTotalMap().put(propertyType,Integer.parseInt(value));
+        }
+        //todo:注入职业值
+        //获取角色职业
+        Occupation occupation = OccupationMap.getOccupationMap().get(role.getOccupation().getId());
+        //获取属性值（json格式）
+        JSONObject jsonObject = occupation.getProperty();
+        Set<String> keySet = jsonObject.keySet();
+        Iterator<String> iterator2 = keySet.iterator();
+        //遍历,存储职业值
+        while (iterator2.hasNext()) {
+            //获取key
+            String key = iterator2.next();
+            PropertyType propertyType = PropertyType.map.get(key);
+            String value = jsonObject.getString(key);
+            Map<PropertyType, Integer> totalMap = role.getTotalMap();
+            //存进去
+            totalMap.put(propertyType,totalMap.get(propertyType)+Integer.parseInt(value));
         }
         //todo:注入装备栏属性
         //获取装备栏
