@@ -1,4 +1,4 @@
-package com.game.user.threadpool;
+package com.game.map.threadpool;
 
 import io.netty.util.concurrent.DefaultThreadFactory;
 
@@ -6,14 +6,14 @@ import java.util.concurrent.ThreadFactory;
 
 /**
  * @ClassName MapThreadPool
- * @Description 用户线程池
+ * @Description 环境线程池
  * @Author DELL
  * @Date 2019/6/10 20:48
  * @Version 1.0
  */
-public class UserThreadPool {
+public class MapThreadPool {
     public static final int DEFAULT_THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
-    public static final String FACTORY_NAME = "user_thread";
+    public static final String FACTORY_NAME = "map_thread";
 
     public static final SingleThread[] ACCOUNT_SERVICE = new SingleThread[DEFAULT_THREAD_POOL_SIZE];
     static {

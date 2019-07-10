@@ -20,7 +20,18 @@ public class ConcreteMonster {
      * 怪兽血量
      */
     private Integer hp;
-
+    /**
+     * 击败boss的最大时间
+     */
+    private Integer time;
+    /**
+     * boss每次自动攻击的相隔时间
+     */
+    private Long attackTime;
+    /**
+     * boss的攻击力
+     */
+    private Integer attack;
     public Integer getId() {
         return id;
     }
@@ -43,6 +54,30 @@ public class ConcreteMonster {
 
     public void setHp(Integer hp) {
         this.hp = hp;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
+
+    public Long getAttackTime() {
+        return attackTime;
+    }
+
+    public void setAttackTime(Long attackTime) {
+        this.attackTime = attackTime;
+    }
+
+    public Integer getAttack() {
+        return attack;
+    }
+
+    public void setAttack(Integer attack) {
+        this.attack = attack;
     }
 
     /**

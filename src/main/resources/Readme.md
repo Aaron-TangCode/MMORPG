@@ -17,8 +17,8 @@
 {type:"/user/getRoleInfo",mapname:"森林"}
 
 //切换地图
-{type:"/map/moveTo",username:"123",dest:"森林"}
-{type:"/map/moveTo",username:"123",dest:"村子"}
+{type:"/map/moveTo",roleName:"role4",dest:"森林"}
+{type:"/map/moveTo",roleName:"role4",dest:"村子"}
 
 //获取当前地图
 {type:"/map/moveTo",username:"123",dest:"森林"}
@@ -72,4 +72,7 @@
 
 //PK模块：A攻击B
 {type:"/skill/rolePK",roleName:"role4",skillName:"血之狂暴",targetRoleName:"role5"}
+
+//刷副本
+{type:"/duplicate/attackboss",roleName:"role4",bossName:"怪兽4号",mapName:"森林"}
 ```

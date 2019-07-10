@@ -56,6 +56,12 @@ public class ReadMonster {
                         concreteMonster.setName(cellStr);
                     } else if (j == 2) {
                         concreteMonster.setHp(new Double(cellStr).intValue());
+                    }else if(j==3){
+                        concreteMonster.setTime(new Double(cellStr).intValue());
+                    }else if(j==4){
+                        concreteMonster.setAttackTime(new Double(cellStr).longValue());
+                    }else if(j==5){
+                        concreteMonster.setAttack(new Double(cellStr).intValue());
                     }
                 }
                 // 数据装入List

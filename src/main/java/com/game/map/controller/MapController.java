@@ -38,15 +38,16 @@ public class MapController {
 
     /**
      * 切换地图
-     * @param username
+     * @param roleName
      * @param dest
      * @return
      */
     @RequestAnnotation("/moveTo")
-    public String moveTo(String username,String dest) {
+    public String moveTo(String roleName,String dest) {
         //获取角色信息
-        System.out.println(MapUtils.getMapUsername_Role().size());
-        ConcreteRole role = MapUtils.getMapUsername_Role().get(username);
+//        System.out.println(MapUtils.getMapUsername_Role().size());
+//        ConcreteRole role = MapUtils.getMapUsername_Role().get(username);
+        ConcreteRole role = MapUtils.getMapRolename_Role().get(roleName);
         //获取角色的原地点
         String src = role.getConcreteMap().getName();
         //获取源地点和目的地点的id
@@ -60,7 +61,8 @@ public class MapController {
             role.getConcreteMap().setName(dest);
             role.getConcreteMap().setId(dest_id);
             //更新本地缓存
-            MapUtils.getMapUsername_Role().put(username,role);
+//            MapUtils.getMapUsername_Role().put(username,role);
+            MapUtils.getMapRolename_Role().put(roleName,role);
             return role.getName()+"从"+src+"移动到"+dest;
         }else{
             return "不能从"+src+"直接移动到"+dest;

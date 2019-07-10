@@ -298,7 +298,7 @@ public class SkillController {
      * @param monsterName
      * @return
      */
-    private ConcreteMonster findConcreteMonster(List<Integer> monsterList,String monsterName) {
+    public ConcreteMonster findConcreteMonster(List<Integer> monsterList,String monsterName) {
         ConcreteMonster monster = null;
         for (int i = 0; i < monsterList.size(); i++) {
             if (Objects.equals(MapUtils.getMonsterMap().get(monsterList.get(i)).getName(),monsterName)) {
@@ -364,7 +364,7 @@ public class SkillController {
      * @param roleName
      * @return
      */
-    private List<Integer> prepareForAttack(String roleName) {
+    public List<Integer> prepareForAttack(String roleName) {
         //获取角色
         ConcreteRole concreteRole = getRoleFromDB(roleName);
         //获取地图id
