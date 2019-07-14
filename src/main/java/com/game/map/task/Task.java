@@ -3,6 +3,8 @@ package com.game.map.task;
 import com.game.map.threadpool.TaskQueue;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.role.bean.ConcreteRole;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -26,6 +28,7 @@ public class Task implements Runnable{
     @Override
     public void run() {
         Set<Map.Entry<Integer, ConcreteMonster>> entries = bossMap.entrySet();
+
         Iterator<Map.Entry<Integer, ConcreteMonster>> iterator = entries.iterator();
         //遍历地图的每一个boss攻击角色
         while (iterator.hasNext()) {
@@ -37,22 +40,27 @@ public class Task implements Runnable{
 
     }
 
+    /**
+     * boss发动攻击
+     * @param boss
+     * @param role
+     */
     private void bossAttack(ConcreteMonster boss, ConcreteRole role) {
-        //boss攻击角色
+        //boss的攻击力
+
         Integer attack = boss.getAttack();
-
+        //角色的当前血量
         int curHp = role.getCurHp();
-
+        //角色被攻击，减少响应血量
         role.setCurHp(curHp-attack);
-
-        System.out.println(boss.getName()+"攻击"+role.getName()+"\t角色的血量："+role.getCurHp());
-
-        Integer deadTime = boss.getTime();
-
-        long end = System.currentTimeMillis();
+        ChannelHandlerContext ctx = role.getCtx();
+        Channel channel = ctx.channel();
+        //输出
+        channel.writeAndFlush(boss.getName()+"攻击"+role.getName()+"\t角色的血量："+role.getCurHp());
 
         if(role.getCurHp()<=0){
             TaskQueue.getQueue().remove();
+            channel.writeAndFlush("角色死亡，执行副本任务失败");
         }
     }
 }

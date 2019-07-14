@@ -75,4 +75,9 @@ public class ConcreteMap {
         this.id = map.getId();
         this.name = map.getName();
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
