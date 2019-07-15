@@ -1,5 +1,11 @@
 ﻿#客户端的输入指令
 ```
+//操作指引
+- 1、启动服务端：com.game.server.SpringMain
+- 2、启动客户端：com.game.client.Client
+- 3、在客户端端口输入相关指令
+
+##### 相关指令如下：
 //登录操作
 {type:"/user/login",username:"123",password:"123"}
 {type:"/user/login",username:"456",password:"123"}
@@ -74,5 +80,16 @@
 {type:"/skill/rolePK",roleName:"role4",skillName:"血之狂暴",targetRoleName:"role5"}
 
 //刷副本
-{type:"/duplicate/attackboss",roleName:"role4",bossName:"怪兽4号",mapName:"森林"}
+{type:"/duplicate/attackboss1",roleName:"role4",bossName:"怪兽4号",mapName:"森林"}
+
+//交易系统
+{type:"/trade/tradegoods",roleName1:"role4",roleName2:"role5",goodsName:"小血瓶"}
+//请求交易
+{type:"/trade/requestTrade",roleName1:"role4",roleName2:"role5"}
+//确认交易
+{type:"/trade/confirmTrade",roleName1:"role5",roleName2:"role4",uuid:""}
+//进行交易物品
+{type:"/trade/tradingGoods",uuid:"",goodsName:"小蓝瓶"}
+//进行交易金币
+{type:"/trade/tradingMoney",uuid:"",number:"10"}
 ```

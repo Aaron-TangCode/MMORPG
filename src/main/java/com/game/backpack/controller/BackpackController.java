@@ -24,6 +24,12 @@ public class BackpackController {
     @Autowired
     private BackpackService backpackService;
 
+    /**
+     * 获取物品
+     * @param roleName
+     * @param goodsName
+     * @return
+     */
     @RequestAnnotation("/getGoods")
     public String getGoods(String roleName,String goodsName){
         //获取角色
@@ -122,7 +128,39 @@ public class BackpackController {
      * todo
      * @return
      */
-    public String discardGoods(){
-        return null;
+    public String discardGoods(String roleName,String goodsName){
+        ConcreteRole role = getRole(roleName);
+        //逻辑处理
+        String msg = discardHandle(role,goodsName);
+        return msg;
+    }
+
+    /**
+     * 丢弃物品
+     * @param role
+     * @param goodsName
+     * @return
+     */
+    private String discardHandle(ConcreteRole role, String goodsName) {
+        //在数据库查询，根据角色id查询是否具有物品
+        List<Goods> list = backpackService.getGoodsByRoleId(role.getId());
+        //找物品(数据库)
+        Goods goods_db =findGoods(list,goodsName);
+        //找物品（本地缓存）
+        Goods goods_local = MapUtils.getGoodsMap().get(goodsName);
+        //更新本地的count信息
+        if(goods_db!=null){
+            goods_db.setRepeat(goods_local.getRepeat());
+        }
+       //选择丢弃
+        String msg = discardWay(goods_db,goodsName,role);
+        //返回信息
+        return msg;
+    }
+
+    private String discardWay(Goods goods, String goodsName, ConcreteRole role) {
+        //物品数量-1
+        backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
+        return role.getName()+"的"+goodsName+"数量-1";
     }
 }

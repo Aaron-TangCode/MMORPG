@@ -95,7 +95,7 @@ public class DuplicateController {
      */
     public String initRole(List<ConcreteRole> roleList,String bossName, String mapName, String skillName) {
         //获取地图id
-        int mapId = roleList.get(1).getConcreteMap().getId();
+        int mapId = roleList.get(0).getConcreteMap().getId();
         //获取临时地图
         ConcreteMap tmpMap = mapController.getMap(mapId);
         //新副本
@@ -118,7 +118,7 @@ public class DuplicateController {
         //boss的自动攻击
         autoAttack(map);
 
-        return  null;
+        return  "刷副本";
     }
 
     /**
@@ -132,11 +132,11 @@ public class DuplicateController {
         //获取地图中的怪兽集合
         Map<Integer, ConcreteMonster> monsterMap = map.getMonsterMap();
 
-        ConcreteMonster monster = null;
+
         for (int i = 0; i < monsterList.size(); i++) {
             ConcreteMonster concreteMonster = MapUtils.getMonsterMap().get(monsterList.get(i));
             if (Objects.equals(concreteMonster.getName(),monsterName)) {
-               monsterMap.put(monster.getId(),monster);
+               monsterMap.put(concreteMonster.getId(),concreteMonster);
             }
         }
         return monsterMap;
@@ -147,7 +147,9 @@ public class DuplicateController {
     public void autoAttack(ConcreteMap map){
         //todo:怪物根据角色的职业的吸引值优先进行攻击
         //遍历角色的仇恨值，选出最大的一个来攻击
-        ConcreteRole mostRole = chooseRole(map);
+        ConcreteRole tmpRole = chooseRole(map);
+        ConcreteRole mostRole = MapUtils.getMapRolename_Role().get(tmpRole.getName());
+
         //选择线程池中的某一个线程处理
         int id = Math.abs(map.hashCode());
         int modIndex = id% MapThreadPool.DEFAULT_THREAD_POOL_SIZE;
