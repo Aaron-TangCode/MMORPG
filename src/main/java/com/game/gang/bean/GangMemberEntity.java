@@ -12,7 +12,7 @@ import com.game.role.bean.ConcreteRole;
 public class GangMemberEntity {
     private ConcreteRole role;
     private GangEntity gang;
-    private Job job;
+    private String job;
 
     public ConcreteRole getRole() {
         return role;
@@ -30,11 +30,11 @@ public class GangMemberEntity {
         this.gang = gang;
     }
 
-    public Job getJob() {
+    public String getJob() {
         return job;
     }
 
-    public void setJob(Job job) {
+    public void setJob(String job) {
         this.job = job;
     }
 }

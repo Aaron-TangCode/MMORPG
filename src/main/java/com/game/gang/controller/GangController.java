@@ -1,13 +1,18 @@
 package com.game.gang.controller;
 
 import com.game.dispatcher.RequestAnnotation;
+import com.game.gang.bean.GangEntity;
 import com.game.gang.bean.GangMemberEntity;
+import com.game.gang.bean.Job;
 import com.game.gang.service.GangService;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.service.RoleService;
 import com.game.utils.MapUtils;
 import io.netty.channel.ChannelHandlerContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.text.MessageFormat;
 
 /**
  * @ClassName GangController
@@ -23,6 +28,8 @@ public class GangController {
     @Autowired
     private GangService gangService;
 
+    @Autowired
+    private RoleService roleService;
     /**
      * 创建工会
      * @param roleName
@@ -36,19 +43,37 @@ public class GangController {
         //判断该角色是否已经有工会
         GangMemberEntity flag = belongGang(roleName);
         ChannelHandlerContext ctx = role.getCtx();
+        //创建工会
+        buildGang(flag,gangName,role,ctx);
+
+
+    }
+
+    /**
+     * 创建工会
+     * @param flag
+     * @param gangName
+     * @param role
+     * @param ctx
+     */
+    private void buildGang(GangMemberEntity flag,String gangName,ConcreteRole role,ChannelHandlerContext ctx) {
         //没工会可创建工会
-        if(flag!=null){
+        if(flag==null){
             //插入工会
-//            gangService.insertGang(gangName);
+            gangService.insertGang(gangName);
+            //查询工会
+            GangEntity gangEntity =  gangService.queryGang(gangName);
             //插入工会会长
             GangMemberEntity entity = new GangMemberEntity();
-//            entity.setGang();
-//            entity.setJob(Job.CHARIMEN);
-//            gangService.insertGangMember()
-        }else{//有工会就返回提示信息
-            ctx.channel().writeAndFlush(roleName+"已经有工会了!\t工会："+flag.getGang().getName());
-        }
 
+            entity.setRole(role);
+            entity.setGang(gangEntity);
+            entity.setJob(Job.CHARIMEN.getName());
+            gangService.insertGangMember(entity);
+            ctx.channel().writeAndFlush("成功创建工会");
+        }else{//有工会就返回提示信息
+            ctx.channel().writeAndFlush(role.getName()+"已经有工会了!\t工会："+flag.getGang().getName());
+        }
     }
 
     /**
@@ -59,10 +84,36 @@ public class GangController {
     @RequestAnnotation("/join")
     public void joinGang(String roleName,String gangName){
         //判断是否已经有工会
+        GangMemberEntity entity = belongGang(roleName);
+        //查询角色
+        ConcreteRole role = getRole(roleName);
+        //加入工会
+        join(entity,role,gangName);
+    }
 
+    /**
+     * 加入工会
+     * @param entity
+     * @param role
+     * @param gangName
+     */
+    private void join(GangMemberEntity entity,ConcreteRole role,String gangName) {
+        ChannelHandlerContext ctx = role.getCtx();
         //没的话加入工会
-
-        //有就返回提示信息
+        if(entity==null){
+            GangMemberEntity newEntity = new GangMemberEntity();
+            newEntity.setRole(role);
+            //查询工会
+            GangEntity gangEntity =  gangService.queryGang(gangName);
+            newEntity.setGang(gangEntity);
+            //设置工会职位
+            newEntity.setJob(Job.GENERAL.getName());
+            gangService.insertGangMember(newEntity);
+            //返回信息
+            ctx.channel().writeAndFlush("成功加入工会"+gangName);
+        }else{//有就返回提示信息
+            ctx.channel().writeAndFlush("你已经加入工会");
+        }
     }
 
     /**
@@ -72,13 +123,31 @@ public class GangController {
     public void dismiss(String roleName,String gangName){
         //判断角色是否有工会
 
-        //判断角色是否
+        //判断角色是否会长
+
+
     }
 
-
+    /**
+     *
+     * @param roleName
+     * @param number
+     */
     @RequestAnnotation("/donateMoney")
     public void donate(String roleName,String number){
-
+        //获取工会
+        ConcreteRole role = getRole(roleName);
+        GangEntity gangEntity = gangService.queryGangByRoleName(role.getId());
+        int cost = Integer.parseInt(number);
+        Integer money = role.getMoney();
+        role.setMoney(money-cost);
+        //更新角色
+        roleService.updateRole(role);
+        gangEntity.setFunds(gangEntity.getFunds()+cost);
+        //更新工会基金
+        gangService.updateGangEntity(gangEntity);
+        String outputContent = "【通知】：{0}向{1}捐献{2}金币";
+        role.getCtx().channel().writeAndFlush(MessageFormat.format(outputContent,role.getName(),gangEntity.getName(),number));
     }
 
     /**

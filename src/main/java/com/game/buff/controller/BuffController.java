@@ -41,7 +41,9 @@ public class BuffController {
             ConcreteBuff buff = next.getValue();
             //获取对象
             //客户端的唯一标识
+
             Task task = new Task(buff,role);
+
             UserThreadPool.ACCOUNT_SERVICE[modIndex].scheduleAtFixedRate(task,5,buff.getPeriod(), TimeUnit.SECONDS);
         }
     }

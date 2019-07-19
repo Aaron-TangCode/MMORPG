@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.gang.mapper.GangEntityMapper">
+    <insert id="insertGang">
+        insert into gang(name) values (#{name})
+    </insert>
+
+    <select id="queryGang" resultType="com.game.gang.bean.GangEntity">
+        select id,name,level,funds from gang where name=#{name}
+    </select>
+    <resultMap id="gangMap" type="com.game.gang.bean.GangEntity">
+       <result column="id" property="id"></result>
+        <result column="funds" property="funds"></result>
+        <result column="level" property="level"></result>
+        <result column="name" property="name"></result>
+    </resultMap>
+    <select id="queryGangByRoleName" resultMap="gangMap">
+        SELECT g.funds funds,g.level level,g.name name,g.id id from gang g,gangmember gm where g.id = gm.gangId and gm.roleId = #{roleId}
+    </select>
+
+    <update id="updateGangEntity" parameterType="com.game.gang.bean.GangEntity">
+        update gang set name=#{name},level=#{level},funds=#{funds} where id=#{id}
+    </update>
+</mapper>

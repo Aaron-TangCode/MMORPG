@@ -17,7 +17,7 @@ import java.util.Map;
  * @Version 1.0
  */
 public class JobPermissionMapping {
-    public static Map<Job, List<JobPermission>> jobPermissionListMap = new HashMap<>();
+    public static Map<String, List<JobPermission>> jobPermissionListMap = new HashMap<>();
 
     public static void handleRelation(Map<String, JobResource> jobPermissionMap){
         //遍历map，匹配job和permision
@@ -38,21 +38,20 @@ public class JobPermissionMapping {
             }
 
             String job = stringJobResourceEntry.getKey();
-            String s = Job.CHARIMEN.toString();
-            String name = Job.CHARIMEN.getName();
+
             if(job.equalsIgnoreCase(Job.CHARIMEN.getName())){
-                jobPermissionListMap.put(Job.CHARIMEN,jobPermissionList);
+                jobPermissionListMap.put(Job.CHARIMEN.getName(),jobPermissionList);
             }else if(job.equalsIgnoreCase(Job.VICE_CHARIMEN.getName())){
-                jobPermissionListMap.put(Job.VICE_CHARIMEN,jobPermissionList);
+                jobPermissionListMap.put(Job.VICE_CHARIMEN.getName(),jobPermissionList);
             }else if(job.equalsIgnoreCase(Job.ELITE.getName())){
-                jobPermissionListMap.put(Job.ELITE,jobPermissionList);
+                jobPermissionListMap.put(Job.ELITE.getName(),jobPermissionList);
             }else if(job.equalsIgnoreCase(Job.GENERAL.getName())){
-                jobPermissionListMap.put(Job.GENERAL,jobPermissionList);
+                jobPermissionListMap.put(Job.GENERAL.getName(),jobPermissionList);
             }
         }
     }
 
-    public static Map<Job, List<JobPermission>> getJobPermissionListMap(){
+    public static Map<String, List<JobPermission>> getJobPermissionListMap(){
         return jobPermissionListMap;
     }
 }

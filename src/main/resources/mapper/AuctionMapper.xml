@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.auction.mapper.AuctionMapper">
+<!--  插入物品  -->
+    <insert id="insertGoods" parameterType="com.game.auction.bean.Auction" useGeneratedKeys="true" keyProperty="id">
+        insert into auction(goods_name,price,seller,number,buyer) values(#{goodsName},#{price},#{seller},#{number},#{buyer})
+    </insert>
+
+    <select id="queryAllGoods" resultType="com.game.auction.bean.Auction">
+        select * from auction
+    </select>
+
+    <select id="queryAutionById" resultType="com.game.auction.bean.Auction">
+        select * from auction where id = #{auctionId}
+    </select>
+
+    <delete id="deleteAuction">
+        delete from auction where id = #{auctionId}
+    </delete>
+
+    <update id="updateAuction" parameterType="com.game.auction.bean.Auction">
+        update auction set goods_name=#{goodsName},price=#{price},number=#{number},seller=#{seller},buyer=#{buyer} where id = #{id}
+    </update>
+</mapper>

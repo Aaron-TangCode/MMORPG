@@ -3,7 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.game.gang.mapper.GangMemberEntityMapper">
-    <select id="findGangMember" resultType="com.game.gang.bean.GangMemberEntity">
-            select roleId,gangId,job from gangmember where roleId=#{roleId}
+   <resultMap id="memberMap" type="com.game.gang.bean.GangMemberEntity">
+       <result column="roleId" property="role.id"></result>
+       <result column="gangId" property="gang.id"></result>
+       <result column="job" property="job"></result>
+       <result column="funds" property="gang.funds"></result>
+       <result column="level" property="gang.level"></result>
+       <result column="name" property="gang.name"></result>
+   </resultMap>
+
+    <select id="findGangMember" resultMap="memberMap">
+            SELECT g.funds funds,g.level level,g.name name,gm.roleId roleId,gm.gangId gangId,gm.job job from gang g ,gangmember gm where g.id = gm.gangId and gm.roleId = #{roleId}
     </select>
+
+    <resultMap id="gangMember" type="com.game.gang.bean.GangMemberEntity">
+        <result column="roleId" property="role.id"></result>
+        <result column="gangId" property="gang.id"></result>
+    </resultMap>
+
+    <parameterMap id="inGang" type="com.game.gang.bean.GangMemberEntity">
+        <parameter property="role.id" resultMap="gangMember"></parameter>
+        <parameter property="gang.id" resultMap="gangMember"></parameter>
+    </parameterMap>
+
+    <insert id="insertGangMember" parameterMap="inGang">
+        insert into gangmember(roleId,gangId,job) values (#{role.id},#{gang.id},#{job})
+    </insert>
 </mapper>

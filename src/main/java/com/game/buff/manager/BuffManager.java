@@ -11,6 +11,7 @@ import com.game.role.bean.ConcreteRole;
  * @Version 1.0
  */
 public class BuffManager {
+
     public static void startBuff(ConcreteBuff buff,ConcreteRole role){
         if(role.getCurHp()<role.getCurHp()){
             int tempHp = role.getCurHp()+buff.getHp();

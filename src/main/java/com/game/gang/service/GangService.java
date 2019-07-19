@@ -1,5 +1,6 @@
 package com.game.gang.service;
 
+import com.game.gang.bean.GangEntity;
 import com.game.gang.bean.GangMemberEntity;
 import com.game.gang.repository.GangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,25 @@ public class GangService {
 
     public GangMemberEntity findGangMember(int roleId) {
         return gangRepository.findGangMember(roleId);
+    }
+
+    public void insertGang(String gangName) {
+        gangRepository.insertGang(gangName);
+    }
+
+    public GangEntity queryGang(String gangName) {
+        return gangRepository.queryGang(gangName);
+    }
+
+    public void insertGangMember(GangMemberEntity entity) {
+        gangRepository.insertGangMember(entity);
+    }
+
+    public GangEntity queryGangByRoleName(Integer roleId) {
+        return gangRepository.queryGangByRoleName(roleId);
+    }
+
+    public void updateGangEntity(GangEntity gangEntity) {
+        gangRepository.updateGangEntity(gangEntity);
     }
 }

@@ -26,5 +26,7 @@
         <mapper resource="mapper/BackpackMapper.xml"/>
         <mapper resource="mapper/EquipmentMapper.xml"/>
         <mapper resource="mapper/GangMemberEntityMapper.xml"/>
+        <mapper resource="mapper/GangEntityMapper.xml"/>
+        <mapper resource="mapper/AuctionMapper.xml"/>
     </mappers>
 </configuration>

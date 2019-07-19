@@ -9,4 +9,10 @@ public interface GangMemberEntityMapper {
      * @return
      */
     public GangMemberEntity findGangMember(Integer roleId);
+
+    /**
+     * 添加工会成员
+     * @param entity
+     */
+    public void insertGangMember(GangMemberEntity entity);
 }
