@@ -117,4 +117,15 @@
 
 //竞拍叫价
 {type:"/auction/bidding",roleName:"role5",auctionId:"",money:"20"}
+
+//任务系统
+//查询可接受的任务
+{type:"/task/queryReceivableTask",roleName:"role4"}
+//查询已接受的任务
+{type:"/task/queryReceivedTask",roleName:"role4"}
+
+//接受任务
+{type:"/task/receiveTask",roleName:"role4",taskId:"1"}
+//放弃任务
+{type:"/task/discardTask",roleName:"role4",taskId:"1"}
 ```

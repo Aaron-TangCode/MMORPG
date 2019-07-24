@@ -5,6 +5,7 @@ import com.game.dispatcher.RequestAnnotation;
 import com.game.property.manager.InjectProperty;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
+import com.game.task.manager.InjectTaskData;
 import com.game.user.service.Login;
 import com.game.user.service.RegisterService;
 import com.game.utils.MapUtils;
@@ -35,6 +36,8 @@ public class UserController {
 
 	@Autowired
 	private InjectProperty injectProperty;
+	@Autowired
+	private InjectTaskData injectTaskData;
 	/**
 	 * 用户登录
 	 * @param username

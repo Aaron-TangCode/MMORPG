@@ -17,6 +17,7 @@ import java.util.Set;
  */
 public class NoticeUtils {
 
+
     public static void notifyAllRoles(ConcreteMonster monster){
         //通知该场景下的所有玩家
         int mapId = 0;
@@ -44,4 +45,5 @@ public class NoticeUtils {
             }
         }
     }
+
 }

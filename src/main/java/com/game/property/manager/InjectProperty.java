@@ -13,6 +13,7 @@ import com.game.property.bean.PropertyType;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.manager.InjectRoleProperty;
 import com.game.role.service.RoleService;
+import com.game.task.manager.InjectTaskData;
 import com.game.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,8 @@ import java.util.*;
  */
 @Component
 public class InjectProperty {
+    @Autowired
+    private InjectTaskData injectTaskData;
     @Autowired
     private RoleService roleService;
 
@@ -48,7 +51,8 @@ public class InjectProperty {
 
         //从本地获取role
         ConcreteRole role = MapUtils.getMapRolename_Role().get(roleDB.getName());
-
+        //注入任务数据
+        injectTaskData.injectData(role);
         //注入角色的技能属性
         role.setConcreteSkill(roleDB.getConcreteSkill());
         //获取角色等级

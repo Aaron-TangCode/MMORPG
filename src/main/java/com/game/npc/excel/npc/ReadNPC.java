@@ -21,7 +21,7 @@ import java.io.IOException;
 @ExcelAnnotation
 @Component
 public class ReadNPC {
-    private static final String FILEPATH = "src/main/resources/resource/NPC.xls";
+    private static final String FILEPATH = "src/main/resources/resource/npc.xls";
     /**
      * 读取excel
      * @return

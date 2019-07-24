@@ -3,6 +3,7 @@ package com.game.skill.controller;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.service.BackpackService;
 import com.game.dispatcher.RequestAnnotation;
+import com.game.event.bean.MonsterDeadEvent;
 import com.game.notice.NoticeUtils;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.MonsterMapMapping;
@@ -28,6 +29,8 @@ import java.util.*;
 @RequestAnnotation("/skill")
 public class SkillController {
 
+    @Autowired
+    private MonsterDeadEvent monsterDeadEvent;
     @Autowired
     private RoleService roleService;
 
@@ -354,7 +357,10 @@ public class SkillController {
         //怪兽死亡，通知该地图所有玩家
         if(monster.getHp()<=0){
             NoticeUtils.notifyAllRoles(monster);
+
         }
+        //触发事件，记录怪兽死亡次数
+        monsterDeadEvent.onfire(localRole);
         return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+localRole.getCurMp()+
                 ";"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
     }
