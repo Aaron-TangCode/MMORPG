@@ -8,6 +8,6 @@
     </select>
 
     <update id="updateTask" parameterType="com.game.task.bean.RoleTask">
-        update roleTask set receivedTask=#{receivedTask},finishedTask=#{finishedTask} where roleId=#{roleId}
+        update roleTask set receivedTask=#{receivedTask},finishedTask=#{finishedTask},count=#{count} where roleId=#{roleId}
     </update>
 </mapper>

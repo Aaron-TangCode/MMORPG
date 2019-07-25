@@ -360,7 +360,7 @@ public class SkillController {
 
         }
         //触发事件，记录怪兽死亡次数
-        monsterDeadEvent.onfire(localRole);
+        monsterDeadEvent.onfire(localRole,monster);
         return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+localRole.getCurMp()+
                 ";"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
     }

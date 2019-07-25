@@ -2,8 +2,6 @@ package com.game.role.bean;
 
 import com.alibaba.fastjson.JSONObject;
 import com.game.equipment.bean.EquipmentBox;
-import com.game.event.core.IEvent;
-import com.game.event.handler.IHandler;
 import com.game.map.bean.ConcreteMap;
 import com.game.occupation.bean.Occupation;
 import com.game.property.bean.Property;
@@ -16,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +25,8 @@ import java.util.Map;
  */
 @Component
 public class ConcreteRole {
+
+
     /**
      * 角色id
      */
@@ -97,18 +96,7 @@ public class ConcreteRole {
      * 已完成的任务
      */
     private Map<Integer,ConcreteTask> finishedTaskMap;
-    /**
-     * 事件map
-     */
-    private Map<Class<? extends IEvent>, List<IHandler>> eventMap;
 
-    public Map<Class<? extends IEvent>, List<IHandler>> getEventMap() {
-        return eventMap;
-    }
-
-    public void setEventMap(Map<Class<? extends IEvent>, List<IHandler>> eventMap) {
-        this.eventMap = eventMap;
-    }
 
     public Integer getMoney() {
         return money;

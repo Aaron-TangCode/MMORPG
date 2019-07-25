@@ -1,11 +1,7 @@
 package com.game.task.controller;
 
 import com.game.dispatcher.RequestAnnotation;
-import com.game.event.bean.MonsterDeadEvent;
 import com.game.event.core.EventBusManager;
-import com.game.event.handler.IHandler;
-import com.game.event.handler.KillMonsterHandler;
-import com.game.event.service.EventService;
 import com.game.role.bean.ConcreteRole;
 import com.game.task.bean.ConcreteTask;
 import com.game.task.bean.RoleTask;
@@ -17,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,8 +26,6 @@ import java.util.Map;
 @RequestAnnotation("/task")
 @Controller
 public class TaskController {
-    @Autowired
-    private EventService eventService;
 
     @Autowired
     private TaskService taskService;
@@ -148,12 +140,9 @@ public class TaskController {
         //更新数据库信息
         taskService.updateTask(roleTask);
         //注册事件
-        List<IHandler> list = new ArrayList<>();
-        list.add(new KillMonsterHandler());
+
         //todo 这里需要做一个扩展：任务的自动匹配
-        eventBusManager.register(MonsterDeadEvent.class,list,role);
-        //增加数据到roleCount中
-        eventService.insert(role.getId(),0);
+
         role.getCtx().channel().writeAndFlush("成功接受任务");
     }
 
@@ -219,4 +208,5 @@ public class TaskController {
                     taskEntry.getValue().getBonus(), taskEntry.getValue().getCondition())) ;
         }
     }
+
 }

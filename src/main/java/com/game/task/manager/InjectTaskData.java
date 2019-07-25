@@ -1,7 +1,5 @@
 package com.game.task.manager;
 
-import com.game.event.core.IEvent;
-import com.game.event.handler.IHandler;
 import com.game.role.bean.ConcreteRole;
 import com.game.task.bean.ConcreteTask;
 import com.game.task.bean.RoleTask;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,8 +48,7 @@ public class InjectTaskData {
         Map<Integer,ConcreteTask> raMap = new HashMap<>();
         Map<Integer,ConcreteTask> rMap = new HashMap<>();
         Map<Integer,ConcreteTask> fMap = new HashMap<>();
-        Map<Class<? extends IEvent>, List<IHandler>> eventMap = new HashMap<>();
-        role.setEventMap(eventMap);
+
         role.setReceivedTaskMap(rMap);
         role.setFinishedTaskMap(fMap);
         //创建临时taskmap

@@ -11,6 +11,7 @@ public class RoleTask {
     private Integer roleId;
     private String receivedTask;
     private String finishedTask;
+    private Integer count;
 
     public Integer getRoleId() {
         return roleId;
@@ -34,5 +35,14 @@ public class RoleTask {
 
     public void setFinishedTask(String finishedTask) {
         this.finishedTask = finishedTask;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+
     }
 }

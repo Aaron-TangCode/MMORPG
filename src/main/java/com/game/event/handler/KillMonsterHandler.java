@@ -11,6 +11,7 @@ public class KillMonsterHandler implements IHandler {
 
     @Override
     public void exec() {
-        System.out.println("恭喜你已经完成1个杀怪任务");
+        System.out.println("恭喜完成杀怪任务");
+        //todo:逻辑处理
     }
 }
