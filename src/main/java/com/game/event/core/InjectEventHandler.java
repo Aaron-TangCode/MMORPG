@@ -22,8 +22,10 @@ public class InjectEventHandler {
     @ExcelAnnotation
     public void injectData(){
         Map<Class<? extends IEvent>, List<IHandler>> eventMap = EventBusManager.getEventMap();
+
         List<IHandler> handlerList = new ArrayList<>();
         handlerList.add(new KillMonsterHandler());
+        //把事件和handler放一起
         eventMap.put(MonsterDeadEvent.class,handlerList);
     }
 }
