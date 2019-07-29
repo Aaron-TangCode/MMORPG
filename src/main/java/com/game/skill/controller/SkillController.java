@@ -3,7 +3,8 @@ package com.game.skill.controller;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.service.BackpackService;
 import com.game.dispatcher.RequestAnnotation;
-import com.game.event.bean.MonsterDeadEvent;
+import com.game.event.beanevent.MonsterDeadEvent;
+import com.game.event.manager.EventMap;
 import com.game.notice.NoticeUtils;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.MonsterMapMapping;
@@ -29,10 +30,14 @@ import java.util.*;
 @RequestAnnotation("/skill")
 public class SkillController {
 
-    @Autowired
-    private MonsterDeadEvent monsterDeadEvent;
+   @Autowired
+   private EventMap eventMap;
+
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private MonsterDeadEvent monsterDeadEvent;
 
     @Autowired
     private BackpackService backpackService;
@@ -288,8 +293,10 @@ public class SkillController {
     public String useSkill(String roleName,String skillName,String monsterName){
         //获取角色--->获取地图id--->获取地图上的怪兽列表
         List<Integer> monsterList =  prepareForAttack(roleName);
+
         //找出具体怪兽
         ConcreteMonster monster = findConcreteMonster(monsterList,monsterName);
+
         //获取技能---使用技能---判断是否具备攻击条件--攻击--返回信息
         String msg = attack(monster,skillName,roleName,monsterName);
        return msg;
@@ -359,8 +366,12 @@ public class SkillController {
             NoticeUtils.notifyAllRoles(monster);
 
         }
+        monsterDeadEvent.setRole(localRole);
+        monsterDeadEvent.setMonster(monster);
         //触发事件，记录怪兽死亡次数
-        monsterDeadEvent.onfire(localRole,monster);
+        eventMap.submit(monsterDeadEvent);
+
+
         return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+localRole.getCurMp()+
                 ";"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
     }

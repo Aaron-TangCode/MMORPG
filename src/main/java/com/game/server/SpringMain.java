@@ -1,15 +1,20 @@
 package com.game.server;
 
+import com.game.annotation.ExcelAnnotation;
 import com.game.dispatcher.ClassUtil;
 import com.game.dispatcher.MyAnnotationUtil;
 import com.game.dispatcher.StringUtil;
-import com.game.annotation.ExcelAnnotation;
+import com.game.event.annotation.EventAnnotation;
+import com.game.event.core.IEvent;
+import com.game.event.handler.IHandler;
+import com.game.event.manager.EventMap;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -59,7 +64,31 @@ public class SpringMain {
                     } catch (InvocationTargetException e) {
                         e.printStackTrace();
                     }
+                }
 
+                if(clz.isAnnotationPresent(EventAnnotation.class)){
+                    try {
+                        Object obj = applicationContext.getBean(clz);
+                        Method[] methods = clz.getMethods();
+                        for (Method method:methods){
+                            if(method.isAnnotationPresent(EventAnnotation.class)){
+                                //获取参数
+                                Class<? extends IEvent>[] parameterTypes = (Class<? extends IEvent>[]) method.getParameterTypes();
+                                List<IHandler> handlerList = EventMap.getEventMap().get(parameterTypes);
+                                if(handlerList==null){
+                                    handlerList = new ArrayList<>();
+                                }
+                                if(obj instanceof IHandler){
+                                    IHandler handler = (IHandler)obj;
+                                    handlerList.add(handler);
+                                    //添加到容器
+                                    EventMap.getEventMap().put(parameterTypes[0],handlerList);
+                                }
+                            }
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }
         }

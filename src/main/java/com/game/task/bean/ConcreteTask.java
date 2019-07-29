@@ -1,5 +1,7 @@
 package com.game.task.bean;
 
+import com.game.utils.QuestType;
+
 /**
  * @ClassName ConcreteTask
  * @Description TODO
@@ -12,6 +14,8 @@ public class ConcreteTask {
     private String taskDescription;
     private String condition;
     private Integer bonus;
+    private String type;
+    private QuestType questType;
 
     public Integer getId() {
         return id;
@@ -43,5 +47,21 @@ public class ConcreteTask {
 
     public void setBonus(Integer bonus) {
         this.bonus = bonus;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public QuestType getQuestType() {
+        return questType;
+    }
+
+    public void setQuestType(QuestType questType) {
+        this.questType = questType;
     }
 }

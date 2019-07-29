@@ -1,7 +1,7 @@
 package com.game.event.core;
 
 import com.game.annotation.ExcelAnnotation;
-import com.game.event.bean.MonsterDeadEvent;
+import com.game.event.beanevent.MonsterDeadEvent;
 import com.game.event.handler.IHandler;
 import com.game.event.handler.KillMonsterHandler;
 

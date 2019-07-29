@@ -3,6 +3,7 @@ package com.game.task.excel;
 import com.game.annotation.ExcelAnnotation;
 import com.game.task.bean.ConcreteTask;
 import com.game.task.manager.TaskMap;
+import com.game.utils.EnumUtil;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -65,6 +66,9 @@ public class ReadTask {
                         task.setCondition(cellStr);
                     }else if(j == 3){
                         task.setBonus(new Double(cellStr).intValue());
+                    }else if(j==4){
+                        task.setType(cellStr);
+                        task.setQuestType(EnumUtil.string2Enum(cellStr));
                     }
                 }
                 // 数据装入map
