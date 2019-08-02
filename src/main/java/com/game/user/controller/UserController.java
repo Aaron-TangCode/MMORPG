@@ -6,6 +6,7 @@ import com.game.property.manager.InjectProperty;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.task.manager.InjectTaskData;
+import com.game.user.manager.SessionMap;
 import com.game.user.service.Login;
 import com.game.user.service.RegisterService;
 import com.game.utils.MapUtils;
@@ -53,11 +54,31 @@ public class UserController {
 			MapUtils.getMapUsername_Role().put(username,role);
 			buffController.executeBuff(role.getName());
 			injectProperty.initProperty(role.getName());
+			//校验账号
+
+			checkAccount(username,role);
 			return role.getName()+"上线了";
 		}else{
-			System.out.println("登录失败");
+			return role.getName()+"登录失败";
 		}
-		return null;
+	}
+
+	/**
+	 * 校验账号
+	 * @param username
+	 * @param role1
+	 */
+	private void checkAccount(String username, ConcreteRole role1) {
+		ConcreteRole role = MapUtils.getMapRolename_Role().get(role1.getName());
+		Map<String, ConcreteRole> sessionMap = SessionMap.getSessionMap();
+		ConcreteRole localRole = sessionMap.get(username);
+		if(localRole==null){
+			sessionMap.put(username,role);
+		}else{
+			localRole.getCtx().channel().writeAndFlush("账号重复登录");
+			logout(username);
+		}
+
 	}
 
 	/**
@@ -66,12 +87,12 @@ public class UserController {
 	 * @return
 	 */
 	@RequestAnnotation("/logout")
-	public String logout(String username) {
+	public void logout(String username) {
 		//通过username找到map中的role
 		ConcreteRole role = MapUtils.getMapUsername_Role().get(username);
 		//移除角色信息，下线
 		MapUtils.getMapUsername_Role().remove(username);
-		return role.getName()+"下线了";
+		 role.getCtx().channel().writeAndFlush(role.getName()+"下线了");
 	}
 
 	/**
