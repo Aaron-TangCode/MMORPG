@@ -60,16 +60,23 @@ public class RoleController {
      */
     @RequestAnnotation("/roleByHurted")
     public String roleByHurted(String roleName){
-        ConcreteRole concreteRole = MapUtils.getMapRolename_Role().get(roleName);
-        if(concreteRole==null){
-            return roleName+"还没登录，请先登录";
+        ConcreteRole role = MapUtils.getMapRolename_Role().get(roleName);
+
+        return hurted(role);
+
+    }
+
+    private String hurted(ConcreteRole role) {
+        String roleName = role.getName();
+        if(role==null){
+            return role.getName()+"还没登录，请先登录";
         }
-        if(concreteRole.getCurHp()>0){
-            if(concreteRole.getCurHp()-10>0){
-//                concreteRole.setHp();
+        if(role.getCurHp()>0){
+            int newHp = role.getCurHp()-10;
+            if(newHp>0){
+                role.setCurHp(newHp);
                 return roleName+"受到伤害，生命值减10";
             }else{
-//                concreteRole.setHp();
                 return roleName+"受到伤害，生命值减为0";
             }
         }else{

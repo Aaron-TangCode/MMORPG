@@ -15,6 +15,7 @@ public class ConcreteBuff {
     private int effect;
     private int hp;
     private int mp;
+    private int defend;
 
     public int getHp() {
         return hp;
@@ -70,5 +71,13 @@ public class ConcreteBuff {
 
     public void setEffect(int effect) {
         this.effect = effect;
+    }
+
+    public int getDefend() {
+        return defend;
+    }
+
+    public void setDefend(int defend) {
+        this.defend = defend;
     }
 }

@@ -11,9 +11,5 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class PropertyController {
-    //初始化
-   static {
-       //HP总值：基础值+装备值+环境值（暂无）
-//        PropertyManager.getBasicPropertyMap().get()
-   }
+
 }

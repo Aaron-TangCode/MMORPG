@@ -1,5 +1,8 @@
 ﻿#客户端的输入指令
 ```
+//游戏介绍
+本游戏是一款MMORPG游戏，多人在线角色扮演游戏。游戏玩法：有玩家PK，刷副本，掉装备，排行榜，玩家互动，拍卖行，工会等新奇有趣玩法。  
+游戏名字：江湖传奇
 //操作指引
 - 1、启动服务端：com.game.server.SpringMain
 - 2、启动客户端：com.game.client.Client
@@ -128,4 +131,7 @@
 {type:"/task/receiveTask",roleName:"role4",taskId:"1"}
 //放弃任务
 {type:"/task/discardTask",roleName:"role4",taskId:"1"}
+
+//排行榜查询
+{type:"/rank/queryRank",roleName:"role4"}
 ```

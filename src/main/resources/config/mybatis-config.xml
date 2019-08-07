@@ -29,5 +29,6 @@
         <mapper resource="mapper/GangEntityMapper.xml"/>
         <mapper resource="mapper/AuctionMapper.xml"/>
         <mapper resource="mapper/TaskMapper.xml"/>
+        <mapper resource="mapper/RankMapper.xml"/>
     </mappers>
 </configuration>

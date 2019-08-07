@@ -21,6 +21,7 @@ public class Task implements Runnable {
     @Override
     public void run() {
         BuffManager.startBuff(buff,role);
+        BuffManager.defendBuff(buff,role);
     }
 
 

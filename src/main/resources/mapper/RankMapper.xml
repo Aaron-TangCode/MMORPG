@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.rank.mapper.RankMapper">
+
+    <resultMap id="rank" type="com.game.rank.bean.RankBean">
+        <result column="rid" property="role.id"></result>
+        <result column="cat" property="comat"></result>
+        <result column="name" property="role.name"></result>
+    </resultMap>
+
+    <select id="queryRank" resultMap="rank">
+        select c.roleId rid,c.comat cat,r.name name from combat c,role r where r.id = roleId
+    </select>
+</mapper>
