@@ -5,6 +5,8 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,8 +16,11 @@ import org.springframework.stereotype.Component;
  * @Date 2019/5/2714:08
  * @Version 1.0
  */
+@Slf4j
 @Component("Server")
 public class Server {
+    @Autowired
+    private ServerInitializer serverInitializer;
     /**
      *   默认端口
      */
@@ -26,8 +31,12 @@ public class Server {
      * @param port
      */
     public void start(int port) {
+        log.info("start server ");
+
         this.port = port;
         this.run();
+
+
     }
 
     /**
@@ -42,8 +51,8 @@ public class Server {
         try{
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup,workerGroup).channel(NioServerSocketChannel.class)
-                    .childHandler(new ServerInitializer());
-
+                    .childHandler(serverInitializer);
+            //绑定端口
             ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {

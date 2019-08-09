@@ -39,4 +39,14 @@ public class MapRepository {
         Integer id = mapper.getIdByName(name);
         return id;
     }
+
+    public ConcreteMap getMapByRoleId(int roleId) {
+        SqlSession session = SqlUtils.getSession();
+        try {
+            MapMapper mapper = session.getMapper(MapMapper.class);
+            return mapper.getMapByRoleId(roleId);
+        }finally {
+            session.close();
+        }
+    }
 }

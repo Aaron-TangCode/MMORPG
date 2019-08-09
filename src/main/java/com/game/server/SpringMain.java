@@ -8,6 +8,7 @@ import com.game.event.annotation.EventAnnotation;
 import com.game.event.core.IEvent;
 import com.game.event.handler.IHandler;
 import com.game.event.manager.EventMap;
+import com.game.server.local.LocalMessageMap;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -34,6 +35,7 @@ public class SpringMain {
      */
         static {
             applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+
             //解析资源文件得到资源对象
             Properties prop = MyAnnotationUtil.parsePackAgeByProperties("src/main/resources/my.properties");
             //得到基础控制器包
@@ -91,11 +93,14 @@ public class SpringMain {
                     }
                 }
             }
+        LocalMessageMap.readAllMessageType();
+
         }
     public static void main(String[] args) {
         Server server = applicationContext.getBean(Server.class);
         //启动服务端
         server.start(8899);
+
     }
 
 }

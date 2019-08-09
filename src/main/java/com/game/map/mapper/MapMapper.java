@@ -24,4 +24,11 @@ public interface MapMapper {
      */
     public Integer getIdByName(String name);
 
+    /**
+     * 根据roleId获取地图
+     * @param roleId
+     * @return
+     */
+    public ConcreteMap getMapByRoleId(int roleId);
+
 }

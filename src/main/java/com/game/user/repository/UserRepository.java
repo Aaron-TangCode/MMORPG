@@ -1,4 +1,4 @@
-package com.game.user.service;
+package com.game.user.repository;
 
 import com.game.user.bean.User;
 import com.game.user.mapper.UserMapper;
@@ -22,6 +22,26 @@ public class UserRepository {
             UserMapper mapper = session.getMapper(UserMapper.class);
             mapper.updateUser(user);
             session.commit();
+        }finally {
+            session.close();
+        }
+    }
+
+    public User selectUserByUsername(String username){
+        SqlSession session = SqlUtils.getSession();
+        try{
+            UserMapper mapper = session.getMapper(UserMapper.class);
+            return mapper.selectUserByUsername(username);
+        }finally {
+            session.close();
+        }
+    }
+
+    public User selectUserById(int id){
+        SqlSession session = SqlUtils.getSession();
+        try{
+            UserMapper mapper = session.getMapper(UserMapper.class);
+            return mapper.selectUserById(id);
         }finally {
             session.close();
         }

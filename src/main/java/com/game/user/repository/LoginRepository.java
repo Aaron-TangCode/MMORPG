@@ -43,7 +43,12 @@ public class LoginRepository {
 
         try{
             UserMapper mapper = session.getMapper(UserMapper.class);
-           return mapper.getUserRoleIdByUsername(username);
+            Integer id = mapper.getUserRoleIdByUsername(username);
+            if(id==null){
+                return 0;
+            }
+            return id;
+
         }finally {
             session.close();
         }

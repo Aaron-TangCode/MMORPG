@@ -1,7 +1,16 @@
 package com.game.role.service;
 
+import com.game.protobuf.message.ContentType;
+import com.game.protobuf.message.ResultCode;
+import com.game.protobuf.protoc.MsgRoleInfoProto;
+import com.game.protobuf.service.ProtoService;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.controller.RegisterRole;
 import com.game.role.repository.RoleRepository;
+import com.game.user.bean.User;
+import com.game.user.manager.LocalUserMap;
+import com.game.user.repository.UserRepository;
+import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +27,14 @@ public class RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private RegisterRole registerRole;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ProtoService protoService;
     /**
      * 获取角色role
      * @param id
@@ -77,5 +94,31 @@ public class RoleService {
 
     public void insertRole(ConcreteRole role) {
         roleRepository.insertRole(role);
+    }
+
+    public MsgRoleInfoProto.ResponseRoleInfo chooseRole(Channel channel, MsgRoleInfoProto.RequestRoleInfo requestRoleInfo) {
+        //userId
+        long userId = LocalUserMap.getChannelUserMap().get(channel);
+        //roleName
+        String roleName = requestRoleInfo.getRoleName();
+        //occupationId   职业id
+        int occupationId = requestRoleInfo.getOccupationId();
+        //获取user
+        User user = userRepository.selectUserById((int) userId);
+        //注册role
+        registerRole.preRegister(user.getUsername(), roleName, occupationId);
+        //获取role
+        ConcreteRole role = roleRepository.getRoleByRoleName(roleName);
+        //返回信息
+       return MsgRoleInfoProto.ResponseRoleInfo.newBuilder()
+                .setType(MsgRoleInfoProto.RequestType.CHOOSEROLE)
+                .setContent(ContentType.CREATE_ROLE)
+                .setResult(ResultCode.SUCCESS)
+                .setRole(protoService.transToRole(role))
+                .build();
+    }
+
+    public MsgRoleInfoProto.ResponseRoleInfo roleInfo(Channel channel, MsgRoleInfoProto.RequestRoleInfo requestRoleInfo) {
+        return null;
     }
 }

@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "Role.proto";
+//protoc --proto_path=src\main\java\com\game\protobuf --java_out=src\main\java src\main\java\com\game\protobuf\MsgUserInfo.proto
+
+option java_package = "com.game.protobuf.protoc";
+option java_outer_classname = "MsgUserInfoProto";
+enum RequestType{
+    LOGIN = 0;
+    REGISTER = 1;
+    EXIT = 2;
+}
+
+message RequestUserInfo{
+    string requestId = 1;       // 请求id
+    int64 userId = 2;           // 请求的uid
+    string username = 3;
+    string password = 4;
+
+    RequestType type = 5;      // 请求类型
+}
+
+message ResponseUserInfo{
+    int32 result = 1;           // 返回结果
+    int64 userId = 2;           // 返回的uid
+    string content = 3;
+    string token = 4;           // token信息
+
+    RequestType type = 5;       // 返回类型
+
+    Role role = 6;          // 用户角色
+}

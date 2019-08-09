@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+//protoc --java_out=src\main\java src\main\java\com\game\protobuf\Role.proto
+
+option java_package = "com.game.protobuf.protoc";
+option java_outer_classname = "RoleProto";
+
+message Role{
+    int32 id = 1;
+    string name = 2;
+    int32 level = 3;
+    int32 curHp = 4;
+    int32 curMp = 5;
+    int32 totalHp = 6;
+    int32 totalMp = 7;
+    int32 attack = 8;
+    int32 defend = 9;
+    int32 backpackCapacity = 10;
+    int32 money = 11;
+}

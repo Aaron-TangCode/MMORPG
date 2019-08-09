@@ -50,5 +50,4 @@ public interface UserMapper {
      * @param user
      */
     public void updateUser(User user);
-
 }

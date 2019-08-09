@@ -16,4 +16,8 @@
     <select id="getIdByName" resultType="java.lang.Integer" parameterType="java.lang.String">
         select id from map where name=#{name}
     </select>
+
+    <select id="getMapByRoleId" resultType="com.game.map.bean.ConcreteMap">
+         select id,name from map where id = (select r.map_id from role r where r.id=#{roleId})
+    </select>
 </mapper>

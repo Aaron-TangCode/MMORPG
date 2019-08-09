@@ -34,7 +34,7 @@ public class RegisterRole {
     public String preRegister(String username,String roleName,Integer occupationId){
         //检查用户是否注册
         User user =  getUser(username);
-      String msg = register(user,username,roleName,occupationId);
+        String msg = register(user,username,roleName,occupationId);
         return msg;
     }
 

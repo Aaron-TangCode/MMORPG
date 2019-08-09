@@ -35,10 +35,7 @@ public class ConcreteRole {
      * 角色name
      */
     private String name;
-    /**
-     * 角色所在地图map
-     */
-    private ConcreteMap concreteMap;
+
     /**
      * 角色等级
      */
@@ -60,21 +57,13 @@ public class ConcreteRole {
      * 角色总魔法值
      */
     private int totalMp;
-
-    private ConcreteSkill concreteSkill;
-
-    private ChannelHandlerContext ctx;
-
-    private EquipmentBox equipmentBox;
-    @Autowired
-    private Property property;
-
+    /**
+     * 攻击力
+     */
     private Integer attack;
     /**
-     * 角色职业
+     * 防御力
      */
-    private Occupation occupation;
-
     private Integer defend;
     /**
      * 角色的背包容量
@@ -84,6 +73,33 @@ public class ConcreteRole {
      * 玩家拥有的金币
      */
     private Integer money;
+
+
+    /**
+     * 角色所在地图map
+     */
+    private ConcreteMap concreteMap;
+    /**
+     * 技能
+     */
+    private ConcreteSkill concreteSkill;
+    /**
+     * ctx
+     */
+    private ChannelHandlerContext ctx;
+    /**
+     * 装备栏
+     */
+    private EquipmentBox equipmentBox;
+    /**
+     * 属性
+     */
+    @Autowired
+    private Property property;
+    /**
+     * 角色职业
+     */
+    private Occupation occupation;
     /**
      * 可接受的任务
      */
@@ -96,6 +112,9 @@ public class ConcreteRole {
      * 已完成的任务
      */
     private Map<Integer,ConcreteTask> finishedTaskMap;
+
+
+
 
 
     public Integer getMoney() {
