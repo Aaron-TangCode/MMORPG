@@ -3,21 +3,24 @@ import "Role.proto";
 //protoc --proto_path=src\main\java\com\game\protobuf --java_out=src\main\java src\main\java\com\game\protobuf\MsgRoleInfo.proto
 
 option java_package = "com.game.protobuf.protoc";
-option java_outer_classname = "MsgMapInfoProto";
+option java_outer_classname = "MsgSkillInfoProto";
 
 enum RequestType{
-    GETMAP = 0;     //获取所在位置
-    MOVE = 1;       //移动
+    UPGRADESKILL = 0; //升级技能
+    STUDYSKILL = 1; //学习技能
+    ROLEPK = 2; //角色PK
+    USESKILL = 3;   //使用技能
 }
 
-message RequestMapInfo{
+message RequestSkillInfo{
     string requestId = 1;       // 请求id
     int32 userId = 2;           // 请求的uid
-    string dest = 3;            //目的地
-    RequestType type = 4;      // 请求类型
+    string skillName = 3;
+    string target = 4;            //攻击目标
+    RequestType type = 5;      // 请求类型
 }
 
-message ResponseMapInfo{
+message ResponseSkillInfo{
     int32 result = 1;           // 返回结果
     int32 userId = 2;           // 返回的uid
     string content = 3;         // 返回内容

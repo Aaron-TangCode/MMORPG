@@ -30,14 +30,45 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
     private RoleHandler roleHandler;
     @Autowired
     private MapHandler mapHandler;
+    @Autowired
+    private NpcHandler npcHandler;
+    @Autowired
+    private GoodsHandler goodsHandler;
+    @Autowired
+    private SkillHandler skillHandler;
+    @Autowired
+    private EquipHandler equipHandler;
+    @Autowired
+    private DuplicateHandler duplicateHandler;
+    @Autowired
+    private ShopHandler shopHandler;
+    @Autowired
+    private ChatHandler chatHandler;
     private static Map<Integer, SimpleChannelInboundHandler<? extends Message>> handlerMap = new HashMap<>();
 
     private DispatcherHandler(){}
     @PostConstruct
     public void injectData(){
+        //user
         handlerMap.put(REQUEST_USERINFO_PROTO.protoCode, userInfoHandler);
+        //role
         handlerMap.put(REQUEST_ROLEINFO_PROTO.protoCode,roleHandler);
+        //map
         handlerMap.put(REQUEST_MAPINFO_PROTO.protoCode,mapHandler);
+        //npc
+        handlerMap.put(REQUEST_NPCINFO_PROTO.protoCode,npcHandler);
+        //goods
+        handlerMap.put(REQUEST_GOODSINFO_PROTO.protoCode,goodsHandler);
+        //skill
+        handlerMap.put(REQUEST_SKILLINFO_PROTO.protoCode,skillHandler);
+        //equip
+        handlerMap.put(REQUEST_EQUIPINFO_PROTO.protoCode,equipHandler);
+        //duplicate
+        handlerMap.put(REQUEST_BOSSINFO_PROTO.protoCode,duplicateHandler);
+        //shop
+        handlerMap.put(REQUEST_SHOPINFO_PROTO.protoCode,shopHandler);
+        //chat
+        handlerMap.put(REQUEST_CHATINFO_PROTO.protoCode,chatHandler);
     }
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception{

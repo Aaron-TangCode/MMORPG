@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+//protoc --java_out=src\main\java src\main\java\com\game\protobuf\Map.proto
+
+option java_package = "com.game.protobuf.protoc";
+option java_outer_classname = "NpcProto";
+
+message Npc{
+    int32 id = 1;
+    string name = 2;
+    string content = 3;
+}

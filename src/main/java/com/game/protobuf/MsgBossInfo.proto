@@ -3,21 +3,22 @@ import "Role.proto";
 //protoc --proto_path=src\main\java\com\game\protobuf --java_out=src\main\java src\main\java\com\game\protobuf\MsgRoleInfo.proto
 
 option java_package = "com.game.protobuf.protoc";
-option java_outer_classname = "MsgMapInfoProto";
+option java_outer_classname = "MsgBossInfoProto";
 
 enum RequestType{
-    GETMAP = 0;     //获取所在位置
-    MOVE = 1;       //移动
+    ATTACKBOSS = 0;
 }
 
-message RequestMapInfo{
+message RequestBossInfo{
     string requestId = 1;       // 请求id
     int32 userId = 2;           // 请求的uid
-    string dest = 3;            //目的地
+    string bossName = 3;            //目的地
     RequestType type = 4;      // 请求类型
+    string skillName = 5;
+    string mapName = 6;
 }
 
-message ResponseMapInfo{
+message ResponseBossInfo{
     int32 result = 1;           // 返回结果
     int32 userId = 2;           // 返回的uid
     string content = 3;         // 返回内容

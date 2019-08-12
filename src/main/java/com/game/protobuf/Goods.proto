@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+//protoc --java_out=src\main\java src\main\java\com\game\protobuf\Map.proto
+
+option java_package = "com.game.protobuf.protoc";
+option java_outer_classname = "GoodsProto";
+
+message Goods{
+    int32 id = 1;
+    string name = 2;
+}

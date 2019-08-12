@@ -3,21 +3,21 @@ import "Role.proto";
 //protoc --proto_path=src\main\java\com\game\protobuf --java_out=src\main\java src\main\java\com\game\protobuf\MsgRoleInfo.proto
 
 option java_package = "com.game.protobuf.protoc";
-option java_outer_classname = "MsgMapInfoProto";
+option java_outer_classname = "MsgEquipInfoProto";
 
 enum RequestType{
-    GETMAP = 0;     //获取所在位置
-    MOVE = 1;       //移动
+    ADDEQUIP = 0;
+    REMOVEEQUIP = 1;
 }
 
-message RequestMapInfo{
+message RequestEquipInfo{
     string requestId = 1;       // 请求id
     int32 userId = 2;           // 请求的uid
-    string dest = 3;            //目的地
+    string goodsName = 3;            //物品名称
     RequestType type = 4;      // 请求类型
 }
 
-message ResponseMapInfo{
+message ResponseEquipInfo{
     int32 result = 1;           // 返回结果
     int32 userId = 2;           // 返回的uid
     string content = 3;         // 返回内容

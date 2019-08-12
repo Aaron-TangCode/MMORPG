@@ -1,8 +1,6 @@
 package com.game.protobuf.message;
 
-import com.game.protobuf.protoc.MsgMapInfoProto;
-import com.game.protobuf.protoc.MsgRoleInfoProto;
-import com.game.protobuf.protoc.MsgUserInfoProto;
+import com.game.protobuf.protoc.*;
 import com.google.protobuf.MessageLite;
 
 import java.lang.reflect.Constructor;
@@ -18,8 +16,28 @@ public enum MessageType {
     RESPONSE_ROLEINFO_PROTO(0x04,MsgRoleInfoProto.ResponseRoleInfo.class),
     //map
     REQUEST_MAPINFO_PROTO(0x05, MsgMapInfoProto.RequestMapInfo.class),
-    RESPONSE_MAPINFO_PROTO(0x06,MsgMapInfoProto.ResponseMapInfo.class);
-
+    RESPONSE_MAPINFO_PROTO(0x06,MsgMapInfoProto.ResponseMapInfo.class),
+    //npc
+    REQUEST_NPCINFO_PROTO(0x07, MsgNpcInfoProto.RequestNpcInfo.class),
+    RESPONSE_NPCINFO_PROTO(0x08,MsgNpcInfoProto.ResponseNpcInfo.class),
+    //goods
+    REQUEST_GOODSINFO_PROTO(0x09,MsgGoodsInfoProto.RequestGoodsInfo.class),
+    RESPONSE_GOODSINFO_PROTO(0x0A,MsgGoodsInfoProto.ResponseGoodsInfo.class),
+    //skill
+    REQUEST_SKILLINFO_PROTO(0x0B, MsgSkillInfoProto.RequestSkillInfo.class),
+    RESPONSE_SKILLINFO_PROTO(0x0C,MsgSkillInfoProto.ResponseSkillInfo.class),
+    //equip
+    REQUEST_EQUIPINFO_PROTO(0x0D, MsgEquipInfoProto.RequestEquipInfo.class),
+    RESPONSE_EQUIPINFO_PROTO(0x0E,MsgEquipInfoProto.ResponseEquipInfo.class),
+    //duplicate
+    REQUEST_BOSSINFO_PROTO(0x0F, MsgBossInfoProto.RequestBossInfo.class),
+    RESPONSE_BOSSINFO_PROTO(0x10,MsgBossInfoProto.ResponseBossInfo.class),
+    //shop
+    REQUEST_SHOPINFO_PROTO(0x11, MsgShopInfoProto.RequestShopInfo.class),
+    RESPONSE_SHOPINFO_PROTO(0x12,MsgShopInfoProto.ResponseShopInfo.class),
+    //chat
+    REQUEST_CHATINFO_PROTO(0x13, MsgChatInfoProto.RequestChatInfo.class),
+    RESPONSE_CHATINFO_PROTO(0x14,MsgChatInfoProto.ResponseChatInfo.class);
     public Integer protoCode;
     public Class messageLite;
 

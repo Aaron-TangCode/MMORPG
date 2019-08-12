@@ -9,6 +9,7 @@ import com.game.user.bean.User;
 import com.game.user.controller.UserController;
 import com.game.user.manager.LocalUserMap;
 import com.game.user.repository.UserRepository;
+import com.game.utils.MapUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -168,8 +169,7 @@ public class UserService {
     private void initUserState(Integer userId, ConcreteRole role, Channel channel) {
 
         // 本地保存
-        LocalUserMap.getUserRoleMap().put(userId, role);
-
+        LocalUserMap.getUserRoleMap().put(userId,role);
         // 分配用户的业务线程
 //        UserExecutorManager.bindUserExecutor(userId);
 
@@ -177,6 +177,7 @@ public class UserService {
         LocalUserMap.getUserChannelMap().put(userId,channel);
         // 绑定 channel-userId
         LocalUserMap.getChannelUserMap().put(channel,userId);
-
+        //roleName-role
+        MapUtils.getMapRolename_Role().put(role.getName(),role);
     }
 }

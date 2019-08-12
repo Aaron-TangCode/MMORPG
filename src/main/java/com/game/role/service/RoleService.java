@@ -96,6 +96,12 @@ public class RoleService {
         roleRepository.insertRole(role);
     }
 
+    /**
+     * 创建角色
+     * @param channel
+     * @param requestRoleInfo
+     * @return
+     */
     public MsgRoleInfoProto.ResponseRoleInfo chooseRole(Channel channel, MsgRoleInfoProto.RequestRoleInfo requestRoleInfo) {
         //userId
         long userId = LocalUserMap.getChannelUserMap().get(channel);
@@ -118,7 +124,22 @@ public class RoleService {
                 .build();
     }
 
+    /**
+     * 获取角色信息
+     * @param channel
+     * @param requestRoleInfo
+     * @return
+     */
     public MsgRoleInfoProto.ResponseRoleInfo roleInfo(Channel channel, MsgRoleInfoProto.RequestRoleInfo requestRoleInfo) {
-        return null;
+        //userId
+        Integer userId = LocalUserMap.getChannelUserMap().get(channel);
+        //获取role
+        ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);
+        //返回信息
+        return MsgRoleInfoProto.ResponseRoleInfo.newBuilder()
+                .setType(MsgRoleInfoProto.RequestType.ROLEINFO)
+                .setResult(ResultCode.SUCCESS)
+                .setRole(protoService.transToRole(role))
+                .build();
     }
 }

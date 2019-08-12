@@ -11,7 +11,7 @@ enum RequestType{
 
 message RequestRoleInfo{
     string requestId = 1;       // 请求id
-    int64 userId = 2;           // 请求的uid
+    int32 userId = 2;           // 请求的uid
     string roleName = 3;
     int32 occupationId = 4;
     RequestType type = 5;      // 请求类型
@@ -19,7 +19,7 @@ message RequestRoleInfo{
 
 message ResponseRoleInfo{
     int32 result = 1;           // 返回结果
-    int64 userId = 2;           // 返回的uid
+    int32 userId = 2;           // 返回的uid
     string content = 3;
 
     RequestType type = 4;       // 返回类型

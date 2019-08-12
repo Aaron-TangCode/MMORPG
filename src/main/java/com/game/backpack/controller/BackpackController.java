@@ -152,7 +152,7 @@ public class BackpackController {
         if(goods_db!=null){
             goods_db.setRepeat(goods_local.getRepeat());
         }
-       //选择丢弃
+        //选择丢弃
         String msg = discardWay(goods_db,goodsName,role);
         //返回信息
         return msg;
