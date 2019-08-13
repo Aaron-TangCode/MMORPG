@@ -40,7 +40,19 @@ public enum MessageType {
     RESPONSE_CHATINFO_PROTO(0x14,MsgChatInfoProto.ResponseChatInfo.class),
     //email
     REQUEST_EMAILINFO_PROTO(0x15, MsgEmailInfoProto.RequestEmailInfo.class),
-    RESPONSE_EMAILINFO_PROTO(0x16,MsgEmailInfoProto.ResponseEmailInfo.class);
+    RESPONSE_EMAILINFO_PROTO(0x16,MsgEmailInfoProto.ResponseEmailInfo.class),
+    //trade
+    REQUEST_TRADEINFO_PROTO(0x17, MsgTradeInfoProto.RequestTradeInfo.class),
+    RESPONSE_TRADEINFO_PROTO(0x18,MsgTradeInfoProto.ResponseTradeInfo.class),
+    //gang
+    REQUEST_GANGINFO_PROTO(0x19, MsgGangInfoProto.RequestGangInfo.class),
+    RESPONSE_GANGINFO_PROTO(0x1A,MsgGangInfoProto.ResponseGangInfo.class),
+    //auction
+    REQUEST_AUCTIONINFO_PROTO(0x1B, MsgGangInfoProto.RequestGangInfo.class),
+    RESPONSE_AUCTIONINFO_PROTO(0x1C,MsgGangInfoProto.ResponseGangInfo.class),
+    //rank
+    REQUEST_RANKINFO_PROTO(0x1D, MsgRankInfoProto.RequestRankInfo.class),
+    RESPONSE_RANKINFO_PROTO(0x1E,MsgRankInfoProto.ResponseRankInfo.class);
     public Integer protoCode;
     public Class messageLite;
 

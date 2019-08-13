@@ -2,14 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26638e92-5c45-4e48-8c5e-15d3c05ce239" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/email/service/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgEmailInfo.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/handler/EmailHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestEmailInfoType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgAuctionInfo.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgGangInfo.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgRankInfo.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgTradeInfo.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/handler/AuctionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/handler/GangHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/handler/RankHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/handler/TradeHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestAuctionInfoType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestGangInfoType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestRankInfoType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestTradeInfoType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/game/trade/service/TradeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/email/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/email/EmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/auction/controller/AuctionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/auction/controller/AuctionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/auction/service/AuctionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/auction/service/AuctionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/gang/service/GangService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/gang/service/GangService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/game/protobuf/message/MessageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/protobuf/message/MessageType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/rank/service/RankService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/rank/service/RankService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/game/server/handler/DispatcherHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/server/handler/DispatcherHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/trade/controller/TradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/trade/controller/TradeController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,14 +54,103 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/trade/controller/TradeController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/DispatcherHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="28" column="36" lean-forward="true" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+            <state relative-caret-position="270">
+              <caret line="86" column="69" lean-forward="true" selection-start-line="86" selection-start-column="69" selection-end-line="86" selection-end-column="69" />
               <folding>
-                <element signature="e#3291#3292#0" expanded="true" />
-                <element signature="e#3358#3359#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/duplicate/serivce/DuplicateService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="448">
+              <caret line="143" column="5" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/message/MessageType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-720">
+              <caret line="54" column="74" lean-forward="true" selection-start-line="54" selection-start-column="74" selection-end-line="54" selection-end-column="74" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/RankHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="424">
+              <caret line="44" column="55" lean-forward="true" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/rank/service/RankService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="762">
+              <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/request/RequestRankInfoType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/duplicate/DuplicateController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3550">
+              <caret line="195" column="11" lean-forward="true" selection-start-line="195" selection-start-column="11" selection-end-line="195" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/buff/controller/BuffController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-162">
+              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/rank/controller/RankController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="40" column="58" lean-forward="true" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgRankInfo.proto">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -98,24 +200,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/game/server/handler/UserInfoHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/role/service/RoleService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgMapInfo.proto" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgRoleInfo.proto" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgUserInfo.proto" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/map/service/MapService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/Npc.proto" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgNpcInfo.proto" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestNpcInfoType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/npc/NpcService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/npc/controller/NPCController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/npc/service/NpcService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/server/handler/NpcHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/Goods.proto" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgGoodsInfo.proto" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestGoodsInfoType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/server/handler/GoodsHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/backpack/controller/BackpackController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/backpack/service/BackpackService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgSkillInfo.proto" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestSkillInfoType.java" />
@@ -143,11 +227,29 @@
         <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/message/ContentType.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/chat/service/ChatService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/service/MsgEmailInfo.proto" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/message/MessageType.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestEmailInfoType.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/server/handler/EmailHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/email/service/EmailService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/email/EmailController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgTradeInfo.proto" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/trade/controller/TradeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestTradeInfoType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/server/handler/TradeHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/trade/service/TradeService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgGangInfo.proto" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestGangInfoType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/server/handler/GangHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/gang/service/GangService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/auction/controller/AuctionController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgAuctionInfo.proto" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestAuctionInfoType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/server/handler/AuctionHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/auction/service/AuctionService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgRankInfo.proto" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/protobuf/message/MessageType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/server/request/RequestRankInfoType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/server/handler/RankHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/game/rank/service/RankService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/server/handler/DispatcherHandler.java" />
       </list>
     </option>
@@ -214,7 +316,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560007961053" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/game/protobuf/service" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/game/protobuf" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -229,8 +331,8 @@
       <recent name="C:\Users\DELL\IdeaProjects\MMORPG\src\main\java\com\game\protobuf" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\DELL\IdeaProjects\MMORPG\src\main\java\com\game\protobuf\service" />
       <recent name="C:\Users\DELL\IdeaProjects\MMORPG\src\main\java\com\game\protobuf" />
+      <recent name="C:\Users\DELL\IdeaProjects\MMORPG\src\main\java\com\game\protobuf\service" />
       <recent name="C:\Users\DELL\IdeaProjects\MMORPG\src\main\java\com\game\server\codec" />
       <recent name="C:\Users\DELL\IdeaProjects\MMORPG\src\main\resources\mapper" />
       <recent name="C:\Users\DELL\IdeaProjects\MMORPG\src\main\resources\resource" />
@@ -381,7 +483,7 @@
       <workItem from="1565148432626" duration="47775000" />
       <workItem from="1565272909724" duration="150000" />
       <workItem from="1565273087064" duration="23040000" />
-      <workItem from="1565570712920" duration="34524000" />
+      <workItem from="1565570712920" duration="53278000" />
     </task>
     <task id="LOCAL-00001" summary="来自mac的问候">
       <created>1559789455544</created>
@@ -586,7 +688,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565620556731</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="阶段六-完成聊天系统优化">
+      <created>1565666944025</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1565666944025</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -622,7 +731,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="489276000" />
+    <option name="totallyTimeSpent" value="508030000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -636,8 +745,8 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46600565" visible="true" weight="0.21849866" />
-      <window_info id="Structure" order="1" sideWeight="0.5339943" side_tool="true" weight="0.21849866" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46525097" visible="true" weight="0.21849866" />
+      <window_info id="Structure" order="1" sideWeight="0.53474903" side_tool="true" weight="0.21849866" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -653,7 +762,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49932975" weight="0.3286119" />
       <window_info anchor="bottom" id="Spring" order="9" weight="0.3286119" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.26628897" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.26628897" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50067025" side_tool="true" weight="0.4036827" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32719547" />
       <window_info anchor="bottom" id="FindBugs-IDEA" order="13" weight="0.3286119" />
@@ -752,7 +861,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="来自windows的问候" />
     <MESSAGE value="用excel替换xml" />
     <MESSAGE value="修改用户线程在同一个线程" />
     <MESSAGE value="阶段二--任务一" />
@@ -777,7 +885,8 @@
     <MESSAGE value="阶段五-顶号功能" />
     <MESSAGE value="阶段五-以json协议的最终版本" />
     <MESSAGE value="阶段五-修改协议protobuf" />
-    <option name="LAST_COMMIT_MESSAGE" value="阶段五-修改协议protobuf" />
+    <MESSAGE value="阶段六-完成聊天系统优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="阶段六-完成聊天系统优化" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1108,7 +1217,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/game/server/handler/DispatcherHandler.java</url>
-          <line>80</line>
+          <line>91</line>
           <properties />
           <option name="timeStamp" value="162" />
         </line-breakpoint>
@@ -1218,187 +1327,10 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/ServerInitializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.7.1/protobuf-java-3.7.1.jar!/com/google/protobuf/Message.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/local/LocalMessageMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/GoodsHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="37" column="59" lean-forward="true" selection-start-line="37" selection-start-column="59" selection-end-line="37" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/backpack/service/BackpackService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-118">
-          <caret line="154" column="29" selection-start-line="154" selection-start-column="29" selection-end-line="154" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/skill/bean/ConcreteSkill.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgSkillInfo.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/request/RequestSkillInfoType.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/SkillHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="42" column="52" lean-forward="true" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/skill/controller/SkillController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="411" column="9" lean-forward="true" selection-start-line="411" selection-start-column="9" selection-end-line="411" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/skill/service/SkillService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1320">
-          <caret line="46" column="97" lean-forward="true" selection-start-line="46" selection-start-column="97" selection-end-line="46" selection-end-column="97" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#9095#9096#0" expanded="true" />
-            <element signature="e#9157#9158#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgEquipInfo.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="128" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/request/RequestEquipInfoType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/EquipHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/equipment/service/EquipmentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5742">
-          <caret line="285" column="5" lean-forward="true" selection-start-line="285" selection-start-column="5" selection-end-line="285" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/equipment/controller/EquipmentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="275" column="20" lean-forward="true" selection-start-line="275" selection-start-column="20" selection-end-line="275" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Readme.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-1452" />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/DuplicateHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="35" column="57" lean-forward="true" selection-start-line="35" selection-start-column="57" selection-end-line="35" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/MapHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="36" column="52" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/controller/MapController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-166">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/service/MapService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
           <caret line="63" column="71" lean-forward="true" selection-start-line="63" selection-start-column="71" selection-end-line="63" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/duplicate/DuplicateController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1106">
-          <caret line="195" column="11" lean-forward="true" selection-start-line="195" selection-start-column="11" selection-end-line="195" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/duplicate/serivce/DuplicateService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1612">
-          <caret line="143" column="5" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1529,13 +1461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/bean/ConcreteRole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-892">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/codec/CustomProtobufDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -1554,16 +1479,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/message/MessageType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="42" column="77" selection-start-line="42" selection-start-column="77" selection-end-line="42" selection-end-column="77" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1612,10 +1527,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/DispatcherHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgTradeInfo.proto">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="65" column="46" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="46" />
+        <state relative-caret-position="484">
+          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/request/RequestTradeInfoType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="43" lean-forward="true" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/TradeHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="47" column="56" lean-forward="true" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1624,11 +1553,198 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/trade/controller/TradeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="28" column="36" lean-forward="true" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+        <state relative-caret-position="402">
+          <caret line="142" column="9" lean-forward="true" selection-start-line="142" selection-start-column="9" selection-end-line="142" selection-end-column="9" />
           <folding>
             <element signature="e#3291#3292#0" expanded="true" />
             <element signature="e#3358#3359#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/trade/service/TradeService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="154" column="5" lean-forward="true" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgGangInfo.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/request/RequestGangInfoType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/GangHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="44" column="51" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/bean/ConcreteRole.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="170" column="18" selection-start-line="170" selection-start-column="18" selection-end-line="170" selection-end-column="18" />
+          <folding>
+            <element signature="e#3124#3125#0" expanded="true" />
+            <element signature="e#3151#3152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/gang/service/GangService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="152" column="20" lean-forward="true" selection-start-line="152" selection-start-column="20" selection-end-line="152" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/gang/controller/GangController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
+          <folding>
+            <element signature="e#4634#4635#0" expanded="true" />
+            <element signature="e#4701#4702#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgAuctionInfo.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/request/RequestAuctionInfoType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/AuctionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="44" column="55" lean-forward="true" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/auction/service/AuctionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1732">
+          <caret line="129" column="25" selection-start-line="129" selection-start-column="25" selection-end-line="129" selection-end-column="25" />
+          <folding>
+            <element signature="e#2484#2485#0" expanded="true" />
+            <element signature="e#2541#2542#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/auction/controller/AuctionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="228" column="5" lean-forward="true" selection-start-line="222" selection-start-column="4" selection-end-line="228" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/duplicate/serivce/DuplicateService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="143" column="5" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/duplicate/DuplicateController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3550">
+          <caret line="195" column="11" lean-forward="true" selection-start-line="195" selection-start-column="11" selection-end-line="195" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/buff/controller/BuffController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-162">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgRankInfo.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/message/MessageType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-720">
+          <caret line="54" column="74" lean-forward="true" selection-start-line="54" selection-start-column="74" selection-end-line="54" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/request/RequestRankInfoType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/RankHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="44" column="55" lean-forward="true" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/rank/controller/RankController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="40" column="58" lean-forward="true" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/rank/service/RankService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="762">
+          <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/handler/DispatcherHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="86" column="69" lean-forward="true" selection-start-line="86" selection-start-column="69" selection-end-line="86" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

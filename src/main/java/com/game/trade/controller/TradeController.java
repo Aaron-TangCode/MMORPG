@@ -81,7 +81,7 @@ public class TradeController {
 
     }
     @RequestAnnotation("/tradingMoney")
-    public void tradingMoney(String uuid,String number){
+    public void  tradingMoney(String uuid,String number){
         Trade trade = TradeMap.getTradeMap().get(uuid);
         //获取角色
         ConcreteRole from = trade.getFrom();

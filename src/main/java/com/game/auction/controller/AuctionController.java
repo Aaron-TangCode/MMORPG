@@ -116,7 +116,7 @@ public class AuctionController {
      * @param isNow true:一口价 ；false:定时拍卖
      */
     @RequestAnnotation("/publish")
-    public void publish(String seller,String goodsName,String number,String price,String isNow){
+        public void publish(String seller,String goodsName,String number,String price,String isNow){
         //获取角色
         ConcreteRole role = getRole(seller);
         //获取商品

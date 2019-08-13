@@ -46,7 +46,12 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
     private ChatHandler chatHandler;
     @Autowired
     private EmailHandler emailHandler;
-
+    @Autowired
+    private TradeHandler tradeHandler;
+    @Autowired
+    private AuctionHandler auctionHandler;
+    @Autowired
+    private RankHandler rankHandler;
     private static Map<Integer, SimpleChannelInboundHandler<? extends Message>> handlerMap = new HashMap<>();
 
     private DispatcherHandler(){}
@@ -74,6 +79,12 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
         handlerMap.put(REQUEST_CHATINFO_PROTO.protoCode,chatHandler);
         //email
         handlerMap.put(REQUEST_EMAILINFO_PROTO.protoCode,emailHandler);
+        //trade
+        handlerMap.put(REQUEST_TRADEINFO_PROTO.protoCode, tradeHandler);
+        //auction
+        handlerMap.put(REQUEST_AUCTIONINFO_PROTO.protoCode,auctionHandler);
+        //rank
+        handlerMap.put(REQUEST_RANKINFO_PROTO.protoCode,rankHandler);
     }
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception{

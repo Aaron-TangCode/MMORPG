@@ -1,0 +1,29 @@
+syntax = "proto3";
+import "Role.proto";
+//protoc --proto_path=src\main\java\com\game\protobuf --java_out=src\main\java src\main\java\com\game\protobuf\MsgRoleInfo.proto
+
+option java_package = "com.game.protobuf.protoc";
+option java_outer_classname = "MsgRankInfoProto";
+
+enum RequestType{
+    QUERYRANK = 0;
+    INSERTRANK = 1;
+    DELETERANK = 2;
+    UPDATERANK = 3;
+}
+
+message RequestRankInfo{
+    string requestId = 1;       // 请求id
+    int32 userId = 2;           // 请求的uid
+    RequestType type = 3;      // 请求类型
+}
+
+message ResponseRankInfo{
+    int32 result = 1;           // 返回结果
+    int32 userId = 2;           // 返回的uid
+    string content = 3;         // 返回内容
+
+    RequestType type = 4;       // 返回类型
+
+    Role role = 5;          // 用户角色
+}
