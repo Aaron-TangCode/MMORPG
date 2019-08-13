@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "Role.proto";
+//protoc --proto_path=src\main\java\com\game\protobuf --java_out=src\main\java src\main\java\com\game\protobuf\MsgRoleInfo.proto
+
+option java_package = "com.game.protobuf.protoc";
+option java_outer_classname = "MsgEmailInfoProto";
+
+enum RequestType{
+    SENDGOODS = 0;
+}
+
+message RequestEmailInfo{
+    string requestId = 1;       // 请求id
+    int32 userId = 2;           // 请求的uid
+    string goodsName = 3;            //目的地
+    RequestType type = 4;      // 请求类型
+}
+
+message ResponseEmailInfo{
+    int32 result = 1;           // 返回结果
+    int32 userId = 2;           // 返回的uid
+    string content = 3;         // 返回内容
+
+    RequestType type = 4;       // 返回类型
+
+    Role role = 5;          // 用户角色
+}

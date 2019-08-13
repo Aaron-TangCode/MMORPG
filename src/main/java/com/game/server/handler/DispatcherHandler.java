@@ -44,6 +44,9 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
     private ShopHandler shopHandler;
     @Autowired
     private ChatHandler chatHandler;
+    @Autowired
+    private EmailHandler emailHandler;
+
     private static Map<Integer, SimpleChannelInboundHandler<? extends Message>> handlerMap = new HashMap<>();
 
     private DispatcherHandler(){}
@@ -69,6 +72,8 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
         handlerMap.put(REQUEST_SHOPINFO_PROTO.protoCode,shopHandler);
         //chat
         handlerMap.put(REQUEST_CHATINFO_PROTO.protoCode,chatHandler);
+        //email
+        handlerMap.put(REQUEST_EMAILINFO_PROTO.protoCode,emailHandler);
     }
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception{

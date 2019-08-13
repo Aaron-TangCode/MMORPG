@@ -37,7 +37,10 @@ public enum MessageType {
     RESPONSE_SHOPINFO_PROTO(0x12,MsgShopInfoProto.ResponseShopInfo.class),
     //chat
     REQUEST_CHATINFO_PROTO(0x13, MsgChatInfoProto.RequestChatInfo.class),
-    RESPONSE_CHATINFO_PROTO(0x14,MsgChatInfoProto.ResponseChatInfo.class);
+    RESPONSE_CHATINFO_PROTO(0x14,MsgChatInfoProto.ResponseChatInfo.class),
+    //email
+    REQUEST_EMAILINFO_PROTO(0x15, MsgEmailInfoProto.RequestEmailInfo.class),
+    RESPONSE_EMAILINFO_PROTO(0x16,MsgEmailInfoProto.ResponseEmailInfo.class);
     public Integer protoCode;
     public Class messageLite;
 
