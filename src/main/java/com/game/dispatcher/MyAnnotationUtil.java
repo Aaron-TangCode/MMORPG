@@ -155,7 +155,7 @@ public class MyAnnotationUtil {
                 RoleRepository roleRepository = new RoleRepository();
                 int roleId = loginRepository.getUserRoleIdByUsername(username);
                 ConcreteRole role = roleRepository.getRole(roleId);
-                role.setCtx(ctx);
+                role.setChannel(ctx.channel());
                 //加角色名-角色对象
                 MapUtils.getMapRolename_Role().put(role.getName(),role);
             }

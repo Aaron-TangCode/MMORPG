@@ -10,7 +10,7 @@ import com.game.utils.MapUtils;
 import org.springframework.stereotype.Component;
 
 /**
- * @ClassName Task
+ * @ClassName DispatcherTask
  * @Description 交易平台的定时任务
  * @Author DELL
  * @Date 2019/7/19 11:04
@@ -57,10 +57,10 @@ public class Task implements  Runnable{
         TaskQueue.getQueue().remove();
         //返回信息
         if(buyer.equals(seller)){
-            sellRole.getCtx().channel().writeAndFlush("物品没人购买，已退回");
+            sellRole.getChannel().writeAndFlush("物品没人购买，已退回");
         }else{
-            buyRole.getCtx().channel().writeAndFlush("成功拍到物品："+auction.getGoodsName());
-            sellRole.getCtx().channel().writeAndFlush("物品成功售出，获得金币："+price);
+            buyRole.getChannel().writeAndFlush("成功拍到物品："+auction.getGoodsName());
+            sellRole.getChannel().writeAndFlush("物品成功售出，获得金币："+price);
         }
 
     }

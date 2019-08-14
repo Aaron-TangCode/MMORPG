@@ -100,7 +100,7 @@ public class KillMonsterHandler implements IHandler<MonsterDeadEvent> {
             }
 
 
-            role.getCtx().channel().writeAndFlush("恭喜完成任务，领取任务奖励");
+            role.getChannel().writeAndFlush("恭喜完成任务，领取任务奖励");
         }
     }
 

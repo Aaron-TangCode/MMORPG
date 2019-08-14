@@ -17,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.text.MessageFormat;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName AuctionController
@@ -71,7 +68,7 @@ public class AuctionController {
         auction.setBuyer(buyRole.getName());
         //校验价格
         if(Integer.parseInt(money)<=oldMoney){
-            buyRole.getCtx().channel().writeAndFlush("你的竞拍价格需要高于目前价格");
+            buyRole.getChannel().writeAndFlush("你的竞拍价格需要高于目前价格");
             return;
         }
         //更新价格
@@ -83,9 +80,9 @@ public class AuctionController {
             ConcreteRole oldRole = getRole(oldBuyer);
             oldRole.setMoney(oldRole.getMoney()+oldMoney);
             roleService.updateRole(oldRole);
-            oldRole.getCtx().channel().writeAndFlush("你的竞拍的物品："+auction.getGoodsName()+"竞拍价格没"+buyRole.getName()+"高,你之前的竞拍金币已退回");
+            oldRole.getChannel().writeAndFlush("你的竞拍的物品："+auction.getGoodsName()+"竞拍价格没"+buyRole.getName()+"高,你之前的竞拍金币已退回");
         }else{
-            buyRole.getCtx().channel().writeAndFlush("你成功竞拍商品："+auction.getGoodsName());
+            buyRole.getChannel().writeAndFlush("你成功竞拍商品："+auction.getGoodsName());
         }
     }
 
@@ -105,7 +102,7 @@ public class AuctionController {
         //角色增加物品
         String goodsName = auction.getGoodsName();
         backpackController.getGoods(roleName,goodsName);
-        role.getCtx().channel().writeAndFlush("成功撤回物品："+goodsName);
+        role.getChannel().writeAndFlush("成功撤回物品："+goodsName);
     }
     /**
      * 发布物品到拍卖行
@@ -147,33 +144,39 @@ public class AuctionController {
             //更新玩家的物品数据
             backpackController.discardGoods(role.getName(),goods.getName());
             //返回信息
-            role.getCtx().channel().writeAndFlush("【一口价模式】:成功发布物品"+goods.getName());
+            role.getChannel().writeAndFlush("【一口价模式】:成功发布物品"+goods.getName());
         }else{//拍卖模式
             //上传到交易平台
             auctionService.insertGoods(auction);
             //更新玩家的物品数据
             backpackController.discardGoods(role.getName(),goods.getName());
             //查询物品
-            int id = Math.abs(role.getCtx().channel().id().hashCode());
-            int modIndex = id% UserThreadPool.DEFAULT_THREAD_POOL_SIZE;
-            role.getCtx().channel().writeAndFlush("【竞拍模式】:成功发布物品"+goods.getName());
+            int modIndex = UserThreadPool.getThreadIndex(role.getChannel().id());
+            role.getChannel().writeAndFlush("【竞拍模式】:成功发布物品"+goods.getName());
+
+
+
             //把物品放在交易平台，开始倒计时
             Task task = new Task(auction,auctionService,backpackController,roleService);
+
+
             //打包成一个任务，丢给线程池执行
             //添加任务到队列
             TaskQueue.getQueue().add(task);
-            //线程执行任务
-            UserThreadPool.ACCOUNT_SERVICE[modIndex].scheduleAtFixedRate( () ->{
-                        Iterator<Runnable> iterator = TaskQueue.getQueue().iterator();
-                        while (iterator.hasNext()) {
-                            Runnable runnable = iterator.next();
-                            if (Objects.nonNull(runnable)) {
-                                runnable.run();
-                            }
-                        }
 
-                    },
-                    120L,5L, TimeUnit.SECONDS);
+
+            //线程执行任务
+//            UserThreadPool.getThreadPool(modIndex).scheduleAtFixedRate( () ->{
+//                        Iterator<Runnable> iterator = TaskQueue.getQueue().iterator();
+//                        while (iterator.hasNext()) {
+//                            Runnable runnable = iterator.next();
+//                            if (Objects.nonNull(runnable)) {
+//                                runnable.run();
+//                            }
+//                        }
+//
+//                    },
+//                    120L,5L, TimeUnit.SECONDS);
         }
     }
 
@@ -221,7 +224,7 @@ public class AuctionController {
     }
 
     private void printData(ConcreteRole role, List<Auction> auctionList) {
-        Channel channel = role.getCtx().channel();
+        Channel channel = role.getChannel();
         for (Auction auction : auctionList) {
             String outputContent = "id:{0}\tgoodsName:{1}\tprice:{2}\tseller:{3}\tnumber:{4}\tbuyer:{5}";
             channel.writeAndFlush(MessageFormat.format(outputContent,auction.getId(),auction.getGoodsName(),auction.getPrice(),auction.getSeller(),auction.getNumber(),auction.getBuyer()));

@@ -4,14 +4,13 @@ import com.game.map.threadpool.TaskQueue;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.role.bean.ConcreteRole;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
 
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * @ClassName Task
+ * @ClassName DispatcherTask
  * @Description boss攻击角色AI
  * @Author DELL
  * @Date 2019/7/8 16:02
@@ -53,8 +52,8 @@ public class Task implements Runnable{
         int curHp = role.getCurHp();
         //角色被攻击，减少响应血量
         role.setCurHp(curHp-attack);
-        ChannelHandlerContext ctx = role.getCtx();
-        Channel channel = ctx.channel();
+
+        Channel channel = role.getChannel();
         //输出
         channel.writeAndFlush(boss.getName()+"攻击"+role.getName()+"\t角色的血量："+role.getCurHp());
 

@@ -52,7 +52,7 @@ public class UserController {
 		if(isSuccess){
 			//加用户名-角色对象
 			MapUtils.getMapUsername_Role().put(username,role);
-			buffController.executeBuff(role.getName());
+//			buffController.executeBuff(role.getName());
 			injectProperty.initProperty(role.getName());
 			//校验账号
 
@@ -75,7 +75,7 @@ public class UserController {
 		if(localRole==null){
 			sessionMap.put(username,role);
 		}else{
-			localRole.getCtx().channel().writeAndFlush("账号重复登录");
+			localRole.getChannel().writeAndFlush("账号重复登录");
 			logout(username);
 		}
 
@@ -92,7 +92,7 @@ public class UserController {
 		ConcreteRole role = MapUtils.getMapUsername_Role().get(username);
 		//移除角色信息，下线
 		MapUtils.getMapUsername_Role().remove(username);
-		 role.getCtx().channel().writeAndFlush(role.getName()+"下线了");
+		 role.getChannel().writeAndFlush(role.getName()+"下线了");
 	}
 
 	/**

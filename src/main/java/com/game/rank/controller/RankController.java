@@ -41,7 +41,7 @@ public class RankController {
         RankBean[] rankBeans = RankManager.getRankBeans();
         int[] ranks = RankManager.getRanks();
         //输出
-        Channel channel = role.getCtx().channel();
+        Channel channel = role.getChannel();
         channel.writeAndFlush("【排名】\t\t"+"[角色]\t\t"+"[战斗力]\n");
         //从积分高，到积分低排名
         for (int i = ranks.length - 1; i >= 0; i--) {

@@ -130,7 +130,7 @@ public class AuctionService {
                 .build();
     }
     private String printData(ConcreteRole role, List<Auction> auctionList) {
-        Channel channel = role.getCtx().channel();
+        Channel channel = role.getChannel();
         String content = null;
         for (Auction auction : auctionList) {
             String outputContent = "id:{0}\tgoodsName:{1}\tprice:{2}\tseller:{3}\tnumber:{4}\tbuyer:{5}\n";
@@ -219,8 +219,8 @@ public class AuctionService {
             //更新玩家的物品数据
             backpackController.discardGoods(role.getName(),goods.getName());
             //查询物品
-            int id = Math.abs(role.getCtx().channel().id().hashCode());
-            int modIndex = id% UserThreadPool.DEFAULT_THREAD_POOL_SIZE;
+
+            int threadIndex = UserThreadPool.getThreadIndex(role.getChannel().id());
 
             //把物品放在交易平台，开始倒计时
             Task task = new Task(auction,this,backpackController,roleService);
@@ -228,7 +228,7 @@ public class AuctionService {
             //添加任务到队列
             TaskQueue.getQueue().add(task);
             //线程执行任务
-            UserThreadPool.ACCOUNT_SERVICE[modIndex].scheduleAtFixedRate( () ->{
+            UserThreadPool.getThreadPool(threadIndex).scheduleAtFixedRate( () ->{
                         Iterator<Runnable> iterator = TaskQueue.getQueue().iterator();
                         while (iterator.hasNext()) {
                             Runnable runnable = iterator.next();

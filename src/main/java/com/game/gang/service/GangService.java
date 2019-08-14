@@ -10,7 +10,6 @@ import com.game.role.service.RoleService;
 import com.game.user.manager.LocalUserMap;
 import com.game.utils.MapUtils;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,11 +59,10 @@ public class GangService {
         ConcreteRole role = getRole(channel);
         //判断该角色是否已经有工会
         GangMemberEntity flag = belongGang(role);
-        ChannelHandlerContext ctx = role.getCtx();
         //gangName
         String gangName = requestGangInfo.getGangName();
         //创建工会
-        String content = buildGang(flag, gangName, role, ctx);
+        String content = buildGang(flag, gangName, role);
 
         return MsgGangInfoProto.ResponseGangInfo.newBuilder()
                 .setContent(content)
@@ -96,7 +94,6 @@ public class GangService {
      * @param gangName
      */
     private String join(GangMemberEntity entity,ConcreteRole role,String gangName) {
-        ChannelHandlerContext ctx = role.getCtx();
         //没的话加入工会
         if(entity==null){
             GangMemberEntity newEntity = new GangMemberEntity();
@@ -166,9 +163,8 @@ public class GangService {
      * @param flag
      * @param gangName
      * @param role
-     * @param ctx
      */
-    private String buildGang(GangMemberEntity flag,String gangName,ConcreteRole role,ChannelHandlerContext ctx) {
+    private String buildGang(GangMemberEntity flag,String gangName,ConcreteRole role) {
         //没工会可创建工会
         if(flag==null){
             //插入工会

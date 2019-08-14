@@ -71,10 +71,14 @@ public class ReadBuff {
                         buff.setHp(new Double(cellStr).intValue());
                     }else if (j == 6) {
                         buff.setMp(new Double(cellStr).intValue());
+                    }else if (j == 7) {
+                        buff.setDefend(new Double(cellStr).intValue());
+                    }else if (j == 8) {
+                        buff.setAttack(new Double(cellStr).intValue());
                     }
                 }
                 // 数据装入List
-                MapUtils.getBuffMap().put(buff.getId(),buff);
+                MapUtils.getBuffMap().put(buff.getName(),buff);
             }
             System.out.println("buff静态数据加载完毕");
         } catch (IOException e) {

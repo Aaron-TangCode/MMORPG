@@ -1,5 +1,6 @@
 package com.game.user.service;
 
+import com.game.property.manager.InjectProperty;
 import com.game.protobuf.message.ContentType;
 import com.game.protobuf.message.ResultCode;
 import com.game.protobuf.protoc.MsgUserInfoProto;
@@ -28,7 +29,6 @@ public class UserService {
     @Autowired
     private Login login;
 
-
     @Autowired
     private RegisterService registerService;
 
@@ -37,6 +37,9 @@ public class UserService {
 
     @Autowired
     private ProtoService protoService;
+
+    @Autowired
+    private InjectProperty injectProperty;
 
     public void updateUser(User user) {
         userRepository.updateUser(user);
@@ -78,6 +81,7 @@ public class UserService {
         if(is_success){
 
             role = userController.getRoleAfterLoginSuccess(username);
+
             //绑定userId和channel
             LocalUserMap.getChannelUserMap().put(channel,user.getId());
             if(role==null){
@@ -92,7 +96,8 @@ public class UserService {
 
             //初始化玩家数据
             initUserState(user.getId(), role, channel);
-
+            //注入属性
+            injectProperty.initProperty(role.getName());
             // 成功消息返回
             return MsgUserInfoProto.ResponseUserInfo.newBuilder()
                     //请求类型
@@ -172,7 +177,8 @@ public class UserService {
         LocalUserMap.getUserRoleMap().put(userId,role);
         // 分配用户的业务线程
 //        UserExecutorManager.bindUserExecutor(userId);
-
+        //注入channel值
+        role.setChannel(channel);
         // 绑定 userId-channel
         LocalUserMap.getUserChannelMap().put(userId,channel);
         // 绑定 channel-userId

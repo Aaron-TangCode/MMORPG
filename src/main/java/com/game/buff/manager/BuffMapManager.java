@@ -1,6 +1,6 @@
 package com.game.buff.manager;
 
-import com.game.buff.controller.Task;
+import com.game.buff.controller.BuffTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,11 +13,11 @@ import java.util.Map;
  * @Version 1.0
  */
 public class BuffMapManager {
-    private static volatile Map<Integer, Task> taskMap = null;
+    private static volatile Map<Integer, BuffTask> taskMap = null;
 
     private BuffMapManager(){}
 
-    public static Map<Integer, Task> getTaskMap(){
+    public static Map<Integer, BuffTask> getTaskMap(){
         if(taskMap==null){
             synchronized (BuffMapManager.class){
                 if(taskMap==null){

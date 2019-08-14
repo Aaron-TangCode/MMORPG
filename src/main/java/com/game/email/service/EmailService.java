@@ -5,7 +5,6 @@ import com.game.protobuf.protoc.MsgEmailInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.utils.MapUtils;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,10 +37,10 @@ public class EmailService {
         while (iterator.hasNext()) {
             Map.Entry<String, ConcreteRole> next = iterator.next();
             ConcreteRole role = next.getValue();
-            ChannelHandlerContext ctx = role.getCtx();
+            Channel channel = role.getChannel();
             backpackController.getGoods(role.getName(),goodsName);
             String msg = "[系统]"+role.getName()+"获得："+goodsName;
-            ctx.channel().writeAndFlush(msg);
+            channel.writeAndFlush(msg);
         }
     }
 }

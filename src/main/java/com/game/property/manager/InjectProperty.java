@@ -48,7 +48,6 @@ public class InjectProperty {
         Map<Integer, JSONObject> basicPropertyMap = ConcreteRole.getBasicPropertyMap();
         //根据角色名，在db上查找role
         ConcreteRole roleDB = roleService.getRoleByRoleName(roleName);
-
         //从本地获取role
         ConcreteRole role = MapUtils.getMapRolename_Role().get(roleDB.getName());
         //注入任务数据

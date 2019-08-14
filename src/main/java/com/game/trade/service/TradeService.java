@@ -41,7 +41,7 @@ public class TradeService {
         //构建交易Bean
         Trade trade = new Trade(uuid,from,to);
         TradeMap.getTradeMap().put(uuid,trade);
-        to.getCtx().channel().writeAndFlush(from.getName()+":请求交易"+"("+uuid+")");
+        to.getChannel().writeAndFlush(from.getName()+":请求交易"+"("+uuid+")");
         String content = "等待"+roleName2+"确认交易";
         return MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
                 .setContent(content)
@@ -58,7 +58,7 @@ public class TradeService {
         ConcreteRole from = getRoleByChannel(channel);
 
         String content = "进入交易("+uuid+")";
-        to.getCtx().channel().writeAndFlush("进入交易("+uuid+")");
+        to.getChannel().writeAndFlush("进入交易("+uuid+")");
 
         return MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
                 .setContent(content)
@@ -83,8 +83,8 @@ public class TradeService {
 
         String msg = success?"成功交易":"交易失败";
 
-        from.getCtx().channel().writeAndFlush(msg);
-        to.getCtx().channel().writeAndFlush(msg);
+        from.getChannel().writeAndFlush(msg);
+        to.getChannel().writeAndFlush(msg);
 
         return MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
                 .setContent(msg)
@@ -117,7 +117,7 @@ public class TradeService {
 
         String msg = "成功交易";
 
-        to.getCtx().channel().writeAndFlush(msg);
+        to.getChannel().writeAndFlush(msg);
 
         //释放交易
         TradeMap.getTradeMap().remove(uuid);

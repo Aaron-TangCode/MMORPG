@@ -1,5 +1,6 @@
 package com.game.map.service;
 
+import com.game.buff.controller.BuffController;
 import com.game.map.bean.ConcreteMap;
 import com.game.map.repository.MapRepository;
 import com.game.protobuf.message.ResultCode;
@@ -11,6 +12,8 @@ import com.game.utils.MapUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static com.game.buff.controller.BuffType.RED;
 
 /**
  * @ClassName MapService
@@ -26,6 +29,9 @@ public class MapService {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private BuffController buffController;
     /**
      * 根据id获取地图实体类
      * @param id
@@ -77,6 +83,8 @@ public class MapService {
         boolean isAccess = MapUtils.isReach(src_id,dest_id);
         String content = null;
         if(isAccess){
+            //激活buff
+            startBuff(role,dest);
             //从src移动到dest,更新数据库
             roleService.updateMap(role.getName(),dest_id);
             role.getConcreteMap().setName(dest);
@@ -91,5 +99,11 @@ public class MapService {
                 .setType(MsgMapInfoProto.RequestType.MOVE)
                 .setContent(content)
                 .build();
+    }
+
+    private void startBuff(ConcreteRole role,String dest) {
+        if(!dest.equals("村子")){
+            buffController.executeBuff(role.getName(),RED);
+        }
     }
 }

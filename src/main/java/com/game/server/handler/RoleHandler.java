@@ -9,8 +9,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.game.server.request.RequestRoleInfoType.CHOOSEROLE;
-import static com.game.server.request.RequestRoleInfoType.ROLEINFO;
+import static com.game.server.request.RequestRoleInfoType.*;
 
 /**
  * @ClassName RoleHandler
@@ -37,6 +36,9 @@ public class RoleHandler extends SimpleChannelInboundHandler<MsgRoleInfoProto.Re
                 break;
             case ROLEINFO :
                 responseRoleInfo = roleService.roleInfo(channel,requestRoleInfo);
+                break;
+            case USEGOODS :
+                responseRoleInfo = roleService.useGoods(channel,requestRoleInfo);
                 break;
                 default:
                     break;

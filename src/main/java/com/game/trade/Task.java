@@ -1,7 +1,7 @@
 package com.game.trade;
 
 /**
- * @ClassName Task
+ * @ClassName DispatcherTask
  * @Description TODO
  * @Author DELL
  * @Date 2019/7/15 14:38

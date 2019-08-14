@@ -141,7 +141,7 @@ public class DuplicateController {
 //        List<ConcreteRole> roleList = map.getRoleList();
 //        Map<Integer, ConcreteMonster> bossMap = map.getMonsterMap();
 //        //创建新任务
-//        Task task = new Task(mostRole,bossMap);
+//        DispatcherTask task = new DispatcherTask(mostRole,bossMap);
 //        //添加任务到队列
 //        TaskQueue.getQueue().add(task);
 //        //线程执行任务

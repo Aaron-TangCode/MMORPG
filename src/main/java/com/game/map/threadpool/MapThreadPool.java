@@ -22,5 +22,15 @@ public class MapThreadPool {
             ACCOUNT_SERVICE[i] = new SingleThread(i+1,null,threadFactory,true);
         }
     }
+    //对外开放接口
+    public static SingleThread getThreadPool(int index){
+        return ACCOUNT_SERVICE[index];
+    }
+
+    //计算线程序号
+    public static int getThreadIndex(Object number){
+        int id = Math.abs(number.hashCode());
+        return id% DEFAULT_THREAD_POOL_SIZE;
+    }
 }
 

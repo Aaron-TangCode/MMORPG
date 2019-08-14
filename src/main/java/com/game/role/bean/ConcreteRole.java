@@ -9,7 +9,7 @@ import com.game.property.bean.PropertyType;
 import com.game.property.manager.PropertyManager;
 import com.game.skill.bean.ConcreteSkill;
 import com.game.task.bean.ConcreteTask;
-import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -84,9 +84,9 @@ public class ConcreteRole {
      */
     private ConcreteSkill concreteSkill;
     /**
-     * ctx
+     * channel
      */
-    private ChannelHandlerContext ctx;
+    private Channel channel;
     /**
      * 装备栏
      */
@@ -216,12 +216,12 @@ public class ConcreteRole {
         this.concreteSkill = concreteSkill;
     }
 
-    public ChannelHandlerContext getCtx() {
-        return ctx;
+    public Channel getChannel() {
+        return channel;
     }
 
-    public void setCtx(ChannelHandlerContext ctx) {
-        this.ctx = ctx;
+    public void setChannel(Channel channel) {
+        this.channel = channel;
     }
 
     public EquipmentBox getEquipmentBox() {

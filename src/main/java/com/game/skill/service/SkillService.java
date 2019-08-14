@@ -182,7 +182,7 @@ public class SkillService {
         ConcreteSkill skill = concreteRole.getConcreteSkill();
         if(skill==null){
             //该角色无技能，学习技能
-            ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyName().get(skillname);
+            ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyName().get(skillname+1);
             concreteRole.setConcreteSkill(concreteSkill);
             //更新数据库
             roleService.updateRole(concreteRole);
@@ -202,7 +202,7 @@ public class SkillService {
         if(learned){
             return "已经学了技能："+skillname+",不能再学了！！";
         }else{
-            ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyName().get(skillname);
+            ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyName().get(skillname+1);
             //修改技能id
             updateSkillId(concreteRole,concreteSkill);
             concreteRole.setConcreteSkill(concreteSkill);
@@ -395,13 +395,11 @@ public class SkillService {
         //怪兽死亡，通知该地图所有玩家
         if(monster.getHp()<=0){
             NoticeUtils.notifyAllRoles(monster);
-
+            monsterDeadEvent.setRole(localRole);
+            monsterDeadEvent.setMonster(monster);
+            //触发事件，记录怪兽死亡次数
+            eventMap.submit(monsterDeadEvent);
         }
-        monsterDeadEvent.setRole(localRole);
-        monsterDeadEvent.setMonster(monster);
-        //触发事件，记录怪兽死亡次数
-        eventMap.submit(monsterDeadEvent);
-
 
         return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+localRole.getCurMp()+
                 ";"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";

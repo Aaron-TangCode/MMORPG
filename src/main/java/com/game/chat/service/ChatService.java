@@ -6,7 +6,6 @@ import com.game.role.bean.ConcreteRole;
 import com.game.user.manager.LocalUserMap;
 import com.game.utils.MapUtils;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
@@ -46,9 +45,11 @@ public class ChatService {
         while (iterator.hasNext()) {
             Map.Entry<String, ConcreteRole> next = iterator.next();
             ConcreteRole targetRole = next.getValue();
-            ChannelHandlerContext ctx = targetRole.getCtx();
+
+            //channel
+            Channel channel = targetRole.getChannel();
             String msg = "[世界]"+roleName +":"+content;
-            ctx.channel().writeAndFlush(msg);
+            channel.writeAndFlush(msg);
         }
     }
 
@@ -74,9 +75,8 @@ public class ChatService {
 
         Map<String, ConcreteRole> roleMap = MapUtils.getMapRolename_Role();
         ConcreteRole role = roleMap.get(target);
-        ChannelHandlerContext ctx = role.getCtx();
         String msg = "[私聊]"+tmpRole.getName()+":"+content;
-        ctx.channel().writeAndFlush(msg);
+        channel.writeAndFlush(msg);
         return MsgChatInfoProto.ResponseChatInfo.newBuilder()
                 .setContent(ContentType.SEND_SUCCESS)
                 .setType(MsgChatInfoProto.RequestType.CHATSOMEONE)

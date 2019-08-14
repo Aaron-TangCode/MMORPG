@@ -1,5 +1,7 @@
 package com.game.duplicate.serivce;
 
+import com.game.event.beanevent.AttackedEvent;
+import com.game.event.manager.EventMap;
 import com.game.map.bean.ConcreteMap;
 import com.game.map.controller.MapController;
 import com.game.map.service.MapService;
@@ -35,6 +37,10 @@ public class DuplicateService {
     private MapService mapService;
     @Autowired
     private MapController mapController;
+    @Autowired
+    private AttackedEvent attackedEvent;
+    @Autowired
+    private EventMap eventMap;
     public MsgBossInfoProto.ResponseBossInfo attackBoss(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
         //role
         ConcreteRole tmpRole = getRole(channel);
@@ -100,10 +106,11 @@ public class DuplicateService {
         //遍历角色的仇恨值，选出最大的一个来攻击
         ConcreteRole tmpRole = chooseRole(map);
         ConcreteRole mostRole = MapUtils.getMapRolename_Role().get(tmpRole.getName());
-
+        //触发仇恨值最大的角色被攻击事件
+        attackedEvent.setRole(mostRole);
+        eventMap.submit(attackedEvent);
         //选择线程池中的某一个线程处理
-        int id = Math.abs(map.hashCode());
-        int modIndex = id% MapThreadPool.DEFAULT_THREAD_POOL_SIZE;
+        int threadIndex = MapThreadPool.getThreadIndex(map);
         List<ConcreteRole> roleList = map.getRoleList();
         Map<Integer, ConcreteMonster> bossMap = map.getMonsterMap();
         //创建新任务
@@ -111,7 +118,7 @@ public class DuplicateService {
         //添加任务到队列
         TaskQueue.getQueue().add(task);
         //线程执行任务
-        MapThreadPool.ACCOUNT_SERVICE[modIndex].scheduleAtFixedRate( () ->{
+        MapThreadPool.ACCOUNT_SERVICE[threadIndex].scheduleAtFixedRate( () ->{
                     Iterator<Runnable> iterator = TaskQueue.getQueue().iterator();
                     while (iterator.hasNext()) {
                         Runnable runnable = iterator.next();

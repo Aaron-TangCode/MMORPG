@@ -79,7 +79,7 @@ public class MapUtils {
      * key:id
      * value:ConcreteBuff
      */
-    private static volatile Map<Integer, ConcreteBuff> buffMap = null;
+    private static volatile Map<String, ConcreteBuff> buffMap = null;
 
 
 
@@ -101,7 +101,7 @@ public class MapUtils {
      * buff的map
      * @return
      */
-    public static Map<Integer, ConcreteBuff>  getBuffMap(){
+    public static Map<String, ConcreteBuff>  getBuffMap(){
         if(buffMap==null){
             synchronized (MapUtils.class){
                 if(buffMap==null){

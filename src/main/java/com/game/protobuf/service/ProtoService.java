@@ -19,14 +19,14 @@ public class ProtoService {
                 .setId(role.getId())
                 .setName(role.getName())
                 .setLevel(role.getLevel())
-//                .setAttack(role.getAttack())
-//                .setDefend(role.getDefend())
-//                .setCurHp(role.getCurHp())
-//                .setCurMp(role.getCurMp())
-//                .setTotalHp(role.getTotalHp())
-//                .setTotalMp(role.getTotalMp())
-//                .setBackpackCapacity(role.getBackpackCapacity())
-//                .setMoney(role.getBackpackCapacity())
+                .setAttack(role.getAttack())
+                .setDefend(role.getDefend())
+                .setCurHp(role.getCurHp())
+                .setCurMp(role.getCurMp())
+                .setTotalHp(role.getTotalHp())
+                .setTotalMp(role.getTotalMp())
+                .setBackpackCapacity(role.getBackpackCapacity())
+                .setMoney(role.getBackpackCapacity())
                 .build();
     }
 }

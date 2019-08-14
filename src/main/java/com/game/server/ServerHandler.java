@@ -38,9 +38,9 @@ public class ServerHandler extends SimpleChannelInboundHandler<Object> {
         //封装任务
         RequestTask requestTask = new RequestTask(content,ctx);
         //客户端的唯一标识
-        int id = Math.abs(ctx.channel().id().hashCode());
-        int modIndex = id% UserThreadPool.DEFAULT_THREAD_POOL_SIZE;
-        UserThreadPool.ACCOUNT_SERVICE[modIndex].execute(requestTask);
+
+        int threadIndex = UserThreadPool.getThreadIndex(ctx.channel().id());
+        UserThreadPool.ACCOUNT_SERVICE[threadIndex].execute(requestTask);
     }
 
     /**

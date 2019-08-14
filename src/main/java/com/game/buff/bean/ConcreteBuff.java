@@ -16,6 +16,7 @@ public class ConcreteBuff {
     private int hp;
     private int mp;
     private int defend;
+    private int attack;
 
     public int getHp() {
         return hp;
@@ -61,6 +62,14 @@ public class ConcreteBuff {
         return period;
     }
 
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
     public void setPeriod(long period) {
         this.period = period;
     }
@@ -79,5 +88,19 @@ public class ConcreteBuff {
 
     public void setDefend(int defend) {
         this.defend = defend;
+    }
+
+    public ConcreteBuff(int id, String name, long keeptime, long period, int effect, int hp, int mp, int defend) {
+        this.id = id;
+        this.name = name;
+        this.keeptime = keeptime;
+        this.period = period;
+        this.effect = effect;
+        this.hp = hp;
+        this.mp = mp;
+        this.defend = defend;
+    }
+
+    public ConcreteBuff() {
     }
 }

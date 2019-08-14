@@ -41,7 +41,7 @@ public class NoticeUtils {
                 String msg = monster.getName()+"状态:"+monster.getState();
                 ConcreteRole role = name.getValue();
                 //玩家收到通知
-                role.getCtx().channel().writeAndFlush(msg);
+                role.getChannel().writeAndFlush(msg);
             }
         }
     }

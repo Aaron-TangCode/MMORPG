@@ -38,8 +38,8 @@ public class TradeController {
         //构建交易Bean
         Trade trade = new Trade(uuid,from,to);
         TradeMap.getTradeMap().put(uuid,trade);
-        to.getCtx().channel().writeAndFlush(roleName1+":请求交易"+"("+uuid+")");
-        from.getCtx().channel().writeAndFlush("等待"+roleName2+"确认交易");
+        to.getChannel().writeAndFlush(roleName1+":请求交易"+"("+uuid+")");
+        from.getChannel().writeAndFlush("等待"+roleName2+"确认交易");
     }
 
     /**
@@ -53,8 +53,8 @@ public class TradeController {
         ConcreteRole to = getRole(roleName2);
         ConcreteRole from = getRole(roleName1);
 
-        from.getCtx().channel().writeAndFlush("进入交易("+uuid+")");
-        to.getCtx().channel().writeAndFlush("进入交易("+uuid+")");
+        from.getChannel().writeAndFlush("进入交易("+uuid+")");
+        to.getChannel().writeAndFlush("进入交易("+uuid+")");
     }
 
     /**
@@ -76,8 +76,8 @@ public class TradeController {
 
         String msg = success?"成功交易":"交易失败";
 
-        from.getCtx().channel().writeAndFlush(msg);
-        to.getCtx().channel().writeAndFlush(msg);
+        from.getChannel().writeAndFlush(msg);
+        to.getChannel().writeAndFlush(msg);
 
     }
     @RequestAnnotation("/tradingMoney")
@@ -102,8 +102,8 @@ public class TradeController {
 
         String msg = "成功交易";
 
-        from.getCtx().channel().writeAndFlush(msg);
-        to.getCtx().channel().writeAndFlush(msg);
+        from.getChannel().writeAndFlush(msg);
+        to.getChannel().writeAndFlush(msg);
 
         //释放交易
         TradeMap.getTradeMap().remove(uuid);

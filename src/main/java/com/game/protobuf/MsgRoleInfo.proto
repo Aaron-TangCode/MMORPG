@@ -7,6 +7,7 @@ option java_outer_classname = "MsgRoleInfoProto";
 enum RequestType{
     CHOOSEROLE = 0;
     ROLEINFO = 1;
+    USEGOODS = 2;
 }
 
 message RequestRoleInfo{
@@ -15,6 +16,7 @@ message RequestRoleInfo{
     string roleName = 3;
     int32 occupationId = 4;
     RequestType type = 5;      // 请求类型
+    string goodsName = 6;
 }
 
 message ResponseRoleInfo{

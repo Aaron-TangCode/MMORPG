@@ -8,7 +8,7 @@ import com.game.gang.service.GangService;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.utils.MapUtils;
-import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -42,9 +42,11 @@ public class GangController {
         ConcreteRole role = getRole(roleName);
         //判断该角色是否已经有工会
         GangMemberEntity flag = belongGang(roleName);
-        ChannelHandlerContext ctx = role.getCtx();
+
+        //channel
+        Channel channel = role.getChannel();
         //创建工会
-        buildGang(flag,gangName,role,ctx);
+        buildGang(flag,gangName,role,channel);
 
 
     }
@@ -54,9 +56,8 @@ public class GangController {
      * @param flag
      * @param gangName
      * @param role
-     * @param ctx
      */
-    private void buildGang(GangMemberEntity flag,String gangName,ConcreteRole role,ChannelHandlerContext ctx) {
+    private void buildGang(GangMemberEntity flag,String gangName,ConcreteRole role,Channel channel) {
         //没工会可创建工会
         if(flag==null){
             //插入工会
@@ -70,9 +71,9 @@ public class GangController {
             entity.setGang(gangEntity);
             entity.setJob(Job.CHARIMEN.getName());
             gangService.insertGangMember(entity);
-            ctx.channel().writeAndFlush("成功创建工会");
+            channel.writeAndFlush("成功创建工会");
         }else{//有工会就返回提示信息
-            ctx.channel().writeAndFlush(role.getName()+"已经有工会了!\t工会："+flag.getGang().getName());
+            channel.writeAndFlush(role.getName()+"已经有工会了!\t工会："+flag.getGang().getName());
         }
     }
 
@@ -98,7 +99,9 @@ public class GangController {
      * @param gangName
      */
     private void join(GangMemberEntity entity,ConcreteRole role,String gangName) {
-        ChannelHandlerContext ctx = role.getCtx();
+
+        //channel
+        Channel channel = role.getChannel();
         //没的话加入工会
         if(entity==null){
             GangMemberEntity newEntity = new GangMemberEntity();
@@ -110,9 +113,9 @@ public class GangController {
             newEntity.setJob(Job.GENERAL.getName());
             gangService.insertGangMember(newEntity);
             //返回信息
-            ctx.channel().writeAndFlush("成功加入工会"+gangName);
+            channel.writeAndFlush("成功加入工会"+gangName);
         }else{//有就返回提示信息
-            ctx.channel().writeAndFlush("你已经加入工会");
+            channel.writeAndFlush("你已经加入工会");
         }
     }
 
@@ -147,7 +150,7 @@ public class GangController {
         //更新工会基金
         gangService.updateGangEntity(gangEntity);
         String outputContent = "【通知】：{0}向{1}捐献{2}金币";
-        role.getCtx().channel().writeAndFlush(MessageFormat.format(outputContent,role.getName(),gangEntity.getName(),number));
+        role.getChannel().writeAndFlush(MessageFormat.format(outputContent,role.getName(),gangEntity.getName(),number));
     }
 
     /**

@@ -143,7 +143,7 @@ public class TaskController {
 
         //todo 这里需要做一个扩展：任务的自动匹配
 
-        role.getCtx().channel().writeAndFlush("成功接受任务");
+        role.getChannel().writeAndFlush("成功接受任务");
     }
 
     /**
@@ -157,7 +157,7 @@ public class TaskController {
         ConcreteRole role = getRole(roleName);
         //更新数据
         updateData(role,taskId);
-        role.getCtx().channel().writeAndFlush("成功放弃任务");
+        role.getChannel().writeAndFlush("成功放弃任务");
     }
 
     private void updateData(ConcreteRole role,String taskId) {
@@ -166,7 +166,7 @@ public class TaskController {
         String receivedTask = roleTask.getReceivedTask();
 
         if(receivedTask==null){
-            role.getCtx().channel().writeAndFlush("没已接受的任务");
+            role.getChannel().writeAndFlush("没已接受的任务");
             return;
         }
         //[1,2]
@@ -202,7 +202,7 @@ public class TaskController {
      */
     private void printMap(Map<Integer, ConcreteTask> map,ConcreteRole role){
         String outputContent = "任务id:{0}\t任务描述:{1}\t任务奖励:{2}\t完成条件:{3}";
-        Channel channel = role.getCtx().channel();
+        Channel channel = role.getChannel();
         for (Map.Entry<Integer, ConcreteTask> taskEntry : map.entrySet()) {
             channel.writeAndFlush(MessageFormat.format(outputContent, taskEntry.getKey(), taskEntry.getValue().getTaskDescription(),
                     taskEntry.getValue().getBonus(), taskEntry.getValue().getCondition())) ;
