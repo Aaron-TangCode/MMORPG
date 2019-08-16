@@ -1,5 +1,6 @@
 package com.game.server.handler;
 
+import com.game.auction.AuctionHandler;
 import com.game.server.local.LocalMessageMap;
 import com.game.server.local.LocalUserData;
 import com.game.server.task.DispatcherTask;
@@ -104,9 +105,14 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
 
         long userId = LocalUserData.getUserId();
         int threadIndex;
+
+
+
+
         if(userId<=0){
             //未登陆
             threadIndex = UserThreadPool.getThreadIndex(ctx.channel().id());
+
         }else{
             //已登陆
             Integer useId = LocalUserMap.getChannelUserMap().get(ctx.channel());

@@ -106,6 +106,8 @@ public class DuplicateService {
         //遍历角色的仇恨值，选出最大的一个来攻击
         ConcreteRole tmpRole = chooseRole(map);
         ConcreteRole mostRole = MapUtils.getMapRolename_Role().get(tmpRole.getName());
+
+
         //触发仇恨值最大的角色被攻击事件
         attackedEvent.setRole(mostRole);
         eventMap.submit(attackedEvent);

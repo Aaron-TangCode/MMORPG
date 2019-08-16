@@ -1,5 +1,7 @@
 package com.game.buff.bean;
 
+import com.game.role.bean.ConcreteRole;
+
 /**
  * @ClassName ConcreteBuff
  * @Description buff实体类
@@ -17,6 +19,7 @@ public class ConcreteBuff {
     private int mp;
     private int defend;
     private int attack;
+    private ConcreteRole role;
 
     public int getHp() {
         return hp;
@@ -90,7 +93,15 @@ public class ConcreteBuff {
         this.defend = defend;
     }
 
-    public ConcreteBuff(int id, String name, long keeptime, long period, int effect, int hp, int mp, int defend) {
+    public ConcreteRole getRole() {
+        return role;
+    }
+
+    public void setRole(ConcreteRole role) {
+        this.role = role;
+    }
+
+    public ConcreteBuff(int id, String name, long keeptime, long period, int effect, int hp, int mp, int defend, int attack, ConcreteRole role) {
         this.id = id;
         this.name = name;
         this.keeptime = keeptime;
@@ -99,6 +110,8 @@ public class ConcreteBuff {
         this.hp = hp;
         this.mp = mp;
         this.defend = defend;
+        this.attack = attack;
+        this.role = role;
     }
 
     public ConcreteBuff() {

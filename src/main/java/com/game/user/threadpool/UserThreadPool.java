@@ -1,6 +1,6 @@
 package com.game.user.threadpool;
 
-import com.game.map.threadpool.TaskQueue;
+import com.game.role.bean.ConcreteRole;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.ScheduledFuture;
@@ -47,9 +47,9 @@ public class UserThreadPool {
      * @param period
      * @param timeUnit
      */
-    public static Future executeTask(int threadIndex, long initialDelay, long period, TimeUnit timeUnit){
+    public static Future executeTask(ConcreteRole role,int threadIndex, long initialDelay, long period, TimeUnit timeUnit){
         ScheduledFuture<?> scheduledFuture = UserThreadPool.getThreadPool(threadIndex).scheduleAtFixedRate(() -> {
-                    Iterator<Runnable> iterator = TaskQueue.getQueue().iterator();
+                    Iterator<Runnable> iterator = role.getQueue().iterator();
                     while (iterator.hasNext()) {
                         Runnable runnable = iterator.next();
                         if (Objects.nonNull(runnable)) {

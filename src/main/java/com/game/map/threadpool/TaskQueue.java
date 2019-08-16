@@ -11,11 +11,11 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @Version 1.0
  */
 public class TaskQueue {
-    private static volatile Queue<Runnable> queue = new ArrayBlockingQueue<Runnable>(20);
+    private  volatile Queue<Runnable> queue;
 
     private TaskQueue(){}
 
     public static Queue<Runnable> getQueue(){
-        return queue;
+        return new ArrayBlockingQueue<Runnable>(20);
     }
 }

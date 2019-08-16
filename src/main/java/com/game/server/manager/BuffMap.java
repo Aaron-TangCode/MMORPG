@@ -1,6 +1,6 @@
 package com.game.server.manager;
 
-import io.netty.util.concurrent.Future;
+import com.game.buff.bean.ConcreteBuff;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,10 +12,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Date 2019/8/14 21:25
  * @Version 1.0
  */
-public class TaskMap {
-    private TaskMap(){}
+public class BuffMap {
+    private BuffMap(){}
 
-    public static Map<String, Future> getFutureMap(){
+    public static Map<String, ConcreteBuff> getBuffMap(){
         return new ConcurrentHashMap<>();
     }
 }

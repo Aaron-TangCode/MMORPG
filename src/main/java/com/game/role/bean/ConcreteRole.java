@@ -1,6 +1,7 @@
 package com.game.role.bean;
 
 import com.alibaba.fastjson.JSONObject;
+import com.game.buff.bean.ConcreteBuff;
 import com.game.equipment.bean.EquipmentBox;
 import com.game.map.bean.ConcreteMap;
 import com.game.occupation.bean.Occupation;
@@ -10,11 +11,13 @@ import com.game.property.manager.PropertyManager;
 import com.game.skill.bean.ConcreteSkill;
 import com.game.task.bean.ConcreteTask;
 import io.netty.channel.Channel;
+import io.netty.util.concurrent.Future;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
 
 /**
  * @ClassName ConcreteRole
@@ -114,8 +117,47 @@ public class ConcreteRole {
     private Map<Integer,ConcreteTask> finishedTaskMap;
 
 
+    private Map<String,ConcreteBuff> mapBuff;
 
 
+    private Map<String, Future> taskMap;
+
+    private Queue<Runnable> queue;
+
+
+    private ConcreteBuff buff;
+
+    public ConcreteBuff getBuff() {
+        return buff;
+    }
+
+    public void setBuff(ConcreteBuff buff) {
+        this.buff = buff;
+    }
+
+    public Map<String, Future> getTaskMap() {
+        return taskMap;
+    }
+
+    public void setTaskMap(Map<String, Future> taskMap) {
+        this.taskMap = taskMap;
+    }
+
+    public Queue<Runnable> getQueue() {
+        return queue;
+    }
+
+    public void setQueue(Queue<Runnable> queue) {
+        this.queue = queue;
+    }
+
+    public Map<String, ConcreteBuff> getMapBuff() {
+        return mapBuff;
+    }
+
+    public void setMapBuff(Map<String, ConcreteBuff> mapBuff) {
+        this.mapBuff = mapBuff;
+    }
 
     public Integer getMoney() {
         return money;

@@ -1,4 +1,4 @@
-package com.game.server.handler;
+package com.game.auction;
 
 import com.game.auction.service.AuctionService;
 import com.game.protobuf.protoc.MsgAuctionInfoProto;

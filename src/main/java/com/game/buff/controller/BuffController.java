@@ -3,6 +3,7 @@ package com.game.buff.controller;
 import com.game.buff.bean.ConcreteBuff;
 import com.game.map.threadpool.TaskQueue;
 import com.game.role.bean.ConcreteRole;
+import com.game.server.manager.BuffMap;
 import com.game.server.manager.TaskMap;
 import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.MapUtils;
@@ -10,6 +11,7 @@ import io.netty.util.concurrent.Future;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
+import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
 import static com.game.buff.controller.BuffType.*;
@@ -50,17 +52,30 @@ public class BuffController {
                     buff = new ConcreteBuff();
                     break;
         }
+        initBuffAndRole(role,buff,TaskQueue.getQueue(),TaskMap.getFutureMap(), BuffMap.getBuffMap());
         //创建任务
         BuffTask task = new BuffTask(buff,role);
         //把任务加到任务队列
-        TaskQueue.getQueue().add(task);
-
+        role.getQueue().add(task);
+        //添加buff
+        role.getMapBuff().put(buffName,buff);
+        role.setBuff(buff);
+        //设置名字
+        buff.setName(buffName);
         //把任务丢线程池
-        int threadIndex = UserThreadPool.getThreadIndex(role.getChannel().id());
-        Future future =  UserThreadPool.executeTask(threadIndex, 5L, 5L, TimeUnit.SECONDS);
+        int threadIndex = UserThreadPool.getThreadIndex(role.getId());
+        Future future =  UserThreadPool.executeTask(role,threadIndex, 5L, 5L, TimeUnit.SECONDS);
 
         //存在map中
-        TaskMap.getFutureMap().put(role.getChannel().id().asLongText(),future);
+        role.getTaskMap().put(String.valueOf(role.getId()),future);
 
+
+    }
+
+    public void initBuffAndRole(ConcreteRole role, ConcreteBuff buff, Queue<Runnable> queue,Map<String,Future> map,Map<String,ConcreteBuff> buffMap){
+        role.setMapBuff(buffMap);
+        buff.setRole(role);
+        role.setQueue(queue);
+        role.setTaskMap(map);
     }
 }
