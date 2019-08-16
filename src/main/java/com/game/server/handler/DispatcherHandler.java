@@ -1,13 +1,14 @@
 package com.game.server.handler;
 
 import com.game.server.local.LocalMessageMap;
+import com.game.server.local.LocalUserData;
 import com.game.server.task.DispatcherTask;
+import com.game.user.manager.LocalUserMap;
 import com.game.user.threadpool.UserThreadPool;
 import com.google.protobuf.Message;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.util.concurrent.Future;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -93,19 +94,26 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
     protected void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception{
         //获取请求号
         Integer protoNum = LocalMessageMap.messageMap.get(msg.getClass());
+
         //获取任务参数
         SimpleChannelInboundHandler<? extends Message> simpleChannelInboundHandler = handlerMap.get(protoNum);
-
-
 
         //创建任务
         DispatcherTask task = new DispatcherTask(simpleChannelInboundHandler,ctx,msg);
 
-        //获取线程id
-        int threadIndex = UserThreadPool.getThreadIndex(ctx.channel().id());
 
+        long userId = LocalUserData.getUserId();
+        int threadIndex;
+        if(userId<=0){
+            //未登陆
+            threadIndex = UserThreadPool.getThreadIndex(ctx.channel().id());
+        }else{
+            //已登陆
+            Integer useId = LocalUserMap.getChannelUserMap().get(ctx.channel());
+            threadIndex = UserThreadPool.getThreadIndex(useId);
+        }
         //把任务放到线程池
-        Future<?> submit = UserThreadPool.getThreadPool(threadIndex).submit(task);
+        UserThreadPool.getThreadPool(threadIndex).submit(task);
 
     }
 }

@@ -16,4 +16,5 @@ public class ContentType {
     public static final String CREATE_ROLE = "成功创建角色！\n";
     public static final String UNCREATE_ROLE = "用户还没创建角色！\n";
     public static final String SEND_SUCCESS = "成功发送消息！\n";
+    public static final String EXIT_SUCCESS = "成功退出！\n";
 }

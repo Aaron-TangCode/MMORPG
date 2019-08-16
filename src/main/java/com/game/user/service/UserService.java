@@ -160,7 +160,17 @@ public class UserService {
      * @return
      */
     public MsgUserInfoProto.ResponseUserInfo exit(Channel channel, MsgUserInfoProto.RequestUserInfo requestUserInfo) {
-        return null;
+        //获取角色
+        int userId = requestUserInfo.getUserId();
+        ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);
+
+        //清楚缓存
+        unloadUserState(userId,role,channel);
+        //
+        return MsgUserInfoProto.ResponseUserInfo.newBuilder()
+                .setType(MsgUserInfoProto.RequestType.EXIT)
+                .setContent(ContentType.EXIT_SUCCESS)
+                .build();
     }
 
     /**
@@ -185,5 +195,24 @@ public class UserService {
         LocalUserMap.getChannelUserMap().put(channel,userId);
         //roleName-role
         MapUtils.getMapRolename_Role().put(role.getName(),role);
+    }
+
+    /**
+     * 清楚缓存数据
+     * @param userId
+     * @param role
+     * @param channel
+     */
+    private void unloadUserState(Integer userId, ConcreteRole role, Channel channel){
+        //清楚缓存
+        LocalUserMap.getUserRoleMap().remove(userId);
+
+        LocalUserMap.getUserChannelMap().remove(userId);
+
+        LocalUserMap.getChannelUserMap().remove(channel);
+
+        MapUtils.getMapRolename_Role().remove(role.getName());
+
+        role = null;
     }
 }

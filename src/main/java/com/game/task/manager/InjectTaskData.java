@@ -38,6 +38,9 @@ public class InjectTaskData {
 
     private void allocateTask(Map<Integer, ConcreteTask> taskMap,ConcreteRole role) {
         RoleTask roleTask = taskService.queryTask(role.getId());
+        if (roleTask==null){
+            return;
+        }
         //存进不同的taskmap中(finishedTask的数据格式：1,2,3)
         String finishedTask = roleTask.getFinishedTask();
         String receivedTask = roleTask.getReceivedTask();

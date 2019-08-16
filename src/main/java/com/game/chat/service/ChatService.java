@@ -28,6 +28,7 @@ public class ChatService {
      * @return
      */
     public MsgChatInfoProto.ResponseChatInfo chatAll(Channel channel, MsgChatInfoProto.RequestChatInfo requestChatInfo) {
+        //获取角色map
         Map<String, ConcreteRole> roleMap = MapUtils.getMapRolename_Role();
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
         Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
@@ -49,7 +50,11 @@ public class ChatService {
             //channel
             Channel channel = targetRole.getChannel();
             String msg = "[世界]"+roleName +":"+content;
-            channel.writeAndFlush(msg);
+            MsgChatInfoProto.ResponseChatInfo responseChatInfo = MsgChatInfoProto.ResponseChatInfo.newBuilder()
+                    .setContent(msg)
+                    .setType(MsgChatInfoProto.RequestType.CHATALL)
+                    .build();
+            channel.writeAndFlush(responseChatInfo);
         }
     }
 
@@ -75,8 +80,13 @@ public class ChatService {
 
         Map<String, ConcreteRole> roleMap = MapUtils.getMapRolename_Role();
         ConcreteRole role = roleMap.get(target);
+        Channel channel1 = role.getChannel();
         String msg = "[私聊]"+tmpRole.getName()+":"+content;
-        channel.writeAndFlush(msg);
+        MsgChatInfoProto.ResponseChatInfo responseChatInfo = MsgChatInfoProto.ResponseChatInfo.newBuilder()
+                .setContent(msg)
+                .setType(MsgChatInfoProto.RequestType.CHATSOMEONE)
+                .build();
+        channel1.writeAndFlush(responseChatInfo);
         return MsgChatInfoProto.ResponseChatInfo.newBuilder()
                 .setContent(ContentType.SEND_SUCCESS)
                 .setType(MsgChatInfoProto.RequestType.CHATSOMEONE)

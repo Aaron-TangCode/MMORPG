@@ -94,6 +94,10 @@ public class InjectProperty {
         //获取装备栏
         EquipmentBox equipmentBox = equipmentService.getEquipmet(roleDB.getId());
         role.setEquipmentBox(equipmentBox);
+        //校验
+        if(equipmentBox==null){
+            return;
+        }
         //获取装备
         Equipment equipment = JSON.parseObject(equipmentBox.getEquipmentBox(),Equipment.class);
         //数据格式："head":"1"--->装备类型：装备id
