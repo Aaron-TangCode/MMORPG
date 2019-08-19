@@ -7,8 +7,8 @@ import com.game.role.bean.ConcreteRole;
 import static com.game.buff.controller.BuffType.*;
 
 /**
- * @ClassName DispatcherTask
- * @Description TODO
+ * @ClassName BuffTask
+ * @Description Buff任务
  * @Author DELL
  * @Date 2019/6/20 17:29
  * @Version 1.0
@@ -22,6 +22,7 @@ public class BuffTask implements Runnable {
     }
     @Override
     public void run() {
+        //获取buff名字
         String name = buff.getName();
         switch (name){
             case RED :

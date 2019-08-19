@@ -10,15 +10,45 @@ import com.game.role.bean.ConcreteRole;
  * @Version 1.0
  */
 public class ConcreteBuff {
+    /**
+     * Buff的id
+     */
     private int id;
+    /**
+     * buff名字
+     */
     private String name;
+    /**
+     * 持续时间
+     */
     private long keeptime;
+    /**
+     * 时间段
+     */
     private long period;
+    /**
+     * Buff效果
+     */
     private int effect;
+    /**
+     * buff的hp
+     */
     private int hp;
+    /**
+     * buff的mp
+     */
     private int mp;
+    /**
+     * buff的defend
+     */
     private int defend;
+    /**
+     * buff的attack
+     */
     private int attack;
+    /**
+     * 角色
+     */
     private ConcreteRole role;
 
     public int getHp() {

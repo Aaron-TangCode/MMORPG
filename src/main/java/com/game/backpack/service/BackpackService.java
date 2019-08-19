@@ -14,41 +14,68 @@ import java.util.List;
 
 /**
  * @ClassName BackpackService
- * @Description 背包逻辑层
+ * @Description 背包服务
  * @Author DELL
  * @Date 2019/6/17 15:36
  * @Version 1.0
  */
 @Service
 public class BackpackService {
+    /**
+     * 背包数据访问层
+     */
     @Autowired
     private BackpackRepository backpackRepository;
 
+    /**
+     * 通过角色id获取物品
+     * @param roleId 角色id
+     * @return 返回物品列表
+     */
     public List<Goods> getGoodsByRoleId(int roleId) {
         return backpackRepository.getGoodsByRoleId(roleId);
     }
 
-    public void insertGoods(Goods newGoods) {
-        backpackRepository.insertGoods(newGoods);
+    /**
+     * 插入物品
+     * @param goods 物品
+     */
+    public void insertGoods(Goods goods) {
+        backpackRepository.insertGoods(goods);
     }
 
+    /**
+     * 通过角色id更新物品
+     * @param roleId 角色id
+     * @param goodsId 物品id
+     */
     public void updateGoodsByRoleId(int roleId,int goodsId) {
         backpackRepository.updateGoodsByRoleId(roleId,goodsId);
     }
 
+    /**
+     * 更新物品(减)
+     * @param roleId 角色id
+     * @param goodsId 物品id
+     */
     public void updateGoodsByRoleIdDel(int roleId, Integer goodsId) {
         backpackRepository.updateGoodsByRoleIdDel(roleId,goodsId);
     }
 
+    /**
+     * 获取物品id
+     * @param goodsId 物品id
+     * @return 返回物品
+     */
     public Goods getGoodsById(String goodsId) {
         return backpackRepository.getGoodsById(goodsId);
     }
 
     /**
      * 获取物品
-     * @param channel
-     * @param requestGoodsInfo
-     * @return
+     * @param channel Channel
+     * @param requestGoodsInfo 物品请求信息
+     * @return 物品协议信息
      */
     public MsgGoodsInfoProto.ResponseGoodsInfo getGoods(Channel channel, MsgGoodsInfoProto.RequestGoodsInfo requestGoodsInfo) {
         //获取userId
@@ -66,6 +93,12 @@ public class BackpackService {
                 .build();
     }
 
+    /**
+     * 处理物品
+     * @param goodsName 物品名称
+     * @param role 角色
+     * @return 返回信息
+     */
     private String handleGoods(String goodsName, ConcreteRole role) {
         //在数据库查询，根据角色id查询是否具有物品
         List<Goods> list = getGoodsByRoleId(role.getId());
@@ -120,9 +153,9 @@ public class BackpackService {
 
     /**
      * 匹配物品
-     * @param list
-     * @param goodsName
-     * @return
+     * @param list 物品列表
+     * @param goodsName 物品名称
+     * @return 物品
      */
     private Goods findGoods(List<Goods> list,String goodsName) {
         Goods goods = null;
@@ -137,9 +170,9 @@ public class BackpackService {
 
     /**
      * 丢物品
-     * @param channel
-     * @param requestGoodsInfo
-     * @return
+     * @param channel Channel
+     * @param requestGoodsInfo 物品请求信息
+     * @return 物品协议信息
      */
     public MsgGoodsInfoProto.ResponseGoodsInfo discardGoods(Channel channel, MsgGoodsInfoProto.RequestGoodsInfo requestGoodsInfo) {
         //获取userId
@@ -155,6 +188,12 @@ public class BackpackService {
                     .build();
     }
 
+    /**
+     * 处理丢物品
+     * @param role 角色
+     * @param goodsName 物品名称
+     * @return 消息
+     */
     private String discardHandle(ConcreteRole role, String goodsName) {
         //在数据库查询，根据角色id查询是否具有物品
         List<Goods> list = getGoodsByRoleId(role.getId());
@@ -172,6 +211,13 @@ public class BackpackService {
         return msg;
     }
 
+    /**
+     * 丢掉
+     * @param goods 物品
+     * @param goodsName 物品名称
+     * @param role 角色
+     * @return 消息
+     */
     private String discardWay(Goods goods, String goodsName, ConcreteRole role) {
         //物品数量-1
         updateGoodsByRoleIdDel(role.getId(),goods.getId());

@@ -4,14 +4,23 @@ import com.game.npc.bean.ConcreteMonster;
 
 /**
  * @ClassName NoticeBean
- * @Description TODO
+ * @Description 通知
  * @Author DELL
  * @Date 2019/6/14 16:37
  * @Version 1.0
  */
 public class NoticeBean {
+    /**
+     * 通知类型
+     */
     private String type;
+    /**
+     * 角色名字
+     */
     private String roleName;
+    /**
+     * 怪兽
+     */
     private ConcreteMonster monster;
 
     public String getType() {

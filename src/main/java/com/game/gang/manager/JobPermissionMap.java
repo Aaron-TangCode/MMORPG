@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * @ClassName JobPermissionMap
- * @Description TODO
+ * @Description 职位-职位权限
  * @Author DELL
  * @Date 2019/7/16 14:57
  * @Version 1.0

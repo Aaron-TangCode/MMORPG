@@ -5,6 +5,9 @@ import com.google.protobuf.MessageLite;
 
 import java.lang.reflect.Constructor;
 
+/**
+ * 协议信息
+ */
 public enum MessageType {
     /**
      * 用户信息请求

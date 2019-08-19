@@ -4,13 +4,17 @@ import com.game.gang.bean.GangEntity;
 import com.game.gang.bean.GangMemberEntity;
 import com.game.gang.mapper.GangEntityMapper;
 import com.game.gang.mapper.GangMemberEntityMapper;
+import com.game.gang.task.InsertGangMemberTask;
+import com.game.gang.task.InsertGangTask;
+import com.game.gang.task.UpdateGangEntityTask;
+import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 /**
  * @ClassName GangRepository
- * @Description TODO
+ * @Description 工会数据访问
  * @Author DELL
  * @Date 2019/7/16 16:22
  * @Version 1.0
@@ -19,7 +23,7 @@ import org.springframework.stereotype.Repository;
 public class GangRepository {
     /**
      * 查询工会成员
-     * @param roleId
+     * @param roleId 角色id
      * @return
      */
     public GangMemberEntity findGangMember(int roleId) {
@@ -35,23 +39,17 @@ public class GangRepository {
 
     /**
      * 添加工会
-     * @param gangName
+     * @param gangName 工会名字
      */
     public void insertGang(String gangName) {
-        SqlSession session = SqlUtils.getSession();
-        try {
-            GangEntityMapper mapper = session.getMapper(GangEntityMapper.class);
-            mapper.insertGang(gangName);
-            session.commit();
-        }finally {
-            session.close();
-        }
+        InsertGangTask insertGangTask = new InsertGangTask(gangName);
+        UserThreadPool.ACCOUNT_SERVICE[0].submit(insertGangTask);
     }
 
     /**
      * 查询工会
-     * @param gangName
-     * @return
+     * @param gangName 工会名字
+     * @return 工会
      */
     public GangEntity queryGang(String gangName) {
         SqlSession session = SqlUtils.getSession();
@@ -66,19 +64,18 @@ public class GangRepository {
 
     /**
      * 添加工会成员
-     * @param entity
+     * @param entity 工会成员
      */
     public void insertGangMember(GangMemberEntity entity) {
-        SqlSession session = SqlUtils.getSession();
-        try {
-            GangMemberEntityMapper mapper = session.getMapper(GangMemberEntityMapper.class);
-            mapper.insertGangMember(entity);
-            session.commit();
-        }finally {
-            session.close();
-        }
+        InsertGangMemberTask insertGangMemberTask = new InsertGangMemberTask(entity);
+        UserThreadPool.ACCOUNT_SERVICE[0].submit(insertGangMemberTask);
     }
 
+    /**
+     * 查询工会
+     * @param roleId 角色id
+     * @return 工会
+     */
     public GangEntity queryGangByRoleName(Integer roleId) {
         SqlSession session = SqlUtils.getSession();
         try {
@@ -91,14 +88,12 @@ public class GangRepository {
 
     }
 
+    /**
+     * 更新工会
+     * @param gangEntity 工会
+     */
     public void updateGangEntity(GangEntity gangEntity) {
-        SqlSession session = SqlUtils.getSession();
-        try {
-            GangEntityMapper mapper = session.getMapper(GangEntityMapper.class);
-            mapper.updateGangEntity(gangEntity);
-            session.commit();
-        }finally {
-            session.close();
-        }
+        UpdateGangEntityTask updateGangEntityTask = new UpdateGangEntityTask(gangEntity);
+        UserThreadPool.ACCOUNT_SERVICE[0].submit(updateGangEntityTask);
     }
 }

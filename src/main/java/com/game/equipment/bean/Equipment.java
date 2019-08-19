@@ -8,10 +8,25 @@ package com.game.equipment.bean;
  * @Version 1.0
  */
 public class Equipment {
+    /**
+     * 头部
+     */
     private String head;
+    /**
+     * 衣服
+     */
     private String clothes;
+    /**
+     * 裤子
+     */
     private String pants;
+    /**
+     * 装备
+     */
     private String weapon;
+    /**
+     * 鞋子
+     */
     private String shoes;
 
     public String getHead() {

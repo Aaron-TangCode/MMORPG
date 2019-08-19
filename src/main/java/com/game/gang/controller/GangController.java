@@ -16,7 +16,7 @@ import java.text.MessageFormat;
 
 /**
  * @ClassName GangController
- * @Description TODO
+ * @Description 工会控制器
  * @Author DELL
  * @Date 2019/7/16 16:21
  * @Version 1.0
@@ -24,17 +24,20 @@ import java.text.MessageFormat;
 @Controller
 @RequestAnnotation("/gang")
 public class GangController {
-
+    /**
+     * 工会服务
+     */
     @Autowired
     private GangService gangService;
-
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
     /**
      * 创建工会
-     * @param roleName
-     * @param gangName
-     * todo
+     * @param roleName 角色名
+     * @param gangName 工会名
      */
     @RequestAnnotation("/create")
     public void createGang(String roleName,String gangName){
@@ -48,14 +51,13 @@ public class GangController {
         //创建工会
         buildGang(flag,gangName,role,channel);
 
-
     }
 
     /**
      * 创建工会
-     * @param flag
-     * @param gangName
-     * @param role
+     * @param flag 工会成员
+     * @param gangName 工会名字
+     * @param role 角色
      */
     private void buildGang(GangMemberEntity flag,String gangName,ConcreteRole role,Channel channel) {
         //没工会可创建工会
@@ -79,8 +81,8 @@ public class GangController {
 
     /**
      * 加入工会
-     * @param roleName
-     * @param gangName
+     * @param roleName 角色名
+     * @param gangName 工会名
      */
     @RequestAnnotation("/join")
     public void joinGang(String roleName,String gangName){
@@ -94,12 +96,11 @@ public class GangController {
 
     /**
      * 加入工会
-     * @param entity
-     * @param role
-     * @param gangName
+     * @param entity 工会成员
+     * @param role 角色
+     * @param gangName 工会名
      */
     private void join(GangMemberEntity entity,ConcreteRole role,String gangName) {
-
         //channel
         Channel channel = role.getChannel();
         //没的话加入工会
@@ -128,13 +129,12 @@ public class GangController {
 
         //判断角色是否会长
 
-
     }
 
     /**
-     *
-     * @param roleName
-     * @param number
+     * 捐款
+     * @param roleName 角色名
+     * @param number 数量
      */
     @RequestAnnotation("/donateMoney")
     public void donate(String roleName,String number){
@@ -155,8 +155,8 @@ public class GangController {
 
     /**
      * 判断角色是否有工会
-     * @param roleName
-     * @return
+     * @param roleName 角色名
+     * @return 工会成员
      */
     public GangMemberEntity belongGang(String roleName){
         ConcreteRole role = getRole(roleName);
@@ -166,7 +166,7 @@ public class GangController {
 
     /**
      * 获取角色
-     * @return
+     * @return 角色
      */
     public ConcreteRole getRole(String roleName){
         return MapUtils.getMapRolename_Role().get(roleName);

@@ -13,14 +13,19 @@ import java.util.List;
 
 /**
  * @ClassName NpcService
- * @Description TODO
+ * @Description npc服务
  * @Author DELL
  * @Date 2019/8/12 10:23
  * @Version 1.0
  */
 @Service
 public class NpcService {
-
+    /**
+     * 和npc谈话
+     * @param channel channel
+     * @param requestNpcInfo npc请求信息
+     * @return 协议信息
+     */
     public MsgNpcInfoProto.ResponseNpcInfo talkToNpc(Channel channel, MsgNpcInfoProto.RequestNpcInfo requestNpcInfo) {
         //获取npc名字
         String npcName = requestNpcInfo.getNpcName();
@@ -40,6 +45,14 @@ public class NpcService {
                 .setContent(content)
                 .build();
     }
+
+    /**
+     * 和npc交谈
+     * @param npcIdList
+     * @param rolename
+     * @param npcName
+     * @return
+     */
     public String talkNPC(List<Integer> npcIdList,String rolename,String npcName){
         Iterator<Integer> iterator = npcIdList.iterator();
         while(iterator.hasNext()){

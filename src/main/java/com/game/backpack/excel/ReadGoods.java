@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.game.annotation.ExcelAnnotation;
 import com.game.backpack.bean.Goods;
 import com.game.property.bean.PropertyType;
+import com.game.utils.ExcelUtils;
 import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
@@ -15,10 +16,7 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
- * 读取Excel文件
- * @author lmb
- * @date 2017-3-15
- *
+ * 读取excel文件
  */
 @ExcelAnnotation
 @Component
@@ -58,7 +56,7 @@ public class ReadGoods {
                     // 获取单元格对象
                 	Cell cell = row.getCell(j);
                     // 单元格为空设置cellStr为空串
-                    cellStr =  getResult(cell);
+                    cellStr =  ExcelUtils.returnCellStr(cell);
                     // 下面按照数据出现位置封装到bean中
                     if(j == 0) {
                         goods.setId(new Double(cellStr).intValue());
@@ -112,8 +110,6 @@ public class ReadGoods {
                 }
                 goodsList.add(goods);
             }
-
-
             System.out.println("Goods静态数据加载完毕");
         } catch (IOException e) {
             e.printStackTrace();
@@ -129,27 +125,5 @@ public class ReadGoods {
                 }  
             }  
         }  
-    }
-
-    private static String getResult(Cell cell) {
-	    String cellStr = null;
-        if (cell == null) {
-            cellStr = "";
-        }else {
-            switch (cell.getCellTypeEnum()){
-                case NUMERIC:
-                    cellStr = cell.getNumericCellValue() + "";
-                    break;
-                case BOOLEAN:
-                    cellStr = String.valueOf(cell.getBooleanCellValue());
-                    break;
-                default: cellStr = cell.getStringCellValue();
-            }
-        }
-        return cellStr;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(MapUtils.getListRole().size());
     }
 }  

@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * @author Aaron
  * @date 2019/6/8 5:59 PM
- * @function 识别excel,纯标记
+ * @function 识别excel静态数据,纯标记
  */
 @Component
 @Retention(RetentionPolicy.RUNTIME)

@@ -5,7 +5,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @ClassName TaskQueue
- * @Description TODO
+ * @Description 任务队列
  * @Author DELL
  * @Date 2019/7/8 17:12
  * @Version 1.0

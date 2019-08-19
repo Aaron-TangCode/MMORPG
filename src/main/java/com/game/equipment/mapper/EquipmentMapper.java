@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * @ClassName EquipmentMapper
- * @Description TODO
+ * @Description 装备mapper
  * @Author DELL
  * @Date 2019/6/19 12:13
  * @Version 1.0
@@ -13,22 +13,22 @@ import org.apache.ibatis.annotations.Param;
 public interface EquipmentMapper {
     /**
      * 添加装备到装备栏
-     * @param roleId
-     * @param equipmentPart
+     * @param roleId 角色id
+     * @param equipmentPart 装备
      */
     public void insertEquipment(@Param("roleId") int roleId, @Param("equipmentPart") String equipmentPart);
 
     /**
      * 修改装备
-     * @param roleId
-     * @param equipmentPart
+     * @param roleId 角色id
+     * @param equipmentPart 装备
      */
     public void updateEquipment(@Param("roleId") int roleId, @Param("equipmentPart") String equipmentPart);
 
     /**
      * 查找装备
-     * @param roleId
-     * @return
+     * @param roleId 角色id
+     * @return 装备栏
      */
     public EquipmentBox getEquipment(int roleId);
 }

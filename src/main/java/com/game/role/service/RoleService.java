@@ -32,25 +32,35 @@ import java.util.Map;
  */
 @Service("RoleService")
 public class RoleService {
-
+    /**
+     * role数据访问
+     */
     @Autowired
     private RoleRepository roleRepository;
-
+    /**
+     * 注册role
+     */
     @Autowired
     private RegisterRole registerRole;
-
+    /**
+     * user数据访问
+     */
     @Autowired
     private UserRepository userRepository;
-
+    /**
+     * 背包服务
+     */
     @Autowired
     private BackpackService backpackService;
-
+    /**
+     * proto服务
+     */
     @Autowired
     private ProtoService protoService;
     /**
      * 获取角色role
-     * @param id
-     * @return
+     * @param id id
+     * @return role
      */
     public ConcreteRole getRole(int id){
         return roleRepository.getRole(id);
@@ -58,8 +68,8 @@ public class RoleService {
 
     /**
      * 根据角色名roleName获取地图map
-     * @param roleName
-     * @return
+     * @param roleName roleName
+     * @return map
      */
     public String getMapByRoleName(String roleName) {
         return roleRepository.getMapByRoleName(roleName);
@@ -67,9 +77,8 @@ public class RoleService {
 
     /**
      * 更新角色所在的地图
-     * @param roleName
-     * @param dest
-     * @return
+     * @param roleName rolename
+     * @param dest dest
      */
     public void updateMap(String roleName, Integer dest) {
          roleRepository.updateMap(roleName,dest);
@@ -80,8 +89,8 @@ public class RoleService {
 
     /**
      * 根据角色名roleName获取地图id
-     * @param roleName
-     * @return
+     * @param roleName rolename
+     * @return int
      */
     public int getMapIdByRoleName(String roleName) {
         return roleRepository.getMapIdByRoleName(roleName);
@@ -89,30 +98,43 @@ public class RoleService {
 
     /**
      * 根据地图id获取地图name
-     * @param map_id
-     * @return
+     * @param map_id the id of map
+     * @return map's name
      */
     public String getMapNameByMapId(int map_id) {
         return roleRepository.getMapNameByMapId(map_id);
     }
 
+    /**
+     * 获取role
+     * @param rolename rolename
+     * @return role
+     */
     public ConcreteRole getRoleByRoleName(String rolename) {
         return roleRepository.getRoleByRoleName(rolename);
     }
 
+    /**
+     * 更新角色
+     * @param concreteRole role
+     */
     public void updateRole(ConcreteRole concreteRole) {
         roleRepository.updateRole(concreteRole);
     }
 
+    /**
+     * 插入role
+     * @param role role
+     */
     public void insertRole(ConcreteRole role) {
         roleRepository.insertRole(role);
     }
 
     /**
      * 创建角色
-     * @param channel
-     * @param requestRoleInfo
-     * @return
+     * @param channel channel
+     * @param requestRoleInfo 角色请求信息
+     * @return 协议信息
      */
     public MsgRoleInfoProto.ResponseRoleInfo chooseRole(Channel channel, MsgRoleInfoProto.RequestRoleInfo requestRoleInfo) {
         //userId
@@ -138,9 +160,9 @@ public class RoleService {
 
     /**
      * 获取角色信息
-     * @param channel
-     * @param requestRoleInfo
-     * @return
+     * @param channel channel
+     * @param requestRoleInfo 角色请求信息
+     * @return 协议信息
      */
     public MsgRoleInfoProto.ResponseRoleInfo roleInfo(Channel channel, MsgRoleInfoProto.RequestRoleInfo requestRoleInfo) {
         //获取role
@@ -153,6 +175,12 @@ public class RoleService {
                 .build();
     }
 
+    /**
+     * 使用物品
+     * @param channel channel
+     * @param requestRoleInfo 角色请求信息
+     * @return 协议信息
+     */
     public MsgRoleInfoProto.ResponseRoleInfo useGoods(Channel channel, MsgRoleInfoProto.RequestRoleInfo requestRoleInfo) {
         //role
         ConcreteRole tmpRole = getRole(channel);
@@ -175,6 +203,11 @@ public class RoleService {
                 .build();
     }
 
+    /**
+     * 获取role
+     * @param channel channel
+     * @return role
+     */
     public ConcreteRole getRole(Channel channel){
         //userId
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);
@@ -184,9 +217,9 @@ public class RoleService {
     }
     /**
      * 获取物品
-     * @param goodsList
-     * @param goodsName
-     * @return
+     * @param goodsList 物品列表
+     * @param goodsName 物品名称
+     * @return 物品
      */
     private Goods getGoods(List<Goods> goodsList, String goodsName) {
         Goods goods = null;
@@ -199,8 +232,8 @@ public class RoleService {
     }
     /**
      * 检查物品是否存在
-     * @param goods
-     * @return
+     * @param goods 物品
+     * @return true or false
      */
     private boolean checkGoodsIsExist(Goods goods) {
         if(goods==null||goods.getCount()<=0){
@@ -210,10 +243,10 @@ public class RoleService {
     }
     /**
      * 判断物品的功能、使用物品
-     * @param role
-     * @param goods
-     * @param isExisted
-     * @return
+     * @param role role
+     * @param goods 物品
+     * @param isExisted true or false
+     * @return 协议信息
      */
     private String checkAndUseGoodsFunction(ConcreteRole role,Goods goods,boolean isExisted) {
         if(isExisted){
@@ -263,9 +296,21 @@ public class RoleService {
             return "物品不存在";
         }
     }
+
+    /**
+     * 检查是否满血
+     * @param role role
+     * @return true or false
+     */
     private boolean checkFullBoold(ConcreteRole role) {
         return role.getCurHp()>=100?true:false;
     }
+
+    /**
+     * 检查是否满蓝
+     * @param role role
+     * @return true or false
+     */
     private boolean checkFullMagic(ConcreteRole role) {
         return role.getCurMp()>=100?true:false;
     }

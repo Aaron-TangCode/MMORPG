@@ -2,7 +2,7 @@ package com.game.protobuf.message;
 
 /**
  * @ClassName ContentType
- * @Description TODO
+ * @Description 内容类型
  * @Author DELL
  * @Date 2019/8/7 19:03
  * @Version 1.0

@@ -26,16 +26,17 @@ public class BackpackController {
 
     /**
      * 获取物品
-     * @param roleName
-     * @param goodsName
-     * @return
+     * @param roleName 角色名
+     * @param goodsName 物品名称
+     * @return 返回消息
      */
     @RequestAnnotation("/getGoods")
     public String getGoods(String roleName,String goodsName){
         //获取角色
         ConcreteRole role = getRole(roleName);
-        //逻辑处理
+        //物品逻辑处理
         String msg = handleGoods(goodsName,role);
+        //返回消息
         return msg;
     }
 
@@ -99,9 +100,9 @@ public class BackpackController {
 
     /**
      * 匹配物品
-     * @param list
-     * @param goodsName
-     * @return
+     * @param list 物品列表
+     * @param goodsName 物品名称
+     * @return 物品
      */
     private Goods findGoods(List<Goods> list,String goodsName) {
         Goods goods = null;
@@ -116,8 +117,8 @@ public class BackpackController {
 
     /**
      * 返回角色
-     * @param roleName
-     * @return
+     * @param roleName 角色名
+     * @return 返回角色
      */
     private ConcreteRole getRole(String roleName) {
         return MapUtils.getMapRolename_Role().get(roleName);
@@ -125,8 +126,9 @@ public class BackpackController {
 
     /**
      * 丢掉物品
-     * todo
-     * @return
+     * @param roleName 角色名
+     * @param goodsName 物品名
+     * @return 返回消息
      */
     public String discardGoods(String roleName,String goodsName){
         ConcreteRole role = getRole(roleName);
@@ -137,9 +139,9 @@ public class BackpackController {
 
     /**
      * 丢弃物品
-     * @param role
-     * @param goodsName
-     * @return
+     * @param role 角色
+     * @param goodsName 物品名
+     * @return 返回消息
      */
     private String discardHandle(ConcreteRole role, String goodsName) {
         //在数据库查询，根据角色id查询是否具有物品
@@ -158,6 +160,13 @@ public class BackpackController {
         return msg;
     }
 
+    /**
+     * 丢弃物品
+     * @param goods 物品
+     * @param goodsName 物品名
+     * @param role 角色
+     * @return 返回消息
+     */
     private String discardWay(Goods goods, String goodsName, ConcreteRole role) {
         //物品数量-1
         backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());

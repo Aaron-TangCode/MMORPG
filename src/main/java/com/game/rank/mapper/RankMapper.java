@@ -6,11 +6,15 @@ import java.util.List;
 
 /**
  * @ClassName RankMapper
- * @Description TODO
+ * @Description 排行榜mapper
  * @Author DELL
  * @Date 2019/8/5 16:45
  * @Version 1.0
  */
 public interface RankMapper {
+    /**
+     * 查询排行榜
+     * @return
+     */
     public List<RankBean> queryRank();
 }

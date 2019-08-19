@@ -24,18 +24,25 @@ import static com.game.buff.controller.BuffType.RED;
  */
 @Service("MapService")
 public class MapService {
+    /**
+     * 地图的数据访问
+     */
     @Autowired
     private MapRepository mapRepository;
-
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
-
+    /**
+     * buff控制器
+     */
     @Autowired
     private BuffController buffController;
     /**
      * 根据id获取地图实体类
-     * @param id
-     * @return
+     * @param id id
+     * @return map
      */
     public ConcreteMap getMap(int id){
         return mapRepository.getMap(id);
@@ -43,13 +50,19 @@ public class MapService {
 
     /**
      * 根据地图名字获取地图id
-     * @param name
-     * @return
+     * @param name name
+     * @return the id of map
      */
     public int getMapIdByMapName(String name) {
         return mapRepository.getId(name);
     }
 
+    /**
+     * 获取地图信息
+     * @param channel channel
+     * @param requestMapInfo 地图请求信息
+     * @return 协议信息
+     */
     public MsgMapInfoProto.ResponseMapInfo getMapInfo(Channel channel, MsgMapInfoProto.RequestMapInfo requestMapInfo) {
         //获取userId
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);
@@ -65,6 +78,12 @@ public class MapService {
                 .build();
     }
 
+    /**
+     * 移动
+     * @param channel channel
+     * @param requestMapInfo 地图请求信息
+     * @return 协议信息
+     */
     public MsgMapInfoProto.ResponseMapInfo move(Channel channel, MsgMapInfoProto.RequestMapInfo requestMapInfo) {
         //获取userId
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);
@@ -101,6 +120,11 @@ public class MapService {
                 .build();
     }
 
+    /**
+     * 激活buff
+     * @param role 角色
+     * @param dest 目的地
+     */
     private void startBuff(ConcreteRole role,String dest) {
         if(!dest.equals("村子")){
             buffController.executeBuff(role.getName(),RED);

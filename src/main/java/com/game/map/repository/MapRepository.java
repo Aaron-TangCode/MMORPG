@@ -18,8 +18,8 @@ import org.springframework.stereotype.Repository;
 public class MapRepository {
     /**
      * 根据地图id获取地图实体类
-     * @param id
-     * @return
+     * @param id id
+     * @return map
      */
     public ConcreteMap getMap(int id){
         SqlSession session = SqlUtils.getSession();
@@ -30,8 +30,8 @@ public class MapRepository {
 
     /**
      * 通过地图名字获取地图id
-     * @param name
-     * @return
+     * @param name name
+     * @return the id of map
      */
     public Integer getId(String name) {
         SqlSession session = SqlUtils.getSession();
@@ -40,6 +40,11 @@ public class MapRepository {
         return id;
     }
 
+    /**
+     * 获取地图
+     * @param roleId roleId
+     * @return map
+     */
     public ConcreteMap getMapByRoleId(int roleId) {
         SqlSession session = SqlUtils.getSession();
         try {

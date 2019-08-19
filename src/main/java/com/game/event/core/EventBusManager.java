@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * @ClassName EventBusManager
- * @Description TODO
+ * @Description 事件管理器
  * @Author DELL
  * @Date 2019/7/24 18:19
  * @Version 1.0

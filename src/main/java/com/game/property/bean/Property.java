@@ -12,7 +12,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Property {
+    /**
+     * id
+     */
     private Integer id;
+    /**
+     * property
+     */
     private JSONObject propertyJson;
 
     public Integer getId() {

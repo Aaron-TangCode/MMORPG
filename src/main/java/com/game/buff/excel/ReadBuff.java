@@ -2,6 +2,7 @@ package com.game.buff.excel;
 
 import com.game.buff.bean.ConcreteBuff;
 import com.game.annotation.ExcelAnnotation;
+import com.game.utils.ExcelUtils;
 import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
@@ -55,7 +56,7 @@ public class ReadBuff {
                     // 获取单元格对象
                 	Cell cell = row.getCell(j);
                     // 单元格为空设置cellStr为空串
-                    cellStr =  getResult(cell);
+                    cellStr =  ExcelUtils.returnCellStr(cell);
                     // 下面按照数据出现位置封装到bean中
                     if(j == 0) {
                         buff.setId(new Double(cellStr).intValue());
@@ -95,27 +96,5 @@ public class ReadBuff {
                 }  
             }  
         }  
-    }
-
-    private static String getResult(Cell cell) {
-	    String cellStr = null;
-        if (cell == null) {
-            cellStr = "";
-        }else {
-            switch (cell.getCellTypeEnum()){
-                case NUMERIC:
-                    cellStr = cell.getNumericCellValue() + "";
-                    break;
-                case BOOLEAN:
-                    cellStr = String.valueOf(cell.getBooleanCellValue());
-                    break;
-                default: cellStr = cell.getStringCellValue();
-            }
-        }
-        return cellStr;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(MapUtils.getListRole().size());
     }
 }  

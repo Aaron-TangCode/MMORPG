@@ -2,12 +2,10 @@ package com.game.auction.controller;
 
 import com.game.auction.bean.Auction;
 import com.game.auction.service.AuctionService;
-import com.game.auction.task.Task;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.controller.BackpackController;
 import com.game.backpack.service.BackpackService;
 import com.game.dispatcher.RequestAnnotation;
-import com.game.map.threadpool.TaskQueue;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.user.threadpool.UserThreadPool;
@@ -21,7 +19,7 @@ import java.util.List;
 
 /**
  * @ClassName AuctionController
- * @Description 拍卖行
+ * @Description 拍卖行控制器
  * @Author DELL
  * @Date 2019/7/18 10:46
  * @Version 1.0
@@ -29,40 +27,54 @@ import java.util.List;
 @Controller
 @RequestAnnotation("/auction")
 public class AuctionController {
-
+    /**
+     * 背包服务
+     */
     @Autowired
     private BackpackService backpackService;
-
+    /**
+     * 背包控制器
+     */
     @Autowired
     private BackpackController backpackController;
-
+    /**
+     * 拍卖行服务
+     */
     @Autowired
     private AuctionService auctionService;
-
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
 
     /**
      * 竞拍物品
-     * @param roleName
-     * @param auctionId
-     * @param money
+     * @param roleName 角色名
+     * @param auctionId 拍卖唯一id
+     * @param money 竞拍价钱
      */
     @RequestAnnotation("/bidding")
     public void bidding(String roleName,String auctionId,String money){
         //获取角色
         ConcreteRole buyRole = getRole(roleName);
-        //获取交易平台的物品信息
+        //处理竞拍
         hanleBidding(buyRole,auctionId,money);
 
     }
 
     /**
-     * 处理逻辑
+     * 处理竞拍
+     * @param buyRole 买家
+     * @param auctionId 拍卖唯一id
+     * @param money 竞拍价钱
      */
     private void hanleBidding(ConcreteRole buyRole,String auctionId,String money) {
+        //通过竞拍id查询具体竞拍
         Auction auction = auctionService.queryAutionById(Integer.parseInt(auctionId));
+        //旧竞拍价格
         Integer oldMoney = auction.getPrice();
+        //上一个竞拍者
         String oldBuyer = auction.getBuyer();
         //设置新的竞拍者
         auction.setBuyer(buyRole.getName());
@@ -76,6 +88,7 @@ public class AuctionController {
         auctionService.updateAuction(auction);
         //把钱退回给其他人
         String seller = auction.getSeller();
+        //返回消息
         if(!seller.equals(oldBuyer)){
             ConcreteRole oldRole = getRole(oldBuyer);
             oldRole.setMoney(oldRole.getMoney()+oldMoney);
@@ -88,8 +101,8 @@ public class AuctionController {
 
     /**
      * 撤回交易物品
-     * @param roleName
-     * @param auctionId
+     * @param roleName 角色名
+     * @param auctionId 竞拍唯一id
      */
     @RequestAnnotation("/recycle")
     public void recycle(String roleName,String auctionId){
@@ -104,34 +117,36 @@ public class AuctionController {
         backpackController.getGoods(roleName,goodsName);
         role.getChannel().writeAndFlush("成功撤回物品："+goodsName);
     }
-    /**
-     * 发布物品到拍卖行
-     * @param seller 售卖者
-     * @param goodsName 物品名称
-     * @param number 物品数量
-     * @param price 价钱
-     * @param isNow true:一口价 ；false:定时拍卖
-     */
-    @RequestAnnotation("/publish")
+        /**
+         * 发布物品到拍卖行
+         * @param seller 售卖者
+         * @param goodsName 物品名称
+         * @param number 物品数量
+         * @param price 价钱
+         * @param isNow true:一口价 ；false:定时拍卖
+         */
+        @RequestAnnotation("/publish")
         public void publish(String seller,String goodsName,String number,String price,String isNow){
         //获取角色
         ConcreteRole role = getRole(seller);
         //获取商品
-        Goods goods = getGoods(role.getId(),goodsName);
+//        Goods goods = getGoods(role.getId(),goodsName);
         //发布商品
-        publishGoods(role,goods,number,price,isNow);
+//        publishGoods(role,goods,number,price,isNow);
     }
 
     /**
      * 发布物品
-     * @param role
-     * @param goods
-     * @param number
-     * @param price
-     * @param isNow
+     * @param role 角色
+     * @param goods 物品
+     * @param number 数量
+     * @param price 价格
+     * @param isNow true:为一口价模式；false：为竞拍模式
      */
     private void publishGoods(ConcreteRole role, Goods goods, String number, String price, String isNow) {
+        //创建一个交易
         Auction auction = new Auction();
+        //注入属性值
         auction.setGoodsName(goods.getName());
         auction.setNumber(Integer.parseInt(number));
         auction.setPrice(Integer.parseInt(price));
@@ -155,14 +170,12 @@ public class AuctionController {
             role.getChannel().writeAndFlush("【竞拍模式】:成功发布物品"+goods.getName());
 
 
-
             //把物品放在交易平台，开始倒计时
-            Task task = new Task(auction,auctionService,backpackController,roleService);
-
+//            BossAutoAttackTask task = new BossAutoAttackTask(auction,auctionService,backpackController,roleService);
 
             //打包成一个任务，丢给线程池执行
             //添加任务到队列
-            TaskQueue.getQueue().add(task);
+//            TaskQueue.getQueue().add(task);
 
 
             //线程执行任务
@@ -182,27 +195,27 @@ public class AuctionController {
 
     /**
      * 获取商品
-     * @param roleId
-     * @param goodsName
+     * @param roleId 角色唯一id
+     * @param goodsName 物品名称
      * @return
      */
-    private Goods getGoods(int roleId,String goodsName) {
-        Goods goods = null;
-        //获取物品列表
-        List<Goods> goodsList = backpackService.getGoodsByRoleId(roleId);
-        //遍历列表，找出具体物品
-        for (int i = 0; i < goodsList.size(); i++) {
-            if (goodsList.get(i).getName().equals(goodsName)) {
-                goods = goodsList.get(i);
-                break;
-            }
-        }
-        return goods;
-    }
+//    private Goods getGoods(int roleId,String goodsName) {
+//        Goods goods = null;
+//        //获取物品列表
+//        List<Goods> goodsList = backpackService.getGoodsByRoleId(roleId);
+//        //遍历列表，找出具体物品
+//        for (int i = 0; i < goodsList.size(); i++) {
+//            if (goodsList.get(i).getName().equals(goodsName)) {
+//                goods = goodsList.get(i);
+//                break;
+//            }
+//        }
+//        return goods;
+//    }
 
     /**
      * 获取角色
-     * @param seller
+     * @param seller 卖家
      * @return
      */
     private ConcreteRole getRole(String seller) {
@@ -223,6 +236,11 @@ public class AuctionController {
 
     }
 
+    /**
+     * 打印数据
+     * @param role 角色
+     * @param auctionList 拍卖行的商品列表
+     */
     private void printData(ConcreteRole role, List<Auction> auctionList) {
         Channel channel = role.getChannel();
         for (Auction auction : auctionList) {

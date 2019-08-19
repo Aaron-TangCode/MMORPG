@@ -5,14 +5,14 @@ import com.game.event.manager.EventMap;
 import com.game.map.bean.ConcreteMap;
 import com.game.map.controller.MapController;
 import com.game.map.service.MapService;
-import com.game.map.task.Task;
+import com.game.map.task.BossAutoAttackTask;
 import com.game.map.threadpool.MapThreadPool;
 import com.game.map.threadpool.TaskQueue;
 import com.game.npc.bean.ConcreteMonster;
-import com.game.npc.bean.MonsterMapMapping;
 import com.game.protobuf.protoc.MsgBossInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
+import com.game.skill.service.SkillService;
 import com.game.user.manager.LocalUserMap;
 import com.game.utils.MapUtils;
 import io.netty.channel.Channel;
@@ -24,23 +24,48 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName DuplicateService
- * @Description TODO
+ * @Description 副本服务
  * @Author DELL
  * @Date 2019/8/12 17:35
  * @Version 1.0
  */
 @Service
 public class DuplicateService {
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
+    /**
+     * 地图服务
+     */
     @Autowired
     private MapService mapService;
+    /**
+     * 地图控制器
+     */
     @Autowired
     private MapController mapController;
+    /**
+     * 被攻击事件
+     */
     @Autowired
     private AttackedEvent attackedEvent;
+    /**
+     * 事件驱动
+     */
     @Autowired
     private EventMap eventMap;
+
+    @Autowired
+    private SkillService skillService;
+
+    /**
+     * 攻击boss
+     * @param channel channel
+     * @param requestBossInfo Boss请求信息
+     * @return
+     */
     public MsgBossInfoProto.ResponseBossInfo attackBoss(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
         //role
         ConcreteRole tmpRole = getRole(channel);
@@ -65,11 +90,11 @@ public class DuplicateService {
     }
     /**
      * 副本模块的统一入口，初始化副本
-     * @param roleList
-     * @param bossName
-     * @param mapName
-     * @param skillName
-     * @return
+     * @param roleList 角色列表
+     * @param bossName boss名字
+     * @param mapName 地图名字
+     * @param skillName 技能
+     * @return 消息
      */
     public String initRole(List<ConcreteRole> roleList,String bossName, String mapName, String skillName) {
         //获取地图id
@@ -87,7 +112,7 @@ public class DuplicateService {
             map.getRoleList().add(role);
         }
         //获取Boss列表
-        List<Integer> list = prepareForAttack(mapId);
+        List<Integer> list = skillService.findMonster(mapId);
         //找出地图的boss
         Map<Integer, ConcreteMonster> bossMap = findConcreteMonster(map,list, bossName);
         //boss添加到地图
@@ -98,8 +123,10 @@ public class DuplicateService {
 
         return  "刷副本";
     }
+
     /**
-     * 怪物的自动攻击
+     * 自动攻击
+     * @param map 地图
      */
     public void autoAttack(ConcreteMap map){
         //todo:怪物根据角色的职业的吸引值优先进行攻击
@@ -116,7 +143,7 @@ public class DuplicateService {
         List<ConcreteRole> roleList = map.getRoleList();
         Map<Integer, ConcreteMonster> bossMap = map.getMonsterMap();
         //创建新任务
-        Task task = new Task(mostRole,bossMap);
+        BossAutoAttackTask task = new BossAutoAttackTask(mostRole,bossMap);
         //添加任务到队列
         TaskQueue.getQueue().add(task);
         //线程执行任务
@@ -136,8 +163,8 @@ public class DuplicateService {
     }
     /**
      * 选出玩家的仇恨值最高的那个
-     * @param map
-     * @return
+     * @param map 地图
+     * @return 角色
      */
     private ConcreteRole chooseRole(ConcreteMap map) {
         //获取角色列表
@@ -153,10 +180,10 @@ public class DuplicateService {
     }
     /**
      * 找出地图的Boss
-     * @param map
-     * @param monsterList
-     * @param monsterName
-     * @return
+     * @param map 地图
+     * @param monsterList 怪兽列表
+     * @param monsterName 怪兽名字
+     * @return 集合
      */
     public Map<Integer,ConcreteMonster> findConcreteMonster(ConcreteMap map,List<Integer> monsterList, String monsterName) {
         //获取地图中的怪兽集合
@@ -171,24 +198,12 @@ public class DuplicateService {
         }
         return monsterMap;
     }
+
     /**
-     * 准备攻击
-     * @param mapId
-     * @return
+     * 获取角色
+     * @param channel channel
+     * @return 角色
      */
-    public List<Integer> prepareForAttack(int mapId) {
-        //获取地图上的怪兽列表
-        List<Integer> monsterList = new ArrayList<>();
-        //地图和怪兽的映射列表
-        List<MonsterMapMapping> monsterMapMappingList = MapUtils.getMonsterMapMappingList();
-        //遍历找出具体的怪兽列表
-        for (int i = 0; i < monsterMapMappingList.size(); i++) {
-            if(monsterMapMappingList.get(i).getMapId()==mapId){
-                monsterList.add(monsterMapMappingList.get(i).getMonsterId());
-            }
-        }
-        return monsterList;
-    }
     public ConcreteRole getRole(Channel channel){
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);
         ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);

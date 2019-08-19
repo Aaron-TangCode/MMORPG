@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @ClassName BuffManager
- * @Description TODO
+ * @Description buff管理器
  * @Author DELL
  * @Date 2019/6/20 17:42
  * @Version 1.0
@@ -14,11 +14,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class BuffManager {
 
-
+    /**
+     * 蓝Buff
+     * @param buff buff
+     * @param role 角色
+     */
     public static void blueBuff(ConcreteBuff buff,ConcreteRole role){
 
         if(role.getCurMp()<role.getTotalMp()){
            int tempMp = role.getCurMp()+buff.getMp();
+
            int newMp = tempMp>role.getTotalMp()?role.getTotalMp():tempMp;
 
            role.setCurMp(newMp);
@@ -27,6 +32,12 @@ public class BuffManager {
         }
 
     }
+
+    /**
+     * 红Buff
+     * @param buff buff
+     * @param role 角色
+     */
     public static void redBuff(ConcreteBuff buff,ConcreteRole role){
         //比较当前血量和总血量
         if(role.getCurHp()<role.getTotalHp()){
@@ -40,7 +51,11 @@ public class BuffManager {
         }
     }
 
-
+    /**
+     * 防守buff
+     * @param buff buff
+     * @param role 角色
+     */
     public static void defendBuff(ConcreteBuff buff,ConcreteRole role){
         //获取角色防御力
         Integer lastDefend = buff.getDefend();

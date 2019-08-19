@@ -4,16 +4,31 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * @ClassName Occupation
- * @Description TODO
+ * @Description 职业
  * @Author DELL
  * @Date 2019/7/3 14:52
  * @Version 1.0
  */
 public class Occupation {
+    /**
+     * id
+     */
     private Integer id;
+    /**
+     * 职业名字
+     */
     private String name;
+    /**
+     * 仇恨值
+     */
     private Integer attract;
+    /**
+     * 描述
+     */
     private String description;
+    /**
+     * 属性
+     */
     private JSONObject property;
 
     public Integer getId() {

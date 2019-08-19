@@ -13,10 +13,27 @@ import java.util.Map;
  * @Version 1.0
  */
 public class EquipmentBox {
+    /**
+     * 装备栏id
+     */
     private int id;
+    /**
+     * 角色id
+     */
     private int roleId;
+    /**
+     * 装备栏
+     */
     private String equipmentBox;
+    /**
+     * 装备map
+     */
     private static volatile Map<Integer, String> equipMap = null;
+
+    /**
+     * 初始化
+     * @return Map
+     */
     public static Map<Integer,String> getEquipMap(){
         if(equipMap==null){
             synchronized (EquipmentBox.class){
@@ -56,6 +73,4 @@ public class EquipmentBox {
     public void setEquipmentBox(String equipmentBox) {
         this.equipmentBox = equipmentBox;
     }
-
-
 }

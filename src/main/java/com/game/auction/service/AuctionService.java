@@ -2,7 +2,7 @@ package com.game.auction.service;
 
 import com.game.auction.bean.Auction;
 import com.game.auction.repository.AuctionRepository;
-import com.game.auction.task.Task;
+import com.game.auction.task.AuctionTask;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.controller.BackpackController;
 import com.game.backpack.service.BackpackService;
@@ -25,43 +25,82 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName AuctionService
- * @Description TODO
+ * @Description 拍卖服务
  * @Author DELL
  * @Date 2019/7/18 11:08
  * @Version 1.0
  */
 @Service
 public class AuctionService {
+    /**
+     * 拍卖数据访问
+     */
     @Autowired
     private AuctionRepository auctionRepository;
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
+    /**
+     * 背包控制器
+     */
     @Autowired
     private BackpackController backpackController;
-
+    /**
+     * 背包服务
+     */
     @Autowired
     private BackpackService backpackService;
 
+    /**
+     * 添加物品
+     * @param auction 拍卖行
+     * @return 整数
+     */
     public Integer insertGoods(Auction auction) {
        return auctionRepository.insertGoods(auction);
     }
 
+    /**
+     * 查询所有物品
+     * @return 整数
+     */
     public List<Auction> queryAllGoods() {
         return auctionRepository.queryAllGoods();
     }
 
+    /**
+     * 通过id查询拍卖
+     * @param auctionId 拍卖id
+     * @return 返回拍卖实体
+     */
     public Auction queryAutionById(int auctionId) {
         return auctionRepository.queryAutionById(auctionId);
     }
 
+    /**
+     * 删除拍卖物品
+     * @param auctionId 拍卖id
+     */
     public void deleteAuction(int auctionId) {
         auctionRepository.deleteAuction(auctionId);
     }
 
+    /**
+     * 更新拍卖
+     * @param auction 拍卖
+     */
     public void updateAuction(Auction auction) {
         auctionRepository.updateAuction(auction);
     }
 
+    /**
+     * 竞拍
+     * @param channel channel
+     * @param requestAuctionInfo 拍卖请求信息
+     * @return 返回拍卖协议信息
+     */
     public MsgAuctionInfoProto.ResponseAuctionInfo bidding(Channel channel, MsgAuctionInfoProto.RequestAuctionInfo requestAuctionInfo) {
         //获取角色
         ConcreteRole buyRole = getRole(channel);
@@ -71,12 +110,19 @@ public class AuctionService {
         String money = requestAuctionInfo.getMoney();
         //获取交易平台的物品信息
         String content = hanleBidding(buyRole,auctionId,money);
+        //返回协议信息
         return MsgAuctionInfoProto.ResponseAuctionInfo.newBuilder()
                 .setContent(content)
                 .setType(MsgAuctionInfoProto.RequestType.BIDDING)
                 .build();
     }
 
+    /**
+     * 下架拍卖物品
+     * @param channel channel
+     * @param requestAuctionInfo 拍卖请求信息
+     * @return 返回拍卖协议信息
+     */
     public MsgAuctionInfoProto.ResponseAuctionInfo recycle(Channel channel, MsgAuctionInfoProto.RequestAuctionInfo requestAuctionInfo) {
         //获取角色
         ConcreteRole role = getRole(channel);
@@ -96,6 +142,12 @@ public class AuctionService {
                 .build();
     }
 
+    /**
+     * 发布物品或上架物品
+     * @param channel channel
+     * @param requestAuctionInfo 拍卖请求信息
+     * @return 拍卖协议信息
+     */
     public MsgAuctionInfoProto.ResponseAuctionInfo publish(Channel channel, MsgAuctionInfoProto.RequestAuctionInfo requestAuctionInfo) {
         //获取角色
         ConcreteRole role = getRole(channel);
@@ -117,6 +169,12 @@ public class AuctionService {
                 .build();
     }
 
+    /**
+     * 查询拍卖物品
+     * @param channel channel
+     * @param requestAuctionInfo 拍卖请求信息2
+     * @return 返回拍卖协议信息
+     */
     public MsgAuctionInfoProto.ResponseAuctionInfo queryAuction(Channel channel, MsgAuctionInfoProto.RequestAuctionInfo requestAuctionInfo) {
         //获取角色
         ConcreteRole role = getRole(channel);
@@ -129,6 +187,13 @@ public class AuctionService {
                 .setContent(content)
                 .build();
     }
+
+    /**
+     * 打印数量
+     * @param role 角色
+     * @param auctionList 拍卖行物品列表
+     * @return 字符串
+     */
     private String printData(ConcreteRole role, List<Auction> auctionList) {
         Channel channel = role.getChannel();
         String content = null;
@@ -138,15 +203,36 @@ public class AuctionService {
         }
         return content;
     }
+
+    /**
+     * 获取角色
+     * @param channel Channel
+     * @return 返回角色
+     */
     public ConcreteRole getRole(Channel channel){
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);
         ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);
         return role;
     }
+
+    /**
+     * 获取角色
+     * @param name 角色名
+     * @return 返回角色
+     */
     public ConcreteRole getRoleByRoleName(String name){
        return MapUtils.getMapRolename_Role().get(name);
     }
+
+    /**
+     * 处理竞拍物品
+     * @param buyRole 买家
+     * @param auctionId 拍卖id
+     * @param money 竞拍价格
+     * @return
+     */
     private String hanleBidding(ConcreteRole buyRole,String auctionId,String money) {
+        //获取action
         Auction auction = queryAutionById(Integer.parseInt(auctionId));
         Integer oldMoney = auction.getPrice();
         String oldBuyer = auction.getBuyer();
@@ -173,9 +259,9 @@ public class AuctionService {
     }
     /**
      * 获取商品
-     * @param roleId
-     * @param goodsName
-     * @return
+     * @param roleId 角色id
+     * @param goodsName 物品名称
+     * @return 返回物品
      */
     private Goods getGoods(int roleId,String goodsName) {
         Goods goods = null;
@@ -192,14 +278,16 @@ public class AuctionService {
     }
     /**
      * 发布物品
-     * @param role
-     * @param goods
-     * @param number
-     * @param price
-     * @param isNow
+     * @param role 角色
+     * @param goods 物品
+     * @param number 数量
+     * @param price 价格
+     * @param isNow true:一口价模式、false:竞拍模式
      */
     private String publishGoods(ConcreteRole role, Goods goods, String number, String price, String isNow) {
+        //创建竞拍
         Auction auction = new Auction();
+        //注入数据
         auction.setGoodsName(goods.getName());
         auction.setNumber(Integer.parseInt(number));
         auction.setPrice(Integer.parseInt(price));
@@ -223,7 +311,7 @@ public class AuctionService {
             int threadIndex = UserThreadPool.getThreadIndex(role.getChannel().id());
 
             //把物品放在交易平台，开始倒计时
-            Task task = new Task(auction,this,backpackController,roleService);
+            AuctionTask task = new AuctionTask(auction,this,backpackController,roleService);
             //打包成一个任务，丢给线程池执行
             //添加任务到队列
             TaskQueue.getQueue().add(task);

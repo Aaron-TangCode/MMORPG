@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.game.annotation.ExcelAnnotation;
 import com.game.occupation.bean.Occupation;
 import com.game.occupation.manager.OccupationMap;
+import com.game.utils.ExcelUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -56,7 +57,7 @@ public class ReadOccupation {
                     // 获取单元格对象
                 	Cell cell = row.getCell(j);
                     // 单元格为空设置cellStr为空串
-                    cellStr =  getResult(cell);
+                    cellStr =  ExcelUtils.returnCellStr(cell);
                     // 下面按照数据出现位置封装到bean中
                     if(j == 0) {
                         occupation.setId(new Double(cellStr).intValue());
@@ -89,23 +90,5 @@ public class ReadOccupation {
                 }  
             }  
         }  
-    }
-
-    private static String getResult(Cell cell) {
-	    String cellStr = null;
-        if (cell == null) {
-            cellStr = "";
-        }else {
-            switch (cell.getCellTypeEnum()){
-                case NUMERIC:
-                    cellStr = cell.getNumericCellValue() + "";
-                    break;
-                case BOOLEAN:
-                    cellStr = String.valueOf(cell.getBooleanCellValue());
-                    break;
-                default: cellStr = cell.getStringCellValue();
-            }
-        }
-        return cellStr;
     }
 }  

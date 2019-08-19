@@ -2,6 +2,7 @@ package com.game.backpack.excel;
 
 import com.game.backpack.bean.Type;
 import com.game.annotation.ExcelAnnotation;
+import com.game.utils.ExcelUtils;
 import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
@@ -10,12 +11,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 /**
- * 读取Excel文件
- * @author lmb
- * @date 2017-3-15
- *
+ * 读取excel文件
  */
 @ExcelAnnotation
 @Component
@@ -55,7 +52,7 @@ public class ReadGoodsType {
                     // 获取单元格对象
                 	Cell cell = row.getCell(j);
                     // 单元格为空设置cellStr为空串
-                    cellStr =  getResult(cell);
+                    cellStr =  ExcelUtils.returnCellStr(cell);
                     // 下面按照数据出现位置封装到bean中
                     if (j == 0) {
                         type.setId(new Double(cellStr).intValue());
@@ -81,27 +78,5 @@ public class ReadGoodsType {
                 }  
             }  
         }  
-    }
-
-    private static String getResult(Cell cell) {
-	    String cellStr = null;
-        if (cell == null) {
-            cellStr = "";
-        }else {
-            switch (cell.getCellTypeEnum()){
-                case NUMERIC:
-                    cellStr = cell.getNumericCellValue() + "";
-                    break;
-                case BOOLEAN:
-                    cellStr = String.valueOf(cell.getBooleanCellValue());
-                    break;
-                default: cellStr = cell.getStringCellValue();
-            }
-        }
-        return cellStr;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(MapUtils.getListRole().size());
     }
 }  

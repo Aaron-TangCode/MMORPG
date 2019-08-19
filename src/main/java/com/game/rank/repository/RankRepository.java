@@ -10,14 +10,17 @@ import java.util.List;
 
 /**
  * @ClassName RankRepository
- * @Description TODO
+ * @Description 排行榜数据访问
  * @Author DELL
  * @Date 2019/8/5 16:20
  * @Version 1.0
  */
 @Repository
 public class RankRepository {
-
+    /**
+     * 查询排行榜
+     * @return list
+     */
     public List<RankBean> queryRank() {
         SqlSession session = SqlUtils.getSession();
         RankMapper mapper = session.getMapper(RankMapper.class);

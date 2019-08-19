@@ -6,13 +6,18 @@ import org.springframework.stereotype.Service;
 
 /**
  * @ClassName ProtoService
- * @Description TODO
+ * @Description 协议服务
  * @Author DELL
  * @Date 2019/8/7 19:08
  * @Version 1.0
  */
 @Service
 public class ProtoService {
+    /**
+     * proto的role和自定义role转化
+     * @param role role
+     * @return role->protobuf's role
+     */
     public RoleProto.Role transToRole(ConcreteRole role){
 
         return RoleProto.Role.newBuilder()

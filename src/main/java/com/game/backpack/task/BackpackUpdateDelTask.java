@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 /**
  * @ClassName BackpackUpdateDelTask
- * @Description TODO
+ * @Description 背包更新任务
  * @Author DELL
  * @Date 2019/6/19 10:51
  * @Version 1.0

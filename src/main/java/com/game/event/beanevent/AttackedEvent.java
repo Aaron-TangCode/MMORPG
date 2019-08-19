@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @ClassName AttackedEvent
- * @Description TODO
+ * @Description 被攻击事件
  * @Author DELL
  * @Date 2019/8/14 18:41
  * @Version 1.0
@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 @Component
 @EventAnnotation
 public class AttackedEvent extends IEvent {
+    /**
+     * 角色
+     */
     private ConcreteRole role;
 
     public ConcreteRole getRole() {

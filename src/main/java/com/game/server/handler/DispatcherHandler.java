@@ -1,9 +1,22 @@
 package com.game.server.handler;
 
-import com.game.auction.AuctionHandler;
+import com.game.auction.handler.AuctionHandler;
+import com.game.backpack.handler.GoodsHandler;
+import com.game.chat.handler.ChatHandler;
+import com.game.duplicate.handler.DuplicateHandler;
+import com.game.email.handler.EmailHandler;
+import com.game.equipment.handler.EquipHandler;
+import com.game.map.handler.MapHandler;
+import com.game.npc.handler.NpcHandler;
+import com.game.rank.handler.RankHandler;
+import com.game.role.handler.RoleHandler;
 import com.game.server.local.LocalMessageMap;
 import com.game.server.local.LocalUserData;
 import com.game.server.task.DispatcherTask;
+import com.game.shop.handler.ShopHandler;
+import com.game.skill.handler.SkillHandler;
+import com.game.trade.handler.TradeHandler;
+import com.game.user.handler.UserInfoHandler;
 import com.game.user.manager.LocalUserMap;
 import com.game.user.threadpool.UserThreadPool;
 import com.google.protobuf.Message;

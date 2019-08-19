@@ -429,7 +429,11 @@ public class SkillService {
         ConcreteRole concreteRole = getRoleFromDB(roleName);
         //获取地图id
         int mapId = concreteRole.getConcreteMap().getId();
-        //获取地图上的怪兽列表
+       //找出怪兽列表
+        return findMonster(mapId);
+    }
+
+    public List<Integer> findMonster(int mapId){
         List<Integer> monsterList = new ArrayList<>();
         //地图和怪兽的映射列表
         List<MonsterMapMapping> monsterMapMappingList = MapUtils.getMonsterMapMappingList();

@@ -18,7 +18,7 @@ import static com.game.buff.controller.BuffType.*;
 
 /**
  * @ClassName BuffController
- * @Description TODO
+ * @Description buff控制器
  * @Author DELL
  * @Date 2019/6/20 16:59
  * @Version 1.0
@@ -26,7 +26,9 @@ import static com.game.buff.controller.BuffType.*;
 @Component
 public class BuffController {
     /**
-     * 执行Buff
+     * 执行buff
+     * @param roleName 角色名
+     * @param buffName Buff名
      */
     public void executeBuff(String roleName,String buffName){
         //获取角色
@@ -72,6 +74,14 @@ public class BuffController {
 
     }
 
+    /**
+     * 初始化buff和role
+     * @param role 角色
+     * @param buff buff
+     * @param queue 容器队列
+     * @param map 容器map
+     * @param buffMap 容器buffMap
+     */
     public void initBuffAndRole(ConcreteRole role, ConcreteBuff buff, Queue<Runnable> queue,Map<String,Future> map,Map<String,ConcreteBuff> buffMap){
         role.setMapBuff(buffMap);
         buff.setRole(role);

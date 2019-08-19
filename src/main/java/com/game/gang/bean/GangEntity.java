@@ -8,9 +8,21 @@ package com.game.gang.bean;
  * @Version 1.0
  */
 public class GangEntity {
+    /**
+     * 工会id
+     */
     private Integer id;
+    /**
+     * 工会名字
+     */
     private String name;
+    /**
+     * 工会等级
+     */
     private Integer level;
+    /**
+     * 工会基金
+     */
     private Integer funds;
 
     public Integer getId() {

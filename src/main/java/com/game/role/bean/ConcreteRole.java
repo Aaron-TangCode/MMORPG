@@ -116,15 +116,23 @@ public class ConcreteRole {
      */
     private Map<Integer,ConcreteTask> finishedTaskMap;
 
-
+    /**
+     * buff容器
+     */
     private Map<String,ConcreteBuff> mapBuff;
 
-
+    /**
+     * 任务容器
+     */
     private Map<String, Future> taskMap;
-
+    /**
+     * 任务队列
+     */
     private Queue<Runnable> queue;
 
-
+    /**
+     * buff
+     */
     private ConcreteBuff buff;
 
     public ConcreteBuff getBuff() {

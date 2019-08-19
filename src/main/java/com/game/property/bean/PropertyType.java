@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @ClassName PropertyType
- * @Description TODO
+ * @Description 属性类型
  * @Author DELL
  * @Date 2019/6/24 18:03
  * @Version 1.0

@@ -16,7 +16,13 @@ import org.springframework.stereotype.Component;
 @EventAnnotation
 @Component
 public class MonsterDeadEvent extends IEvent {
+    /**
+     * 角色
+     */
     private ConcreteRole role;
+    /**
+     * 怪兽
+     */
     private ConcreteMonster monster;
 
     public ConcreteRole getRole() {

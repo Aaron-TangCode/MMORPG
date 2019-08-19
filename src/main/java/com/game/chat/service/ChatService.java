@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  * @ClassName ChatService
- * @Description TODO
+ * @Description 聊天服务
  * @Author DELL
  * @Date 2019/8/12 21:34
  * @Version 1.0
@@ -23,9 +23,9 @@ import java.util.Set;
 public class ChatService {
     /**
      * 世界聊天
-     * @param channel
-     * @param requestChatInfo
-     * @return
+     * @param channel channel
+     * @param requestChatInfo 聊天请求信息
+     * @return 协议请求信息
      */
     public MsgChatInfoProto.ResponseChatInfo chatAll(Channel channel, MsgChatInfoProto.RequestChatInfo requestChatInfo) {
         //获取角色map
@@ -36,12 +36,20 @@ public class ChatService {
         ConcreteRole role = getRole(channel);
         //content
         String content = requestChatInfo.getContent();
+        //发送消息
         sendMessage(iterator,role.getName(),content);
         return MsgChatInfoProto.ResponseChatInfo.newBuilder()
                 .setContent(ContentType.SEND_SUCCESS)
                 .setType(MsgChatInfoProto.RequestType.CHATALL)
                 .build();
     }
+
+    /**
+     * 发送消息
+     * @param iterator 迭代器
+     * @param roleName 角色名
+     * @param content 内容
+     */
     private void sendMessage(Iterator<Map.Entry<String, ConcreteRole>> iterator,String roleName,String content) {
         while (iterator.hasNext()) {
             Map.Entry<String, ConcreteRole> next = iterator.next();
@@ -58,6 +66,11 @@ public class ChatService {
         }
     }
 
+    /**
+     * 获取角色
+     * @param channel channel
+     * @return 角色
+     */
     public ConcreteRole getRole(Channel channel){
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);
 
@@ -66,9 +79,9 @@ public class ChatService {
     }
     /**
      * 私聊
-     * @param channel
-     * @param requestChatInfo
-     * @return
+     * @param channel channel
+     * @param requestChatInfo 聊天请求信息
+     * @return 协议信息
      */
     public MsgChatInfoProto.ResponseChatInfo chatSomeone(Channel channel, MsgChatInfoProto.RequestChatInfo requestChatInfo) {
         //role
@@ -77,7 +90,7 @@ public class ChatService {
         String content = requestChatInfo.getContent();
         //target
         String target = requestChatInfo.getTarget();
-
+        //获取角色map
         Map<String, ConcreteRole> roleMap = MapUtils.getMapRolename_Role();
         ConcreteRole role = roleMap.get(target);
         Channel channel1 = role.getChannel();

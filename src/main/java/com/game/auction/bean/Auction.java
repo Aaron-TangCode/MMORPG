@@ -8,12 +8,33 @@ package com.game.auction.bean;
  * @Version 1.0
  */
 public class Auction {
+    /**
+     * 唯一id
+     */
     private Integer id;
+    /**
+     * 物品名称
+     */
     private String goodsName;
+    /**
+     * 物品价格
+     */
     private Integer price;
+    /**
+     * 卖家
+     */
     private String seller;
+    /**
+     * 物品数量
+     */
     private Integer number;
+    /**
+     * 物品剩余的拍卖时间
+     */
     private Integer leftTime;
+    /**
+     * 买家
+     */
     private String buyer;
 
     public Integer getId() {

@@ -2,14 +2,23 @@ package com.game.gang.bean;
 
 /**
  * @ClassName JobResource
- * @Description excelBean
+ * @Description 职位
  * @Author DELL
  * @Date 2019/7/16 14:20
  * @Version 1.0
  */
 public class JobResource {
+    /**
+     * 职位Id
+     */
     private Integer id;
+    /**
+     * 职位
+     */
     private String job;
+    /**
+     * 职位权限
+     */
     private String permission;
 
     public Integer getId() {

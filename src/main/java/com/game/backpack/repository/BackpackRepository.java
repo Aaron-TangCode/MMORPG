@@ -2,7 +2,7 @@ package com.game.backpack.repository;
 
 import com.game.backpack.bean.Goods;
 import com.game.backpack.mapper.BackpackMapper;
-import com.game.backpack.task.BackpackInserTask;
+import com.game.backpack.task.BackpackInsertTask;
 import com.game.backpack.task.BackpackUpdateDelTask;
 import com.game.backpack.task.BackpackUpdateTask;
 import com.game.utils.SqlUtils;
@@ -21,6 +21,11 @@ import java.util.List;
  */
 @Repository
 public class BackpackRepository {
+    /**
+     * 通过角色id获取物品
+     * @param roleId 角色id
+     * @return
+     */
     public List<Goods> getGoodsByRoleId(int roleId) {
         SqlSession session = SqlUtils.getSession();
         try{
@@ -34,16 +39,17 @@ public class BackpackRepository {
 
     /**
      * 增加物品
-     * @param newGoods
+     * @param goods 物品
      */
-    public void insertGoods(Goods newGoods) {
-        BackpackInserTask task = new BackpackInserTask(newGoods);
+    public void insertGoods(Goods goods) {
+        BackpackInsertTask task = new BackpackInsertTask(goods);
         ThreadPoolUtils.getThreadPool().execute(task);
     }
 
     /**
      * 更新物品数量(加)
-     * @param roleId
+     * @param roleId 角色id
+     * @param goodsId 物品id
      */
     public void updateGoodsByRoleId(int roleId,int goodsId) {
         BackpackUpdateTask task = new BackpackUpdateTask(roleId,goodsId);
@@ -52,8 +58,8 @@ public class BackpackRepository {
 
     /**
      * 获取角色拥有的物品数量
-     * @param roleId
-     * @return
+     * @param roleId 角色id
+     * @return 返回整数
      */
     public int getExistedGoodsCountsByRoleId(int roleId) {
         SqlSession session = SqlUtils.getSession();
@@ -68,14 +74,19 @@ public class BackpackRepository {
 
     /**
      * 更新物品数量（减）
-     * @param roleId
-     * @param goodsId
+     * @param roleId 角色id
+     * @param goodsId 物品id
      */
     public void updateGoodsByRoleIdDel(int roleId, Integer goodsId) {
         BackpackUpdateDelTask task = new BackpackUpdateDelTask(roleId,goodsId);
         ThreadPoolUtils.getThreadPool().execute(task);
     }
 
+    /**
+     * 通过物品id获取物品
+     * @param goodsId 物品id
+     * @return 返回物品
+     */
     public Goods getGoodsById(String goodsId) {
         SqlSession session = SqlUtils.getSession();
         try{

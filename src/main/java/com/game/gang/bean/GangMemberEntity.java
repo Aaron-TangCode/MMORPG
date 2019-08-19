@@ -10,8 +10,17 @@ import com.game.role.bean.ConcreteRole;
  * @Version 1.0
  */
 public class GangMemberEntity {
+    /**
+     * 角色
+     */
     private ConcreteRole role;
+    /**
+     * 工会
+     */
     private GangEntity gang;
+    /**
+     * 职位
+     */
     private String job;
 
     public ConcreteRole getRole() {

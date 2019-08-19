@@ -22,26 +22,45 @@ import java.util.*;
 
 /**
  * @ClassName EquipmentService
- * @Description TODO
+ * @Description 装备栏服务
  * @Author DELL
  * @Date 2019/6/19 15:14
  * @Version 1.0
  */
 @Service
 public class EquipmentService {
+    /**
+     * 装备数据访问器
+     */
     @Autowired
     private EquipmentRepository equipmentRepository;
+    /**
+     * 背包服务
+     */
     @Autowired
     private BackpackService backpackService;
 
+    /**
+     * 获取装备栏
+     * @param id id
+     * @return 装备栏
+     */
     public EquipmentBox getEquipmet(int id) {
        return equipmentRepository.getEquipment(id);
     }
 
+    /**
+     * 更新装备栏
+     * @param equipmentBox 装备栏
+     */
     public void updateEquipment(EquipmentBox equipmentBox) {
         equipmentRepository.updateEquipment(equipmentBox);
     }
 
+    /**
+     * 插入装备
+     * @param equipmentBox 装备栏
+     */
     public void insertEquipment(EquipmentBox equipmentBox) {
         equipmentRepository.insertEquipment(equipmentBox);
     }
@@ -91,9 +110,17 @@ public class EquipmentService {
         //背包减少装备
         backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
     }
+
+    /**
+     * 注入商品
+     * @param goods 商品
+     */
     private void injectGoods(Goods goods) {
+        //获取物品
         Goods newGoods = MapUtils.getGoodsMap().get(goods.getName());
+        //物品属性
         JSONObject jsonObject1 = newGoods.getProperty();
+        //遍历物品，注入属性
         Set<Map.Entry<String, Object>> entries = jsonObject1.entrySet();
         Iterator<Map.Entry<String, Object>> iterator = entries.iterator();
         Map<PropertyType, Integer> map = new HashMap<>();
@@ -106,6 +133,15 @@ public class EquipmentService {
             goods.getPropertyMap().put(propertyType,Integer.valueOf(value));
         }
     }
+
+    /**
+     * 装备处理
+     * @param role 角色
+     * @param equipmentBox 装备栏
+     * @param goodsList 物品列表
+     * @param goodsName 物品名称
+     * @return 物品
+     */
     private Goods  handleEquipement(ConcreteRole role,EquipmentBox equipmentBox,List<Goods> goodsList,String goodsName) {
         Goods goods = getGoods(goodsList,goodsName);
         //获取装备的类型
@@ -142,6 +178,13 @@ public class EquipmentService {
         }
         return goods;
     }
+
+    /**
+     * 旧装备
+     * @param eName 装备部位
+     * @param equipment 装备
+     * @return 物品
+     */
     private Goods returnOldEquipmemt(String eName,Equipment equipment) {
         String goodsId = null;
         switch (eName) {
@@ -167,8 +210,8 @@ public class EquipmentService {
 
     /**
      * 按照百分比来改变MPHP
-     * @param role
-     * @param tmpTotalMap
+     * @param role 角色
+     * @param tmpTotalMap 容器map
      */
     private void changeMPHP(ConcreteRole role, Map<PropertyType, Integer> tmpTotalMap) {
         Map<PropertyType, Integer> totalMap = role.getTotalMap();
@@ -191,8 +234,8 @@ public class EquipmentService {
 
     /**
      * 改变属性总值和属性当前值(ATTACK和DEFEND)
-     * @param role
-     * @param goods
+     * @param role 角色
+     * @param goods 物品
      */
     private void changeProperty(ConcreteRole role,Goods goods,List<Goods> goodsList) {
         EquipmentBox equipmentBox = role.getEquipmentBox();
@@ -239,7 +282,13 @@ public class EquipmentService {
         }
     }
 
-
+    /**
+     * 根据装备注入属性
+     * @param eName 装备名
+     * @param equipment 装备
+     * @param goods 物品
+     * @return json数据
+     */
     private JSON setEquipmentValueAndReturnJson(String eName,Equipment equipment,Goods goods) {
         switch (eName){
             case "head":
@@ -267,9 +316,9 @@ public class EquipmentService {
 
     /**
      * 获取商品
-     * @param goodsList
-     * @param goodsName
-     * @return
+     * @param goodsList 物品列表
+     * @param goodsName 物品名
+     * @return 物品
      */
     private Goods getGoods(List<Goods> goodsList, String goodsName) {
         Goods goods = null;
@@ -281,9 +330,22 @@ public class EquipmentService {
         }
         return goods;
     }
+
+    /**
+     * 移除装备
+     * @param channel channel
+     * @param requestEquipInfo 装备请求信息
+     * @return 协议信息
+     */
     public MsgEquipInfoProto.ResponseEquipInfo removeEquip(Channel channel, MsgEquipInfoProto.RequestEquipInfo requestEquipInfo) {
         return null;
     }
+
+    /**
+     * 获取角色
+     * @param channel channel
+     * @return 角色
+     */
     public ConcreteRole getRole(Channel channel){
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);
         ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);

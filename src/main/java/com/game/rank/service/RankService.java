@@ -14,20 +14,33 @@ import java.util.List;
 
 /**
  * @ClassName RankService
- * @Description TODO
+ * @Description 排行榜服务
  * @Author DELL
  * @Date 2019/8/5 16:20
  * @Version 1.0
  */
 @Service
 public class RankService {
+    /**
+     * 排行榜数据访问
+     */
     @Autowired
     private RankRepository rankRepository;
 
+    /**
+     * 查询排行榜
+     * @return
+     */
     public List<RankBean> queryRank() {
         return rankRepository.queryRank();
     }
 
+    /**
+     * 查询排行榜
+     * @param channel channel
+     * @param requestRankInfo 排行榜请求信息
+     * @return 协议信息
+     */
     public MsgRankInfoProto.ResponseRankInfo queryRankInfo(Channel channel, MsgRankInfoProto.RequestRankInfo requestRankInfo) {
         ConcreteRole role = getRole(channel);
         //获取数据
@@ -50,14 +63,32 @@ public class RankService {
 
     }
 
+    /**
+     * 插入信息
+     * @param channel channel
+     * @param requestRankInfo 排行榜请求信息
+     * @return 协议信息
+     */
     public MsgRankInfoProto.ResponseRankInfo insertRankInfo(Channel channel, MsgRankInfoProto.RequestRankInfo requestRankInfo) {
         return null;
     }
 
+    /**
+     *
+     * @param channel channel
+     * @param requestRankInfo 排行榜请求信息
+     * @return 协议信息
+     */
     public MsgRankInfoProto.ResponseRankInfo updateRankInfo(Channel channel, MsgRankInfoProto.RequestRankInfo requestRankInfo) {
         return null;
     }
 
+    /**
+     *
+     * @param channel channel
+     * @param requestRankInfo 排行榜请求信息
+     * @return 协议信息
+     */
     public MsgRankInfoProto.ResponseRankInfo deleteRankInfo(Channel channel, MsgRankInfoProto.RequestRankInfo requestRankInfo) {
         return null;
     }

@@ -1,16 +1,14 @@
 package com.game.event.handler;
 
-import com.game.buff.controller.BuffController;
 import com.game.event.annotation.EventAnnotation;
 import com.game.event.beanevent.AttackedEvent;
 import com.game.role.bean.ConcreteRole;
 import io.netty.util.concurrent.Future;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
  * @ClassName AttackedHandler
- * @Description TODO
+ * @Description 被攻击处理器
  * @Author DELL
  * @Date 2019/8/14 20:27
  * @Version 1.0
@@ -18,8 +16,10 @@ import org.springframework.stereotype.Component;
 @EventAnnotation
 @Component
 public class AttackedHandler implements IHandler<AttackedEvent> {
-    @Autowired
-    private BuffController buffController;
+    /**
+     * 执行处理器
+     * @param attackedEvent 被攻击事件
+     */
     @Override
     public void exec(AttackedEvent attackedEvent) {
         ConcreteRole role = attackedEvent.getRole();

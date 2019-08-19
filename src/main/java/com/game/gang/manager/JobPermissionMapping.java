@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * @ClassName JobPermissionMapping
- * @Description TODO
+ * @Description 职位-职位权限映射关系
  * @Author DELL
  * @Date 2019/7/16 15:04
  * @Version 1.0

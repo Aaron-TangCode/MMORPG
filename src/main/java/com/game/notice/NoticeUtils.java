@@ -10,14 +10,17 @@ import java.util.Set;
 
 /**
  * @ClassName NoticeUtils
- * @Description TODO
+ * @Description 通知工具类
  * @Author DELL
  * @Date 2019/6/14 14:30
  * @Version 1.0
  */
 public class NoticeUtils {
 
-
+    /**
+     * 通知所有角色
+     * @param monster 怪兽
+     */
     public static void notifyAllRoles(ConcreteMonster monster){
         //通知该场景下的所有玩家
         int mapId = 0;

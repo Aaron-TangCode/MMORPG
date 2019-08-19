@@ -17,43 +17,81 @@ import java.text.MessageFormat;
 
 /**
  * @ClassName GangService
- * @Description TODO
+ * @Description 工会服务
  * @Author DELL
  * @Date 2019/7/16 16:21
  * @Version 1.0
  */
 @Service
 public class GangService {
+    /**
+     * 工会数据访问
+     */
     @Autowired
     private GangRepository gangRepository;
-
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
 
+    /**
+     * 查找工会成员
+     * @param roleId 角色id
+     * @return 工会成员
+     */
     public GangMemberEntity findGangMember(int roleId) {
         return gangRepository.findGangMember(roleId);
     }
 
+    /**
+     * 创建工会
+     * @param gangName 工会名称
+     */
     public void insertGang(String gangName) {
         gangRepository.insertGang(gangName);
     }
 
+    /**
+     * 查询工会
+     * @param gangName 工会名称
+     * @return 工会
+     */
     public GangEntity queryGang(String gangName) {
         return gangRepository.queryGang(gangName);
     }
 
+    /**
+     * 添加工会成员
+     * @param entity 工会
+     */
     public void insertGangMember(GangMemberEntity entity) {
         gangRepository.insertGangMember(entity);
     }
 
+    /**
+     * 查询工会
+     * @param roleId 角色id
+     * @return
+     */
     public GangEntity queryGangByRoleName(Integer roleId) {
         return gangRepository.queryGangByRoleName(roleId);
     }
 
+    /**
+     * 更新工会
+     * @param gangEntity 工会
+     */
     public void updateGangEntity(GangEntity gangEntity) {
         gangRepository.updateGangEntity(gangEntity);
     }
 
+    /**
+     * 创建工会
+     * @param channel channel
+     * @param requestGangInfo 工会请求信息
+     * @return 协议信息
+     */
     public MsgGangInfoProto.ResponseGangInfo createGang(Channel channel, MsgGangInfoProto.RequestGangInfo requestGangInfo) {
         //获取角色
         ConcreteRole role = getRole(channel);
@@ -70,6 +108,12 @@ public class GangService {
                 .build();
     }
 
+    /**
+     * 加入工会
+     * @param channel channel
+     * @param requestGangInfo 工会请求信息
+     * @return 协议信息
+     */
     public MsgGangInfoProto.ResponseGangInfo joinGang(Channel channel, MsgGangInfoProto.RequestGangInfo requestGangInfo) {
         //role
         ConcreteRole tmpRole = getRole(channel);
@@ -89,9 +133,9 @@ public class GangService {
     }
     /**
      * 加入工会
-     * @param entity
-     * @param role
-     * @param gangName
+     * @param entity 工会
+     * @param role 角色
+     * @param gangName 工会名字
      */
     private String join(GangMemberEntity entity,ConcreteRole role,String gangName) {
         //没的话加入工会
@@ -112,15 +156,21 @@ public class GangService {
     }
 
     /**
-     * todo
-     * @param channel
-     * @param requestGangInfo
-     * @return
+     * 解散工会
+     * @param channel channel
+     * @param requestGangInfo 工会请求信息
+     * @return 协议信息
      */
     public MsgGangInfoProto.ResponseGangInfo dismissGang(Channel channel, MsgGangInfoProto.RequestGangInfo requestGangInfo) {
         return null;
     }
 
+    /**
+     * 捐款
+     * @param channel channel
+     * @param requestGangInfo 工会请求信息
+     * @return 协议信息
+     */
     public MsgGangInfoProto.ResponseGangInfo donateMoney(Channel channel, MsgGangInfoProto.RequestGangInfo requestGangInfo) {
         //获取工会
         ConcreteRole role = getRole(channel);
@@ -144,6 +194,11 @@ public class GangService {
                 .build();
     }
 
+    /**
+     * 获取角色
+     * @param channel channel
+     * @return 角色
+     */
     public ConcreteRole getRole(Channel channel){
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);
         ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);
@@ -151,8 +206,8 @@ public class GangService {
     }
     /**
      * 判断角色是否有工会
-     * @param role
-     * @return
+     * @param role 角色
+     * @return true or false
      */
     public GangMemberEntity belongGang(ConcreteRole role){
         GangMemberEntity entity = findGangMember(role.getId());
@@ -160,9 +215,9 @@ public class GangService {
     }
     /**
      * 创建工会
-     * @param flag
-     * @param gangName
-     * @param role
+     * @param flag 工会成员
+     * @param gangName 工会名字
+     * @param role 角色
      */
     private String buildGang(GangMemberEntity flag,String gangName,ConcreteRole role) {
         //没工会可创建工会
@@ -185,7 +240,7 @@ public class GangService {
     }
     /**
      * 获取角色
-     * @return
+     * @return 角色
      */
     public ConcreteRole getRoleByRoleName(String roleName){
         return MapUtils.getMapRolename_Role().get(roleName);

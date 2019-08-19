@@ -4,7 +4,7 @@ import com.game.role.bean.ConcreteRole;
 
 /**
  * @ClassName IEventBusManager
- * @Description TODO
+ * @Description 事件管理器接口
  * @Author DELL
  * @Date 2019/7/24 18:18
  * @Version 1.0

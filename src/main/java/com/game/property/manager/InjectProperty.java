@@ -22,21 +22,31 @@ import java.util.*;
 
 /**
  * @ClassName InjectProperty
- * @Description TODO
+ * @Description 注入属性
  * @Author DELL
  * @Date 2019/6/25 10:56
  * @Version 1.0
  */
 @Component
 public class InjectProperty {
+    /**
+     * 注入任务数据
+     */
     @Autowired
     private InjectTaskData injectTaskData;
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
-
+    /**
+     * 装备服务
+     */
     @Autowired
     private EquipmentService equipmentService;
-
+    /**
+     * 背包服务
+     */
     @Autowired
     private BackpackService backpackService;
     /**
@@ -129,6 +139,12 @@ public class InjectProperty {
         MapUtils.getMapRolename_Role().put(role.getName(), role);
     }
 
+    /**
+     * 返回装备列表
+     * @param equipment 装备
+     * @param goodsList 物品列表
+     * @return 物品列表
+     */
     public static List<Goods> returnOwnEquipmentList(Equipment equipment,List<Goods> goodsList) {
         String clothes = equipment.getClothes();
         String head = equipment.getHead();
