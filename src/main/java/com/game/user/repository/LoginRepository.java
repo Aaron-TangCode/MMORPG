@@ -17,9 +17,9 @@ import org.springframework.stereotype.Component;
 public class LoginRepository {
     /**
      * 检查登录
-     * @param username
-     * @param password
-     * @return
+     * @param username username
+     * @param password password
+     * @return true or false
      */
     public boolean login(String username,String password){
         SqlSession session = SqlUtils.getSession();
@@ -35,8 +35,8 @@ public class LoginRepository {
     /**
 
      * 根据username找RoleId
-     * @param username
-     * @return
+     * @param username username
+     * @return int
      */
     public int getUserRoleIdByUsername(String username) {
         SqlSession session = SqlUtils.getSession();
@@ -54,6 +54,11 @@ public class LoginRepository {
         }
     }
 
+    /**
+     * 检查用户是否存在
+     * @param username username
+     * @return User
+     */
     public User checkUser(String username) {
         SqlSession session = SqlUtils.getSession();
 

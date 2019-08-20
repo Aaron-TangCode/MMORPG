@@ -17,39 +17,57 @@ import org.springframework.stereotype.Service;
 
 /**
  * @ClassName UserService
- * @Description
+ * @Description 用户服务
  * @Author DELL
  * @Date 2019/7/3 16:52
  * @Version 1.0
  */
 @Service
 public class UserService {
+    /**
+     * 用户数据范文
+     */
     @Autowired
     private UserRepository userRepository;
+    /**
+     * 登录服务
+     */
     @Autowired
     private Login login;
-
+    /**
+     * 注册服务
+     */
     @Autowired
     private RegisterService registerService;
-
+    /**
+     * 用户控制器
+     */
     @Autowired
     private UserController userController;
-
+    /**
+     * proto服务
+     */
     @Autowired
     private ProtoService protoService;
-
+    /**
+     * 注入属性服务
+     */
     @Autowired
     private InjectProperty injectProperty;
 
+    /**
+     * 更新用户
+     * @param user
+     */
     public void updateUser(User user) {
         userRepository.updateUser(user);
     }
 
     /**
      * 登录
-     * @param channel
-     * @param requestUserInfo
-     * @return
+     * @param channel channel
+     * @param requestUserInfo requestUserInfo
+     * @return 协议信息
      */
     public MsgUserInfoProto.ResponseUserInfo login(Channel channel, MsgUserInfoProto.RequestUserInfo requestUserInfo) {
         //获取账号和密码
@@ -123,9 +141,9 @@ public class UserService {
 
     /**
      * 注册
-     * @param channel
-     * @param requestUserInfo
-     * @return
+     * @param channel channel
+     * @param requestUserInfo requestUserInfo
+     * @return 协议信息
      */
     public MsgUserInfoProto.ResponseUserInfo register(Channel channel, MsgUserInfoProto.RequestUserInfo requestUserInfo) {
         //获取用户名和密码
@@ -155,9 +173,9 @@ public class UserService {
 
     /**
      * 退出
-     * @param channel
-     * @param requestUserInfo
-     * @return
+     * @param channel channel
+     * @param requestUserInfo requestUserInfo
+     * @return 协议信息
      */
     public MsgUserInfoProto.ResponseUserInfo exit(Channel channel, MsgUserInfoProto.RequestUserInfo requestUserInfo) {
         //获取角色
@@ -175,11 +193,9 @@ public class UserService {
 
     /**
      * 初始化玩家数据
-     *
-     *
-     * @param userId
-     * @param role
-     * @param channel
+     * @param userId  userId
+     * @param role role
+     * @param channel  channel
      */
     private void initUserState(Integer userId, ConcreteRole role, Channel channel) {
 
@@ -199,9 +215,9 @@ public class UserService {
 
     /**
      * 清楚缓存数据
-     * @param userId
-     * @param role
-     * @param channel
+     * @param userId userId
+     * @param role role
+     * @param channel channel
      */
     private void unloadUserState(Integer userId, ConcreteRole role, Channel channel){
         //清楚缓存

@@ -15,7 +15,7 @@ import java.util.UUID;
 
 /**
  * @ClassName TradeController
- * @Description TODO
+ * @Description 交易控制器
  * @Author DELL
  * @Date 2019/7/15 12:28
  * @Version 1.0
@@ -28,6 +28,11 @@ public class TradeController {
     @Autowired
     private RoleService roleService;
 
+    /**
+     * 请求交易
+     * @param roleName1 rolename1
+     * @param roleName2 rolename2
+     */
     @RequestAnnotation("/requestTrade")
     public void requestTrade(String roleName1,String roleName2){
         //生成交易ID
@@ -44,9 +49,9 @@ public class TradeController {
 
     /**
      * 确认交易
-     * @param roleName1
-     * @param roleName2
-     * @param uuid
+     * @param roleName1 roleName1
+     * @param roleName2 roleName2
+     * @param uuid uuid
      */
     @RequestAnnotation("/confirmTrade")
     public void confirmTrade(String roleName1,String roleName2,String uuid){
@@ -59,8 +64,8 @@ public class TradeController {
 
     /**
      * 交易物品
-     * @param uuid
-     * @param goodsName
+     * @param uuid uuid
+     * @param goodsName 物品名称
      */
     @RequestAnnotation("/tradingGoods")
     public void tradingGoods(String uuid,String goodsName){

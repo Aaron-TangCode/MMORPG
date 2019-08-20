@@ -20,9 +20,9 @@ public class Login {
 
     /**
      * 用户登录
-     * @param username
-     * @param password
-     * @return
+     * @param username username
+     * @param password password
+     * @return true or false
      */
     public boolean login(String username,String password){
         if(username!=null&&password!=null){
@@ -34,8 +34,8 @@ public class Login {
 
     /**
      * 根据用户名username找角色role
-     * @param username
-     * @return
+     * @param username username
+     * @return int
      */
     public int getUserRoleIdByUsername(String username) {
         return loginRepository.getUserRoleIdByUsername(username);

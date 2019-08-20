@@ -2,6 +2,7 @@ package com.game.user.handler;
 
 import com.game.protobuf.protoc.MsgUserInfoProto;
 import com.game.user.service.UserService;
+import com.game.utils.ProtobufUtils;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -13,7 +14,7 @@ import static com.game.server.request.RequestUserInfoType.*;
 
 /**
  * @ClassName UserInfoHandler
- * @Description TODO
+ * @Description 用户处理器
  * @Author DELL
  * @Date 2019/8/7 18:09
  * @Version 1.0
@@ -21,19 +22,25 @@ import static com.game.server.request.RequestUserInfoType.*;
 @Component
 @ChannelHandler.Sharable
 public class UserInfoHandler extends SimpleChannelInboundHandler<MsgUserInfoProto.RequestUserInfo> {
+    /**
+     * 用户服务
+     */
     @Autowired
     private UserService userService;
 
-
+    /**
+     * 协议
+     */
     private MsgUserInfoProto.ResponseUserInfo responseUserInfo;
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MsgUserInfoProto.RequestUserInfo requestUserInfo) throws Exception {
+        //channel
         Channel channel = ctx.channel();
-
+        //协议号
         int requestType = requestUserInfo.getType().getNumber();
-
-        switch (requestType){
+        //分发任务
+        switch  (requestType){
             case LOGIN:
                 responseUserInfo = userService.login(channel, requestUserInfo);
                 break;
@@ -48,6 +55,6 @@ public class UserInfoHandler extends SimpleChannelInboundHandler<MsgUserInfoProt
         }
 
         // 返回消息
-        ctx.writeAndFlush(responseUserInfo);
+        ProtobufUtils.sendProtobufMessage(ctx,responseUserInfo);
     }
 }

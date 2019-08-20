@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @ClassName ShopController
- * @Description TODO
+ * @Description 商店控制器
  * @Author DELL
  * @Date 2019/7/1 20:57
  * @Version 1.0
@@ -20,13 +20,23 @@ import org.springframework.stereotype.Component;
 @RequestAnnotation("/shop")
 @Component
 public class ShopController {
-
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
-
+    /**
+     * 背包控制器
+     */
     @Autowired
     private BackpackController backpackController;
 
+    /**
+     * 购买物品
+     * @param roleName 角色名
+     * @param goodsName 物品名
+     * @return 信息
+     */
     @RequestAnnotation("/buy")
     public String buy(String roleName,String goodsName){
         //获取玩家

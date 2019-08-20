@@ -15,6 +15,7 @@ import com.game.server.local.LocalUserData;
 import com.game.server.task.DispatcherTask;
 import com.game.shop.handler.ShopHandler;
 import com.game.skill.handler.SkillHandler;
+import com.game.task.handler.TaskHandler;
 import com.game.trade.handler.TradeHandler;
 import com.game.user.handler.UserInfoHandler;
 import com.game.user.manager.LocalUserMap;
@@ -70,6 +71,8 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
     private AuctionHandler auctionHandler;
     @Autowired
     private RankHandler rankHandler;
+    @Autowired
+    private TaskHandler taskHandler;
     private static Map<Integer, SimpleChannelInboundHandler<? extends Message>> handlerMap = new HashMap<>();
 
     private DispatcherHandler(){}
@@ -103,6 +106,8 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
         handlerMap.put(REQUEST_AUCTIONINFO_PROTO.protoCode,auctionHandler);
         //rank
         handlerMap.put(REQUEST_RANKINFO_PROTO.protoCode,rankHandler);
+        //task
+        handlerMap.put(REQUEST_TASKINFO_PROTO.protoCode,taskHandler);
     }
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception{

@@ -18,7 +18,7 @@ import java.util.UUID;
 
 /**
  * @ClassName TradeService
- * @Description TODO
+ * @Description 交易服务
  * @Author DELL
  * @Date 2019/8/13 12:18
  * @Version 1.0
@@ -30,6 +30,12 @@ public class TradeService {
     @Autowired
     private RoleService roleService;
 
+    /**
+     * 请求交易
+     * @param channel Channel
+     * @param requestTradeInfo requestTradeInfo
+     * @return 协议信息
+     */
     public MsgTradeInfoProto.ResponseTradeInfo requestTrade(Channel channel, MsgTradeInfoProto.RequestTradeInfo requestTradeInfo) {
         //生成交易ID
         String uuid = UUID.randomUUID().toString();
@@ -49,6 +55,12 @@ public class TradeService {
                 .build();
     }
 
+    /**
+     * 确认交易
+     * @param channel channel
+     * @param requestTradeInfo requestTradeInfo
+     * @return 协议信息
+     */
     public MsgTradeInfoProto.ResponseTradeInfo confirmTrade(Channel channel, MsgTradeInfoProto.RequestTradeInfo requestTradeInfo) {
         //rolename
         String roleName2 = requestTradeInfo.getRoleName();
@@ -56,16 +68,22 @@ public class TradeService {
         String uuid = requestTradeInfo.getUuid();
         ConcreteRole to = getRoleByRoleName(roleName2);
         ConcreteRole from = getRoleByChannel(channel);
-
+        //内容d
         String content = "进入交易("+uuid+")";
         to.getChannel().writeAndFlush("进入交易("+uuid+")");
-
+        //返回消息
         return MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
                 .setContent(content)
                 .setType(MsgTradeInfoProto.RequestType.CONFIRMTRADE)
                 .build();
     }
 
+    /**
+     * 交易物品
+     * @param channel channel
+     * @param requestTradeInfo requestTradeInfo
+     * @return 协议信息
+     */
     public MsgTradeInfoProto.ResponseTradeInfo tradingGoods(Channel channel, MsgTradeInfoProto.RequestTradeInfo requestTradeInfo) {
         //uuid
         String uuid = requestTradeInfo.getUuid();
@@ -92,6 +110,12 @@ public class TradeService {
                 .build();
     }
 
+    /**
+     * 价格
+     * @param channel channel
+     * @param requestTradeInfo requestTradeInfo
+     * @return 协议信息
+     */
     public MsgTradeInfoProto.ResponseTradeInfo tradingMoney(Channel channel, MsgTradeInfoProto.RequestTradeInfo requestTradeInfo) {
         //uuid
         String uuid = requestTradeInfo.getUuid();
@@ -128,6 +152,12 @@ public class TradeService {
                 .build();
     }
 
+    /**
+     * 交易信息
+     * @param channel channel
+     * @param requestTradeInfo requestTradeInfo
+     * @return 协议信息
+     */
     public MsgTradeInfoProto.ResponseTradeInfo tradeGoods(Channel channel, MsgTradeInfoProto.RequestTradeInfo requestTradeInfo) {
         //goodsName
         String goodsName = requestTradeInfo.getGoodsName();
@@ -154,6 +184,11 @@ public class TradeService {
                 .build();
     }
 
+    /**
+     * 获取角色
+     * @param channel channel
+     * @return 协议信息
+     */
     public ConcreteRole getRoleByChannel(Channel channel){
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);
 
@@ -161,16 +196,21 @@ public class TradeService {
         return role;
     }
 
+    /**
+     * 获取角色
+     * @param roleName 角色名
+     * @return role
+     */
     public ConcreteRole getRoleByRoleName(String roleName){
         ConcreteRole role = MapUtils.getMapRolename_Role().get(roleName);
         return role;
     }
     /**
      * 处理交易逻辑
-     * @param seller
-     * @param buyer
-     * @param goods
-     * @return
+     * @param seller 卖家
+     * @param buyer 买家
+     * @param goods 物品
+     * @return 消息
      */
     private boolean bigDeal(ConcreteRole seller, ConcreteRole buyer, Goods goods) {
         try {

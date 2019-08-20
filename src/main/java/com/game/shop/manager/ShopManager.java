@@ -20,6 +20,9 @@ import java.util.Set;
 @Component
 @ExcelAnnotation
 public class ShopManager {
+    /**
+     * 商店缓存map
+     */
     private static volatile Map<String,Goods> shopMap = null;
     public static Map<String,Goods> getShopMap(){
         if(shopMap==null){
@@ -31,11 +34,16 @@ public class ShopManager {
         }
         return shopMap;
     }
+
+    /**
+     * 初始化商店缓存
+     */
     @ExcelAnnotation
     public void init(){
         Map<String,Goods> map = getShopMap();
         Set<Map.Entry<String, Goods>> entrySet = MapUtils.getGoodsMap().entrySet();
         Iterator<Map.Entry<String, Goods>> iterator = entrySet.iterator();
+        //遍历注入值
         while (iterator.hasNext()) {
             Map.Entry<String, Goods> next = iterator.next();
             map.put(next.getKey(),next.getValue());

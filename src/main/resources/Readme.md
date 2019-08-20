@@ -5,133 +5,71 @@
 游戏名字：江湖传奇
 //操作指引
 - 1、启动服务端：com.game.server.SpringMain
-- 2、启动客户端：com.game.client.Client
+- 2、启动客户端：com.hailintang.client.StartClient
 - 3、在客户端端口输入相关指令
 
 ##### 相关指令如下：
-//登录操作
-{type:"/user/login",username:"123",password:"123"}
-{type:"/user/login",username:"456",password:"123"}
-{type:"/user/login",username:"789",password:"123"}
-//注册用户
-{type:"/user/registerService",username:"123",password:"123",ackpassword:"123"}
-//注册角色
-{type:"/register/role",username:"tanghailin",roleName:"role8",occupationId:1}
-//登出
-{type:"/user/logout",username:"123"}
-//根据roleName获取它所在的地图
-{type:"/role/getMap",roleName:"role4"}
-//获取当前地图角色信息
-{type:"/user/getRoleInfo",mapname:"村子"}
-{type:"/user/getRoleInfo",mapname:"森林"}
+客户端连接后：（有以下信息提示）
+欢迎进入游戏！登录:Login		注册:Register		帮助文档:Help
+Connect to Server Successfully!
 
-//切换地图
-{type:"/map/moveTo",roleName:"role4",dest:"森林"}
-{type:"/map/moveTo",roleName:"role4",dest:"村子"}
-
-//获取当前地图
-{type:"/map/moveTo",username:"123",dest:"森林"}
-{type:"/map/moveTo",username:"123",dest:"村子"}
-
-//获取某个角色的状态信息
-{type:"/role/getRoleState",roleName:"role4"}
-
-//给某个角色加血
-{type:"/role/roleByAddBlood",roleName:"role4"}
-//给某个角色减血
-{type:"/role/roleByHurted",roleName:"role4"}
-//和某个NPC谈话
-{type:"/npc/taklwithnpc",rolename:"role4",npcname:"NPC1"}
-//某个角色学习某个技能
-{type:"/skill/studyskill",roleName:"role4",skillName:"噬魂之手"}
-{type:"/skill/studyskill",roleName:"role4",skillName:"血之狂暴"}
-
-//某个角色升级某个技能
-{type:"/skill/upgradeskill",roleName:"role4",skillName:"血之狂暴"}
-
-//某个角色用某个技能攻击某个怪兽
-{type:"/skill/useskill",roleName:"role4",skillName:"血之狂暴",monsterName:"怪兽4号"}
-//某个角色获取某个物品
-{type:"/backpack/getGoods",roleName:"role4",goodsName:"小血瓶"}
-{type:"/backpack/getGoods",roleName:"role4",goodsName:"小蓝瓶"}
-{type:"/backpack/getGoods",roleName:"role4",goodsName:"太刀"}
-{type:"/backpack/getGoods",roleName:"role4",goodsName:"手枪"}
-{type:"/backpack/getGoods",roleName:"role4",goodsName:"技能包"}
-//某个角色使用某个物品
-{type:"/role/roleUseGoods",roleName:"role4",goodsName:"手枪"}
-{type:"/role/roleUseGoods",roleName:"role4",goodsName:"太刀"}
-{type:"/role/roleUseGoods",roleName:"role4",goodsName:"小血瓶"}
-{type:"/role/roleUseGoods",roleName:"role4",goodsName:"小蓝瓶"}
-
-//把某个装备添加到装备栏
-{type:"/equipment/addEquipment",roleName:"role4",goodsName:"太刀"}
-{type:"/equipment/addEquipment",roleName:"role4",goodsName:"手枪"}
-
-//某个角色在商店系统购买某个物品或装备
-{type:"/shop/buy",roleName:"role4",goodsName:"小血瓶"}
-
-//和世界聊天
-{type:"/chat/all",roleName:"role4",content:"来自上帝的祝福"}
-
-//和某个角色私聊
-{type:"/chat/someone",roleName:"role4",roleTarget:"role5",content:"来自上帝的祝福"}
-
-//邮件发送道具
-{type:"/email/goods",goodsName:"小血瓶"}
-
-//PK模块：A攻击B
-{type:"/skill/rolePK",roleName:"role4",skillName:"血之狂暴",targetRoleName:"role5"}
-
-//刷副本
-{type:"/duplicate/attackboss1",roleName:"role4",bossName:"怪兽4号",mapName:"森林"}
-
-//交易系统
-{type:"/trade/tradegoods",roleName1:"role4",roleName2:"role5",goodsName:"小血瓶"}
-//请求交易
-{type:"/trade/requestTrade",roleName1:"role4",roleName2:"role5"}
-//确认交易
-{type:"/trade/confirmTrade",roleName1:"role5",roleName2:"role4",uuid:""}
-//进行交易物品
-{type:"/trade/tradingGoods",uuid:"",goodsName:"小蓝瓶"}
-//进行交易金币
-{type:"/trade/tradingMoney",uuid:"",number:"10"}
-
-
-//工会系统
-//创建工会
-{type:"/gang/create",roleName:"role4",gangName:"王者工会"}
-//加入工会
-{type:"/gang/join",roleName:"role5",gangName:"王者工会"}
-//捐款给工会
-{type:"/gang/donateMoney",roleName:"role4",number:"10"}
-
-//交易行系统
-//发布物品到交易平台(一口价)
-{type:"/auction/publish",seller:"role4",goodsName:"小蓝瓶",number:"1",price:"10",isNow:"true"}
-
-//发布物品到交易平台(竞拍)
-{type:"/auction/publish",seller:"role4",goodsName:"小蓝瓶",number:"1",price:"10",isNow:"false"}
-
-//查询交易平台的物品
-{type:"/auction/queryAuction",roleName:"role4"}
-
-//撤回交易平台的物品
-{type:"/auction/recycle",roleName:"role4",auctionId:"1"}
-
-//竞拍叫价
-{type:"/auction/bidding",roleName:"role5",auctionId:"",money:"20"}
-
-//任务系统
-//查询可接受的任务
-{type:"/task/queryReceivableTask",roleName:"role4"}
-//查询已接受的任务
-{type:"/task/queryReceivedTask",roleName:"role4"}
-
-//接受任务
-{type:"/task/receiveTask",roleName:"role4",taskId:"1"}
-//放弃任务
-{type:"/task/discardTask",roleName:"role4",taskId:"1"}
-
-//排行榜查询
-{type:"/rank/queryRank",roleName:"role4"}
+输入Help指令，会有相关操作文档出现：
+游戏的指令有：
+用户相关：
+	 Login：登录
+	 Register：注册
+角色相关：
+	 ChooseRole：创建角色
+	 RoleInfo：获取角色信息
+	 UseGoods：角色使用物品
+场景相关：
+	 GetMap：获取角色当前所在地图
+	 Move：角色移动，切换地图
+NPC相关：
+	 TalkToNpc：和NPC谈话
+背包相关：
+	 GetGoods：获取物品或装备
+	 DiscardGoods：丢弃物品或装备
+技能相关：
+	 UpgradeSkill：升级技能
+	 StudySkill：学习新技能
+	 RolePK：角色PK
+	 UseSkill：释放技能
+装备相关：
+	 AddEquip：装备武器
+	 RemoveEquip：移除武器
+副本相关：
+	 AttackBoss：刷副本
+商店相关：
+	 Buy：购买装备或物品
+聊天相关：
+	 ChatAll：世界聊天
+	 ChatSomeone：私聊
+邮件相关：
+	 SendGoods：发送物品或装备
+交易相关：
+	 RequestTrade：请求交易
+	 ConfirmTrade：确认交易
+	 TradingGoods：交易物品
+	 TradingMoney：交易金额
+	 TradeGoods：交易
+工会相关：
+	 CreateGang：创建工会
+	 JoinGang：加入工会
+	 DismissGang：解散工会
+	 DonateMoney：捐钱
+拍卖行相关：
+	 Bidding：竞拍物品
+	 Recycle：物品下架
+	 Publish：物品上架
+	 QueryAuction：查询拍卖行物品
+排行榜相关：
+	 QueryRank：排行榜
+排行榜相关：
+	 Exit：退出当前游戏
+任务相关：
+	 QueryReceivableTask：查询可接受任务
+	 QueryReceivedTask：查询已接受任务
+	 ReceiveTask：接受任务
+	 DiscardTask：放弃任务
 ```

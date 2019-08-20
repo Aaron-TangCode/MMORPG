@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.game.task.mapper.TaskMapper">
     <select id="queryTask" resultType="com.game.task.bean.RoleTask">
-        select * from roleTask where roleId=#{id}
+        select * from roletask where roleId=#{id}
     </select>
 
     <update id="updateTask" parameterType="com.game.task.bean.RoleTask">
-        update roleTask set receivedTask=#{receivedTask},finishedTask=#{finishedTask},count=#{count} where roleId=#{roleId}
+        update roletask set receivedTask=#{receivedTask},finishedTask=#{finishedTask},count=#{count} where roleId=#{roleId}
     </update>
 </mapper>

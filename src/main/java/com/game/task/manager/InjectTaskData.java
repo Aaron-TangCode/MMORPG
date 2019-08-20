@@ -20,14 +20,21 @@ import java.util.Map;
  */
 @Component
 public class InjectTaskData {
+    /**
+     * 任务服务
+     */
     @Autowired
     private TaskService taskService;
-
+    /**
+     * 任务数据访问
+     */
     @Autowired
     private TaskRepository taskRepository;
 
+
     /**
      * 注入数据，缓存本地
+     * @param role role
      */
     public void injectData(ConcreteRole role){
         //获取本地的任务map（所有任务）
@@ -36,6 +43,11 @@ public class InjectTaskData {
         allocateTask(taskMap,role);
     }
 
+    /**
+     * 分配任务
+     * @param taskMap 任务map
+     * @param role 角色
+     */
     private void allocateTask(Map<Integer, ConcreteTask> taskMap,ConcreteRole role) {
         RoleTask roleTask = taskService.queryTask(role.getId());
         if (roleTask==null){

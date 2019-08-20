@@ -4,6 +4,7 @@ import com.game.annotation.ExcelAnnotation;
 import com.game.task.bean.ConcreteTask;
 import com.game.task.manager.TaskMap;
 import com.game.utils.EnumUtil;
+import com.game.utils.ExcelUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -56,7 +57,7 @@ public class ReadTask {
                     // 获取单元格对象
                 	Cell cell = row.getCell(j);
                     // 单元格为空设置cellStr为空串
-                    cellStr =  getResult(cell);
+                    cellStr =  ExcelUtils.returnCellStr(cell);
                     // 下面按照数据出现位置封装到bean中
                     if(j == 0) {
                         task.setId(new Double(cellStr).intValue());
@@ -89,23 +90,5 @@ public class ReadTask {
                 }  
             }  
         }  
-    }
-
-    private static String getResult(Cell cell) {
-	    String cellStr = null;
-        if (cell == null) {
-            cellStr = "";
-        }else {
-            switch (cell.getCellTypeEnum()){
-                case NUMERIC:
-                    cellStr = cell.getNumericCellValue() + "";
-                    break;
-                case BOOLEAN:
-                    cellStr = String.valueOf(cell.getBooleanCellValue());
-                    break;
-                default: cellStr = cell.getStringCellValue();
-            }
-        }
-        return cellStr;
     }
 }  

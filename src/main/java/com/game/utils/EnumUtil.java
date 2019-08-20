@@ -2,7 +2,7 @@ package com.game.utils;
 
 /**
  * @ClassName EnumUtil
- * @Description TODO
+ * @Description 枚举工具类
  * @Author DELL
  * @Date 2019/7/29 21:29
  * @Version 1.0

@@ -4,7 +4,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 /**
  * @ClassName ProtobufUtils
- * @Description TODO
+ * @Description protobuf工具类
  * @Author DELL
  * @Date 2019/8/19 12:28
  * @Version 1.0

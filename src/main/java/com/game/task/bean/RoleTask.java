@@ -8,9 +8,21 @@ package com.game.task.bean;
  * @Version 1.0
  */
 public class RoleTask {
+    /**
+     * 角色id
+     */
     private Integer roleId;
+    /**
+     * 已接受任务
+     */
     private String receivedTask;
+    /**
+     * 已完成任务
+     */
     private String finishedTask;
+    /**
+     * 完成任务条件
+     */
     private Integer count;
 
     public Integer getRoleId() {

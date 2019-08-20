@@ -23,26 +23,38 @@ import java.util.*;
 
 /**
  * @ClassName SkillService
- * @Description TODO
+ * @Description 技能服务
  * @Author DELL
  * @Date 2019/8/12 15:46
  * @Version 1.0
  */
 @Service
 public class SkillService {
+    /**
+     * 背包服务
+     */
     @Autowired
     private BackpackService backpackService;
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
+    /**
+     * 怪兽死亡事件
+     */
     @Autowired
     private MonsterDeadEvent monsterDeadEvent;
+    /**
+     * 事件map
+     */
     @Autowired
     private EventMap eventMap;
     /**
      * 升级技能
-     * @param channel
-     * @param requestSkillInfo
-     * @return
+     * @param channel channel
+     * @param requestSkillInfo 技能请求信息
+     * @return 协议信息
      */
     public MsgSkillInfoProto.ResponseSkillInfo upgradeSkill(Channel channel, MsgSkillInfoProto.RequestSkillInfo requestSkillInfo) {
        //获取role
@@ -52,7 +64,9 @@ public class SkillService {
         //判断角色有没有技能包
         Goods consumeGoods = findGoods(role);
         if(consumeGoods==null){
+            //内容
             String content =  role.getName()+"没技能包";
+            //返回消息
             return MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
                     .setContent(content)
                     .setType(MsgSkillInfoProto.RequestType.UPGRADESKILL)
@@ -60,12 +74,23 @@ public class SkillService {
         }
         //获取技能(from db)
         ConcreteSkill skill = role.getConcreteSkill();
+        //内容
         String content =  handleSkill(skill,skillName,role,consumeGoods);
+        //返回消息
         return MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
                 .setContent(content)
                 .setType(MsgSkillInfoProto.RequestType.UPGRADESKILL)
                 .build();
     }
+
+    /**
+     * 技能逻辑处理
+     * @param skill Skill
+     * @param skillName 技能名
+     * @param role 角色
+     * @param consumeGoods 消耗物品
+     * @return 消息
+     */
     private String handleSkill(ConcreteSkill skill,String skillName,ConcreteRole role,Goods consumeGoods) {
         if(skill!=null){
             //skill:1,2,3
@@ -77,6 +102,15 @@ public class SkillService {
             return role.getName()+"没技能:"+skillName+";如需升级技能，请先学习技能";
         }
     }
+
+    /**
+     * 处理技能
+     * @param skills 技能组
+     * @param skillName 技能名
+     * @param role 角色
+     * @param consumeGoods 消耗物品
+     * @return 协议消息
+     */
     private String handleSkills(String[] skills, String skillName,ConcreteRole role,Goods consumeGoods) {
         ConcreteSkill lowSkill = findSkill(skills,skillName);
         if(lowSkill!=null){
@@ -88,11 +122,11 @@ public class SkillService {
     }
     /**
      * 升级技能
-     * @param lowSkill
-     * @param role
-     * @param skillName
-     * @param consumeGoods
-     * @return
+     * @param lowSkill 技能
+     * @param role 角色
+     * @param skillName 技能名称
+     * @param consumeGoods 消耗物品
+     * @return 协议消息
      */
     private String upSkill(ConcreteSkill lowSkill,ConcreteRole role,String skillName,Goods consumeGoods) {
         if(lowSkill.getLevel()==2){
@@ -109,8 +143,8 @@ public class SkillService {
     }
     /**
      * 修改技能id
-     * @param concreteRole
-     * @param concreteSkill
+     * @param concreteRole role
+     * @param concreteSkill skill
      */
     private void updateSkillId(ConcreteRole concreteRole, ConcreteSkill concreteSkill) {
         //oldId的数据格式：1,2
@@ -122,9 +156,9 @@ public class SkillService {
     }
     /**
      * 找技能
-     * @param skills
-     * @param skillName
-     * @return
+     * @param skills skills
+     * @param skillName skill's name
+     * @return skill
      */
     private ConcreteSkill findSkill(String[] skills,String skillName) {
         ConcreteSkill lowSkill = null;
@@ -140,8 +174,8 @@ public class SkillService {
     }
     /**
      * 找技能包
-     * @param role
-     * @return
+     * @param role role
+     * @return goods
      */
     private Goods findGoods(ConcreteRole role) {
         List<Goods> goods = backpackService.getGoodsByRoleId(role.getId());
@@ -156,9 +190,9 @@ public class SkillService {
 
     /**
      * 学习技能
-     * @param channel
-     * @param requestSkillInfo
-     * @return
+     * @param channel channel
+     * @param requestSkillInfo 技能请求信息
+     * @return 协议信息
      */
     public MsgSkillInfoProto.ResponseSkillInfo studySkill(Channel channel, MsgSkillInfoProto.RequestSkillInfo requestSkillInfo) {
         //获取role
@@ -173,9 +207,9 @@ public class SkillService {
     }
     /**
      * 判断角色是否已经拥有该技能或判断角色是否达到学习该技能的条件
-     * @param concreteRole
-     * @param skillname
-     * @return
+     * @param concreteRole role
+     * @param skillname skill's name
+     * @return 协议信息
      */
     private String checkAndLearn(ConcreteRole concreteRole, String skillname) {
         String rolename = concreteRole.getName();
@@ -206,17 +240,18 @@ public class SkillService {
             //修改技能id
             updateSkillId(concreteRole,concreteSkill);
             concreteRole.setConcreteSkill(concreteSkill);
-
+            //更新角色
             roleService.updateRole(concreteRole);
+            //返回消息
             return rolename+"成功学习技能："+skillname;
         }
     }
 
     /**
      * 角色PK
-     * @param channel
-     * @param requestSkillInfo
-     * @return
+     * @param channel channel
+     * @param requestSkillInfo 协议请求信息
+     * @return 协议信息
      */
     public MsgSkillInfoProto.ResponseSkillInfo rolePK(Channel channel, MsgSkillInfoProto.RequestSkillInfo requestSkillInfo) {
         ConcreteRole tmpRole = getRole(channel);
@@ -235,6 +270,15 @@ public class SkillService {
                 .setType(MsgSkillInfoProto.RequestType.ROLEPK)
                 .build();
     }
+
+    /**
+     * 攻击
+     * @param role 角色
+     * @param skillName 技能名称
+     * @param roleName 角色名称
+     * @param targetRoleName 目标对象
+     * @return 协议消息
+     */
     private String attackPk(ConcreteRole role, String skillName, String roleName, String targetRoleName) {
         //从local获取本地角色
         ConcreteRole localRole = MapUtils.getMapRolename_Role().get(roleName);
@@ -279,9 +323,9 @@ public class SkillService {
     }
     /**
      * 找具体的角色
-     * @param roleList
-     * @param targetRoleName
-     * @return
+     * @param roleList roleList
+     * @param targetRoleName 目标对象
+     * @return role
      */
     private ConcreteRole findRole(List<ConcreteRole> roleList, String targetRoleName) {
         ConcreteRole role = null;
@@ -294,8 +338,8 @@ public class SkillService {
     }
     /**
      * 准备Pk
-     * @param roleName
-     * @return
+     * @param roleName 角色名
+     * @return 角色列表
      */
     private List<ConcreteRole> prepareForPk(String roleName) {
         //获取角色
@@ -319,8 +363,8 @@ public class SkillService {
     }
     /**
      * 从数据库获取角色
-     * @param roleName
-     * @return
+     * @param roleName 角色名
+     * @return role
      */
     public ConcreteRole getRoleFromDB(String roleName){
         return roleService.getRoleByRoleName(roleName);
@@ -328,8 +372,8 @@ public class SkillService {
     /**
      * 使用技能
      * @param channel
-     * @param requestSkillInfo
-     * @return
+     * @param requestSkillInfo 技能请求信息
+     * @return 协议信息
      */
     public MsgSkillInfoProto.ResponseSkillInfo useSkill(Channel channel, MsgSkillInfoProto.RequestSkillInfo requestSkillInfo) {
         ConcreteRole role = getRole(channel);
@@ -351,11 +395,11 @@ public class SkillService {
     }
     /**
      * 攻击
-     * @param monster
-     * @param skillName
-     * @param roleName
-     * @param monsterName
-     * @return
+     * @param monster 怪兽
+     * @param skillName 技能名
+     * @param roleName 角色名
+     * @param monsterName 怪兽名
+     * @return 协议信息
      */
     private String attack(ConcreteMonster monster,String skillName,String roleName,String monsterName) {
         //从local获取本地角色
@@ -406,9 +450,9 @@ public class SkillService {
     }
     /**
      * 找出具体的怪兽
-     * @param monsterList
-     * @param monsterName
-     * @return
+     * @param monsterList 怪兽列表
+     * @param monsterName 怪兽名字
+     * @return monster
      */
     public ConcreteMonster findConcreteMonster(List<Integer> monsterList,String monsterName) {
         ConcreteMonster monster = null;
@@ -421,7 +465,7 @@ public class SkillService {
     }
     /**
      * 准备攻击
-     * @param roleName
+     * @param roleName 角色名
      * @return
      */
     public List<Integer> prepareForAttack(String roleName) {
@@ -433,6 +477,11 @@ public class SkillService {
         return findMonster(mapId);
     }
 
+    /**
+     * 找怪兽
+     * @param mapId 地图id
+     * @return monster
+     */
     public List<Integer> findMonster(int mapId){
         List<Integer> monsterList = new ArrayList<>();
         //地图和怪兽的映射列表
@@ -445,6 +494,12 @@ public class SkillService {
         }
         return monsterList;
     }
+
+    /**
+     * 获取角色
+     * @param channel channel
+     * @return role
+     */
     public ConcreteRole getRole(Channel channel){
         //获取userid
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);

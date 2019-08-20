@@ -5,7 +5,6 @@ import com.game.dispatcher.RequestAnnotation;
 import com.game.property.manager.InjectProperty;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
-import com.game.task.manager.InjectTaskData;
 import com.game.user.manager.SessionMap;
 import com.game.user.service.Login;
 import com.game.user.service.RegisterService;
@@ -23,22 +22,32 @@ import java.util.Set;
 @RequestAnnotation("/user")
 @Component
 public class UserController {
+	/**
+	 * 登录服务
+	 */
 	@Autowired
 	private Login login;
-
+	/**
+	 * 注册服务
+	 */
 	@Autowired
 	private RegisterService registerService;
-
+	/**
+	 * 角色服务
+	 */
 	@Autowired
 	private RoleService roleService;
-
+	/**
+	 * buff控制器
+	 */
 	@Autowired
 	private BuffController buffController;
-
+	/**
+	 * 注入属性
+	 */
 	@Autowired
 	private InjectProperty injectProperty;
-	@Autowired
-	private InjectTaskData injectTaskData;
+
 	/**
 	 * 用户登录
 	 * @param username

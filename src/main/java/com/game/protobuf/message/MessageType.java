@@ -55,7 +55,10 @@ public enum MessageType {
     RESPONSE_AUCTIONINFO_PROTO(0x1C,MsgGangInfoProto.ResponseGangInfo.class),
     //rank
     REQUEST_RANKINFO_PROTO(0x1D, MsgRankInfoProto.RequestRankInfo.class),
-    RESPONSE_RANKINFO_PROTO(0x1E,MsgRankInfoProto.ResponseRankInfo.class);
+    RESPONSE_RANKINFO_PROTO(0x1E,MsgRankInfoProto.ResponseRankInfo.class),
+    //task
+    REQUEST_TASKINFO_PROTO(0x1F, MsgTaskInfoProto.RequestTaskInfo.class),
+    RESPONSE_TASKINFO_PROTO(0x20,MsgTaskInfoProto.ResponseTaskInfo.class);
     public Integer protoCode;
     public Class messageLite;
 

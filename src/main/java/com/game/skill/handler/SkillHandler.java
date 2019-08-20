@@ -2,6 +2,7 @@ package com.game.skill.handler;
 
 import com.game.protobuf.protoc.MsgSkillInfoProto;
 import com.game.skill.service.SkillService;
+import com.game.utils.ProtobufUtils;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -13,7 +14,7 @@ import static com.game.server.request.RequestSkillInfoType.*;
 
 /**
  * @ClassName SkillHandler
- * @Description TODO
+ * @Description 技能处理器
  * @Author DELL
  * @Date 2019/8/12 15:40
  * @Version 1.0
@@ -21,14 +22,22 @@ import static com.game.server.request.RequestSkillInfoType.*;
 @Component
 @ChannelHandler.Sharable
 public class SkillHandler extends SimpleChannelInboundHandler<MsgSkillInfoProto.RequestSkillInfo> {
+    /**
+     * 协议信息
+     */
     private MsgSkillInfoProto.ResponseSkillInfo responseSkillInfo;
+    /**
+     * 技能服务
+     */
     @Autowired
     private SkillService skillService;
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MsgSkillInfoProto.RequestSkillInfo requestSkillInfo) throws Exception {
+        //channel
         Channel channel = ctx.channel();
+        //协议号
         int typeNum = requestSkillInfo.getType().getNumber();
-
+        //分发任务
         switch (typeNum) {
             case UPGRADESKILL :
                 responseSkillInfo = skillService.upgradeSkill(channel,requestSkillInfo);
@@ -45,6 +54,7 @@ public class SkillHandler extends SimpleChannelInboundHandler<MsgSkillInfoProto.
                 default:
                     break;
         }
-        ctx.writeAndFlush(responseSkillInfo);
+        //发送消息
+        ProtobufUtils.sendProtobufMessage(ctx,responseSkillInfo);
     }
 }

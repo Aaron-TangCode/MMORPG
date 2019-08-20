@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName SingleThread
- * @Description TODO
+ * @Description 线程
  * @Author DELL
  * @Date 2019/6/20 14:36
  * @Version 1.0

@@ -19,9 +19,9 @@ import org.springframework.stereotype.Repository;
 public class RegisterRepository {
     /**
      * 用户注册
-     * @param username
-     * @param password
-     * @return
+     * @param username username
+     * @param password password
+     * @return true or false
      */
     public boolean register(String username,String password) {
         SqlSession session = SqlUtils.getSession();

@@ -12,7 +12,7 @@
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <!--这里需要加utf-8，否则以后查中文的时候，都会返回Null-->
-                <property name="url" value="jdbc:mysql://localhost/game?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=true"/>
+                <property name="url" value="jdbc:mysql://www.hailintang.top/game?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=true"/>
                 <property name="username" value="root"/>
                 <property name="password" value="root"/>
             </dataSource>

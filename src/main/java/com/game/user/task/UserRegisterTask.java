@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 /**
  * @ClassName UserRegisterTask
- * @Description TODO
+ * @Description 用户注册任务
  * @Author DELL
  * @Date 2019/6/6 16:24
  * @Version 1.0

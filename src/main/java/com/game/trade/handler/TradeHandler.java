@@ -2,6 +2,7 @@ package com.game.trade.handler;
 
 import com.game.protobuf.protoc.MsgTradeInfoProto;
 import com.game.trade.service.TradeService;
+import com.game.utils.ProtobufUtils;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -13,7 +14,7 @@ import static com.game.server.request.RequestTradeInfoType.*;
 
 /**
  * @ClassName TradeHandler
- * @Description TODO
+ * @Description 交易处理器
  * @Author DELL
  * @Date 2019/8/13 12:17
  * @Version 1.0
@@ -21,16 +22,22 @@ import static com.game.server.request.RequestTradeInfoType.*;
 @Component
 @ChannelHandler.Sharable
 public class TradeHandler extends SimpleChannelInboundHandler<MsgTradeInfoProto.RequestTradeInfo> {
+    /**
+     * 交易服务
+     */
     @Autowired
     private TradeService tradeService;
-
+    /**
+     * 协议
+     */
     private MsgTradeInfoProto.ResponseTradeInfo responseTradeInfo;
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MsgTradeInfoProto.RequestTradeInfo requestTradeInfo) throws Exception {
+        //channel
         Channel channel = ctx.channel();
-
+            //协议号
         int typeNum = requestTradeInfo.getType().getNumber();
-
+        //分发任务
         switch (typeNum) {
             case REQUESTTRADE :
                 responseTradeInfo = tradeService.requestTrade(channel,requestTradeInfo);
@@ -50,6 +57,7 @@ public class TradeHandler extends SimpleChannelInboundHandler<MsgTradeInfoProto.
                 default:
                     break;
         }
-        ctx.writeAndFlush(responseTradeInfo);
+        //发送协议
+        ProtobufUtils.sendProtobufMessage(ctx,responseTradeInfo);
     }
 }

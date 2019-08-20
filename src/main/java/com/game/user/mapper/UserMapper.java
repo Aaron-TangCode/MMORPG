@@ -12,42 +12,42 @@ import com.game.user.bean.User;
 public interface UserMapper {
     /**
      * 通过id获取用户user
-     * @param id
-     * @return
+     * @param id id
+     * @return User
      */
     public User selectUserById(Integer id);
 
     /**
      * 通过username获取用户user
-     * @param username
-     * @return
+     * @param username username
+     * @return User
      */
     public User selectUserByUsername(String username);
 
     /**
      * 通过用户username获取游戏角色role
-     * @param username
-     * @return
+     * @param username username
+     * @return int
      */
     public Integer getUserRoleIdByUsername(String username);
 
     /**
      * 创建用户user
-     * @param user
-     * @return
+     * @param user user
+     * @return true or false
      */
     public boolean addUser(User user);
 
     /**
      * 检查
-     * @param username
-     * @return
+     * @param username username
+     * @return User
      */
     public User checkUser(String username);
 
     /**
      * 更新用户信息
-     * @param user
+     * @param user user
      */
     public void updateUser(User user);
 }

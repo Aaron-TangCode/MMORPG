@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "Role.proto";
+//protoc --proto_path=src\main\java\com\game\protobuf --java_out=src\main\java src\main\java\com\game\protobuf\MsgTaskInfo.proto
+
+option java_package = "com.game.protobuf.protoc";
+option java_outer_classname = "MsgTaskInfoProto";
+
+enum RequestType{
+    QUERYRECEIVABLETASK = 0;
+    QUERYRECEIVEDTASK = 1;
+    RECEIVETASK = 2;
+    DISCARDTASK = 3;
+}
+
+message RequestTaskInfo{
+    string requestId = 1;       // 请求id
+    int32 userId = 2;           // 请求的uid
+    string taskId = 3;            //任务id
+    RequestType type = 4;      // 请求类型
+
+}
+
+message ResponseTaskInfo{
+    int32 result = 1;           // 返回结果
+    int32 userId = 2;           // 返回的uid
+    string content = 3;         // 返回内容
+
+    RequestType type = 4;       // 返回类型
+
+    Role role = 5;          // 用户角色
+}
