@@ -3,7 +3,6 @@ package com.game.duplicate.serivce;
 import com.game.event.beanevent.AttackedEvent;
 import com.game.event.manager.EventMap;
 import com.game.map.bean.ConcreteMap;
-import com.game.map.controller.MapController;
 import com.game.map.service.MapService;
 import com.game.map.task.BossAutoAttackTask;
 import com.game.map.threadpool.MapThreadPool;
@@ -41,11 +40,6 @@ public class DuplicateService {
      */
     @Autowired
     private MapService mapService;
-    /**
-     * 地图控制器
-     */
-    @Autowired
-    private MapController mapController;
     /**
      * 被攻击事件
      */
@@ -107,7 +101,7 @@ public class DuplicateService {
         for(ConcreteRole role:roleList){
             String roleName = role.getName();
             //切换地图
-            mapController.moveTo(roleName, mapName);
+            mapService.moveTo(roleName, mapName);
             //把角色添加到地图
             map.getRoleList().add(role);
         }

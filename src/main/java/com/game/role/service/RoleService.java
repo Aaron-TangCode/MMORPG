@@ -3,18 +3,21 @@ package com.game.role.service;
 import com.alibaba.fastjson.JSONObject;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.service.BackpackService;
+import com.game.occupation.bean.Occupation;
+import com.game.occupation.manager.OccupationMap;
 import com.game.property.bean.PropertyType;
 import com.game.protobuf.message.ContentType;
 import com.game.protobuf.message.ResultCode;
 import com.game.protobuf.protoc.MsgRoleInfoProto;
 import com.game.protobuf.service.ProtoService;
 import com.game.role.bean.ConcreteRole;
-import com.game.role.controller.RegisterRole;
 import com.game.role.manager.InjectRoleProperty;
 import com.game.role.repository.RoleRepository;
 import com.game.user.bean.User;
 import com.game.user.manager.LocalUserMap;
 import com.game.user.repository.UserRepository;
+import com.game.user.service.Login;
+import com.game.user.service.UserService;
 import com.game.utils.MapUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +36,20 @@ import java.util.Map;
 @Service("RoleService")
 public class RoleService {
     /**
+     * 用户服务
+     */
+    @Autowired
+    private UserService userService;
+    /**
+     * 登录服务
+     */
+    @Autowired
+    private Login login;
+    /**
      * role数据访问
      */
     @Autowired
     private RoleRepository roleRepository;
-    /**
-     * 注册role
-     */
-    @Autowired
-    private RegisterRole registerRole;
     /**
      * user数据访问
      */
@@ -146,7 +154,7 @@ public class RoleService {
         //获取user
         User user = userRepository.selectUserById((int) userId);
         //注册role
-        registerRole.preRegister(user.getUsername(), roleName, occupationId);
+        preRegister(user.getUsername(), roleName, occupationId);
         //获取role
         ConcreteRole role = roleRepository.getRoleByRoleName(roleName);
         //返回信息
@@ -313,5 +321,72 @@ public class RoleService {
      */
     private boolean checkFullMagic(ConcreteRole role) {
         return role.getCurMp()>=100?true:false;
+    }
+
+    /**
+     * 检查用户是否注册
+     * @param username 用户名
+     * @param roleName 角色名
+     * @param occupationId 职业id
+     * @return true or false
+     */
+    public String preRegister(String username,String roleName,Integer occupationId){
+        //检查用户是否注册
+        User user =  getUser(username);
+        String msg = register(user,username,roleName,occupationId);
+        return msg;
+    }
+
+    /**
+     * 注册
+     * @param user 用户
+     * @param username 用户名
+     * @param roleName 角色名
+     * @param occupationId 职业id
+     * @return 消息
+     */
+    private String register(User user, String username, String roleName, Integer occupationId) {
+        //注册角色和选择职业
+        if(user!=null){
+            //从缓存找职业
+            Occupation occupation =  handle(user,roleName,occupationId);
+            return roleName+"成功注册\t职业:"+occupation.getName() ;
+        }else{
+            return username+"还没注册";
+        }
+    }
+
+    /**
+     * 获取用户
+     * @param username 用户名
+     * @return user
+     */
+    private User getUser(String username) {
+        return login.checkUser(username);
+    }
+
+    /**
+     * 处理
+     * @param user user
+     * @param roleName username
+     * @param occupationId 职业id
+     * @return 职业
+     */
+    private Occupation handle(User user,String roleName,Integer occupationId) {
+        //获取职业
+        Occupation occupation = OccupationMap.getOccupationMap().get(occupationId);
+        //获取角色
+        ConcreteRole role = new ConcreteRole();
+        //注入属性
+        role.setName(roleName);
+        role.setOccupation(occupation);
+        //添加角色
+        insertRole(role);
+        role = getRoleByRoleName(roleName);
+        //角色绑定
+        user.setRole(role);
+        //更新用户
+        userService.updateUser(user);
+        return occupation;
     }
 }

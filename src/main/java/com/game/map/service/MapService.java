@@ -1,6 +1,6 @@
 package com.game.map.service;
 
-import com.game.buff.controller.BuffController;
+import com.game.buff.handler.BuffHandler;
 import com.game.map.bean.ConcreteMap;
 import com.game.map.repository.MapRepository;
 import com.game.protobuf.message.ResultCode;
@@ -13,7 +13,7 @@ import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.game.buff.controller.BuffType.RED;
+import static com.game.buff.handler.BuffType.RED;
 
 /**
  * @ClassName MapService
@@ -38,7 +38,7 @@ public class MapService {
      * buff控制器
      */
     @Autowired
-    private BuffController buffController;
+    private BuffHandler buffHandler;
     /**
      * 根据id获取地图实体类
      * @param id id
@@ -127,7 +127,35 @@ public class MapService {
      */
     private void startBuff(ConcreteRole role,String dest) {
         if(!dest.equals("村子")){
-            buffController.executeBuff(role.getName(),RED);
+            buffHandler.executeBuff(role.getName(),RED);
+        }
+    }
+    /**
+     * 切换地图
+     * @param roleName 角色名
+     * @param dest 目的地
+     * @return 消息
+     */
+    public String moveTo(String roleName,String dest) {
+        //获取角色信息
+        ConcreteRole role = MapUtils.getMapRolename_Role().get(roleName);
+        //获取角色的原地点
+        String src = role.getConcreteMap().getName();
+        //获取源地点和目的地点的id
+        int src_id = getMapIdByMapName(src);
+        int dest_id = getMapIdByMapName(dest);
+        //判断是否可达
+        boolean isAccess = MapUtils.isReach(src_id,dest_id);
+        if(isAccess){
+            //从src移动到dest,更新数据库
+            roleService.updateMap(role.getName(),dest_id);
+            role.getConcreteMap().setName(dest);
+            role.getConcreteMap().setId(dest_id);
+            //更新本地缓存
+            MapUtils.getMapRolename_Role().put(roleName,role);
+            return role.getName()+"从"+src+"移动到"+dest;
+        }else{
+            return "不能从"+src+"直接移动到"+dest;
         }
     }
 }

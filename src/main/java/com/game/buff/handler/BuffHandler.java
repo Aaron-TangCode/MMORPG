@@ -1,4 +1,4 @@
-package com.game.buff.controller;
+package com.game.buff.handler;
 
 import com.game.buff.bean.ConcreteBuff;
 import com.game.map.threadpool.TaskQueue;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
-import static com.game.buff.controller.BuffType.*;
+import static com.game.buff.handler.BuffType.*;
 
 /**
  * @ClassName BuffController
@@ -24,7 +24,7 @@ import static com.game.buff.controller.BuffType.*;
  * @Version 1.0
  */
 @Component
-public class BuffController {
+public class BuffHandler {
     /**
      * 执行buff
      * @param roleName 角色名

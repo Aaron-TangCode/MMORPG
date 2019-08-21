@@ -1,4 +1,4 @@
-package com.game.backpack.controller;
+package com.game.backpack.handler;
 
 import com.game.backpack.bean.Goods;
 import com.game.backpack.service.BackpackService;
@@ -18,8 +18,7 @@ import java.util.List;
  * @Version 1.0
  */
 @Component
-@RequestAnnotation("/backpack")
-public class BackpackController {
+public class BackpackHandler {
 
     @Autowired
     private BackpackService backpackService;

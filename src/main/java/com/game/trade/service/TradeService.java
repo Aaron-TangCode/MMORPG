@@ -1,7 +1,7 @@
 package com.game.trade.service;
 
 import com.game.backpack.bean.Goods;
-import com.game.backpack.controller.BackpackController;
+import com.game.backpack.handler.BackpackHandler;
 import com.game.protobuf.protoc.MsgTradeInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
@@ -26,7 +26,7 @@ import java.util.UUID;
 @Service
 public class TradeService {
     @Autowired
-    private BackpackController backpackController;
+    private BackpackHandler backpackHandler;
     @Autowired
     private RoleService roleService;
 
@@ -215,11 +215,11 @@ public class TradeService {
     private boolean bigDeal(ConcreteRole seller, ConcreteRole buyer, Goods goods) {
         try {
             //玩家1：物品减少，增加金币
-            backpackController.getGoods(seller.getName(),goods.getName());
+            backpackHandler.getGoods(seller.getName(),goods.getName());
             seller.setMoney(seller.getMoney()+goods.getCost());
             roleService.updateRole(seller);
             //玩家2：物品增加，减少金币
-            backpackController.discardGoods(buyer.getName(),goods.getName());
+            backpackHandler.discardGoods(buyer.getName(),goods.getName());
             buyer.setMoney(buyer.getMoney()-goods.getCost());
             roleService.updateRole(buyer);
             return true;

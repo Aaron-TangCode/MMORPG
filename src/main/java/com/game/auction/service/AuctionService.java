@@ -4,7 +4,7 @@ import com.game.auction.bean.Auction;
 import com.game.auction.repository.AuctionRepository;
 import com.game.auction.task.AuctionTask;
 import com.game.backpack.bean.Goods;
-import com.game.backpack.controller.BackpackController;
+import com.game.backpack.handler.BackpackHandler;
 import com.game.backpack.service.BackpackService;
 import com.game.map.threadpool.TaskQueue;
 import com.game.protobuf.protoc.MsgAuctionInfoProto;
@@ -46,7 +46,7 @@ public class AuctionService {
      * 背包控制器
      */
     @Autowired
-    private BackpackController backpackController;
+    private BackpackHandler backpackHandler;
     /**
      * 背包服务
      */
@@ -134,7 +134,7 @@ public class AuctionService {
         deleteAuction(Integer.parseInt(auctionId));
         //角色增加物品
         String goodsName = auction.getGoodsName();
-        backpackController.getGoods(role.getName(),goodsName);
+        backpackHandler.getGoods(role.getName(),goodsName);
         String content = "成功撤回物品："+goodsName;
         return MsgAuctionInfoProto.ResponseAuctionInfo.newBuilder()
                 .setType(MsgAuctionInfoProto.RequestType.RECYCLE)
@@ -298,20 +298,20 @@ public class AuctionService {
             //插入数据到数据库
             insertGoods(auction);
             //更新玩家的物品数据
-            backpackController.discardGoods(role.getName(),goods.getName());
+            backpackHandler.discardGoods(role.getName(),goods.getName());
             //返回信息
             return "【一口价模式】:成功发布物品"+goods.getName();
         }else{//拍卖模式
             //上传到交易平台
             insertGoods(auction);
             //更新玩家的物品数据
-            backpackController.discardGoods(role.getName(),goods.getName());
+            backpackHandler.discardGoods(role.getName(),goods.getName());
             //查询物品
 
             int threadIndex = UserThreadPool.getThreadIndex(role.getChannel().id());
 
             //把物品放在交易平台，开始倒计时
-            AuctionTask task = new AuctionTask(auction,this,backpackController,roleService);
+            AuctionTask task = new AuctionTask(auction,this, backpackHandler,roleService);
             //打包成一个任务，丢给线程池执行
             //添加任务到队列
             TaskQueue.getQueue().add(task);

@@ -1,6 +1,6 @@
 package com.game.email.service;
 
-import com.game.backpack.controller.BackpackController;
+import com.game.backpack.handler.BackpackHandler;
 import com.game.protobuf.protoc.MsgEmailInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.utils.MapUtils;
@@ -25,7 +25,7 @@ public class EmailService {
      * 背包控制器
      */
     @Autowired
-    private BackpackController backpackController;
+    private BackpackHandler backpackHandler;
 
     /**
      * 发送物品
@@ -55,7 +55,7 @@ public class EmailService {
             Map.Entry<String, ConcreteRole> next = iterator.next();
             ConcreteRole role = next.getValue();
             Channel channel = role.getChannel();
-            backpackController.getGoods(role.getName(),goodsName);
+            backpackHandler.getGoods(role.getName(),goodsName);
             String msg = "[系统]"+role.getName()+"获得："+goodsName;
             channel.writeAndFlush(msg);
         }

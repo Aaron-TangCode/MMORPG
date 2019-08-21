@@ -2,7 +2,7 @@ package com.game.auction.task;
 
 import com.game.auction.bean.Auction;
 import com.game.auction.service.AuctionService;
-import com.game.backpack.controller.BackpackController;
+import com.game.backpack.handler.BackpackHandler;
 import com.game.map.threadpool.TaskQueue;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
@@ -22,14 +22,14 @@ public class AuctionTask implements  Runnable{
 
     private AuctionService auctionService;
 
-    private BackpackController backpackController;
+    private BackpackHandler backpackHandler;
 
     private RoleService roleService;
 
-    public AuctionTask(Auction auction, AuctionService auctionService, BackpackController backpackController, RoleService roleService){
+    public AuctionTask(Auction auction, AuctionService auctionService, BackpackHandler backpackHandler, RoleService roleService){
         this.auction = auction;
         this.auctionService = auctionService;
-        this.backpackController = backpackController;
+        this.backpackHandler = backpackHandler;
         this.roleService = roleService;
     }
 
@@ -46,7 +46,7 @@ public class AuctionTask implements  Runnable{
         ConcreteRole buyRole = getRole(buyer);
 
         //把物品给购买者
-        backpackController.getGoods(buyer,auction.getGoodsName());
+        backpackHandler.getGoods(buyer,auction.getGoodsName());
 
         //更新生产者的钱
         Integer money = sellRole.getMoney();

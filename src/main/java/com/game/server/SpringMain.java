@@ -42,7 +42,7 @@ public class SpringMain {
             String basePackage=prop.getProperty("excel.file");
             //解析失败
             if (!StringUtil.isNotNullOrEmpty(basePackage)) {
-                throw new RuntimeException("解析properties资源文件失败,请检查是否是properties文件路径有错或资源文件中属性名是否是my.controller.package");
+                throw new RuntimeException("解析properties资源文件失败,请检查是否是properties文件路径有错或资源文件中属性名是否是my.handler.package");
             }
             //拿到基础包之后,去得到所有Controller类
             List<Class> clzes = ClassUtil.parseAllController(basePackage);

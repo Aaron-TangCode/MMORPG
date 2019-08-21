@@ -3,7 +3,7 @@ package com.game.auction.controller;
 import com.game.auction.bean.Auction;
 import com.game.auction.service.AuctionService;
 import com.game.backpack.bean.Goods;
-import com.game.backpack.controller.BackpackController;
+import com.game.backpack.handler.BackpackHandler;
 import com.game.backpack.service.BackpackService;
 import com.game.dispatcher.RequestAnnotation;
 import com.game.role.bean.ConcreteRole;
@@ -36,7 +36,7 @@ public class AuctionController {
      * 背包控制器
      */
     @Autowired
-    private BackpackController backpackController;
+    private BackpackHandler backpackHandler;
     /**
      * 拍卖行服务
      */
@@ -114,7 +114,7 @@ public class AuctionController {
         auctionService.deleteAuction(Integer.parseInt(auctionId));
         //角色增加物品
         String goodsName = auction.getGoodsName();
-        backpackController.getGoods(roleName,goodsName);
+        backpackHandler.getGoods(roleName,goodsName);
         role.getChannel().writeAndFlush("成功撤回物品："+goodsName);
     }
         /**
@@ -157,21 +157,21 @@ public class AuctionController {
             //插入数据到数据库
             auctionService.insertGoods(auction);
             //更新玩家的物品数据
-            backpackController.discardGoods(role.getName(),goods.getName());
+            backpackHandler.discardGoods(role.getName(),goods.getName());
             //返回信息
             role.getChannel().writeAndFlush("【一口价模式】:成功发布物品"+goods.getName());
         }else{//拍卖模式
             //上传到交易平台
             auctionService.insertGoods(auction);
             //更新玩家的物品数据
-            backpackController.discardGoods(role.getName(),goods.getName());
+            backpackHandler.discardGoods(role.getName(),goods.getName());
             //查询物品
             int modIndex = UserThreadPool.getThreadIndex(role.getChannel().id());
             role.getChannel().writeAndFlush("【竞拍模式】:成功发布物品"+goods.getName());
 
 
             //把物品放在交易平台，开始倒计时
-//            BossAutoAttackTask task = new BossAutoAttackTask(auction,auctionService,backpackController,roleService);
+//            BossAutoAttackTask task = new BossAutoAttackTask(auction,auctionService,backpackHandler,roleService);
 
             //打包成一个任务，丢给线程池执行
             //添加任务到队列

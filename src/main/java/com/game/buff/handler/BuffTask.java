@@ -1,10 +1,10 @@
-package com.game.buff.controller;
+package com.game.buff.handler;
 
 import com.game.buff.bean.ConcreteBuff;
 import com.game.buff.manager.BuffManager;
 import com.game.role.bean.ConcreteRole;
 
-import static com.game.buff.controller.BuffType.*;
+import static com.game.buff.handler.BuffType.*;
 
 /**
  * @ClassName BuffTask

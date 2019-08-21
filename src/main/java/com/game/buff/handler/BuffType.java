@@ -1,4 +1,4 @@
-package com.game.buff.controller;
+package com.game.buff.handler;
 
 /**
  * @ClassName BuffType

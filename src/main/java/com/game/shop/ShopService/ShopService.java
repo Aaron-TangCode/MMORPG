@@ -1,7 +1,7 @@
 package com.game.shop.ShopService;
 
 import com.game.backpack.bean.Goods;
-import com.game.backpack.controller.BackpackController;
+import com.game.backpack.handler.BackpackHandler;
 import com.game.protobuf.protoc.MsgShopInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
@@ -29,7 +29,7 @@ public class ShopService {
      * 背包控制器
      */
     @Autowired
-    private BackpackController backpackController;
+    private BackpackHandler backpackHandler;
 
     /**
      * 购物
@@ -53,7 +53,7 @@ public class ShopService {
         //消耗玩家金币
         roleService.updateRole(role);
         //获得商品
-        backpackController.getGoods(role.getName(),goodsName);
+        backpackHandler.getGoods(role.getName(),goodsName);
         //信息
         String content =  role.getName()+"成功购买"+goodsName;
         //返回消息

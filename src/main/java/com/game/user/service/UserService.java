@@ -7,7 +7,7 @@ import com.game.protobuf.protoc.MsgUserInfoProto;
 import com.game.protobuf.service.ProtoService;
 import com.game.role.bean.ConcreteRole;
 import com.game.user.bean.User;
-import com.game.user.controller.UserController;
+import com.game.user.handler.UserHandler;
 import com.game.user.manager.LocalUserMap;
 import com.game.user.repository.UserRepository;
 import com.game.utils.MapUtils;
@@ -43,7 +43,7 @@ public class UserService {
      * 用户控制器
      */
     @Autowired
-    private UserController userController;
+    private UserHandler userHandler;
     /**
      * proto服务
      */
@@ -98,7 +98,7 @@ public class UserService {
         }
         if(is_success){
 
-            role = userController.getRoleAfterLoginSuccess(username);
+            role = userHandler.getRoleAfterLoginSuccess(username);
 
             //绑定userId和channel
             LocalUserMap.getChannelUserMap().put(channel,user.getId());

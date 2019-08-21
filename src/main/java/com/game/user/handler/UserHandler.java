@@ -1,6 +1,5 @@
-package com.game.user.controller;
+package com.game.user.handler;
 
-import com.game.buff.controller.BuffController;
 import com.game.dispatcher.RequestAnnotation;
 import com.game.property.manager.InjectProperty;
 import com.game.role.bean.ConcreteRole;
@@ -21,7 +20,7 @@ import java.util.Set;
  */
 @RequestAnnotation("/user")
 @Component
-public class UserController {
+public class UserHandler {
 	/**
 	 * 登录服务
 	 */
@@ -37,11 +36,6 @@ public class UserController {
 	 */
 	@Autowired
 	private RoleService roleService;
-	/**
-	 * buff控制器
-	 */
-	@Autowired
-	private BuffController buffController;
 	/**
 	 * 注入属性
 	 */
@@ -61,7 +55,6 @@ public class UserController {
 		if(isSuccess){
 			//加用户名-角色对象
 			MapUtils.getMapUsername_Role().put(username,role);
-//			buffController.executeBuff(role.getName());
 			injectProperty.initProperty(role.getName());
 			//校验账号
 
