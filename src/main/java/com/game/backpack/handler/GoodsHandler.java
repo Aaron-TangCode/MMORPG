@@ -9,8 +9,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.game.server.request.RequestGoodsInfoType.DISCARDGOODS;
-import static com.game.server.request.RequestGoodsInfoType.GETGOODS;
+import static com.game.server.request.RequestGoodsInfoType.*;
 
 /**
  * @ClassName GoodsHandler
@@ -43,6 +42,9 @@ public class GoodsHandler extends SimpleChannelInboundHandler<MsgGoodsInfoProto.
                 break;
             case DISCARDGOODS :
                 responseGoodsInfo = backpackService.discardGoods(channel,requestGoodsInfo);
+                break;
+            case SHOWGOODS :
+                responseGoodsInfo = backpackService.showGoods(channel,requestGoodsInfo);
                 break;
                 default:
                     break;

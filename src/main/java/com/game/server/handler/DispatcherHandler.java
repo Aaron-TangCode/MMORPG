@@ -6,6 +6,7 @@ import com.game.chat.handler.ChatHandler;
 import com.game.duplicate.handler.DuplicateHandler;
 import com.game.email.handler.EmailHandler;
 import com.game.equipment.handler.EquipHandler;
+import com.game.gang.handler.GangHandler;
 import com.game.map.handler.MapHandler;
 import com.game.npc.handler.NpcHandler;
 import com.game.rank.handler.RankHandler;
@@ -70,6 +71,8 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
     @Autowired
     private AuctionHandler auctionHandler;
     @Autowired
+    private GangHandler gangHandler;
+    @Autowired
     private RankHandler rankHandler;
     @Autowired
     private TaskHandler taskHandler;
@@ -102,6 +105,8 @@ public class DispatcherHandler extends SimpleChannelInboundHandler<Message> {
         handlerMap.put(REQUEST_EMAILINFO_PROTO.protoCode,emailHandler);
         //trade
         handlerMap.put(REQUEST_TRADEINFO_PROTO.protoCode, tradeHandler);
+        //gang
+        handlerMap.put(REQUEST_GANGINFO_PROTO.protoCode, gangHandler);
         //auction
         handlerMap.put(REQUEST_AUCTIONINFO_PROTO.protoCode,auctionHandler);
         //rank

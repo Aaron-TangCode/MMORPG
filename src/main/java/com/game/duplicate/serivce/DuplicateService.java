@@ -1,5 +1,8 @@
 package com.game.duplicate.serivce;
 
+import com.game.buff.bean.ConcreteBuff;
+import com.game.duplicate.manager.TeamMapManager;
+import com.game.duplicate.task.RoleAttackBossTask;
 import com.game.event.beanevent.AttackedEvent;
 import com.game.event.manager.EventMap;
 import com.game.map.bean.ConcreteMap;
@@ -11,10 +14,13 @@ import com.game.npc.bean.ConcreteMonster;
 import com.game.protobuf.protoc.MsgBossInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
+import com.game.server.manager.BuffMap;
+import com.game.server.manager.TaskMap;
 import com.game.skill.service.SkillService;
 import com.game.user.manager.LocalUserMap;
 import com.game.utils.MapUtils;
 import io.netty.channel.Channel;
+import io.netty.util.concurrent.Future;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +60,35 @@ public class DuplicateService {
     @Autowired
     private SkillService skillService;
 
+
+    /**
+     * 团队打Boss
+     * @param channel channel
+     * @param requestBossInfo requestBossInfo
+     * @return
+     */
+    public MsgBossInfoProto.ResponseBossInfo teamAttackBoss(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
+        //role
+        ConcreteRole role = getRole(channel);
+        //roleTeamMap --> getTeam
+        Map<String, String> roleTeamMap = TeamMapManager.getRoleTeamMap();
+        String teamName = roleTeamMap.get(role.getName());
+        //getTeam
+        Map<String, List<ConcreteRole>> teamMap = TeamMapManager.getTeamMap();
+        //roleList
+        List<ConcreteRole> roleList = teamMap.get(teamName);
+        //bossName
+        String bossName = requestBossInfo.getBossName();
+        //mapName
+        String mapName = requestBossInfo.getMapName();
+
+        //初始化角色
+        String content = initRole(roleList,bossName,mapName,null);
+        return MsgBossInfoProto.ResponseBossInfo.newBuilder()
+                .setContent(content)
+                .setType(MsgBossInfoProto.RequestType.TEAMATTACKBOSS)
+                .build();
+    }
     /**
      * 攻击boss
      * @param channel channel
@@ -109,13 +144,43 @@ public class DuplicateService {
         List<Integer> list = skillService.findMonster(mapId);
         //找出地图的boss
         Map<Integer, ConcreteMonster> bossMap = findConcreteMonster(map,list, bossName);
+
         //boss添加到地图
         map.setMonsterMap(bossMap);
-
+        //玩家自动攻击boss
+//        roleAttackBoss(map);
         //boss的自动攻击
         autoAttack(map);
-
         return  "刷副本";
+    }
+
+    private void roleAttackBoss(ConcreteMap map) {
+        //roleList
+        List<ConcreteRole> roleList = map.getRoleList();
+        //boss
+        Map<Integer, ConcreteMonster> monsterMap = map.getMonsterMap();
+        //task
+        RoleAttackBossTask task = new RoleAttackBossTask(roleList,monsterMap,skillService,map);
+        ConcreteRole captain = roleList.get(0);
+        //选择线程池中的某一个线程处理
+        int threadIndex = MapThreadPool.getThreadIndex(map);
+        //初始化role和buff
+        initRoleTask(captain,TaskQueue.getQueue(), TaskMap.getFutureMap(), BuffMap.getBuffMap());
+        //添加任务到队列
+        captain.getQueue().add(task);
+        //线程执行任务
+        MapThreadPool.ACCOUNT_SERVICE[threadIndex].scheduleAtFixedRate( () ->{
+                    Iterator<Runnable> iterator = captain.getQueue().iterator();
+                    while (iterator.hasNext()) {
+                        Runnable runnable = iterator.next();
+                        if (Objects.nonNull(runnable)) {
+                            runnable.run();
+                        }
+                    }
+
+                },
+                4L,8L, TimeUnit.SECONDS);
+
     }
 
     /**
@@ -123,11 +188,10 @@ public class DuplicateService {
      * @param map 地图
      */
     public void autoAttack(ConcreteMap map){
-        //todo:怪物根据角色的职业的吸引值优先进行攻击
+        //怪物根据角色的职业的吸引值优先进行攻击
         //遍历角色的仇恨值，选出最大的一个来攻击
         ConcreteRole tmpRole = chooseRole(map);
         ConcreteRole mostRole = MapUtils.getMapRolename_Role().get(tmpRole.getName());
-
 
         //触发仇恨值最大的角色被攻击事件
         attackedEvent.setRole(mostRole);
@@ -137,12 +201,14 @@ public class DuplicateService {
         List<ConcreteRole> roleList = map.getRoleList();
         Map<Integer, ConcreteMonster> bossMap = map.getMonsterMap();
         //创建新任务
-        BossAutoAttackTask task = new BossAutoAttackTask(mostRole,bossMap);
+        BossAutoAttackTask task = new BossAutoAttackTask(mostRole,bossMap,map);
+        //初始化role和buff
+        initRoleTask(mostRole,TaskQueue.getQueue(), TaskMap.getFutureMap(), BuffMap.getBuffMap());
         //添加任务到队列
-        TaskQueue.getQueue().add(task);
+        mostRole.getQueue().add(task);
         //线程执行任务
         MapThreadPool.ACCOUNT_SERVICE[threadIndex].scheduleAtFixedRate( () ->{
-                    Iterator<Runnable> iterator = TaskQueue.getQueue().iterator();
+                    Iterator<Runnable> iterator = mostRole.getQueue().iterator();
                     while (iterator.hasNext()) {
                         Runnable runnable = iterator.next();
                         if (Objects.nonNull(runnable)) {
@@ -167,7 +233,7 @@ public class DuplicateService {
         ConcreteRole resRole = roleList.get(0);
         //选出仇恨值最高的角色
         for (int i = 1; i < roleList.size(); i++) {
-            int bigger = Math.max(roleList.get(i).getOccupation().getAttract(),roleList.get(i-1).getOccupation().getAttract());
+//            int bigger = Math.max(roleList.get(i).getOccupation().getAttract(),roleList.get(i-1).getOccupation().getAttract());
             resRole =  roleList.get(i);
         }
         return resRole;
@@ -182,7 +248,6 @@ public class DuplicateService {
     public Map<Integer,ConcreteMonster> findConcreteMonster(ConcreteMap map,List<Integer> monsterList, String monsterName) {
         //获取地图中的怪兽集合
         Map<Integer, ConcreteMonster> monsterMap = map.getMonsterMap();
-
 
         for (int i = 0; i < monsterList.size(); i++) {
             ConcreteMonster concreteMonster = MapUtils.getMonsterMap().get(monsterList.get(i));
@@ -203,4 +268,154 @@ public class DuplicateService {
         ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);
         return role;
     }
+
+    /**
+     * 初始化任务
+     * @param role 角色
+     * @param queue 任务队列
+     * @param map 地图
+     * @param buffMap buffMap
+     */
+    public static void initRoleTask(ConcreteRole role, Queue<Runnable> queue, Map<String, Future> map, Map<String,ConcreteBuff> buffMap){
+        role.setMapBuff(buffMap);
+        role.setQueue(queue);
+        role.setTaskMap(map);
+    }
+
+    /**
+     * 创建队伍
+     * @param channel channel
+     * @param requestBossInfo requestBossInfo
+     * @return 协议信息
+     */
+    public MsgBossInfoProto.ResponseBossInfo createTeam(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
+        //getRole
+        ConcreteRole role = getRole(channel);
+        //getTeamName
+        String teamName = requestBossInfo.getTeamName();
+        //roleTeamMap
+        Map<String, String> roleTeamMap = TeamMapManager.getRoleTeamMap();
+        roleTeamMap.put(role.getName(),teamName);
+        //addTeam
+        Map<String, List<ConcreteRole>> teamMap = TeamMapManager.getTeamMap();
+        //list
+        List<ConcreteRole> roleList = new ArrayList<>();
+        roleList.add(role);
+        teamMap.put(teamName,roleList);
+        //content
+        String content = role.getName()+"成功创建队伍:"+teamName;
+        return MsgBossInfoProto.ResponseBossInfo.newBuilder()
+                .setType(MsgBossInfoProto.RequestType.CREATETEAM)
+                .setContent(content)
+                .build();
+    }
+    /**
+     * 加入队伍
+     * @param channel channel
+     * @param requestBossInfo requestBossInfo
+     * @return 协议信息
+     */
+    public MsgBossInfoProto.ResponseBossInfo joinTeam(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
+        //getRole
+        ConcreteRole role = getRole(channel);
+        //getTeamName
+        String teamName = requestBossInfo.getTeamName();
+        //addTeam
+        Map<String, List<ConcreteRole>> teamMap = TeamMapManager.getTeamMap();
+        //list
+        List<ConcreteRole> roleList = teamMap.get(teamName);
+        //join
+        roleList.add(role);
+        //content
+        String content = role.getName()+"成功加入队伍:"+teamName;
+        return MsgBossInfoProto.ResponseBossInfo.newBuilder()
+                .setType(MsgBossInfoProto.RequestType.JOINTEAM)
+                .setContent(content)
+                .build();
+    }
+    /**
+     * 退出队伍
+     * @param channel channel
+     * @param requestBossInfo requestBossInfo
+     * @return 协议信息
+     */
+    public MsgBossInfoProto.ResponseBossInfo exitTeam(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
+        //role
+        ConcreteRole role = getRole(channel);
+        //teamName
+        String teamName = requestBossInfo.getTeamName();
+        //exitTeam
+        Map<String, List<ConcreteRole>> teamMap = TeamMapManager.getTeamMap();
+        List<ConcreteRole> roleList = teamMap.get(teamName);
+        //remove
+        roleList.remove(role);
+        //content
+        String content = role.getName()+"成功离开队伍:"+teamName;
+        return MsgBossInfoProto.ResponseBossInfo.newBuilder()
+                .setType(MsgBossInfoProto.RequestType.EXITTEAM)
+                .setContent(content)
+                .build();
+    }
+
+    /**
+     * 解散队伍
+     * @param channel channel
+     * @param requestBossInfo requestBossInfo
+     * @return 协议信息
+     */
+    public MsgBossInfoProto.ResponseBossInfo dismissTeam(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
+        //role
+        ConcreteRole role = getRole(channel);
+        //teamName
+        String teamName = requestBossInfo.getTeamName();
+        //dismissTeam
+        Map<String, List<ConcreteRole>> teamMap = TeamMapManager.getTeamMap();
+        //roleTeamMap
+        Map<String, String> roleTeamMap = TeamMapManager.getRoleTeamMap();
+        List<ConcreteRole> roleList = teamMap.get(teamName);
+        //content
+        String content = null;
+        if(roleList.get(0).getName().equals(role.getName())){
+            content = role.getName()+"成功解散队伍";
+            roleList.clear();
+            teamMap.remove(teamName);
+            roleTeamMap.remove(role.getName());
+        }else{
+            content = role.getName()+"不是队长，无法解散队伍";
+        }
+        //return
+        return MsgBossInfoProto.ResponseBossInfo.newBuilder()
+                .setType(MsgBossInfoProto.RequestType.DISMISSTEAM)
+                .setContent(content)
+                .build();
+    }
+    /**
+     * 查询队伍
+     * @param channel channel
+     * @param requestBossInfo requestBossInfo
+     * @return 协议信息
+     */
+    public MsgBossInfoProto.ResponseBossInfo queryTeam(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
+        //content
+        StringBuilder content = new StringBuilder();
+        content.append("队伍名称\t队员\n");
+        //dismissTeam
+        Map<String, List<ConcreteRole>> teamMap = TeamMapManager.getTeamMap();
+        Set<Map.Entry<String, List<ConcreteRole>>> entries = teamMap.entrySet();
+        for (Map.Entry<String, List<ConcreteRole>> entry : entries) {
+            content.append(" "+entry.getKey()+"\t");
+            List<ConcreteRole> roleList = entry.getValue();
+            for (ConcreteRole role : roleList) {
+                content.append(role.getName()+"\t");
+            }
+            content.append("\n");
+        }
+        //return
+        return MsgBossInfoProto.ResponseBossInfo.newBuilder()
+                .setType(MsgBossInfoProto.RequestType.QUERYTEAM)
+                .setContent(content.toString())
+                .build();
+    }
+
+
 }

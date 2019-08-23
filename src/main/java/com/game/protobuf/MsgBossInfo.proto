@@ -6,7 +6,13 @@ option java_package = "com.game.protobuf.protoc";
 option java_outer_classname = "MsgBossInfoProto";
 
 enum RequestType{
-    ATTACKBOSS = 0;
+    ATTACKBOSS = 0; //攻击boss
+    CREATETEAM = 1; //创建队伍
+    JOINTEAM = 2;   //加入队伍
+    EXITTEAM = 3;   //退出队伍
+    DISMISSTEAM = 4;    //解散队伍
+    QUERYTEAM = 5;      //查询队伍
+    TEAMATTACKBOSS = 6; //团队打boss
 }
 
 message RequestBossInfo{
@@ -14,8 +20,9 @@ message RequestBossInfo{
     int32 userId = 2;           // 请求的uid
     string bossName = 3;            //目的地
     RequestType type = 4;      // 请求类型
-    string skillName = 5;
-    string mapName = 6;
+    string skillName = 5;       //技能名称
+    string mapName = 6;         //地图名称
+    string teamName = 7;        //队伍名称
 }
 
 message ResponseBossInfo{

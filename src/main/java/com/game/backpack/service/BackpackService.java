@@ -4,6 +4,7 @@ import com.game.backpack.bean.Goods;
 import com.game.backpack.repository.BackpackRepository;
 import com.game.protobuf.protoc.MsgGoodsInfoProto;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.service.RoleService;
 import com.game.user.manager.LocalUserMap;
 import com.game.utils.MapUtils;
 import io.netty.channel.Channel;
@@ -21,6 +22,11 @@ import java.util.List;
  */
 @Service
 public class BackpackService {
+    /**
+     * 角色服务
+     */
+    @Autowired
+    private RoleService roleService;
     /**
      * 背包数据访问层
      */
@@ -91,6 +97,28 @@ public class BackpackService {
                 .setType(MsgGoodsInfoProto.RequestType.GETGOODS)
                 .setContent(content)
                 .build();
+    }
+
+    /**
+     * 获取物品
+     * @param channel Channel
+     * @param goodsName 物品名称
+     * @return 协议信息
+     */
+    public void getGoods(Channel channel,String goodsName){
+        //获取userId
+        Integer userId = LocalUserMap.getChannelUserMap().get(channel);
+        //获取role
+        ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);
+        //逻辑处理
+        String content ="掉落物品："+goodsName+"\t"+handleGoods(goodsName,role);
+
+        //返回消息
+        MsgGoodsInfoProto.ResponseGoodsInfo info = MsgGoodsInfoProto.ResponseGoodsInfo.newBuilder()
+                .setType(MsgGoodsInfoProto.RequestType.GETGOODS)
+                .setContent(content)
+                .build();
+        channel.writeAndFlush(info);
     }
 
     /**
@@ -222,5 +250,42 @@ public class BackpackService {
         //物品数量-1
         updateGoodsByRoleIdDel(role.getId(),goods.getId());
         return role.getName()+"的"+goodsName+"数量-1";
+    }
+
+    /**
+     * 显示物品信息
+     * @param channel channel
+     * @param requestGoodsInfo requestGoodsInfo
+     * @return 协议信息
+     */
+    public MsgGoodsInfoProto.ResponseGoodsInfo showGoods(Channel channel, MsgGoodsInfoProto.RequestGoodsInfo requestGoodsInfo) {
+        ConcreteRole role = getRole(channel);
+        List<Goods> goodsList = backpackRepository.getGoodsByRoleId(role.getId());
+        StringBuilder content = new StringBuilder();
+        for (int i = 0; i < goodsList.size(); i++) {
+            Goods goods = goodsList.get(i);
+            if(goods.getCount()<=0){
+                continue;
+            }
+            content.append(goods.getName()+"\t").append(goods.getCount()+"\t").append("\n");
+        }
+        //moneyRole
+        ConcreteRole moneyRole = roleService.getRole(role.getId());
+        content.append("金币：\t"+moneyRole.getMoney());
+        return MsgGoodsInfoProto.ResponseGoodsInfo.newBuilder()
+                .setContent(content.toString())
+                .setType(MsgGoodsInfoProto.RequestType.SHOWGOODS)
+                .build();
+    }
+
+    /**
+     * 获取角色
+     * @param channel
+     * @return
+     */
+    private ConcreteRole getRole(Channel channel) {
+        Integer useId = LocalUserMap.getChannelUserMap().get(channel);
+        ConcreteRole role = LocalUserMap.getUserRoleMap().get(useId);
+        return role;
     }
 }

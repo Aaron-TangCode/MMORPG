@@ -8,6 +8,7 @@ option java_outer_classname = "MsgGoodsInfoProto";
 enum RequestType{
     GETGOODS = 0;   //获取物品
     DISCARDGOODS = 1;   //丢掉物品
+    SHOWGOODS = 2;  //显示物品
 }
 
 message RequestGoodsInfo{

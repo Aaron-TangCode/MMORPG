@@ -66,7 +66,7 @@ public class BuffHandler {
         buff.setName(buffName);
         //把任务丢线程池
         int threadIndex = UserThreadPool.getThreadIndex(role.getId());
-        Future future =  UserThreadPool.executeTask(role,threadIndex, 5L, 5L, TimeUnit.SECONDS);
+        Future future =  UserThreadPool.executeTask(role,threadIndex, 10L, 10L, TimeUnit.SECONDS);
 
         //存在map中
         role.getTaskMap().put(String.valueOf(role.getId()),future);
@@ -82,7 +82,7 @@ public class BuffHandler {
      * @param map 容器map
      * @param buffMap 容器buffMap
      */
-    public void initBuffAndRole(ConcreteRole role, ConcreteBuff buff, Queue<Runnable> queue,Map<String,Future> map,Map<String,ConcreteBuff> buffMap){
+    public static void initBuffAndRole(ConcreteRole role, ConcreteBuff buff, Queue<Runnable> queue,Map<String,Future> map,Map<String,ConcreteBuff> buffMap){
         role.setMapBuff(buffMap);
         buff.setRole(role);
         role.setQueue(queue);

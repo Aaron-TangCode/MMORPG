@@ -24,7 +24,7 @@ public class MonsterDeadEvent extends IEvent {
      * 怪兽
      */
     private ConcreteMonster monster;
-
+    @Override
     public ConcreteRole getRole() {
         return role;
     }

@@ -10,8 +10,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.game.server.request.RequestEquipInfoType.ADDEQUIP;
-import static com.game.server.request.RequestEquipInfoType.REMOVEEQUIP;
+import static com.game.server.request.RequestEquipInfoType.*;
 
 /**
  * @ClassName EquipHandler
@@ -44,6 +43,9 @@ public class EquipHandler extends SimpleChannelInboundHandler<MsgEquipInfoProto.
                 break;
             case REMOVEEQUIP :
                 responseEquipInfo = equipmentService.removeEquip(channel,requestEquipInfo);
+                break;
+            case SHOWEQUIP :
+                responseEquipInfo = equipmentService.showEquip(channel,requestEquipInfo);
                 break;
                 default:
                     break;

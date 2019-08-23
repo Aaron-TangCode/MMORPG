@@ -71,7 +71,7 @@ public class TaskService {
      * @param map map
      */
     private String printMap(Map<Integer, ConcreteTask> map,ConcreteRole role){
-        String outputContent = "任务id:{0}\t任务描述:{1}\t任务奖励:{2}\t完成条件:{3}";
+        String outputContent = "任务id:{0}\t任务描述:{1}\t任务奖励:{2}\t完成条件:{3}\n";
         StringBuffer sb = new StringBuffer();
         for (Map.Entry<Integer, ConcreteTask> taskEntry : map.entrySet()) {
             sb.append(MessageFormat.format(outputContent, taskEntry.getKey(), taskEntry.getValue().getTaskDescription(),

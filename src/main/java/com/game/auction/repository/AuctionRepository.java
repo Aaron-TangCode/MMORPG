@@ -31,7 +31,7 @@ public class AuctionRepository {
         //创建任务
         InsertGoodsTask insertGoodsTask = new InsertGoodsTask(auction);
         //提交任务到线程池
-        Future submit = UserThreadPool.ACCOUNT_SERVICE[0].submit(insertGoodsTask);
+        Future submit = UserThreadPool.ACCOUNT_SERVICE[1].submit(insertGoodsTask);
         Integer integer = null;
         try {
             integer = (Integer) submit.get();

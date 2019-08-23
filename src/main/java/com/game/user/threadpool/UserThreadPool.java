@@ -20,7 +20,9 @@ import java.util.concurrent.TimeUnit;
 public class UserThreadPool {
     public static final int DEFAULT_THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
     public static final String FACTORY_NAME = "user_thread";
-    //声明
+    /**
+     * 声明
+     */
     public static final SingleThread[] ACCOUNT_SERVICE = new SingleThread[DEFAULT_THREAD_POOL_SIZE];
     static {
         ThreadFactory threadFactory = new DefaultThreadFactory(FACTORY_NAME);

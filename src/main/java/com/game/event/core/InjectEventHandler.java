@@ -2,8 +2,10 @@ package com.game.event.core;
 
 import com.game.annotation.ExcelAnnotation;
 import com.game.event.beanevent.AttackedEvent;
+import com.game.event.beanevent.GoVillageEvent;
 import com.game.event.beanevent.MonsterDeadEvent;
 import com.game.event.handler.AttackedHandler;
+import com.game.event.handler.GoVillageHandler;
 import com.game.event.handler.IHandler;
 import com.game.event.handler.KillMonsterHandler;
 
@@ -31,8 +33,11 @@ public class InjectEventHandler {
         //添加处理器
         handlerList.add(new KillMonsterHandler());
         handlerList.add(new AttackedHandler());
+        handlerList.add(new GoVillageHandler());
+
         //把事件和handler放一起
         eventMap.put(MonsterDeadEvent.class,handlerList);
         eventMap.put(AttackedEvent.class,handlerList);
+        eventMap.put(GoVillageEvent.class,handlerList);
     }
 }

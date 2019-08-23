@@ -55,6 +55,5 @@ public class GangHandler extends SimpleChannelInboundHandler<MsgGangInfoProto.Re
         }
         //发送协议
         ProtobufUtils.sendProtobufMessage(ctx,responseGangInfo);
-//        ctx.writeAndFlush(responseGangInfo);
     }
 }

@@ -276,11 +276,15 @@ public class RoleService {
                 String hp = property.getString("hp");
                 Map<PropertyType, Integer> curMap = role.getCurMap();
                 Integer oldHp = curMap.get(PropertyType.HP);
-                curMap.put(PropertyType.HP,oldHp+Integer.parseInt(hp));
+                int tmpHp = oldHp+Integer.parseInt(hp);
+                int setHp = tmpHp>=role.getTotalHp()?role.getTotalHp():tmpHp;
+                curMap.put(PropertyType.HP,setHp);
                 //通知角色更新
                 InjectRoleProperty.injectRoleProperty(role);
-                System.out.println("加血后："+role.getCurHp());
                 MapUtils.getMapRolename_Role().put(role.getName(),role);
+                backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
+                //返回消息
+                return "成功使用"+goods.getName()+"\t加血后："+role.getCurHp();
             }else{
                 boolean isFull = checkFullMagic(role);
                 if(isFull){
@@ -291,15 +295,15 @@ public class RoleService {
                 Integer mp = curMap.get(PropertyType.MP);
                 JSONObject property = localGoods.getProperty();
                 String oldMp = property.getString("mp");
-                curMap.put(PropertyType.MP,mp+Integer.parseInt(oldMp));
+                int tmpMp =Integer.parseInt(oldMp)+mp;
+                int setMp = tmpMp>=role.getTotalMp()?role.getTotalMp():tmpMp;
+                curMap.put(PropertyType.MP,setMp);
                 //通知角色更新
                 InjectRoleProperty.injectRoleProperty(role);
-                System.out.println("加蓝后："+role.getCurMp());
                 MapUtils.getMapRolename_Role().put(role.getName(),role);
+                backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
+                return "成功使用"+goods.getName()+"\t加蓝后："+role.getCurMp();
             }
-            //更新物品数据库信息
-            backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
-            return "成功使用"+goods.getName();
         }else{
             return "物品不存在";
         }
@@ -311,7 +315,7 @@ public class RoleService {
      * @return true or false
      */
     private boolean checkFullBoold(ConcreteRole role) {
-        return role.getCurHp()>=100?true:false;
+        return role.getCurHp()>=role.getTotalHp()?true:false;
     }
 
     /**
@@ -320,7 +324,7 @@ public class RoleService {
      * @return true or false
      */
     private boolean checkFullMagic(ConcreteRole role) {
-        return role.getCurMp()>=100?true:false;
+        return role.getCurMp()>=role.getTotalMp()?true:false;
     }
 
     /**

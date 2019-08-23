@@ -6,8 +6,9 @@ option java_package = "com.game.protobuf.protoc";
 option java_outer_classname = "MsgEquipInfoProto";
 
 enum RequestType{
-    ADDEQUIP = 0;
-    REMOVEEQUIP = 1;
+    ADDEQUIP = 0;       //添加装备
+    REMOVEEQUIP = 1;        //卸掉装备
+    SHOWEQUIP = 2;      //展示装备
 }
 
 message RequestEquipInfo{

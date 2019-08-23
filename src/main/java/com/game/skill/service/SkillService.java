@@ -4,6 +4,7 @@ import com.game.backpack.bean.Goods;
 import com.game.backpack.service.BackpackService;
 import com.game.event.beanevent.MonsterDeadEvent;
 import com.game.event.manager.EventMap;
+import com.game.map.bean.ConcreteMap;
 import com.game.notice.NoticeUtils;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.MonsterMapMapping;
@@ -254,17 +255,17 @@ public class SkillService {
      * @return 协议信息
      */
     public MsgSkillInfoProto.ResponseSkillInfo rolePK(Channel channel, MsgSkillInfoProto.RequestSkillInfo requestSkillInfo) {
-        ConcreteRole tmpRole = getRole(channel);
+        ConcreteRole attackRole = getRole(channel);
         //获取角色--->获取地图id--->获取地图上的角色列表
-        List<ConcreteRole> roleList = prepareForPk(tmpRole.getName());
+        List<ConcreteRole> roleList = prepareForPk(attackRole.getName());
         //target
         String target = requestSkillInfo.getTarget();
         //skill
         String skillName = requestSkillInfo.getSkillName();
         //找出具体的
-        ConcreteRole targetRole = findRole(roleList,target);
+        ConcreteRole attackedRole = findRole(roleList,target);
         //获取技能---使用技能---判断是否具备攻击条件--攻击--返回信息
-        String content = attackPk(targetRole,skillName,tmpRole.getName(),target);
+        String content = attackPk(attackedRole,skillName,attackRole.getName(),target);
         return MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
                 .setContent(content)
                 .setType(MsgSkillInfoProto.RequestType.ROLEPK)
@@ -273,27 +274,27 @@ public class SkillService {
 
     /**
      * 攻击
-     * @param role 角色
+     * @param attackedRole 角色
      * @param skillName 技能名称
      * @param roleName 角色名称
      * @param targetRoleName 目标对象
      * @return 协议消息
      */
-    private String attackPk(ConcreteRole role, String skillName, String roleName, String targetRoleName) {
+    private String attackPk(ConcreteRole attackedRole, String skillName, String roleName, String targetRoleName) {
         //从local获取本地角色
-        ConcreteRole localRole = MapUtils.getMapRolename_Role().get(roleName);
+        ConcreteRole attackRole = MapUtils.getMapRolename_Role().get(roleName);
         //检查当期地图是否存在怪兽
-        if(role==null){
-            return "地图："+localRole.getConcreteMap().getName()+"没角色:"+roleName;
+        if(attackedRole==null){
+            return "地图："+attackRole.getConcreteMap().getName()+"没角色:"+targetRoleName;
         }
         //获取技能和使用技能
-        ConcreteSkill skill = localRole.getConcreteSkill();
+        ConcreteSkill skill = attackRole.getConcreteSkill();
         String[] skills = skill.getId().split(",");
         //在技能集合中选出指定技能
         ConcreteSkill concreteSkill = findSkill(skills, skillName);
 
         //角色剩下的mp值
-        int leftMp = localRole.getCurMp();
+        int leftMp = attackRole.getCurMp();
 
         //技能需要消耗的mp值
         Integer costMp = concreteSkill.getMp();
@@ -304,22 +305,22 @@ public class SkillService {
         //技能的伤害值
         Integer hurt = concreteSkill.getHurt();
         //玩家的自身攻击力
-        Integer attack = localRole.getAttack();
+        Integer attack = attackRole.getAttack();
         //总攻击力
         Integer totalAttack = hurt + attack;
         //技能消耗角色的mp值(更新属性系统和通知角色更新属性)
-        localRole.getCurMap().put(PropertyType.MP,leftMp-costMp);
-        InjectRoleProperty.injectRoleProperty(localRole);
+        attackRole.getCurMap().put(PropertyType.MP,leftMp-costMp);
+        InjectRoleProperty.injectRoleProperty(attackRole);
         //获取怪兽的生命值
-        int curHp = role.getCurHp();
+        int curHp = attackedRole.getCurHp();
         //怪兽的生命值减少并通知角色属性更新
-        Map<PropertyType, Integer> curMap = role.getCurMap();
+        Map<PropertyType, Integer> curMap = attackedRole.getCurMap();
         //被攻击的角色生命值减少，更新属性模块
         curMap.put(PropertyType.HP,curHp-totalAttack);
-        InjectRoleProperty.injectRoleProperty(role);
+        InjectRoleProperty.injectRoleProperty(attackedRole);
 
-        return roleName+"成功攻击"+targetRoleName+"\n("+roleName+"的mp值从"+leftMp+"变为"+localRole.getCurMp()+
-                ";"+targetRoleName+"的hp值从"+curHp+"变为"+role.getCurHp()+")";
+        return roleName+"成功攻击"+targetRoleName+"\n("+roleName+"的mp值从"+leftMp+"变为"+attackRole.getCurMp()+
+                ";"+targetRoleName+"的hp值从"+curHp+"变为"+attackedRole.getCurHp()+")";
     }
     /**
      * 找具体的角色
@@ -328,7 +329,6 @@ public class SkillService {
      * @return role
      */
     private ConcreteRole findRole(List<ConcreteRole> roleList, String targetRoleName) {
-        ConcreteRole role = null;
         for (int i = 0; i < roleList.size(); i++) {
             if (Objects.equals(roleList.get(i).getName(),targetRoleName)) {
                 return roleList.get(i);
@@ -385,13 +385,41 @@ public class SkillService {
         String skillName = requestSkillInfo.getSkillName();
         //找出具体怪兽
         ConcreteMonster monster = findConcreteMonster(monsterList,target);
-
+        String content = null;
+        if(monster.getHp()<=0){
+            content = monster.getName()+"已死，不能再攻击";
+        }else {
+            content = attack(monster,skillName,role.getName(),target,null);
+        }
         //获取技能---使用技能---判断是否具备攻击条件--攻击--返回信息
-        String content = attack(monster,skillName,role.getName(),target);
         return MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
                 .setType(MsgSkillInfoProto.RequestType.USESKILL)
                 .setContent(content)
                 .build();
+    }
+
+    /**
+     * 攻击怪兽
+     * @param role 角色
+     * @param monster 怪兽
+     * @param skillName 技能名
+     * @return 协议信息
+     */
+    public void useSkill(ConcreteRole role, ConcreteMonster monster, String skillName, ConcreteMap map){
+        String content = null;
+        if(monster.getHp()<=0){
+            content = monster.getName()+"已死，不能再攻击";
+        }else {
+            content = attack(monster,skillName,role.getName(),monster.getName(),map);
+        }
+        ConcreteRole tmpRole = MapUtils.getMapRolename_Role().get(role.getName());
+        //获取技能---使用技能---判断是否具备攻击条件--攻击--返回信息
+        MsgSkillInfoProto.ResponseSkillInfo skillInfo = MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
+                .setType(MsgSkillInfoProto.RequestType.USESKILL)
+                .setContent(content)
+                .build();
+        //返回消息
+        tmpRole.getChannel().writeAndFlush(skillInfo);
     }
     /**
      * 攻击
@@ -401,7 +429,7 @@ public class SkillService {
      * @param monsterName 怪兽名
      * @return 协议信息
      */
-    private String attack(ConcreteMonster monster,String skillName,String roleName,String monsterName) {
+    private String attack(ConcreteMonster monster,String skillName,String roleName,String monsterName,ConcreteMap map) {
         //从local获取本地角色
         ConcreteRole localRole = MapUtils.getMapRolename_Role().get(roleName);
         //检查当期地图是否存在怪兽
@@ -413,41 +441,71 @@ public class SkillService {
         String[] skills = skill.getId().split(",");
         //在技能集合中选出指定技能
         ConcreteSkill concreteSkill = findSkill(skills, skillName);
-
         //角色剩下的mp值
         int leftMp = localRole.getCurMp();
-
-        //技能需要消耗的mp值
-        Integer costMp = concreteSkill.getMp();
-        //判断是否具备释放技能的条件
-        if(costMp>leftMp){
-            return "角色的mp值不够c释放节能"+"角色mp值:"+leftMp+"\t"+"技能需消耗的mp值:"+costMp;
-        }
-        //技能的伤害值
-        Integer hurt = concreteSkill.getHurt();
-        //玩家的自身攻击力
-        Integer attack = localRole.getAttack();
-        //总攻击力
-        Integer totalAttack = hurt + attack;
-        //技能消耗角色的mp值(更新属性系统和通知角色更新属性)
-        localRole.getCurMap().put(PropertyType.MP,leftMp-costMp);
-        InjectRoleProperty.injectRoleProperty(localRole);
         //获取怪兽的生命值
         Integer monsterHp = monster.getHp();
-        //怪兽的生命值减少
-        monster.setHp(monster.getHp()-totalAttack);
+        //技能为空，使用普通攻击
+        if(concreteSkill==null){
+            //玩家的自身攻击力
+            Integer attack = localRole.getAttack();
+            //怪兽的生命值减少
+            monster.setHp(monster.getHp()-attack);
+        }else {
+            //技能需要消耗的mp值
+            Integer costMp = concreteSkill.getMp();
+            //判断是否具备释放技能的条件
+            if(costMp>leftMp){
+                return "角色的mp值不够c释放节能"+"角色mp值:"+leftMp+"\t"+"技能需消耗的mp值:"+costMp;
+            }
+            //技能的伤害值
+            Integer hurt = concreteSkill.getHurt();
+            //玩家的自身攻击力
+            Integer attack = localRole.getAttack();
+            //总攻击力
+            Integer totalAttack = hurt + attack;
+            //技能消耗角色的mp值(更新属性系统和通知角色更新属性)
+            localRole.getCurMap().put(PropertyType.MP,leftMp-costMp);
+            InjectRoleProperty.injectRoleProperty(localRole);
+            //怪兽的生命值减少
+            monster.setHp(monster.getHp()-totalAttack);
+        }
         //怪兽死亡，通知该地图所有玩家
         if(monster.getHp()<=0){
+            //通知
             NoticeUtils.notifyAllRoles(monster);
+            //怪兽死亡事件
             monsterDeadEvent.setRole(localRole);
             monsterDeadEvent.setMonster(monster);
             //触发事件，记录怪兽死亡次数
             eventMap.submit(monsterDeadEvent);
+            //掉落装备
+            falldownEquip(localRole);
+            //销毁副本
+            map = null;
+            //Move to 村子
         }
-
+        //返回消息
         return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+leftMp+"变为"+localRole.getCurMp()+
                 ";"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
     }
+
+    private void falldownEquip(ConcreteRole localRole) {
+        List<Goods> goodsList = MapUtils.getGoodsList();
+        //掉落装备数量
+        int num = (int)((Math.random())*goodsList.size()+1);
+
+        for(int i=0;i<num;i++){
+            //掉落装备id
+            int goodsId = (int)(Math.random()*goodsList.size());
+            //获取装备
+            Goods goods = goodsList.get(goodsId);
+
+            //拾取装备
+            backpackService.getGoods(localRole.getChannel(),goods.getName());
+        }
+    }
+
     /**
      * 找出具体的怪兽
      * @param monsterList 怪兽列表

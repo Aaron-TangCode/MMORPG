@@ -3,7 +3,7 @@ package com.game.auction.task;
 import com.game.auction.bean.Auction;
 import com.game.auction.service.AuctionService;
 import com.game.backpack.handler.BackpackHandler;
-import com.game.map.threadpool.TaskQueue;
+import com.game.protobuf.protoc.MsgAuctionInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.utils.MapUtils;
@@ -54,13 +54,29 @@ public class AuctionTask implements  Runnable{
         sellRole.setMoney(money+price);
         roleService.updateRole(sellRole);
         //移除任务
-        TaskQueue.getQueue().remove();
+        sellRole.getQueue().remove();
         //返回信息
         if(buyer.equals(seller)){
-            sellRole.getChannel().writeAndFlush("物品没人购买，已退回");
+            String content = "物品没人购买，已退回";
+            MsgAuctionInfoProto.ResponseAuctionInfo info = MsgAuctionInfoProto.ResponseAuctionInfo.newBuilder()
+                    .setType(MsgAuctionInfoProto.RequestType.BIDDING)
+                    .setContent(content)
+                    .build();
+            sellRole.getChannel().writeAndFlush(info);
         }else{
-            buyRole.getChannel().writeAndFlush("成功拍到物品："+auction.getGoodsName());
-            sellRole.getChannel().writeAndFlush("物品成功售出，获得金币："+price);
+            String buyContent = "成功拍到物品："+auction.getGoodsName();
+            String sellContent = "物品成功售出，获得金币："+price;
+            MsgAuctionInfoProto.ResponseAuctionInfo buyInfo = MsgAuctionInfoProto.ResponseAuctionInfo.newBuilder()
+                    .setType(MsgAuctionInfoProto.RequestType.BIDDING)
+                    .setContent(buyContent)
+                    .build();
+            buyRole.getChannel().writeAndFlush(buyInfo);
+            MsgAuctionInfoProto.ResponseAuctionInfo sellInfo = MsgAuctionInfoProto.ResponseAuctionInfo.newBuilder()
+                    .setType(MsgAuctionInfoProto.RequestType.BIDDING)
+                    .setContent(sellContent)
+                    .build();
+
+            sellRole.getChannel().writeAndFlush(sellInfo);
         }
 
     }

@@ -47,7 +47,13 @@ public class TradeService {
         //构建交易Bean
         Trade trade = new Trade(uuid,from,to);
         TradeMap.getTradeMap().put(uuid,trade);
-        to.getChannel().writeAndFlush(from.getName()+":请求交易"+"("+uuid+")");
+        String msg = from.getName()+":请求交易"+"("+uuid+")";
+        MsgTradeInfoProto.ResponseTradeInfo info = MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
+                .setContent(msg)
+                .setType(MsgTradeInfoProto.RequestType.REQUESTTRADE)
+                .build();
+
+        to.getChannel().writeAndFlush(info);
         String content = "等待"+roleName2+"确认交易";
         return MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
                 .setContent(content)
@@ -67,10 +73,14 @@ public class TradeService {
         //uuid
         String uuid = requestTradeInfo.getUuid();
         ConcreteRole to = getRoleByRoleName(roleName2);
-        ConcreteRole from = getRoleByChannel(channel);
+
         //内容d
         String content = "进入交易("+uuid+")";
-        to.getChannel().writeAndFlush("进入交易("+uuid+")");
+        MsgTradeInfoProto.ResponseTradeInfo info = MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
+                .setContent(content)
+                .setType(MsgTradeInfoProto.RequestType.CONFIRMTRADE)
+                .build();
+        to.getChannel().writeAndFlush(info);
         //返回消息
         return MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
                 .setContent(content)
@@ -98,11 +108,16 @@ public class TradeService {
         Goods goods = MapUtils.getGoodsMap().get(goodsName);
 
         boolean success = bigDeal(from, to, goods);
-
+        //内容
         String msg = success?"成功交易":"交易失败";
+        //协议信息
+        MsgTradeInfoProto.ResponseTradeInfo info = MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
+                .setContent(msg)
+                .setType(MsgTradeInfoProto.RequestType.TRADINGGOODS)
+                .build();
 
-        from.getChannel().writeAndFlush(msg);
-        to.getChannel().writeAndFlush(msg);
+        from.getChannel().writeAndFlush(info);
+        to.getChannel().writeAndFlush(info);
 
         return MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
                 .setContent(msg)
@@ -141,7 +156,12 @@ public class TradeService {
 
         String msg = "成功交易";
 
-        to.getChannel().writeAndFlush(msg);
+        MsgTradeInfoProto.ResponseTradeInfo info = MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
+                .setType(MsgTradeInfoProto.RequestType.TRADINGMONEY)
+                .setContent(msg)
+                .build();
+
+        to.getChannel().writeAndFlush(info);
 
         //释放交易
         TradeMap.getTradeMap().remove(uuid);

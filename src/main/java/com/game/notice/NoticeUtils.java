@@ -1,6 +1,7 @@
 package com.game.notice;
 
 import com.game.npc.bean.ConcreteMonster;
+import com.game.protobuf.protoc.MsgSkillInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.utils.MapUtils;
 
@@ -44,7 +45,11 @@ public class NoticeUtils {
                 String msg = monster.getName()+"状态:"+monster.getState();
                 ConcreteRole role = name.getValue();
                 //玩家收到通知
-                role.getChannel().writeAndFlush(msg);
+                MsgSkillInfoProto.ResponseSkillInfo responseSkillInfo = MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
+                        .setContent(msg)
+                        .setType(MsgSkillInfoProto.RequestType.USESKILL)
+                        .build();
+                role.getChannel().writeAndFlush(responseSkillInfo);
             }
         }
     }

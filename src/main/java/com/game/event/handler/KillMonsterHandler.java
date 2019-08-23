@@ -2,6 +2,8 @@ package com.game.event.handler;
 
 import com.game.event.annotation.EventAnnotation;
 import com.game.event.beanevent.MonsterDeadEvent;
+import com.game.event.task.RecoveryMonsterTask;
+import com.game.map.threadpool.TaskQueue;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
@@ -9,6 +11,7 @@ import com.game.task.bean.ConcreteTask;
 import com.game.task.bean.RoleTask;
 import com.game.task.manager.TaskMap;
 import com.game.task.service.TaskService;
+import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.QuestType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName KillMonsterHandler
@@ -41,6 +45,8 @@ public class KillMonsterHandler implements IHandler<MonsterDeadEvent> {
         ConcreteRole role = event.getRole();
         //获取怪兽
         ConcreteMonster monster = event.getMonster();
+        //怪兽复活
+        recovery(monster,role);
         //获取count
         RoleTask roleTask = taskService.queryTask(role.getId());
         Integer count = roleTask.getCount();
@@ -102,6 +108,14 @@ public class KillMonsterHandler implements IHandler<MonsterDeadEvent> {
 
             role.getChannel().writeAndFlush("恭喜完成任务，领取任务奖励");
         }
+    }
+
+    private void recovery(ConcreteMonster monster,ConcreteRole role) {
+        RecoveryMonsterTask recoveryMonsterTask = new RecoveryMonsterTask(monster,role);
+
+        role.setQueue(TaskQueue.getQueue());
+        role.getQueue().add(recoveryMonsterTask);
+        UserThreadPool.executeTask(role,1,10L,10L, TimeUnit.SECONDS);
     }
 
 }

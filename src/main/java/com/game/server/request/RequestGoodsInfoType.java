@@ -10,4 +10,5 @@ package com.game.server.request;
 public class RequestGoodsInfoType {
     public static final int GETGOODS = 0;
     public static final int DISCARDGOODS = 1;
+    public static final int SHOWGOODS = 2;
 }

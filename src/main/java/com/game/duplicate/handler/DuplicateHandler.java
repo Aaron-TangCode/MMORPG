@@ -10,7 +10,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.game.server.request.RequestBossInfoType.ATTACKBOSS;
+import static com.game.server.request.RequestBossInfoType.*;
 
 /**
  * @ClassName DuplicateHandler
@@ -41,10 +41,28 @@ public class DuplicateHandler extends SimpleChannelInboundHandler<MsgBossInfoPro
             case ATTACKBOSS :
                 responseBossInfo = duplicateService.attackBoss(channel,requestBossInfo);
                 break;
+            case CREATETEAM :
+                responseBossInfo = duplicateService.createTeam(channel,requestBossInfo);
+                break;
+            case JOINTEAM :
+                responseBossInfo = duplicateService.joinTeam(channel,requestBossInfo);
+                break;
+            case EXITTEAM :
+                responseBossInfo = duplicateService.exitTeam(channel,requestBossInfo);
+                break;
+            case DISMISSTEAM :
+                responseBossInfo = duplicateService.dismissTeam(channel,requestBossInfo);
+                break;
+            case QUERYTEAM :
+                responseBossInfo = duplicateService.queryTeam(channel,requestBossInfo);
+                break;
+            case TEAMATTACKBOSS :
+                responseBossInfo = duplicateService.teamAttackBoss(channel,requestBossInfo);
+                break;
                 default:
                     break;
         }
+        //发送协议
         ProtobufUtils.sendProtobufMessage(ctx,responseBossInfo);
-//        ctx.writeAndFlush(responseBossInfo);
     }
 }

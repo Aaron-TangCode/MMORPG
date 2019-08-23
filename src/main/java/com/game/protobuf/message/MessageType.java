@@ -51,8 +51,9 @@ public enum MessageType {
     REQUEST_GANGINFO_PROTO(0x19, MsgGangInfoProto.RequestGangInfo.class),
     RESPONSE_GANGINFO_PROTO(0x1A,MsgGangInfoProto.ResponseGangInfo.class),
     //auction
-    REQUEST_AUCTIONINFO_PROTO(0x1B, MsgGangInfoProto.RequestGangInfo.class),
-    RESPONSE_AUCTIONINFO_PROTO(0x1C,MsgGangInfoProto.ResponseGangInfo.class),
+    //auction
+    REQUEST_AUCTIONINFO_PROTO(0x1B, MsgAuctionInfoProto.RequestAuctionInfo.class),
+    RESPONSE_AUCTIONINFO_PROTO(0x1C,MsgAuctionInfoProto.ResponseAuctionInfo.class),
     //rank
     REQUEST_RANKINFO_PROTO(0x1D, MsgRankInfoProto.RequestRankInfo.class),
     RESPONSE_RANKINFO_PROTO(0x1E,MsgRankInfoProto.ResponseRankInfo.class),

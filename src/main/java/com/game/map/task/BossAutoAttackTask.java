@@ -1,7 +1,8 @@
 package com.game.map.task;
 
-import com.game.map.threadpool.TaskQueue;
+import com.game.map.bean.ConcreteMap;
 import com.game.npc.bean.ConcreteMonster;
+import com.game.protobuf.protoc.MsgBossInfoProto;
 import com.game.role.bean.ConcreteRole;
 import io.netty.channel.Channel;
 
@@ -17,6 +18,7 @@ import java.util.Set;
  * @Version 1.0
  */
 public class BossAutoAttackTask implements Runnable{
+    private ConcreteMap map;
     /**
      * role
      */
@@ -25,7 +27,9 @@ public class BossAutoAttackTask implements Runnable{
      * 容器map
      */
     private Map<Integer,ConcreteMonster> bossMap;
-    public BossAutoAttackTask(ConcreteRole role, Map<Integer,ConcreteMonster> bossMap) {
+
+    public BossAutoAttackTask(ConcreteRole role, Map<Integer, ConcreteMonster> bossMap,ConcreteMap map) {
+        this.map = map;
         this.role = role;
         this.bossMap = bossMap;
     }
@@ -61,14 +65,31 @@ public class BossAutoAttackTask implements Runnable{
         int curHp = role.getCurHp();
         //角色被攻击，减少响应血量
         role.setCurHp(curHp-attack);
-
+        //channel
         Channel channel = role.getChannel();
-        //输出
-        channel.writeAndFlush(boss.getName()+"攻击"+role.getName()+"\t角色的血量："+role.getCurHp());
+        //content
+        String content = boss.getName()+"攻击"+role.getName()+"\t角色的血量："+role.getCurHp();
+        //返回消息
+        MsgBossInfoProto.ResponseBossInfo responseBossInfo = MsgBossInfoProto.ResponseBossInfo.newBuilder()
+                .setType(MsgBossInfoProto.RequestType.ATTACKBOSS)
+                .setContent(content)
+                .build();
+
+        channel.writeAndFlush(responseBossInfo);
 
         if(role.getCurHp()<=0){
-            TaskQueue.getQueue().remove();
-            channel.writeAndFlush("角色死亡，执行副本任务失败");
+            String content2 = "角色死亡，执行副本任务失败";
+            //打包信息
+            MsgBossInfoProto.ResponseBossInfo responseBossInfo2 = MsgBossInfoProto.ResponseBossInfo.newBuilder()
+                    .setType(MsgBossInfoProto.RequestType.ATTACKBOSS)
+                    .setContent(content2)
+                    .build();
+            //返回消息
+            channel.writeAndFlush(responseBossInfo2);
+            //移除任务
+            role.getQueue().remove();
+            //销毁副本
+            map =null;
         }
     }
 }

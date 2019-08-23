@@ -28,6 +28,18 @@ public class ConcreteMap {
      * 怪兽的引用
      */
     private Map<Integer, ConcreteMonster> monsterMap = new HashMap<>();
+    /**
+     * 怪兽引用
+     */
+    private ConcreteMonster monster;
+
+    public ConcreteMonster getMonster() {
+        return monster;
+    }
+
+    public void setMonster(ConcreteMonster monster) {
+        this.monster = monster;
+    }
 
     private List<ConcreteRole> roleList = new ArrayList<>();
 

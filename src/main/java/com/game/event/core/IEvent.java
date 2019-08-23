@@ -1,5 +1,6 @@
 package com.game.event.core;
 
+import com.game.role.bean.ConcreteRole;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,5 +12,5 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public abstract class IEvent {
-
+    public abstract ConcreteRole getRole();
 }

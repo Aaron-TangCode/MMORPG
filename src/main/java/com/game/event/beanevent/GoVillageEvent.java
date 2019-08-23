@@ -6,28 +6,25 @@ import com.game.role.bean.ConcreteRole;
 import org.springframework.stereotype.Component;
 
 /**
- * @ClassName AttackedEvent
- * @Description 被攻击事件
+ * @ClassName GoVillageHandler
+ * @Description 回村子事件
  * @Author DELL
- * @Date 2019/8/14 18:41
+ * @Date 2019/8/22 10:31
  * @Version 1.0
  */
 @Component
 @EventAnnotation
-public class AttackedEvent extends IEvent {
+public class GoVillageEvent extends IEvent {
     /**
      * 角色
      */
     private ConcreteRole role;
-
-
-
-    public void setRole(ConcreteRole role) {
-        this.role = role;
-    }
-
     @Override
     public ConcreteRole getRole() {
         return role;
+    }
+
+    public void setRole(ConcreteRole role) {
+        this.role = role;
     }
 }

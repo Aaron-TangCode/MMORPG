@@ -5,6 +5,7 @@ import com.game.backpack.mapper.BackpackMapper;
 import com.game.backpack.task.BackpackInsertTask;
 import com.game.backpack.task.BackpackUpdateDelTask;
 import com.game.backpack.task.BackpackUpdateTask;
+import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.SqlUtils;
 import com.game.utils.ThreadPoolUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -79,7 +80,7 @@ public class BackpackRepository {
      */
     public void updateGoodsByRoleIdDel(int roleId, Integer goodsId) {
         BackpackUpdateDelTask task = new BackpackUpdateDelTask(roleId,goodsId);
-        ThreadPoolUtils.getThreadPool().execute(task);
+        UserThreadPool.ACCOUNT_SERVICE[0].submit(task);
     }
 
     /**

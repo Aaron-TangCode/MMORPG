@@ -1,6 +1,9 @@
 package com.game.map.service;
 
 import com.game.buff.handler.BuffHandler;
+import com.game.event.beanevent.AttackedEvent;
+import com.game.event.beanevent.GoVillageEvent;
+import com.game.event.manager.EventMap;
 import com.game.map.bean.ConcreteMap;
 import com.game.map.repository.MapRepository;
 import com.game.protobuf.message.ResultCode;
@@ -13,6 +16,7 @@ import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.game.buff.handler.BuffType.BLUE;
 import static com.game.buff.handler.BuffType.RED;
 
 /**
@@ -24,6 +28,18 @@ import static com.game.buff.handler.BuffType.RED;
  */
 @Service("MapService")
 public class MapService {
+    /**
+     * 回村子事件
+     */
+    @Autowired
+    private GoVillageEvent goVillageEvent;
+    @Autowired
+    private AttackedEvent attackedEvent;
+    /**
+     * 事件map
+     */
+    @Autowired
+    private EventMap eventMap;
     /**
      * 地图的数据访问
      */
@@ -103,7 +119,7 @@ public class MapService {
         String content = null;
         if(isAccess){
             //激活buff
-            startBuff(role,dest);
+            buffHandle(role,dest);
             //从src移动到dest,更新数据库
             roleService.updateMap(role.getName(),dest_id);
             role.getConcreteMap().setName(dest);
@@ -121,15 +137,55 @@ public class MapService {
     }
 
     /**
+     * 处理buff
+     * @param role 角色
+     * @param dest 目的地
+     */
+    private void buffHandle(ConcreteRole role,String dest) {
+        startBuff(role,dest);
+        stopBuff(role,dest);
+    }
+    /**
+     * 停止buff
+     * @param role 角色
+     * @param dest 目的地
+     */
+    private void stopBuff(ConcreteRole role, String dest) {
+        if(dest.equals("村子")){
+            //触发事件
+            goVillageEvent.setRole(role);
+            //add
+            eventMap.submit(goVillageEvent);
+            //如果role死亡
+            if(role.getCurHp()<=0){
+                recovery(role);
+            }
+        }else if (dest.equals("起始之地")){
+            //取消红蓝buff
+            attackedEvent.setRole(role);
+            eventMap.submit(attackedEvent);
+            role.getQueue().remove();
+        }
+    }
+    private void recovery(ConcreteRole role){
+        //回血
+        role.setCurHp(role.getTotalHp()/2);
+        //回蓝
+        role.setCurMp(role.getTotalMp()/2);
+    }
+    /**
      * 激活buff
      * @param role 角色
      * @param dest 目的地
      */
-    private void startBuff(ConcreteRole role,String dest) {
-        if(!dest.equals("村子")){
+    private void startBuff(ConcreteRole role, String dest) {
+        if(dest.equals("村子")){
+            //激活Buff
             buffHandler.executeBuff(role.getName(),RED);
+            buffHandler.executeBuff(role.getName(),BLUE);
         }
     }
+
     /**
      * 切换地图
      * @param roleName 角色名

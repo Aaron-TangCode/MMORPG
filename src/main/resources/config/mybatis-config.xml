@@ -30,5 +30,6 @@
         <mapper resource="mapper/AuctionMapper.xml"/>
         <mapper resource="mapper/TaskMapper.xml"/>
         <mapper resource="mapper/RankMapper.xml"/>
+        <mapper resource="mapper/TeamMapper.xml"/>
     </mappers>
 </configuration>

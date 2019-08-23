@@ -84,6 +84,7 @@ public class EquipmentService {
         Goods goods = handleEquipement(role,equipmentBox,goodsList,goodsName);
         //给goods注入propertyMap
         injectGoods(goods);
+
         handleProperty(role,goods,goodsList);
         String content = role.getName()+"成功把装备："+goodsName+"添加到装备栏";
         return MsgEquipInfoProto.ResponseEquipInfo.newBuilder()
@@ -270,13 +271,14 @@ public class EquipmentService {
             //每一件装备的每一个属性
             for (Map.Entry<PropertyType,Integer>  entry:goods2.getPropertyMap().entrySet()) {
                 // 拿出玩家属性，加上装备属性，放回去
-                role.getTotalMap().put(
-                        entry.getKey(),
-                        role.getTotalMap().get(entry.getKey())+entry.getValue());
-                if(entry.getKey().equals(PropertyType.ATTACK)||entry.getKey().equals(PropertyType.DEFEND)) {
-                    role.getCurMap().put(
-                            entry.getKey(),
-                            role.getCurMap().get(entry.getKey()) + entry.getValue());
+                PropertyType key = entry.getKey();
+                Integer value = entry.getValue();
+                Map<PropertyType, Integer> totalMap = role.getTotalMap();
+                totalMap.put(key,totalMap.get(key)+value);
+
+                if(key.equals(PropertyType.ATTACK)||key.equals(PropertyType.DEFEND)) {
+                    Map<PropertyType, Integer> curMap = role.getCurMap();
+                    curMap.put(key,curMap.get(key)+value);
                 }
             }
         }
@@ -350,5 +352,57 @@ public class EquipmentService {
         Integer userId = LocalUserMap.getChannelUserMap().get(channel);
         ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);
         return role;
+    }
+
+    /**
+     * 显示装备信息
+     * @param channel channel
+     * @param requestEquipInfo requestEquipInfo
+     * @return 协议信息
+     */
+    public MsgEquipInfoProto.ResponseEquipInfo showEquip(Channel channel, MsgEquipInfoProto.RequestEquipInfo requestEquipInfo) {
+        //获取角色
+        ConcreteRole role = getRole(channel);
+        //获取装备栏
+        String equipmentBox = role.getEquipmentBox().getEquipmentBox();
+        //获取装备实体对象
+        Equipment equipment = JSONObject.parseObject(equipmentBox, Equipment.class);
+        //消息
+        StringBuilder content = new StringBuilder();
+        //获取本地goods
+        Map<String, Goods> goodsMap = MapUtils.getGoodsMap();
+        //获取各种装备
+        if(equipment.getHead()!=null){
+            Goods tmpHead = backpackService.getGoodsById(equipment.getHead());
+            Goods head = goodsMap.get(tmpHead.getName());
+            content.append("装备名称:\t"+head.getName()+"\t装备属性:\t"+head.getProperty()+"\n");
+        }
+        if(equipment.getClothes()!=null){
+            Goods tmpClothes = backpackService.getGoodsById(equipment.getClothes());
+            Goods clothes = goodsMap.get(tmpClothes.getName());
+            content.append("装备名称:\t"+clothes.getName()+"\t装备属性:\t"+clothes.getProperty()+"\n");
+        }
+        if(equipment.getShoes()!=null){
+            Goods tmpShoes = backpackService.getGoodsById(equipment.getShoes());
+            Goods shoes = goodsMap.get(tmpShoes.getName());
+            content.append("装备名称:\t"+shoes.getName()+"\t装备属性:\t"+shoes.getProperty()+"\n");
+        }
+        if(equipment.getWeapon()!=null){
+            Goods tmpWeapon = backpackService.getGoodsById(equipment.getWeapon());
+            Goods weapon = goodsMap.get(tmpWeapon.getName());
+            content.append("装备名称:\t"+weapon.getName()+"\t装备属性:\t"+weapon.getProperty()+"\n");
+        }
+        if(equipment.getPants()!=null){
+            Goods tmpPants = backpackService.getGoodsById(equipment.getPants());
+            Goods pants = goodsMap.get(tmpPants.getName());
+            content.append("装备名称:\t"+pants.getName()+"\t装备属性:\t"+pants.getProperty()+"\n");
+        }
+
+        //返回消息
+        return MsgEquipInfoProto.ResponseEquipInfo.newBuilder()
+                .setType(MsgEquipInfoProto.RequestType.SHOWEQUIP)
+                .setContent(content.toString())
+                .build();
+
     }
 }

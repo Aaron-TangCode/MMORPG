@@ -10,17 +10,17 @@ import com.game.map.threadpool.TaskQueue;
 import com.game.protobuf.protoc.MsgAuctionInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
+import com.game.server.manager.TaskMap;
 import com.game.user.manager.LocalUserMap;
 import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.MapUtils;
 import io.netty.channel.Channel;
+import io.netty.util.concurrent.Future;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -195,13 +195,12 @@ public class AuctionService {
      * @return 字符串
      */
     private String printData(ConcreteRole role, List<Auction> auctionList) {
-        Channel channel = role.getChannel();
-        String content = null;
+        StringBuffer content = new StringBuffer();
         for (Auction auction : auctionList) {
             String outputContent = "id:{0}\tgoodsName:{1}\tprice:{2}\tseller:{3}\tnumber:{4}\tbuyer:{5}\n";
-           content = MessageFormat.format(outputContent,auction.getId(),auction.getGoodsName(),auction.getPrice(),auction.getSeller(),auction.getNumber(),auction.getBuyer());
+            content.append(MessageFormat.format(outputContent,auction.getId(),auction.getGoodsName(),auction.getPrice(),auction.getSeller(),auction.getNumber(),auction.getBuyer()));
         }
-        return content;
+        return content.toString();
     }
 
     /**
@@ -248,11 +247,19 @@ public class AuctionService {
         //把钱退回给其他人
         String seller = auction.getSeller();
         if(!seller.equals(oldBuyer)){
-            ConcreteRole oldRole = getRoleByRoleName(oldBuyer);
+            //在数据差
+            ConcreteRole oldRole = roleService.getRoleByRoleName(oldBuyer);
             oldRole.setMoney(oldRole.getMoney()+oldMoney);
             roleService.updateRole(oldRole);
 
-            return "你的竞拍的物品："+auction.getGoodsName()+"竞拍价格没"+buyRole.getName()+"高,你之前的竞拍金币已退回";
+            String content = "你的竞拍的物品："+auction.getGoodsName()+"竞拍价格没"+buyRole.getName()+"高,你之前的竞拍金币已退回";
+            MsgAuctionInfoProto.ResponseAuctionInfo auctionInfo = MsgAuctionInfoProto.ResponseAuctionInfo.newBuilder()
+                    .setType(MsgAuctionInfoProto.RequestType.BIDDING)
+                    .setContent(content)
+                    .build();
+
+            oldRole.getChannel().writeAndFlush(auctionInfo);
+            return "...";
         }else{
             return "你成功竞拍商品："+auction.getGoodsName();
         }
@@ -314,10 +321,11 @@ public class AuctionService {
             AuctionTask task = new AuctionTask(auction,this, backpackHandler,roleService);
             //打包成一个任务，丢给线程池执行
             //添加任务到队列
-            TaskQueue.getQueue().add(task);
+            initRoleTask(role,TaskQueue.getQueue(), TaskMap.getFutureMap());
+            role.getQueue().add(task);
             //线程执行任务
             UserThreadPool.getThreadPool(threadIndex).scheduleAtFixedRate( () ->{
-                        Iterator<Runnable> iterator = TaskQueue.getQueue().iterator();
+                        Iterator<Runnable> iterator = role.getQueue().iterator();
                         while (iterator.hasNext()) {
                             Runnable runnable = iterator.next();
                             if (Objects.nonNull(runnable)) {
@@ -326,8 +334,12 @@ public class AuctionService {
                         }
 
                     },
-                    120L,5L, TimeUnit.SECONDS);
+                    60L,5L, TimeUnit.SECONDS);
             return  "【竞拍模式】:成功发布物品"+goods.getName();
         }
+    }
+    public static void initRoleTask(ConcreteRole role, Queue<Runnable> queue, Map<String, Future> map){
+        role.setQueue(queue);
+        role.setTaskMap(map);
     }
 }
