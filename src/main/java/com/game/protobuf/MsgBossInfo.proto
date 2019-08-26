@@ -6,13 +6,14 @@ option java_package = "com.game.protobuf.protoc";
 option java_outer_classname = "MsgBossInfoProto";
 
 enum RequestType{
-    ATTACKBOSS = 0; //攻击boss
+    ENTERDUPLICATE = 0; //进入副本
     CREATETEAM = 1; //创建队伍
     JOINTEAM = 2;   //加入队伍
     EXITTEAM = 3;   //退出队伍
     DISMISSTEAM = 4;    //解散队伍
     QUERYTEAM = 5;      //查询队伍
-    TEAMATTACKBOSS = 6; //团队打boss
+    TEAMENTERDUPLICATE = 6; //团队进入副本
+    USESKILLATTACKBOSS = 7; //攻击boss
 }
 
 message RequestBossInfo{

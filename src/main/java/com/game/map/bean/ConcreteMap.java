@@ -27,7 +27,7 @@ public class ConcreteMap {
     /**
      * 怪兽的引用
      */
-    private Map<Integer, ConcreteMonster> monsterMap = new HashMap<>();
+    private Map<String, ConcreteMonster> monsterMap = new HashMap<>();
     /**
      * 怪兽引用
      */
@@ -43,7 +43,7 @@ public class ConcreteMap {
 
     private List<ConcreteRole> roleList = new ArrayList<>();
 
-    public void setMonsterMap(Map<Integer, ConcreteMonster> monsterMap) {
+    public void setMonsterMap(Map<String, ConcreteMonster> monsterMap) {
         this.monsterMap = monsterMap;
     }
 
@@ -55,7 +55,7 @@ public class ConcreteMap {
         return roleList;
     }
 
-    public Map<Integer, ConcreteMonster> getMonsterMap() {
+    public Map<String, ConcreteMonster> getMonsterMap() {
         return monsterMap;
     }
 

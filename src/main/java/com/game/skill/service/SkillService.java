@@ -490,7 +490,7 @@ public class SkillService {
                 ";"+monsterName+"的hp值从"+monsterHp+"变为"+monster.getHp()+")";
     }
 
-    private void falldownEquip(ConcreteRole localRole) {
+    public void falldownEquip(ConcreteRole localRole) {
         List<Goods> goodsList = MapUtils.getGoodsList();
         //掉落装备数量
         int num = (int)((Math.random())*goodsList.size()+1);
@@ -565,4 +565,66 @@ public class SkillService {
         ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);
         return role;
     }
+
+    public void useSkillBaby(ConcreteRole role, ConcreteMonster attackedBoss, ConcreteMap map) {
+        String content = null;
+        if(attackedBoss.getHp()<=0){
+            content = attackedBoss.getName()+"已死，不能再攻击";
+        }else {
+            content = babyAttack(attackedBoss,role,map);
+        }
+        ConcreteRole tmpRole = MapUtils.getMapRolename_Role().get(role.getName());
+        //获取技能---使用技能---判断是否具备攻击条件--攻击--返回信息
+        MsgSkillInfoProto.ResponseSkillInfo skillInfo = MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
+                .setType(MsgSkillInfoProto.RequestType.USESKILL)
+                .setContent(content)
+                .build();
+        //返回消息
+        tmpRole.getChannel().writeAndFlush(skillInfo);
+    }
+
+    /**
+     * 宝宝攻击怪兽
+     * @param monster 怪兽
+     * @param role role
+     * @param map map
+     * @return 协议信息
+     */
+    private String babyAttack(ConcreteMonster monster, ConcreteRole role, ConcreteMap map) {
+        //获取monster的当前血量
+        Integer monsterHp = monster.getHp();
+        //技能伤害
+        ConcreteSkill skill = role.getConcreteSkill();
+        Integer hurt = skill.getHurt();
+
+        monster.setHp(monsterHp-hurt);
+        //怪兽死亡，通知该地图所有玩家
+        if(monster.getHp()<=0){
+            adviceRole(monster,role,map);
+        }
+        String roleName = role.getName();
+        String monsterName = monster.getName();
+        //返回消息
+        return roleName+"的宝宝成功攻击"+monsterName;
+    }
+
+    /**
+     * 通知玩家
+     */
+    public void adviceRole(ConcreteMonster monster,ConcreteRole role,ConcreteMap map) {
+        //通知
+        NoticeUtils.notifyAllRoles(monster);
+        //怪兽死亡事件
+        monsterDeadEvent.setRole(role);
+        monsterDeadEvent.setMonster(monster);
+        //触发事件，记录怪兽死亡次数
+        eventMap.submit(monsterDeadEvent);
+        //掉落装备
+        falldownEquip(role);
+        //销毁副本
+        map = null;
+        //Move to 村子
+    }
+
+
 }

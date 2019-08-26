@@ -1,5 +1,6 @@
 package com.game.map.task;
 
+import com.game.duplicate.manager.RoleAndMap;
 import com.game.map.bean.ConcreteMap;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.protobuf.protoc.MsgBossInfoProto;
@@ -26,9 +27,9 @@ public class BossAutoAttackTask implements Runnable{
     /**
      * 容器map
      */
-    private Map<Integer,ConcreteMonster> bossMap;
+    private Map<String,ConcreteMonster> bossMap;
 
-    public BossAutoAttackTask(ConcreteRole role, Map<Integer, ConcreteMonster> bossMap,ConcreteMap map) {
+    public BossAutoAttackTask(ConcreteRole role, Map<String, ConcreteMonster> bossMap,ConcreteMap map) {
         this.map = map;
         this.role = role;
         this.bossMap = bossMap;
@@ -39,12 +40,12 @@ public class BossAutoAttackTask implements Runnable{
      */
     @Override
     public void run() {
-        Set<Map.Entry<Integer, ConcreteMonster>> entries = bossMap.entrySet();
+        Set<Map.Entry<String, ConcreteMonster>> entries = bossMap.entrySet();
 
-        Iterator<Map.Entry<Integer, ConcreteMonster>> iterator = entries.iterator();
+        Iterator<Map.Entry<String, ConcreteMonster>> iterator = entries.iterator();
         //遍历地图的每一个boss攻击角色
         while (iterator.hasNext()) {
-            Map.Entry<Integer, ConcreteMonster> next = iterator.next();
+            Map.Entry<String, ConcreteMonster> next = iterator.next();
             ConcreteMonster boss = next.getValue();
             //boss攻击角色
             bossAttack(boss,role);
@@ -69,9 +70,11 @@ public class BossAutoAttackTask implements Runnable{
         Channel channel = role.getChannel();
         //content
         String content = boss.getName()+"攻击"+role.getName()+"\t角色的血量："+role.getCurHp();
+        //set
+        RoleAndMap.varHp = role.getCurHp();
         //返回消息
         MsgBossInfoProto.ResponseBossInfo responseBossInfo = MsgBossInfoProto.ResponseBossInfo.newBuilder()
-                .setType(MsgBossInfoProto.RequestType.ATTACKBOSS)
+                .setType(MsgBossInfoProto.RequestType.ENTERDUPLICATE)
                 .setContent(content)
                 .build();
 
@@ -81,7 +84,7 @@ public class BossAutoAttackTask implements Runnable{
             String content2 = "角色死亡，执行副本任务失败";
             //打包信息
             MsgBossInfoProto.ResponseBossInfo responseBossInfo2 = MsgBossInfoProto.ResponseBossInfo.newBuilder()
-                    .setType(MsgBossInfoProto.RequestType.ATTACKBOSS)
+                    .setType(MsgBossInfoProto.RequestType.ENTERDUPLICATE)
                     .setContent(content2)
                     .build();
             //返回消息

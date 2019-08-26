@@ -32,6 +32,19 @@ public class ConcreteMonster {
      * boss的攻击力
      */
     private Integer attack;
+
+    public ConcreteMonster(ConcreteMonster monster) {
+        this.id = monster.id;
+        this.name = monster.name;
+        this.attack = monster.attack;
+        this.attackTime = monster.attackTime;
+        this.hp = monster.hp;
+        this.time = monster.time;
+    }
+
+    public ConcreteMonster() {
+    }
+
     public Integer getId() {
         return id;
     }

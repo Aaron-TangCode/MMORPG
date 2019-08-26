@@ -18,16 +18,12 @@ import java.util.Set;
  * @Version 1.0
  */
 public class RoleAttackBossTask implements Runnable {
-    private List<ConcreteRole> roleList;
-
-    private Map<Integer, ConcreteMonster> monsterMap;
-
+    private ConcreteRole role;
     private SkillService skillService;
     private ConcreteMap map;
 
-    public RoleAttackBossTask(List<ConcreteRole> roleList, Map<Integer, ConcreteMonster> monsterMap, SkillService skillService, ConcreteMap map) {
-        this.roleList = roleList;
-        this.monsterMap = monsterMap;
+    public RoleAttackBossTask(ConcreteRole role,SkillService skillService, ConcreteMap map) {
+        this.role = role;
         this.skillService = skillService;
         this.map = map;
     }
@@ -36,10 +32,7 @@ public class RoleAttackBossTask implements Runnable {
     public void run() {
         System.out.println("===========");
         //role attack boss
-        for(int i=0;i<roleList.size();i++){
-            ConcreteRole role = roleList.get(i);
-            attackBoss(role,monsterMap);
-        }
+        attackBoss(role,map.getMonsterMap());
     }
 
     /**
@@ -47,21 +40,22 @@ public class RoleAttackBossTask implements Runnable {
      * @param role role
      * @param monsterMap bossMap
      */
-    private void attackBoss(ConcreteRole role, Map<Integer, ConcreteMonster> monsterMap) {
+    private void attackBoss(ConcreteRole role, Map<String, ConcreteMonster> monsterMap) {
         //list
         List<ConcreteMonster> monsterList = new ArrayList<>();
         //iterator
-        Set<Map.Entry<Integer, ConcreteMonster>> entries = monsterMap.entrySet();
+        Set<Map.Entry<String, ConcreteMonster>> entries = monsterMap.entrySet();
         //把怪兽存进List
-        for (Map.Entry<Integer, ConcreteMonster> entry : entries) {
+        for (Map.Entry<String, ConcreteMonster> entry : entries) {
             ConcreteMonster monster = entry.getValue();
             monsterList.add(monster);
         }
+
         //随机编号
         int ram = (int)(Math.random()*monsterList.size());
         //随机怪兽
         ConcreteMonster attackedBoss = monsterList.get(ram);
         //普通攻击
-        skillService.useSkill(role,attackedBoss,null,map);
+        skillService.useSkillBaby(role,attackedBoss,map);
     }
 }

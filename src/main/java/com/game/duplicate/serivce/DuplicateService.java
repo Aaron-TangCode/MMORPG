@@ -1,21 +1,27 @@
 package com.game.duplicate.serivce;
 
 import com.game.buff.bean.ConcreteBuff;
+import com.game.duplicate.manager.RoleAndMap;
 import com.game.duplicate.manager.TeamMapManager;
 import com.game.duplicate.task.RoleAttackBossTask;
 import com.game.event.beanevent.AttackedEvent;
+import com.game.event.beanevent.MonsterDeadEvent;
 import com.game.event.manager.EventMap;
 import com.game.map.bean.ConcreteMap;
 import com.game.map.service.MapService;
 import com.game.map.task.BossAutoAttackTask;
 import com.game.map.threadpool.MapThreadPool;
 import com.game.map.threadpool.TaskQueue;
+import com.game.notice.NoticeUtils;
 import com.game.npc.bean.ConcreteMonster;
+import com.game.property.bean.PropertyType;
 import com.game.protobuf.protoc.MsgBossInfoProto;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.manager.InjectRoleProperty;
 import com.game.role.service.RoleService;
 import com.game.server.manager.BuffMap;
 import com.game.server.manager.TaskMap;
+import com.game.skill.bean.ConcreteSkill;
 import com.game.skill.service.SkillService;
 import com.game.user.manager.LocalUserMap;
 import com.game.utils.MapUtils;
@@ -36,6 +42,10 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class DuplicateService {
+    @Autowired
+    private MonsterDeadEvent monsterDeadEvent;
+    @Autowired
+    private EventMap eventMap;
     /**
      * 角色服务
      */
@@ -51,11 +61,6 @@ public class DuplicateService {
      */
     @Autowired
     private AttackedEvent attackedEvent;
-    /**
-     * 事件驱动
-     */
-    @Autowired
-    private EventMap eventMap;
 
     @Autowired
     private SkillService skillService;
@@ -86,7 +91,7 @@ public class DuplicateService {
         String content = initRole(roleList,bossName,mapName,null);
         return MsgBossInfoProto.ResponseBossInfo.newBuilder()
                 .setContent(content)
-                .setType(MsgBossInfoProto.RequestType.TEAMATTACKBOSS)
+                .setType(MsgBossInfoProto.RequestType.TEAMENTERDUPLICATE)
                 .build();
     }
     /**
@@ -95,13 +100,9 @@ public class DuplicateService {
      * @param requestBossInfo Boss请求信息
      * @return
      */
-    public MsgBossInfoProto.ResponseBossInfo attackBoss(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
+    public MsgBossInfoProto.ResponseBossInfo enterDuplicate(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
         //role
         ConcreteRole tmpRole = getRole(channel);
-        //bossName
-        String bossName = requestBossInfo.getBossName();
-        //skillName
-        String skillName = requestBossInfo.getSkillName();
         //mapName
         String mapName = requestBossInfo.getMapName();
         //队伍列表
@@ -111,10 +112,10 @@ public class DuplicateService {
         //把角色添加到队伍列表
         roleList.add(role);
         //初始化角色
-        String content = initRole(roleList,bossName,mapName,skillName);
+        String content = initRole(roleList,null,mapName,null);
         return MsgBossInfoProto.ResponseBossInfo.newBuilder()
                 .setContent(content)
-                .setType(MsgBossInfoProto.RequestType.ATTACKBOSS)
+                .setType(MsgBossInfoProto.RequestType.ENTERDUPLICATE)
                 .build();
     }
     /**
@@ -126,12 +127,21 @@ public class DuplicateService {
      * @return 消息
      */
     public String initRole(List<ConcreteRole> roleList,String bossName, String mapName, String skillName) {
+        //role
+        ConcreteRole tmpCaptain = roleList.get(0);
+        ConcreteRole captain = MapUtils.getMapRolename_Role().get(tmpCaptain.getName());
+        //移动
+        mapService.moveTo(captain.getName(),mapName);
+
+
         //获取地图id
-        int mapId = roleList.get(0).getConcreteMap().getId();
+        int mapId = captain.getConcreteMap().getId();
         //获取临时地图
         ConcreteMap tmpMap = mapService.getMap(mapId);
+
         //新副本
         ConcreteMap map = new ConcreteMap(tmpMap);
+
         //把角色添加到新副本
         for(ConcreteRole role:roleList){
             String roleName = role.getName();
@@ -140,46 +150,90 @@ public class DuplicateService {
             //把角色添加到地图
             map.getRoleList().add(role);
         }
-        //获取Boss列表
-        List<Integer> list = skillService.findMonster(mapId);
-        //找出地图的boss
-        Map<Integer, ConcreteMonster> bossMap = findConcreteMonster(map,list, bossName);
 
+        //获取Boss列表
+        List<Integer> list = skillService.findMonster(map.getRoleList().get(0).getConcreteMap().getId());
+
+        //找出地图的boss
+        Map<String, ConcreteMonster> bossMap = findConcreteMonster(map, list);
         //boss添加到地图
         map.setMonsterMap(bossMap);
         //玩家自动攻击boss
-//        roleAttackBoss(map);
+//        babyAttackBoss(map);
         //boss的自动攻击
         autoAttack(map);
         return  "刷副本";
     }
 
-    private void roleAttackBoss(ConcreteMap map) {
-        //roleList
+    /**
+     * 找怪兽
+     * @param map map地图
+     * @param list list
+     * @return map容器
+     */
+    private Map<String,ConcreteMonster> findConcreteMonster(ConcreteMap map, List<Integer> list) {
+        Map<String, ConcreteMonster> monsterMap = map.getMonsterMap();
+        for (int i = 0; i < list.size(); i++) {
+            ConcreteMonster monster = MapUtils.getMonsterMap().get(list.get(i));
+            ConcreteMonster boss = new ConcreteMonster(monster);
+            monsterMap.put(boss.getName(),boss);
+        }
+        roleAndMapRelaition(map);
+
+        return monsterMap;
+    }
+
+    private void roleAndMapRelaition(ConcreteMap map) {
         List<ConcreteRole> roleList = map.getRoleList();
-        //boss
-        Map<Integer, ConcreteMonster> monsterMap = map.getMonsterMap();
+        for (int i = 0; i < roleList.size(); i++) {
+            RoleAndMap.getRoleAndMap().put(map.getRoleList().get(i).getName(),map);
+        }
+    }
+
+    /**
+     * 角色攻击怪兽
+     * @param map map
+     */
+    private String babyAttackBoss(ConcreteRole role, ConcreteMap map) {
         //task
-        RoleAttackBossTask task = new RoleAttackBossTask(roleList,monsterMap,skillService,map);
-        ConcreteRole captain = roleList.get(0);
+        RoleAttackBossTask task = new RoleAttackBossTask(role,skillService,map);
         //选择线程池中的某一个线程处理
         int threadIndex = MapThreadPool.getThreadIndex(map);
         //初始化role和buff
-        initRoleTask(captain,TaskQueue.getQueue(), TaskMap.getFutureMap(), BuffMap.getBuffMap());
+        initRoleTask(role,TaskQueue.getQueue(), TaskMap.getFutureMap(), BuffMap.getBuffMap());
         //添加任务到队列
-        captain.getQueue().add(task);
+        role.getQueue().add(task);
+        //当前角色蓝量
+        int curMp = role.getCurMp();
+        //技能消耗蓝量
+        ConcreteSkill skill = role.getConcreteSkill();
+        Integer costMp = skill.getMp();
+        if(costMp>curMp){
+            return "蓝不足，无法释放技能";
+        }
+        //消耗蓝
+        role.setCurMp(curMp-costMp);
+        //更新
+        role.setCurHp(RoleAndMap.varHp);
+        //update property
+        role.getCurMap().put(PropertyType.MP,curMp-costMp);
+        role.getCurMap().put(PropertyType.HP,RoleAndMap.varHp);
+        InjectRoleProperty.injectRoleProperty(role);
+        //roleName
+        String roleName = role.getName();
         //线程执行任务
         MapThreadPool.ACCOUNT_SERVICE[threadIndex].scheduleAtFixedRate( () ->{
-                    Iterator<Runnable> iterator = captain.getQueue().iterator();
+                    Iterator<Runnable> iterator = role.getQueue().iterator();
                     while (iterator.hasNext()) {
                         Runnable runnable = iterator.next();
                         if (Objects.nonNull(runnable)) {
                             runnable.run();
                         }
                     }
-
                 },
-                4L,8L, TimeUnit.SECONDS);
+                5L,20L, TimeUnit.SECONDS);
+        //返回消息
+        return roleName+"成功释放技能"+skill.getName()+"\n("+roleName+"的mp值从"+curMp+"变为"+role.getCurMp()+")";
 
     }
 
@@ -198,14 +252,17 @@ public class DuplicateService {
         eventMap.submit(attackedEvent);
         //选择线程池中的某一个线程处理
         int threadIndex = MapThreadPool.getThreadIndex(map);
-        List<ConcreteRole> roleList = map.getRoleList();
-        Map<Integer, ConcreteMonster> bossMap = map.getMonsterMap();
+       //bossMap
+        Map<String, ConcreteMonster> bossMap = map.getMonsterMap();
         //创建新任务
         BossAutoAttackTask task = new BossAutoAttackTask(mostRole,bossMap,map);
         //初始化role和buff
         initRoleTask(mostRole,TaskQueue.getQueue(), TaskMap.getFutureMap(), BuffMap.getBuffMap());
         //添加任务到队列
         mostRole.getQueue().add(task);
+
+        long initDelay = 10L;
+        long period = 20L;
         //线程执行任务
         MapThreadPool.ACCOUNT_SERVICE[threadIndex].scheduleAtFixedRate( () ->{
                     Iterator<Runnable> iterator = mostRole.getQueue().iterator();
@@ -217,7 +274,7 @@ public class DuplicateService {
                     }
 
                 },
-                5L,5L, TimeUnit.SECONDS);
+                initDelay++,period++, TimeUnit.SECONDS);
 
 
     }
@@ -233,31 +290,10 @@ public class DuplicateService {
         ConcreteRole resRole = roleList.get(0);
         //选出仇恨值最高的角色
         for (int i = 1; i < roleList.size(); i++) {
-//            int bigger = Math.max(roleList.get(i).getOccupation().getAttract(),roleList.get(i-1).getOccupation().getAttract());
-            resRole =  roleList.get(i);
+           resRole =  roleList.get(i);
         }
         return resRole;
     }
-    /**
-     * 找出地图的Boss
-     * @param map 地图
-     * @param monsterList 怪兽列表
-     * @param monsterName 怪兽名字
-     * @return 集合
-     */
-    public Map<Integer,ConcreteMonster> findConcreteMonster(ConcreteMap map,List<Integer> monsterList, String monsterName) {
-        //获取地图中的怪兽集合
-        Map<Integer, ConcreteMonster> monsterMap = map.getMonsterMap();
-
-        for (int i = 0; i < monsterList.size(); i++) {
-            ConcreteMonster concreteMonster = MapUtils.getMonsterMap().get(monsterList.get(i));
-            if (Objects.equals(concreteMonster.getName(),monsterName)) {
-                monsterMap.put(concreteMonster.getId(),concreteMonster);
-            }
-        }
-        return monsterMap;
-    }
-
     /**
      * 获取角色
      * @param channel channel
@@ -417,5 +453,126 @@ public class DuplicateService {
                 .build();
     }
 
+    /**
+     * 使用技能攻击boss
+     * @param channel channel
+     * @param requestBossInfo 请求信息
+     * @return
+     */
+    public MsgBossInfoProto.ResponseBossInfo useSkillAttackBoss(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
+        //role
+        ConcreteRole role = getRole(channel);
+        //map
+        ConcreteMap map = RoleAndMap.getRoleAndMap().get(role.getName());
+        //Skill
+        String skillName = requestBossInfo.getSkillName();
+        ConcreteSkill skill = null;
+        if(MapUtils.getSkillMap_keyName().get(skillName+1)!=null){
+            skill = MapUtils.getSkillMap_keyName().get(skillName+1);
+        }
+        if(MapUtils.getSkillMap_keyName().get(skillName+2)!=null){
+            skill = MapUtils.getSkillMap_keyName().get(skillName+2);
+        }
+        role.setConcreteSkill(skill);
 
+        //monsterName
+        String bossName = requestBossInfo.getBossName();
+        //monster
+        ConcreteMonster boss = map.getMonsterMap().get(bossName);
+        map.setMonster(boss);
+        //return
+        String content = null;
+        if(skill.getName().equals("召唤术")){
+            content = babyAttackBoss(role,map);
+        }else{
+            //角色攻击怪兽
+             content = playerAttackBoss(role,map);
+        }
+        return MsgBossInfoProto.ResponseBossInfo.newBuilder()
+                .setContent(content)
+                .setType(MsgBossInfoProto.RequestType.USESKILLATTACKBOSS)
+                .build();
+    }
+
+    /**
+     * 角色攻击地图
+     * @param role role
+     * @param map map
+     * @return 协议地图
+     */
+    private String playerAttackBoss(ConcreteRole role, ConcreteMap map) {
+        //boss
+        ConcreteMonster boss = map.getMonster();
+        //获取角色伤害
+        Integer attack = role.getAttack();
+        //获取技能伤害
+        ConcreteSkill skill = role.getConcreteSkill();
+        Integer hurt = skill.getHurt();
+        //总伤害
+        Integer totalHurt = attack + hurt;
+        //消耗蓝量
+        Integer costMp = skill.getMp();
+        //角色蓝量
+        int curMp = role.getCurMp();
+        //校验怪兽状态
+        boolean bossState = checkBossState(boss);
+        if(!bossState){
+            return "怪兽已经死亡，不能再攻击,刷副本成功";
+        }
+        boolean mpState = checkMp(costMp,curMp);
+        if(!mpState){
+            return "蓝量不足,无法攻击";
+        }
+
+        //attack
+        Integer bossCurHp = boss.getHp();
+        boss.setHp(bossCurHp-totalHurt);
+        //mp
+        role.setCurMp(curMp-costMp);
+        role.setCurHp(RoleAndMap.varHp);
+        //update property
+        role.getCurMap().put(PropertyType.MP,curMp-costMp);
+        role.getCurMap().put(PropertyType.HP,RoleAndMap.varHp);
+        InjectRoleProperty.injectRoleProperty(role);
+        //怪兽死亡，通知该地图所有玩家
+        if(boss.getHp()<=0){
+            //通知
+            NoticeUtils.notifyAllRoles(boss);
+            //怪兽死亡事件
+            monsterDeadEvent.setRole(role);
+            monsterDeadEvent.setMonster(boss);
+            //触发事件，记录怪兽死亡次数
+            eventMap.submit(monsterDeadEvent);
+            //掉落装备
+            skillService.falldownEquip(role);
+            //Move to 村子
+            //销毁副本
+            map = null;
+
+        }
+        String roleName = role.getName();
+        String monsterName = boss.getName();
+        //返回消息
+        return roleName+"成功攻击"+monsterName+"\n("+roleName+"的mp值从"+curMp+"变为"+role.getCurMp()+
+                ";"+monsterName+"的hp值从"+bossCurHp+"变为"+boss.getHp()+")";
+    }
+
+    /**
+     * 检查蓝量
+     * @param costMp 消耗蓝量
+     * @param curMp 具备蓝量
+     * @return true or false
+     */
+    private boolean checkMp(Integer costMp, int curMp) {
+        return curMp>=costMp?true:false;
+    }
+
+    /**
+     * 检查Boss状态
+     * @param boss boss
+     * @return true or false
+     */
+    private boolean checkBossState(ConcreteMonster boss) {
+        return boss.getHp()<=0?false:true;
+    }
 }

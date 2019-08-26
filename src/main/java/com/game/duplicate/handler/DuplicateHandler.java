@@ -38,8 +38,8 @@ public class DuplicateHandler extends SimpleChannelInboundHandler<MsgBossInfoPro
         int typeNum = requestBossInfo.getType().getNumber();
         //分发任务
         switch (typeNum) {
-            case ATTACKBOSS :
-                responseBossInfo = duplicateService.attackBoss(channel,requestBossInfo);
+            case ENTERDUPLICATE :
+                responseBossInfo = duplicateService.enterDuplicate(channel,requestBossInfo);
                 break;
             case CREATETEAM :
                 responseBossInfo = duplicateService.createTeam(channel,requestBossInfo);
@@ -58,6 +58,9 @@ public class DuplicateHandler extends SimpleChannelInboundHandler<MsgBossInfoPro
                 break;
             case TEAMATTACKBOSS :
                 responseBossInfo = duplicateService.teamAttackBoss(channel,requestBossInfo);
+                break;
+            case USESKILLATTACKBOSS :
+                responseBossInfo = duplicateService.useSkillAttackBoss(channel,requestBossInfo);
                 break;
                 default:
                     break;
