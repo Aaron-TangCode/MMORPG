@@ -22,4 +22,5 @@ public interface TaskMapper {
      * @param roleTask 角色任务
      */
     public void updateTask(RoleTask roleTask);
+    public void insertTask(RoleTask roleTask);
 }

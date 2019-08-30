@@ -49,6 +49,16 @@ public class InjectTaskData {
      * @param role 角色
      */
     private void allocateTask(Map<Integer, ConcreteTask> taskMap,ConcreteRole role) {
+        if(role==null){
+            return;
+        }
+        //赋值
+        Map<Integer,ConcreteTask> raMap = new HashMap<>();
+        Map<Integer,ConcreteTask> rMap = new HashMap<>();
+        Map<Integer,ConcreteTask> fMap = new HashMap<>();
+
+        role.setReceivedTaskMap(rMap);
+        role.setFinishedTaskMap(fMap);
         RoleTask roleTask = taskService.queryTask(role.getId());
         if (roleTask==null){
             return;
@@ -57,27 +67,35 @@ public class InjectTaskData {
         String finishedTask = roleTask.getFinishedTask();
         String receivedTask = roleTask.getReceivedTask();
         //解析数据
-        String[] fTask = finishedTask.split(",");
-        String[] rTask = receivedTask.split(",");
-        //赋值
-        Map<Integer,ConcreteTask> raMap = new HashMap<>();
-        Map<Integer,ConcreteTask> rMap = new HashMap<>();
-        Map<Integer,ConcreteTask> fMap = new HashMap<>();
+        String[] fTask = null;
+        String[] rTask = null;
 
-        role.setReceivedTaskMap(rMap);
-        role.setFinishedTaskMap(fMap);
         //创建临时taskmap
         Map<Integer,ConcreteTask> tmpTaskMap = new HashMap<>(taskMap);
-        //遍历    分配“已完成”的任务
-        for (int i = 0; i < fTask.length; i++) {
-            ConcreteTask tmpTask = tmpTaskMap.remove(Integer.parseInt(fTask[i]));
-            role.getFinishedTaskMap().put(tmpTask.getId(),tmpTask);
+        if(finishedTask!=null){
+            fTask = finishedTask.split(",");
+            //遍历    分配“已完成”的任务
+            for (int i = 0; i < fTask.length; i++) {
+                if(fTask[i].equals("")){
+                    continue;
+                }
+                ConcreteTask tmpTask = tmpTaskMap.remove(Integer.parseInt(fTask[i]));
+                role.getFinishedTaskMap().put(tmpTask.getId(),tmpTask);
+            }
         }
-        //遍历    分配“已接受”的任务
-        for (int i = 0; i < rTask.length; i++) {
-            ConcreteTask tmpTask = tmpTaskMap.remove(Integer.parseInt(rTask[i]));
-            role.getReceivedTaskMap().put(tmpTask.getId(),tmpTask);
+        if(receivedTask!=null){
+            rTask = receivedTask.split(",");
+            //遍历    分配“已接受”的任务
+            for (int i = 0; i < rTask.length; i++) {
+                if(receivedTask.equals("")){
+                    receivedTask = null;
+                    break;
+                }
+                ConcreteTask tmpTask = tmpTaskMap.remove(Integer.parseInt(rTask[i]));
+                role.getReceivedTaskMap().put(tmpTask.getId(),tmpTask);
+            }
         }
+
         raMap = tmpTaskMap;
         role.setReceivableTaskMap(raMap);
     }

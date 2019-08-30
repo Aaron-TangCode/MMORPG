@@ -2,8 +2,8 @@ package com.game.backpack.excel;
 
 import com.game.backpack.bean.Type;
 import com.game.annotation.ExcelAnnotation;
+import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
-import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -61,7 +61,7 @@ public class ReadGoodsType {
                     }
                 }
                 // 数据装入List
-                MapUtils.getTypeMap().put(type.getId(),type);
+                CacheUtils.getTypeMap().put(type.getId(),type);
             }
             System.out.println("type(物品类型)静态数据加载完毕");
         } catch (IOException e) {

@@ -8,7 +8,7 @@ import com.game.protobuf.protoc.MsgGangInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.user.manager.LocalUserMap;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -243,6 +243,6 @@ public class GangService {
      * @return 角色
      */
     public ConcreteRole getRoleByRoleName(String roleName){
-        return MapUtils.getMapRolename_Role().get(roleName);
+        return CacheUtils.getMapRolename_Role().get(roleName);
     }
 }

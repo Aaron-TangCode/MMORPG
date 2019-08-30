@@ -24,8 +24,11 @@ public class CancleBuff {
         }
         Future future = role.getTaskMap().get(String.valueOf(role.getId()));
         //除去buff
-        role.getMapBuff().remove(role.getBuff().getName());
+//        role.getMapBuff().remove(role.getBuff().getName());
         //取消buff
-        future.cancel(true);
+        if(future!=null){
+            future.cancel(true);
+        }
+
     }
 }

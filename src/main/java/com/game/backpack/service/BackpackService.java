@@ -6,7 +6,7 @@ import com.game.protobuf.protoc.MsgGoodsInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.user.manager.LocalUserMap;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -133,7 +133,7 @@ public class BackpackService {
         //找物品(数据库)
         Goods goods_db =findGoods(list,goodsName);
         //找物品（本地缓存）
-        Goods goods_local = MapUtils.getGoodsMap().get(goodsName);
+        Goods goods_local = CacheUtils.getGoodsMap().get(goodsName);
         //更新本地的count信息
         if(goods_db!=null){
             goods_db.setRepeat(goods_local.getRepeat());
@@ -162,7 +162,7 @@ public class BackpackService {
 
         if(flag1){
             //在本地缓存拿装备的详细信息,在数据库中没信息，依赖roleName在本地缓存中查询
-            Goods localGoods = MapUtils.getGoodsMap().get(goodsName);
+            Goods localGoods = CacheUtils.getGoodsMap().get(goodsName);
             if(localGoods==null){
                 return "装备不存在本地缓存";
             }
@@ -228,7 +228,7 @@ public class BackpackService {
         //找物品(数据库)
         Goods goods_db =findGoods(list,goodsName);
         //找物品（本地缓存）
-        Goods goods_local = MapUtils.getGoodsMap().get(goodsName);
+        Goods goods_local = CacheUtils.getGoodsMap().get(goodsName);
         //更新本地的count信息
         if(goods_db!=null){
             goods_db.setRepeat(goods_local.getRepeat());

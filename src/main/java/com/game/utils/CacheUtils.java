@@ -3,6 +3,7 @@ package com.game.utils;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.bean.Type;
 import com.game.buff.bean.ConcreteBuff;
+import com.game.map.bean.ConcreteMap;
 import com.game.map.bean.MapMapping;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.npc.bean.ConcreteNPC;
@@ -14,14 +15,14 @@ import com.game.skill.bean.ConcreteSkill;
 import java.util.*;
 
 /**
- * @ClassName MapUtils
+ * @ClassName CacheUtils
  * @Description 记录上线角色信息
  * @Author DELL
  * @Date 2019/6/310:58
  * @Version 1.0
  */
-public class MapUtils {
-    private MapUtils() {}
+public class CacheUtils {
+    private CacheUtils() {}
     /**
      * 用户名-角色缓存
      */
@@ -31,10 +32,18 @@ public class MapUtils {
      */
     private static volatile Map<String,ConcreteRole> mapRolename_Role = null;
     /**
-     * 地图缓存
+     * 地图映射缓存
      */
-    private static volatile List<MapMapping> listRole = null;
+    private static volatile List<MapMapping> mapList = null;
 
+    /**
+     * id_地图缓存
+     */
+    private static volatile Map<Integer, ConcreteMap> id_ConcreteMap_Map = null;
+    /**
+     * name_地图缓存
+     */
+    private static volatile Map<String, ConcreteMap> name_ConcreteMap_Map = null;
     /**
      * NPC容器
      */
@@ -88,7 +97,7 @@ public class MapUtils {
 
     public static List<Goods> getGoodsList(){
         if(goodsList==null){
-            synchronized (MapUtils.class){
+            synchronized (CacheUtils.class){
                 if(goodsList==null){
                     goodsList = new ArrayList<>();
                 }
@@ -97,13 +106,33 @@ public class MapUtils {
         return goodsList;
     }
 
+    public static Map<String, ConcreteMap>  getName_ConcreteMap_Map(){
+        if(name_ConcreteMap_Map==null){
+            synchronized (CacheUtils.class){
+                if(name_ConcreteMap_Map==null){
+                    name_ConcreteMap_Map = new HashMap<>();
+                }
+            }
+        }
+        return name_ConcreteMap_Map;
+    }
+    public static Map<Integer, ConcreteMap>  getId_ConcreteMap_Map(){
+        if(id_ConcreteMap_Map==null){
+            synchronized (CacheUtils.class){
+                if(id_ConcreteMap_Map==null){
+                    id_ConcreteMap_Map = new HashMap<>();
+                }
+            }
+        }
+        return id_ConcreteMap_Map;
+    }
     /**
      * buff的map
      * @return
      */
     public static Map<String, ConcreteBuff>  getBuffMap(){
         if(buffMap==null){
-            synchronized (MapUtils.class){
+            synchronized (CacheUtils.class){
                 if(buffMap==null){
                     buffMap = new HashMap<>();
                 }
@@ -117,7 +146,7 @@ public class MapUtils {
      */
     public static Map<String, Goods> getGoodsMap(){
         if(goodsMap==null){
-            synchronized (MapUtils.class){
+            synchronized (CacheUtils.class){
                 if(goodsMap==null){
                     goodsMap = new HashMap<>();
                 }
@@ -132,7 +161,7 @@ public class MapUtils {
      */
     public static Map<Integer, Type> getTypeMap(){
         if(typeMap==null){
-            synchronized (MapUtils.class){
+            synchronized (CacheUtils.class){
                 if(typeMap==null){
                     typeMap = new HashMap<>();
                 }
@@ -146,7 +175,7 @@ public class MapUtils {
      */
     public static Map<String,ConcreteSkill> getSkillMap_keyName(){
         if(skillMap2==null){
-            synchronized (MapUtils.class){
+            synchronized (CacheUtils.class){
                 if(skillMap2==null){
                     skillMap2 = new HashMap<>();
                 }
@@ -160,7 +189,7 @@ public class MapUtils {
      */
     public static Map<String,ConcreteSkill> getSkillMap_keyId(){
         if(skillMap==null){
-           synchronized (MapUtils.class){
+           synchronized (CacheUtils.class){
                if(skillMap==null){
                    skillMap = new HashMap<>();
                }
@@ -175,7 +204,7 @@ public class MapUtils {
      */
     public static List<MonsterMapMapping> getMonsterMapMappingList(){
         if(monsterMapMappingList==null){
-            synchronized (MapUtils.class){
+            synchronized (CacheUtils.class){
                 if(monsterMapMappingList==null){
                     monsterMapMappingList = new ArrayList<>();
                 }
@@ -190,7 +219,7 @@ public class MapUtils {
      */
     public static Map<Integer, ConcreteMonster> getMonsterMap(){
         if(monsterMap==null){
-            synchronized (MapUtils.class){
+            synchronized (CacheUtils.class){
                 if (monsterMap==null){
                     monsterMap = new HashMap<>();
                 }
@@ -226,7 +255,7 @@ public class MapUtils {
      */
     public static List<MapNPCMapping> getMapNPCMappingList(){
         if(mapNPCMappingList==null){
-            synchronized (MapUtils.class){
+            synchronized (CacheUtils.class){
                 if(mapNPCMappingList==null){
                     mapNPCMappingList = new ArrayList<>();
                 }
@@ -240,7 +269,7 @@ public class MapUtils {
      */
     public static Map<String, ConcreteRole> getMapUsername_Role() {
         if (mapUsername_Role == null) {
-            synchronized (MapUtils.class) {
+            synchronized (CacheUtils.class) {
                 if (mapUsername_Role == null) {
                     mapUsername_Role = new HashMap<>();
                     return mapUsername_Role;
@@ -257,7 +286,7 @@ public class MapUtils {
      */
     public static Map<String, ConcreteRole> getMapRolename_Role() {
         if (mapRolename_Role == null) {
-            synchronized (MapUtils.class) {
+            synchronized (CacheUtils.class) {
                 if (mapRolename_Role == null) {
                     mapRolename_Role = new HashMap<>();
                     return mapRolename_Role;
@@ -272,15 +301,15 @@ public class MapUtils {
      *
      * @return 地图Map_Mapping实体
      */
-    public static List<MapMapping> getListRole() {
-        if (listRole == null) {
-            synchronized (MapUtils.class) {
-                if (listRole == null) {
-                    listRole = new ArrayList<>();
+    public static List<MapMapping> getMapList() {
+        if (mapList == null) {
+            synchronized (CacheUtils.class) {
+                if (mapList == null) {
+                    mapList = new ArrayList<>();
                 }
             }
         }
-        return listRole;
+        return mapList;
     }
 
     /**
@@ -289,7 +318,7 @@ public class MapUtils {
      */
     public static Map<Integer, ConcreteNPC> getNpcMap(){
         if(npcMap==null){
-            synchronized (MapUtils.class){
+            synchronized (CacheUtils.class){
                 if(npcMap==null){
                     npcMap = new HashMap<>();
                 }
@@ -305,7 +334,7 @@ public class MapUtils {
      * @return
      */
     public static boolean isReach(int src_id, int dest_id) {
-        Iterator<MapMapping> iterator = getListRole().iterator();
+        Iterator<MapMapping> iterator = getMapList().iterator();
         while (iterator.hasNext()) {
             MapMapping mapMapping = iterator.next();
             if (mapMapping.getSrcMap() == src_id && mapMapping.getDestMap() == dest_id) {

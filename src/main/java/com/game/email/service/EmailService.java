@@ -3,7 +3,7 @@ package com.game.email.service;
 import com.game.backpack.handler.BackpackHandler;
 import com.game.protobuf.protoc.MsgEmailInfoProto;
 import com.game.role.bean.ConcreteRole;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,12 +37,16 @@ public class EmailService {
         //goodsName
         String goodsName = requestEmailInfo.getGoodsName();
         //获取所有玩家
-        Map<String, ConcreteRole> roleMap = MapUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
         Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
         //发送物品
         sendGoods(iterator,goodsName);
-        return null;
+        String cotent = "系统发送一个物品："+goodsName;
+        return MsgEmailInfoProto.ResponseEmailInfo.newBuilder()
+                .setContent(cotent)
+                .setType(MsgEmailInfoProto.RequestType.SENDGOODS)
+                .build();
     }
 
     /**

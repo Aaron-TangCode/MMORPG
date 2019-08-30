@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.game.buff.bean.ConcreteBuff;
 import com.game.equipment.bean.EquipmentBox;
 import com.game.map.bean.ConcreteMap;
+import com.game.npc.bean.ConcreteMonster;
 import com.game.occupation.bean.Occupation;
 import com.game.property.bean.Property;
 import com.game.property.bean.PropertyType;
@@ -134,7 +135,18 @@ public class ConcreteRole {
      * buff
      */
     private ConcreteBuff buff;
+    /**
+     * 怪兽引用
+     */
+    private ConcreteMonster monster;
 
+    public ConcreteMonster getMonster() {
+        return monster;
+    }
+
+    public void setMonster(ConcreteMonster monster) {
+        this.monster = monster;
+    }
     public ConcreteBuff getBuff() {
         return buff;
     }

@@ -1,9 +1,7 @@
 package com.game.task.repository;
 
 import com.game.task.bean.RoleTask;
-import com.game.task.bean.UpdateTaskTask;
 import com.game.task.mapper.TaskMapper;
-import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -37,7 +35,30 @@ public class TaskRepository {
      * @param roleTask 角色任务
      */
     public void updateTask(RoleTask roleTask) {
-        UpdateTaskTask updateTaskTask = new UpdateTaskTask(roleTask);
-        UserThreadPool.ACCOUNT_SERVICE[0].submit(updateTaskTask);
+        SqlSession session = SqlUtils.getSession();
+        try{
+            TaskMapper mapper = session.getMapper(TaskMapper.class);
+            mapper.updateTask(roleTask);
+            session.commit();
+        }finally {
+            session.close();
+        }
+//        UpdateTaskTask updateTaskTask = new UpdateTaskTask(roleTask);
+//        UserThreadPool.ACCOUNT_SERVICE[0].submit(updateTaskTask);
+    }
+
+    /**
+     * 增加任务
+     * @param roleTask 角色任务
+     */
+    public void insertTask(RoleTask roleTask) {
+        SqlSession session = SqlUtils.getSession();
+        try{
+            TaskMapper mapper = session.getMapper(TaskMapper.class);
+            mapper.insertTask(roleTask);
+            session.commit();
+        }finally {
+            session.close();
+        }
     }
 }

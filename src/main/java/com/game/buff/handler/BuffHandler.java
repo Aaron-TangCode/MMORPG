@@ -6,7 +6,7 @@ import com.game.role.bean.ConcreteRole;
 import com.game.server.manager.BuffMap;
 import com.game.server.manager.TaskMap;
 import com.game.user.threadpool.UserThreadPool;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.util.concurrent.Future;
 import org.springframework.stereotype.Component;
 
@@ -32,9 +32,9 @@ public class BuffHandler {
      */
     public void executeBuff(String roleName,String buffName){
         //获取角色
-        ConcreteRole role = MapUtils.getMapRolename_Role().get(roleName);
+        ConcreteRole role = CacheUtils.getMapRolename_Role().get(roleName);
         //获取本地buff
-        Map<String, ConcreteBuff> buffMap = MapUtils.getBuffMap();
+        Map<String, ConcreteBuff> buffMap = CacheUtils.getBuffMap();
         ConcreteBuff buff = null;
         //选择Buff
         switch (buffName) {
@@ -54,20 +54,35 @@ public class BuffHandler {
                     buff = new ConcreteBuff();
                     break;
         }
-        initBuffAndRole(role,buff,TaskQueue.getQueue(),TaskMap.getFutureMap(), BuffMap.getBuffMap());
+        //任务队列
+        Queue<Runnable> queue = null;
+        //任务map
+        Map<String, Future> taskMap = null;
+        //buff的map
+        Map<String, ConcreteBuff> buffMap2 = null;
+        if(role.getQueue()==null){
+            role.setQueue(TaskQueue.getQueue());
+        }
+        if(role.getTaskMap()==null){
+            role.setTaskMap(TaskMap.getFutureMap());
+        }
+        if(role.getMapBuff()==null){
+            role.setMapBuff(BuffMap.getBuffMap());
+        }
+//        initBuffAndRole(role,buff,queue,taskMap, buffMap2);
+        buff.setRole(role);
         //创建任务
         BuffTask task = new BuffTask(buff,role);
         //把任务加到任务队列
         role.getQueue().add(task);
-        //添加buff
-        role.getMapBuff().put(buffName,buff);
-        role.setBuff(buff);
         //设置名字
         buff.setName(buffName);
+        //添加buff
+        role.getMapBuff().put(buffName,buff);
+//        role.setBuff(buff);
         //把任务丢线程池
         int threadIndex = UserThreadPool.getThreadIndex(role.getId());
         Future future =  UserThreadPool.executeTask(role,threadIndex, 10L, 10L, TimeUnit.SECONDS);
-
         //存在map中
         role.getTaskMap().put(String.valueOf(role.getId()),future);
 

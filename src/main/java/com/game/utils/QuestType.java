@@ -8,10 +8,22 @@ package com.game.utils;
  * @Version 1.0
  */
 public enum QuestType {
-
+    /**
+     * 杀怪
+     */
     KM,
+    /**
+     * 谈话
+     */
     TALK,
-    TRADE;
+    /**
+     * 交易
+     */
+    TRADE,
+    /**
+     * 使用物品
+     */
+    USEGOODS;
 
 
 }

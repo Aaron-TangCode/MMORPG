@@ -3,9 +3,12 @@ package com.game.role.service;
 import com.alibaba.fastjson.JSONObject;
 import com.game.backpack.bean.Goods;
 import com.game.backpack.service.BackpackService;
+import com.game.event.beanevent.GoodsEvent;
+import com.game.event.manager.EventMap;
 import com.game.occupation.bean.Occupation;
 import com.game.occupation.manager.OccupationMap;
 import com.game.property.bean.PropertyType;
+import com.game.property.manager.InjectProperty;
 import com.game.protobuf.message.ContentType;
 import com.game.protobuf.message.ResultCode;
 import com.game.protobuf.protoc.MsgRoleInfoProto;
@@ -18,7 +21,7 @@ import com.game.user.manager.LocalUserMap;
 import com.game.user.repository.UserRepository;
 import com.game.user.service.Login;
 import com.game.user.service.UserService;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +36,9 @@ import java.util.Map;
  * @Date 2019/5/2920:47
  * @Version 1.0
  */
-@Service("RoleService")
+@Service
 public class RoleService {
+
     /**
      * 用户服务
      */
@@ -65,6 +69,13 @@ public class RoleService {
      */
     @Autowired
     private ProtoService protoService;
+    @Autowired
+    private GoodsEvent goodsEvent;
+    @Autowired
+    private EventMap eventMap;
+
+    @Autowired
+    private InjectProperty injectProperty;
     /**
      * 获取角色role
      * @param id id
@@ -157,6 +168,9 @@ public class RoleService {
         preRegister(user.getUsername(), roleName, occupationId);
         //获取role
         ConcreteRole role = roleRepository.getRoleByRoleName(roleName);
+        LocalUserMap.getUserRoleMap().put((int)userId,role);
+        //注入属性
+        injectProperty.initProperty(role.getName());
         //返回信息
        return MsgRoleInfoProto.ResponseRoleInfo.newBuilder()
                 .setType(MsgRoleInfoProto.RequestType.CHOOSEROLE)
@@ -174,7 +188,9 @@ public class RoleService {
      */
     public MsgRoleInfoProto.ResponseRoleInfo roleInfo(Channel channel, MsgRoleInfoProto.RequestRoleInfo requestRoleInfo) {
         //获取role
-        ConcreteRole role = getRole(channel);
+        ConcreteRole tmpRole = getRole(channel);
+        ConcreteRole role = CacheUtils.getMapRolename_Role().get(tmpRole.getName());
+        injectProperty.initProperty(role.getName());
         //返回信息
         return MsgRoleInfoProto.ResponseRoleInfo.newBuilder()
                 .setType(MsgRoleInfoProto.RequestType.ROLEINFO)
@@ -195,7 +211,7 @@ public class RoleService {
         //goodsName
         String goodsName = requestRoleInfo.getGoodsName();
         //获取角色
-        ConcreteRole role = MapUtils.getMapRolename_Role().get(tmpRole.getName());
+        ConcreteRole role = CacheUtils.getMapRolename_Role().get(tmpRole.getName());
         //获取角色的物品列表
         List<Goods> goodsList = backpackService.getGoodsByRoleId(role.getId());
         //获取角色的具体物品
@@ -263,7 +279,7 @@ public class RoleService {
             if(type>1){
                 return "无法使用该物品,该物品既不是血包，也不是蓝包";
             }
-            Goods localGoods = MapUtils.getGoodsMap().get(goods.getName());
+            Goods localGoods = CacheUtils.getGoodsMap().get(goods.getName());
             //检查物品是血包，还是蓝包（0：血包；1：蓝包）
             if(localGoods.getType()==0){
                 //检查角色的血是否已满
@@ -281,8 +297,10 @@ public class RoleService {
                 curMap.put(PropertyType.HP,setHp);
                 //通知角色更新
                 InjectRoleProperty.injectRoleProperty(role);
-                MapUtils.getMapRolename_Role().put(role.getName(),role);
+                CacheUtils.getMapRolename_Role().put(role.getName(),role);
                 backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
+                goodsEvent.setRole(role);
+                eventMap.submit(goodsEvent);
                 //返回消息
                 return "成功使用"+goods.getName()+"\t加血后："+role.getCurHp();
             }else{
@@ -300,7 +318,7 @@ public class RoleService {
                 curMap.put(PropertyType.MP,setMp);
                 //通知角色更新
                 InjectRoleProperty.injectRoleProperty(role);
-                MapUtils.getMapRolename_Role().put(role.getName(),role);
+                CacheUtils.getMapRolename_Role().put(role.getName(),role);
                 backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
                 return "成功使用"+goods.getName()+"\t加蓝后："+role.getCurMp();
             }

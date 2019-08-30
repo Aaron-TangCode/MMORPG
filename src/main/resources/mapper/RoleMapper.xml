@@ -52,15 +52,17 @@
     <resultMap id="uRoleResultMap" type="com.game.role.bean.ConcreteRole">
         <result column="name" property="name"></result>
         <result column="skill" property="concreteSkill.id"></result>
+        <result column="equipment_id" property="equipmentBox.id"></result>
     </resultMap>
 
     <parameterMap id="uRole" type="com.game.role.bean.ConcreteRole">
         <parameter property="name" resultMap="uRoleResultMap"></parameter>
         <parameter property="concreteSkill.id" resultMap="uRoleResultMap"></parameter>
+        <parameter property="equipmentBox.id" resultMap="uRoleResultMap"></parameter>
     </parameterMap>
 
     <update id="updateRole" parameterMap="uRole">
-        update role set name=#{name},skill=#{concreteSkill.id},money=#{money} where name = #{name}
+        update role set name=#{name},skill=#{concreteSkill.id},money=#{money},equipment_id=#{equipmentBox.id} where name = #{name}
     </update>
 
 <!--   插入role -->

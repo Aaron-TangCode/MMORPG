@@ -2,6 +2,8 @@ package com.game.map.mapper;
 
 import com.game.map.bean.ConcreteMap;
 
+import java.util.List;
+
 /**
  * @ClassName MapMapper
  * @Description 地图mapper
@@ -10,6 +12,12 @@ import com.game.map.bean.ConcreteMap;
  * @Version 1.0
  */
 public interface MapMapper {
+    public void updateMap(ConcreteMap map);
+    /**
+     * 获取地图所有信息
+     * @return 信息
+     */
+    public List<ConcreteMap> getMapMsg();
     /**
      * 根据地图id获取
      * @param id id

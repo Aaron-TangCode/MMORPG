@@ -10,4 +10,8 @@
     <update id="updateTask" parameterType="com.game.task.bean.RoleTask">
         update roletask set receivedTask=#{receivedTask},finishedTask=#{finishedTask},count=#{count} where roleId=#{roleId}
     </update>
+
+    <insert id="insertTask" parameterType="com.game.task.bean.RoleTask">
+        insert into roletask(roleId,receivedTask) values (#{roleId},#{receivedTask})
+    </insert>
 </mapper>

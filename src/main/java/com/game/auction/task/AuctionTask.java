@@ -6,7 +6,7 @@ import com.game.backpack.handler.BackpackHandler;
 import com.game.protobuf.protoc.MsgAuctionInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -81,6 +81,6 @@ public class AuctionTask implements  Runnable{
 
     }
     public ConcreteRole getRole(String roleName){
-        return MapUtils.getMapRolename_Role().get(roleName);
+        return CacheUtils.getMapRolename_Role().get(roleName);
     }
 }

@@ -10,7 +10,7 @@ import com.game.user.bean.User;
 import com.game.user.handler.UserHandler;
 import com.game.user.manager.LocalUserMap;
 import com.game.user.repository.UserRepository;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,6 +78,7 @@ public class UserService {
 
         //校验数据库
         boolean is_success = this.login.login(username, password);
+
         //其他一系列操作
         ConcreteRole role = null;
         //获取user
@@ -96,6 +97,7 @@ public class UserService {
             oldChannel.close();
             LocalUserMap.getUserChannelMap().put(user.getId(),channel);
         }
+
         if(is_success){
 
             role = userHandler.getRoleAfterLoginSuccess(username);
@@ -210,7 +212,7 @@ public class UserService {
         // 绑定 channel-userId
         LocalUserMap.getChannelUserMap().put(channel,userId);
         //roleName-role
-        MapUtils.getMapRolename_Role().put(role.getName(),role);
+        CacheUtils.getMapRolename_Role().put(role.getName(),role);
     }
 
     /**
@@ -227,7 +229,7 @@ public class UserService {
 
         LocalUserMap.getChannelUserMap().remove(channel);
 
-        MapUtils.getMapRolename_Role().remove(role.getName());
+        CacheUtils.getMapRolename_Role().remove(role.getName());
 
         role = null;
     }

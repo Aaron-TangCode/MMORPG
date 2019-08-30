@@ -15,7 +15,7 @@ import com.game.role.manager.InjectRoleProperty;
 import com.game.role.service.RoleService;
 import com.game.skill.bean.ConcreteSkill;
 import com.game.user.manager.LocalUserMap;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -133,7 +133,7 @@ public class SkillService {
         if(lowSkill.getLevel()==2){
             return role.getName()+"的"+skillName+"技能等级已满";
         }
-        ConcreteSkill highSkill = MapUtils.getSkillMap_keyName().get(lowSkill.getName() + (lowSkill.getLevel()+1));
+        ConcreteSkill highSkill = CacheUtils.getSkillMap_keyName().get(lowSkill.getName() + (lowSkill.getLevel()+1));
         //修改技能id
         updateSkillId(role,highSkill);
         role.setConcreteSkill(highSkill);
@@ -165,8 +165,8 @@ public class SkillService {
         ConcreteSkill lowSkill = null;
         //有技能时，不能学习已有技能
         for (int i = 0; i < skills.length; i++) {
-            MapUtils.printMap(MapUtils.getSkillMap_keyId());
-            ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyId().get(skills[i]);
+            CacheUtils.printMap(CacheUtils.getSkillMap_keyId());
+            ConcreteSkill concreteSkill = CacheUtils.getSkillMap_keyId().get(skills[i]);
             if(Objects.equals(concreteSkill.getName(),skillName)){
                 lowSkill = concreteSkill;
             }
@@ -217,7 +217,7 @@ public class SkillService {
         ConcreteSkill skill = concreteRole.getConcreteSkill();
         if(skill==null){
             //该角色无技能，学习技能
-            ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyName().get(skillname+1);
+            ConcreteSkill concreteSkill = CacheUtils.getSkillMap_keyName().get(skillname+1);
             concreteRole.setConcreteSkill(concreteSkill);
             //更新数据库
             roleService.updateRole(concreteRole);
@@ -228,8 +228,8 @@ public class SkillService {
         boolean learned = false;
         //有技能时，不能学习已有技能
         for (int i = 0; i < skills.length; i++) {
-            MapUtils.printMap(MapUtils.getSkillMap_keyId());
-            ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyId().get(skills[i]);
+            CacheUtils.printMap(CacheUtils.getSkillMap_keyId());
+            ConcreteSkill concreteSkill = CacheUtils.getSkillMap_keyId().get(skills[i]);
             if(Objects.equals(concreteSkill.getName(),skillname)){
                 learned = true;
             }
@@ -237,7 +237,7 @@ public class SkillService {
         if(learned){
             return "已经学了技能："+skillname+",不能再学了！！";
         }else{
-            ConcreteSkill concreteSkill = MapUtils.getSkillMap_keyName().get(skillname+1);
+            ConcreteSkill concreteSkill = CacheUtils.getSkillMap_keyName().get(skillname+1);
             //修改技能id
             updateSkillId(concreteRole,concreteSkill);
             concreteRole.setConcreteSkill(concreteSkill);
@@ -282,7 +282,7 @@ public class SkillService {
      */
     private String attackPk(ConcreteRole attackedRole, String skillName, String roleName, String targetRoleName) {
         //从local获取本地角色
-        ConcreteRole attackRole = MapUtils.getMapRolename_Role().get(roleName);
+        ConcreteRole attackRole = CacheUtils.getMapRolename_Role().get(roleName);
         //检查当期地图是否存在怪兽
         if(attackedRole==null){
             return "地图："+attackRole.getConcreteMap().getName()+"没角色:"+targetRoleName;
@@ -349,7 +349,7 @@ public class SkillService {
         //创建链表
         List<ConcreteRole> roleList = new ArrayList<>();
         //根据角色id来找出其他角色
-        Map<String, ConcreteRole> roleMap = MapUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
         Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
         while (iterator.hasNext()) {
@@ -412,7 +412,7 @@ public class SkillService {
         }else {
             content = attack(monster,skillName,role.getName(),monster.getName(),map);
         }
-        ConcreteRole tmpRole = MapUtils.getMapRolename_Role().get(role.getName());
+        ConcreteRole tmpRole = CacheUtils.getMapRolename_Role().get(role.getName());
         //获取技能---使用技能---判断是否具备攻击条件--攻击--返回信息
         MsgSkillInfoProto.ResponseSkillInfo skillInfo = MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
                 .setType(MsgSkillInfoProto.RequestType.USESKILL)
@@ -431,7 +431,7 @@ public class SkillService {
      */
     private String attack(ConcreteMonster monster,String skillName,String roleName,String monsterName,ConcreteMap map) {
         //从local获取本地角色
-        ConcreteRole localRole = MapUtils.getMapRolename_Role().get(roleName);
+        ConcreteRole localRole = CacheUtils.getMapRolename_Role().get(roleName);
         //检查当期地图是否存在怪兽
         if(monster==null){
             return "地图："+localRole.getConcreteMap().getName()+"没怪兽:"+monsterName;
@@ -491,7 +491,7 @@ public class SkillService {
     }
 
     public void falldownEquip(ConcreteRole localRole) {
-        List<Goods> goodsList = MapUtils.getGoodsList();
+        List<Goods> goodsList = CacheUtils.getGoodsList();
         //掉落装备数量
         int num = (int)((Math.random())*goodsList.size()+1);
 
@@ -515,8 +515,8 @@ public class SkillService {
     public ConcreteMonster findConcreteMonster(List<Integer> monsterList,String monsterName) {
         ConcreteMonster monster = null;
         for (int i = 0; i < monsterList.size(); i++) {
-            if (Objects.equals(MapUtils.getMonsterMap().get(monsterList.get(i)).getName(),monsterName)) {
-                return MapUtils.getMonsterMap().get(monsterList.get(i));
+            if (Objects.equals(CacheUtils.getMonsterMap().get(monsterList.get(i)).getName(),monsterName)) {
+                return CacheUtils.getMonsterMap().get(monsterList.get(i));
             }
         }
         return null;
@@ -543,7 +543,7 @@ public class SkillService {
     public List<Integer> findMonster(int mapId){
         List<Integer> monsterList = new ArrayList<>();
         //地图和怪兽的映射列表
-        List<MonsterMapMapping> monsterMapMappingList = MapUtils.getMonsterMapMappingList();
+        List<MonsterMapMapping> monsterMapMappingList = CacheUtils.getMonsterMapMappingList();
         //遍历找出具体的怪兽列表
         for (int i = 0; i < monsterMapMappingList.size(); i++) {
             if(monsterMapMappingList.get(i).getMapId()==mapId){
@@ -573,7 +573,7 @@ public class SkillService {
         }else {
             content = babyAttack(attackedBoss,role,map);
         }
-        ConcreteRole tmpRole = MapUtils.getMapRolename_Role().get(role.getName());
+        ConcreteRole tmpRole = CacheUtils.getMapRolename_Role().get(role.getName());
         //获取技能---使用技能---判断是否具备攻击条件--攻击--返回信息
         MsgSkillInfoProto.ResponseSkillInfo skillInfo = MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
                 .setType(MsgSkillInfoProto.RequestType.USESKILL)

@@ -42,7 +42,6 @@ public class RankService {
      * @return 协议信息
      */
     public MsgRankInfoProto.ResponseRankInfo queryRankInfo(Channel channel, MsgRankInfoProto.RequestRankInfo requestRankInfo) {
-        ConcreteRole role = getRole(channel);
         //获取数据
         RankBean[] rankBeans = RankManager.getRankBeans();
         int[] ranks = RankManager.getRanks();

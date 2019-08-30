@@ -2,8 +2,6 @@ package com.game.user.repository;
 
 import com.game.user.bean.User;
 import com.game.user.mapper.UserMapper;
-import com.game.user.task.UpdateUserTask;
-import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -22,8 +20,16 @@ public class UserRepository {
      * @param user user
      */
     public void updateUser(User user) {
-        UpdateUserTask updateUserTask = new UpdateUserTask(user);
-        UserThreadPool.ACCOUNT_SERVICE[0].submit(updateUserTask);
+        SqlSession session = SqlUtils.getSession();
+        try{
+            UserMapper mapper = session.getMapper(UserMapper.class);
+            mapper.updateUser(user);
+            session.commit();
+        }finally {
+            session.close();
+        }
+//        UpdateUserTask updateUserTask = new UpdateUserTask(user);
+//        UserThreadPool.ACCOUNT_SERVICE[(int)(Math.random()*10)].submit(updateUserTask);
     }
 
     /**

@@ -73,6 +73,9 @@ public class TaskService {
     private String printMap(Map<Integer, ConcreteTask> map,ConcreteRole role){
         String outputContent = "任务id:{0}\t任务描述:{1}\t任务奖励:{2}\t完成条件:{3}\n";
         StringBuffer sb = new StringBuffer();
+        if(map==null){
+            return "还没接受任何任务";
+        }
         for (Map.Entry<Integer, ConcreteTask> taskEntry : map.entrySet()) {
             sb.append(MessageFormat.format(outputContent, taskEntry.getKey(), taskEntry.getValue().getTaskDescription(),
                     taskEntry.getValue().getBonus(), taskEntry.getValue().getCondition()) );
@@ -82,16 +85,26 @@ public class TaskService {
     private Map<Integer, ConcreteTask> handleReceivableData(ConcreteRole role) {
         //查询数据库
         RoleTask roleTask = queryTask(role.getId());
-        //解析数据
-        String finishedTask = roleTask.getFinishedTask();
-        String receivedTask = roleTask.getReceivedTask();
+        String finishedTask = null;
+        String receivedTask = null;
+        if(roleTask!=null){
+            //解析数据
+             finishedTask = roleTask.getFinishedTask();
+             receivedTask = roleTask.getReceivedTask();
+        }
         //本地缓存
         Map<Integer, ConcreteTask> taskMap = TaskMap.getTaskMap();
         Map<Integer, ConcreteTask> tmpTaskMap = new HashMap<>(taskMap);
         //清掉原来缓存数据
-        role.getReceivableTaskMap().clear();
-        role.getReceivedTaskMap().clear();
-        role.getFinishedTaskMap().clear();
+        if(role.getReceivableTaskMap()!=null){
+            role.getReceivableTaskMap().clear();
+        }
+        if(role.getReceivedTaskMap()!=null){
+            role.getReceivedTaskMap().clear();
+        }
+        if(role.getFinishedTaskMap()!=null){
+            role.getFinishedTaskMap().clear();
+        }
         //解析数据
         String[] split = null;
         String[] split1 = null;
@@ -99,6 +112,9 @@ public class TaskService {
         if(finishedTask!=null){
             split = finishedTask.split(",");
             for (int i = 0; i < split.length; i++) {
+                if(split[i].equals("")){
+                    continue;
+                }
                 ConcreteTask tmpTask = tmpTaskMap.remove(Integer.parseInt(split[i]));
                 role.getFinishedTaskMap().put(tmpTask.getId(),tmpTask);
             }
@@ -107,6 +123,10 @@ public class TaskService {
         if(receivedTask!=null){
             split1 = receivedTask.split(",");
             for (int i = 0; i < split1.length; i++) {
+                if(receivedTask.equals("")){
+                    receivedTask = null;
+                    break;
+                }
                 ConcreteTask tmpTask = tmpTaskMap.remove(Integer.parseInt(split1[i]));
                 role.getReceivedTaskMap().put(tmpTask.getId(),tmpTask);
             }
@@ -156,19 +176,29 @@ public class TaskService {
     private Map<Integer, ConcreteTask> handleReceivedData(ConcreteRole role) {
         //查询数据库
         RoleTask roleTask = queryTask(role.getId());
+        String receivedTask = null;
         //解析数据
-        String receivedTask = roleTask.getReceivedTask();
+        if(roleTask!=null){
+            receivedTask = roleTask.getReceivedTask();
+        }
+
         //本地缓存
         Map<Integer, ConcreteTask> taskMap = TaskMap.getTaskMap();
         Map<Integer, ConcreteTask> tmpTaskMap = new HashMap<>(taskMap);
         //清掉原来缓存数据
-        role.getReceivedTaskMap().clear();
+        if(role.getReceivedTaskMap()!=null){
+            role.getReceivedTaskMap().clear();
+        }
         //解析数据
         String[] split1 = null;
         //解析已接受的任务
         if(receivedTask!=null){
             split1 = receivedTask.split(",");
             for (int i = 0; i < split1.length; i++) {
+                if(receivedTask.equals("")){
+                    receivedTask = null;
+                    break;
+                }
                 ConcreteTask tmpTask = tmpTaskMap.remove(Integer.parseInt(split1[i]));
                 role.getReceivedTaskMap().put(tmpTask.getId(),tmpTask);
             }
@@ -188,19 +218,31 @@ public class TaskService {
         String taskId = requestTaskInfo.getTaskId();
         //查询
         RoleTask roleTask = queryTask(role.getId());
-        String receivedTask = roleTask.getReceivedTask();
-        StringBuffer sb = new StringBuffer(receivedTask);
-        if(receivedTask==null){
+        StringBuffer sb = new StringBuffer();
+        if(roleTask==null){
+            //添加
+            roleTask = new RoleTask();
             sb.append(taskId);
+            roleTask.setReceivedTask(sb.toString());
+            roleTask.setRoleId(role.getId());
+            insertTask(roleTask);
         }else{
-            sb.append(",").append(taskId);
+            //更新
+            String receivedTask = roleTask.getReceivedTask();
+            if(receivedTask!=null){
+                sb.append(receivedTask);
+            }
+            if(receivedTask==null||receivedTask.equals("")){
+                sb.append(taskId);
+            }else{
+                sb.append(",").append(taskId);
+            }
+            roleTask.setReceivedTask(sb.toString());
+            //更新数据库信息
+            updateTask(roleTask);
         }
-        roleTask.setReceivedTask(sb.toString());
-        //更新数据库信息
-        updateTask(roleTask);
-        //注册事件
 
-        //todo 这里需要做一个扩展：任务的自动匹配
+        //注册事件
 
         String content = "成功接受任务";
         return MsgTaskInfoProto.ResponseTaskInfo.newBuilder()
@@ -208,6 +250,11 @@ public class TaskService {
                 .setType(MsgTaskInfoProto.RequestType.RECEIVETASK)
                 .build();
     }
+
+    private void insertTask(RoleTask roleTask) {
+        taskRepository.insertTask(roleTask);
+    }
+
     /**
      * 放弃任务
      * @param channel channel
@@ -220,7 +267,7 @@ public class TaskService {
         //taskId
         String taskId = requestTaskInfo.getTaskId();
         //更新数据
-        updateData(role,taskId);
+        updateRoleTaskData(role,taskId);
         String content = "成功放弃任务";
         return MsgTaskInfoProto.ResponseTaskInfo.newBuilder()
                 .setType(MsgTaskInfoProto.RequestType.DISCARDTASK)
@@ -233,19 +280,26 @@ public class TaskService {
      * @param role 角色
      * @param taskId 任务id
      */
-    private void updateData(ConcreteRole role,String taskId) {
+    private void updateRoleTaskData(ConcreteRole role, String taskId) {
         //获取任务数据
         RoleTask roleTask = queryTask(role.getId());
+        //获取已接受任务(3,4)
         String receivedTask = roleTask.getReceivedTask();
-
+        //判断已接受
         if(receivedTask==null){
-            role.getChannel().writeAndFlush("没已接受的任务");
+            String content = "没已接受的任务";
+            MsgTaskInfoProto.ResponseTaskInfo taskInfo = MsgTaskInfoProto.ResponseTaskInfo.newBuilder()
+                    .setContent(content)
+                    .setType(MsgTaskInfoProto.RequestType.DISCARDTASK)
+                    .build();
+            //返回消息
+            role.getChannel().writeAndFlush(taskInfo);
             return;
         }
         //[1,2]
         String[] task = receivedTask.split(",");
         StringBuffer newTask = new StringBuffer();
-
+        //边界，细节操作
         for (int i = 0; i < task.length; i++) {
             if (!task[i].equals(taskId)&&i!=task.length-1) {
                 newTask.append(task[i]+",");

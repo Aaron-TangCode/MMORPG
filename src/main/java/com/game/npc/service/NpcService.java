@@ -1,11 +1,14 @@
 package com.game.npc.service;
 
+import com.game.event.beanevent.TalkEvent;
+import com.game.event.manager.EventMap;
 import com.game.npc.bean.ConcreteNPC;
 import com.game.protobuf.protoc.MsgNpcInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.user.manager.LocalUserMap;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
@@ -20,6 +23,10 @@ import java.util.List;
  */
 @Service
 public class NpcService {
+    @Autowired
+    private TalkEvent talkEvent;
+    @Autowired
+    private EventMap eventMap;
     /**
      * 和npc谈话
      * @param channel channel
@@ -36,9 +43,14 @@ public class NpcService {
         //获取当前玩家所在场景
         final int mapId = role.getConcreteMap().getId();
         //获取场景的npc
-        List<Integer> npcIdList = MapUtils.mapIdnpcIdMap().get(mapId);
+        List<Integer> npcIdList = CacheUtils.mapIdnpcIdMap().get(mapId);
         //和npc交谈
         String content = talkNPC(npcIdList,role.getName(),npcName);
+        //如果是NPC1好，触发事件
+        if(npcName.equals("NPC1")){
+            talkEvent.setRole(role);
+            eventMap.submit(talkEvent);
+        }
 
         return MsgNpcInfoProto.ResponseNpcInfo.newBuilder()
                 .setType(MsgNpcInfoProto.RequestType.TALKTONPC)
@@ -54,11 +66,14 @@ public class NpcService {
      * @return
      */
     public String talkNPC(List<Integer> npcIdList,String rolename,String npcName){
+        if(npcIdList==null){
+            return "该地图没有NPC:"+npcName;
+        }
         Iterator<Integer> iterator = npcIdList.iterator();
         while(iterator.hasNext()){
             //遍历npc
             Integer npcId = iterator.next();
-            ConcreteNPC concreteNPC = MapUtils.getNpcMap().get(npcId);
+            ConcreteNPC concreteNPC = CacheUtils.getNpcMap().get(npcId);
             //匹配npc名字
             if (concreteNPC.getName().equals(npcName)) {
                 return npcName+":"+"你好!"+rolename+","+concreteNPC.getContent();

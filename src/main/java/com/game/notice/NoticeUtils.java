@@ -3,7 +3,7 @@ package com.game.notice;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.protobuf.protoc.MsgSkillInfoProto;
 import com.game.role.bean.ConcreteRole;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -25,15 +25,15 @@ public class NoticeUtils {
     public static void notifyAllRoles(ConcreteMonster monster){
         //通知该场景下的所有玩家
         int mapId = 0;
-        for (int i = 0; i < MapUtils.getMonsterMapMappingList().size(); i++) {
-            int mid = MapUtils.getMonsterMapMappingList().get(i).getMonsterId();
+        for (int i = 0; i < CacheUtils.getMonsterMapMappingList().size(); i++) {
+            int mid = CacheUtils.getMonsterMapMappingList().get(i).getMonsterId();
             if(mid==monster.getId()){
-               mapId = MapUtils.getMonsterMapMappingList().get(i).getMapId();
+               mapId = CacheUtils.getMonsterMapMappingList().get(i).getMapId();
                break;
             }
         }
         //通过mapId找到该场景下的所有玩家
-        Map<String, ConcreteRole> roleMap = MapUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
         Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
         while(iterator.hasNext()){

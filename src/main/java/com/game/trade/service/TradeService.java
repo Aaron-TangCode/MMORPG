@@ -2,13 +2,15 @@ package com.game.trade.service;
 
 import com.game.backpack.bean.Goods;
 import com.game.backpack.handler.BackpackHandler;
+import com.game.event.beanevent.TradeEvent;
+import com.game.event.manager.EventMap;
 import com.game.protobuf.protoc.MsgTradeInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.trade.bean.Trade;
 import com.game.trade.manager.TradeMap;
 import com.game.user.manager.LocalUserMap;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,16 @@ import java.util.UUID;
  */
 @Service
 public class TradeService {
+
     @Autowired
     private BackpackHandler backpackHandler;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private TradeEvent tradeEvent;
+
+    @Autowired
+    private EventMap eventMap;
 
     /**
      * 请求交易
@@ -47,7 +55,7 @@ public class TradeService {
         //构建交易Bean
         Trade trade = new Trade(uuid,from,to);
         TradeMap.getTradeMap().put(uuid,trade);
-        String msg = from.getName()+":请求交易"+"("+uuid+")";
+        String msg = "卖家："+from.getName()+":请求交易"+"("+uuid+")";
         MsgTradeInfoProto.ResponseTradeInfo info = MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
                 .setContent(msg)
                 .setType(MsgTradeInfoProto.RequestType.REQUESTTRADE)
@@ -97,32 +105,37 @@ public class TradeService {
     public MsgTradeInfoProto.ResponseTradeInfo tradingGoods(Channel channel, MsgTradeInfoProto.RequestTradeInfo requestTradeInfo) {
         //uuid
         String uuid = requestTradeInfo.getUuid();
-        //goodsname
+        //goodsName
         String goodsName = requestTradeInfo.getGoodsName();
         Trade trade = TradeMap.getTradeMap().get(uuid);
-
-        ConcreteRole from = trade.getFrom();
-        ConcreteRole to = trade.getTo();
-
+        //卖家
+        ConcreteRole seller = trade.getFrom();
+        //买家
+        ConcreteRole buyer = trade.getTo();
         //获取物品
-        Goods goods = MapUtils.getGoodsMap().get(goodsName);
+        Goods goods = CacheUtils.getGoodsMap().get(goodsName);
 
-        boolean success = bigDeal(from, to, goods);
+        boolean success = bigDeal(seller, buyer, goods);
         //内容
-        String msg = success?"成功交易":"交易失败";
+        String msg = success?"成功交易":"交易失败，金币不够";
+
+        //触发事件
+        if(success){
+            tradeEvent.setRole(seller);
+            eventMap.submit(tradeEvent);
+            tradeEvent.setRole(buyer);
+            eventMap.submit(tradeEvent);
+        }
         //协议信息
         MsgTradeInfoProto.ResponseTradeInfo info = MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
                 .setContent(msg)
                 .setType(MsgTradeInfoProto.RequestType.TRADINGGOODS)
                 .build();
 
-        from.getChannel().writeAndFlush(info);
-        to.getChannel().writeAndFlush(info);
+        seller.getChannel().writeAndFlush(info);
+        buyer.getChannel().writeAndFlush(info);
 
-        return MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
-                .setContent(msg)
-                .setType(MsgTradeInfoProto.RequestType.TRADINGGOODS)
-                .build();
+        return null;
     }
 
     /**
@@ -187,7 +200,7 @@ public class TradeService {
         ConcreteRole seller = getRoleByChannel(channel);
         ConcreteRole buyer = getRoleByRoleName(roleName2);
         //获取物品
-        Map<String, Goods> goodsMap = MapUtils.getGoodsMap();
+        Map<String, Goods> goodsMap = CacheUtils.getGoodsMap();
         Goods goods = goodsMap.get(goodsName);
         //交易物品
         boolean success = bigDeal(seller,buyer,goods);
@@ -222,7 +235,7 @@ public class TradeService {
      * @return role
      */
     public ConcreteRole getRoleByRoleName(String roleName){
-        ConcreteRole role = MapUtils.getMapRolename_Role().get(roleName);
+        ConcreteRole role = CacheUtils.getMapRolename_Role().get(roleName);
         return role;
     }
     /**
@@ -235,12 +248,16 @@ public class TradeService {
     private boolean bigDeal(ConcreteRole seller, ConcreteRole buyer, Goods goods) {
         try {
             //玩家1：物品减少，增加金币
-            backpackHandler.getGoods(seller.getName(),goods.getName());
+            backpackHandler.discardGoods(seller.getName(),goods.getName());
             seller.setMoney(seller.getMoney()+goods.getCost());
             roleService.updateRole(seller);
             //玩家2：物品增加，减少金币
-            backpackHandler.discardGoods(buyer.getName(),goods.getName());
-            buyer.setMoney(buyer.getMoney()-goods.getCost());
+            backpackHandler.getGoods(buyer.getName(),goods.getName());
+            int money = buyer.getMoney()-goods.getCost();
+            if(money<0){
+                return false;
+            }
+            buyer.setMoney(money);
             roleService.updateRole(buyer);
             return true;
         }catch (Exception e){

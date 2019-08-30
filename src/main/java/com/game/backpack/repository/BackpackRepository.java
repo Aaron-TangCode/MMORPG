@@ -2,10 +2,7 @@ package com.game.backpack.repository;
 
 import com.game.backpack.bean.Goods;
 import com.game.backpack.mapper.BackpackMapper;
-import com.game.backpack.task.BackpackInsertTask;
-import com.game.backpack.task.BackpackUpdateDelTask;
 import com.game.backpack.task.BackpackUpdateTask;
-import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.SqlUtils;
 import com.game.utils.ThreadPoolUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -43,8 +40,16 @@ public class BackpackRepository {
      * @param goods 物品
      */
     public void insertGoods(Goods goods) {
-        BackpackInsertTask task = new BackpackInsertTask(goods);
-        ThreadPoolUtils.getThreadPool().execute(task);
+//        BackpackInsertTask task = new BackpackInsertTask(goods);
+//        ThreadPoolUtils.getThreadPool().execute(task);
+        SqlSession session = SqlUtils.getSession();
+        try{
+            BackpackMapper mapper = session.getMapper(BackpackMapper.class);
+            mapper.insertGoods(goods);
+            session.commit();
+        }finally {
+            session.close();
+        }
     }
 
     /**
@@ -79,8 +84,16 @@ public class BackpackRepository {
      * @param goodsId 物品id
      */
     public void updateGoodsByRoleIdDel(int roleId, Integer goodsId) {
-        BackpackUpdateDelTask task = new BackpackUpdateDelTask(roleId,goodsId);
-        UserThreadPool.ACCOUNT_SERVICE[0].submit(task);
+        SqlSession session = SqlUtils.getSession();
+        try{
+            BackpackMapper mapper = session.getMapper(BackpackMapper.class);
+            mapper.updateGoodsByRoleIdDel(roleId,goodsId);
+            session.commit();
+        }finally {
+            session.close();
+        }
+//        BackpackUpdateDelTask task = new BackpackUpdateDelTask(roleId,goodsId);
+//        UserThreadPool.ACCOUNT_SERVICE[0].submit(task);
     }
 
     /**

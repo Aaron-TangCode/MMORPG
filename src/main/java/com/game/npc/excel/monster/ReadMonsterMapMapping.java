@@ -2,8 +2,8 @@ package com.game.npc.excel.monster;
 
 import com.game.annotation.ExcelAnnotation;
 import com.game.npc.bean.MonsterMapMapping;
+import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
-import com.game.utils.MapUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -59,7 +59,7 @@ public class ReadMonsterMapMapping {
                     }
                 }
                 // 数据装入List
-                MapUtils.getMonsterMapMappingList().add(monsterMapMapping);
+                CacheUtils.getMonsterMapMappingList().add(monsterMapMapping);
             }
             System.out.println("Map-Monster映射静态数据加载完毕");
         }

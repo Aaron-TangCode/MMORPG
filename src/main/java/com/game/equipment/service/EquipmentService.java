@@ -12,8 +12,9 @@ import com.game.property.manager.InjectProperty;
 import com.game.protobuf.protoc.MsgEquipInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.manager.InjectRoleProperty;
+import com.game.role.service.RoleService;
 import com.game.user.manager.LocalUserMap;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,8 @@ public class EquipmentService {
     @Autowired
     private BackpackService backpackService;
 
+    @Autowired
+    private RoleService roleService;
     /**
      * 获取装备栏
      * @param id id
@@ -78,10 +81,22 @@ public class EquipmentService {
         String goodsName = requestEquipInfo.getGoodsName();
         //获取角色拥有的装备
         EquipmentBox equipmentBox = role.getEquipmentBox();
+//        if(equipmentBox==null){
+//            role.setEquipmentBox(new EquipmentBox());
+//            role.getEquipmentBox().setEquipmentBox("{"+"head" +":"+"\""+"\""+","+"weapon"+":"+"\""+"\""+","+"shoes"+":"+"\""+"\""+","+"pants"+":"+"\""+"\""+","+"clothes"+":"+"\""+"\""+"}");
+//        }
+
         //获取玩家物品列表
         List<Goods> goodsList = backpackService.getGoodsByRoleId(role.getId());
         //获取具体装备
         Goods goods = handleEquipement(role,equipmentBox,goodsList,goodsName);
+
+        if(goods==null){
+            return MsgEquipInfoProto.ResponseEquipInfo.newBuilder()
+                    .setContent("玩家没改装备")
+                    .setType(MsgEquipInfoProto.RequestType.ADDEQUIP)
+                    .build();
+        }
         //给goods注入propertyMap
         injectGoods(goods);
 
@@ -110,6 +125,18 @@ public class EquipmentService {
         InjectRoleProperty.injectRoleProperty(role);
         //背包减少装备
         backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
+        //查询装备栏id
+        EquipmentBox equipment = equipmentRepository.getEquipment(role.getId());
+        if(equipment==null){
+            System.out.println("equipment is null");
+        }
+        if(role.getEquipmentBox()==null){
+            System.out.println("EquipmentBox is null");
+            role.setEquipmentBox(new EquipmentBox());
+        }
+        role.getEquipmentBox().setId(equipment.getId());
+        //绑定role和装备栏
+        roleService.updateRole(role);
     }
 
     /**
@@ -118,7 +145,7 @@ public class EquipmentService {
      */
     private void injectGoods(Goods goods) {
         //获取物品
-        Goods newGoods = MapUtils.getGoodsMap().get(goods.getName());
+        Goods newGoods = CacheUtils.getGoodsMap().get(goods.getName());
         //物品属性
         JSONObject jsonObject1 = newGoods.getProperty();
         //遍历物品，注入属性
@@ -145,6 +172,9 @@ public class EquipmentService {
      */
     private Goods  handleEquipement(ConcreteRole role,EquipmentBox equipmentBox,List<Goods> goodsList,String goodsName) {
         Goods goods = getGoods(goodsList,goodsName);
+        if(goods==null){
+            return goods;
+        }
         //获取装备的类型
         String eName = EquipmentBox.getEquipMap().get(goods.getType());
         //选择装备，装配在装备栏
@@ -160,14 +190,18 @@ public class EquipmentService {
             equipmentBox.setEquipmentBox(json.toJSONString());
             //更新装备栏
             updateEquipment(equipmentBox);
-            Goods goods2 = MapUtils.getGoodsMap().get(goods1.getName());
-            goods2.setRoleId(goods1.getRoleId());
-            //把被替换装备放回背包
-            backpackService.insertGoods(goods2);
+            if(goods1!=null){
+                Goods goods2 = CacheUtils.getGoodsMap().get(goods1.getName());
+                goods2.setRoleId(goods1.getRoleId());
+                //把被替换装备放回背包
+                backpackService.insertGoods(goods2);
+            }
         }else{
             //新建一个装备对象
             Equipment equipment = new Equipment();
             equipmentBox = new EquipmentBox();
+            role.setEquipmentBox(equipmentBox);
+            role.getEquipmentBox().setEquipmentBox("{"+"head" +":"+"\""+"\""+","+"weapon"+":"+"\""+"\""+","+"shoes"+":"+"\""+"\""+","+"pants"+":"+"\""+"\""+","+"clothes"+":"+"\""+"\""+"}");
             //绑定角色和装备栏
             equipmentBox.setRoleId(role.getId());
             //设置新的装备到装备栏
@@ -206,6 +240,9 @@ public class EquipmentService {
                 break;
             default:
         }
+        if(goodsId==null||goodsId.equals("")){
+            return null;
+        }
         return backpackService.getGoodsById(goodsId);
     }
 
@@ -239,8 +276,11 @@ public class EquipmentService {
      * @param goods 物品
      */
     private void changeProperty(ConcreteRole role,Goods goods,List<Goods> goodsList) {
+        //获取装备栏
         EquipmentBox equipmentBox = role.getEquipmentBox();
+        //Json转对象
         Equipment equipment = JSON.parseObject(equipmentBox.getEquipmentBox(),Equipment.class);
+        //返回装备列表
         List<Goods> list = InjectProperty.returnOwnEquipmentList(equipment, goodsList);
         //总值减去-装备属性=基础属性
         for (Goods goods2 : list) {
@@ -326,7 +366,7 @@ public class EquipmentService {
         Goods goods = null;
         //遍历物品
         for (int i = 0; i < goodsList.size(); i++) {
-            if(goodsList.get(i).getName().equals(goodsName)){
+            if(goodsList.get(i).getName().equals(goodsName)&&goodsList.get(i).getCount()>0){
                 goods = goodsList.get(i);
             }
         }
@@ -361,16 +401,24 @@ public class EquipmentService {
      * @return 协议信息
      */
     public MsgEquipInfoProto.ResponseEquipInfo showEquip(Channel channel, MsgEquipInfoProto.RequestEquipInfo requestEquipInfo) {
+        //消息
+        StringBuilder content = new StringBuilder();
         //获取角色
         ConcreteRole role = getRole(channel);
         //获取装备栏
+        if(role.getEquipmentBox()==null||role.getEquipmentBox().getEquipmentBox()==null){
+            content.append("还没装备");
+            return MsgEquipInfoProto.ResponseEquipInfo.newBuilder()
+                    .setType(MsgEquipInfoProto.RequestType.SHOWEQUIP)
+                    .setContent(content.toString())
+                    .build();
+        }
         String equipmentBox = role.getEquipmentBox().getEquipmentBox();
         //获取装备实体对象
         Equipment equipment = JSONObject.parseObject(equipmentBox, Equipment.class);
-        //消息
-        StringBuilder content = new StringBuilder();
+
         //获取本地goods
-        Map<String, Goods> goodsMap = MapUtils.getGoodsMap();
+        Map<String, Goods> goodsMap = CacheUtils.getGoodsMap();
         //获取各种装备
         if(equipment.getHead()!=null){
             Goods tmpHead = backpackService.getGoodsById(equipment.getHead());

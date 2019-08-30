@@ -2,7 +2,7 @@ package com.game.shop.manager;
 
 import com.game.annotation.ExcelAnnotation;
 import com.game.backpack.bean.Goods;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -41,7 +41,7 @@ public class ShopManager {
     @ExcelAnnotation
     public void init(){
         Map<String,Goods> map = getShopMap();
-        Set<Map.Entry<String, Goods>> entrySet = MapUtils.getGoodsMap().entrySet();
+        Set<Map.Entry<String, Goods>> entrySet = CacheUtils.getGoodsMap().entrySet();
         Iterator<Map.Entry<String, Goods>> iterator = entrySet.iterator();
         //遍历注入值
         while (iterator.hasNext()) {

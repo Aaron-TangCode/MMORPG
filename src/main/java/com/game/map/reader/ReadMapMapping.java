@@ -2,7 +2,7 @@ package com.game.map.reader;
 
 import com.game.annotation.ExcelAnnotation;
 import com.game.map.bean.MapMapping;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -20,20 +20,20 @@ import java.io.InputStream;
 @ExcelAnnotation
 @Component
 public class ReadMapMapping {
-	private static final String FILEPATH = "src/main/resources/resource/MapMapping.xls";
+    private static final String FILEPATH = "src/main/resources/resource/MapMapping.xls";
 
     /**
      * 读取excel
      * @return
      */
-	@ExcelAnnotation
-	public static void readFromXLSX2007() {
+    @ExcelAnnotation
+    public static void readFromXLSX2007() {
 
-         //Excel文件对象
+        //Excel文件对象
         File excelFile = null;
-         //输入流对象
+        //输入流对象
         InputStream is = null;
-         //单元格，最终按字符串处理
+        //单元格，最终按字符串处理
         String cellStr = null;
         //每一个雇员信息对象
         MapMapping mapMapping = null;
@@ -46,30 +46,30 @@ public class ReadMapMapping {
             // 开始循环遍历行，表头不处理，从1开始
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 // 实例化对象
-            	mapMapping = new MapMapping();
+                mapMapping = new MapMapping();
                 // 获取行对象
-            	Row row = sheet.getRow(i);
+                Row row = sheet.getRow(i);
                 // 如果为空，不处理
                 if (row == null) {
-                    continue;  
-                }  
+                    continue;
+                }
                 // 循环遍历单元格(每一列)
                 for (int j = 0; j < row.getLastCellNum(); j++) {
                     // 获取单元格对象
-                	Cell cell = row.getCell(j);
+                    Cell cell = row.getCell(j);
                     // 单元格为空设置cellStr为空串
                     if (cell == null) {
                         cellStr = "";
                     }
-                        switch (cell.getCellTypeEnum()){
-                            case NUMERIC:
-                                cellStr = cell.getNumericCellValue() + "";
-                                break;
-                            case BOOLEAN:
-                                cellStr = String.valueOf(cell.getBooleanCellValue());
-                                break;
-                            default: cellStr = cell.getStringCellValue();
-                        }
+                    switch (cell.getCellTypeEnum()){
+                        case NUMERIC:
+                            cellStr = cell.getNumericCellValue() + "";
+                            break;
+                        case BOOLEAN:
+                            cellStr = String.valueOf(cell.getBooleanCellValue());
+                            break;
+                        default: cellStr = cell.getStringCellValue();
+                    }
                     // 下面按照数据出现位置封装到bean中
                     if (j == 0) {
                         mapMapping.setId(new Double(cellStr).intValue());
@@ -80,7 +80,7 @@ public class ReadMapMapping {
                     }
                 }
                 // 数据装入List
-                MapUtils.getListRole().add(mapMapping);
+                CacheUtils.getMapList().add(mapMapping);
 
             }
             System.out.println("MapMapping静态数据加载完毕");
@@ -90,17 +90,14 @@ public class ReadMapMapping {
             e.printStackTrace();
         } finally {
             // 关闭文件流
-            if (is != null) {  
-                try {  
-                    is.close();  
-                } catch (IOException e) {  
-                    e.printStackTrace();  
-                }  
-            }  
-        }  
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    public static void main(String[] args) {
-        System.out.println(MapUtils.getListRole().size());
-    }
-}  
+}

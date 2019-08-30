@@ -7,7 +7,7 @@ import com.game.role.service.RoleService;
 import com.game.user.manager.SessionMap;
 import com.game.user.service.Login;
 import com.game.user.service.RegisterService;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -54,7 +54,7 @@ public class UserHandler {
 		ConcreteRole role = this.getRoleAfterLoginSuccess(username);
 		if(isSuccess){
 			//加用户名-角色对象
-			MapUtils.getMapUsername_Role().put(username,role);
+			CacheUtils.getMapUsername_Role().put(username,role);
 			injectProperty.initProperty(role.getName());
 			//校验账号
 
@@ -71,7 +71,7 @@ public class UserHandler {
 	 * @param role1
 	 */
 	private void checkAccount(String username, ConcreteRole role1) {
-		ConcreteRole role = MapUtils.getMapRolename_Role().get(role1.getName());
+		ConcreteRole role = CacheUtils.getMapRolename_Role().get(role1.getName());
 		Map<String, ConcreteRole> sessionMap = SessionMap.getSessionMap();
 		ConcreteRole localRole = sessionMap.get(username);
 		if(localRole==null){
@@ -91,9 +91,9 @@ public class UserHandler {
 	@RequestAnnotation("/logout")
 	public void logout(String username) {
 		//通过username找到map中的role
-		ConcreteRole role = MapUtils.getMapUsername_Role().get(username);
+		ConcreteRole role = CacheUtils.getMapUsername_Role().get(username);
 		//移除角色信息，下线
-		MapUtils.getMapUsername_Role().remove(username);
+		CacheUtils.getMapUsername_Role().remove(username);
 		 role.getChannel().writeAndFlush(role.getName()+"下线了");
 	}
 
@@ -105,7 +105,7 @@ public class UserHandler {
 	@RequestAnnotation("/getRoleInfo")
 	public String getRoleInfo(String mapname) {
 		//获取当前场景的所有角色信息
-		Map<String,ConcreteRole> map = MapUtils.getMapUsername_Role();
+		Map<String,ConcreteRole> map = CacheUtils.getMapUsername_Role();
 		return returnRoleInfo(map,mapname);
 	}
 

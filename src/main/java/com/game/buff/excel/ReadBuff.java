@@ -2,8 +2,8 @@ package com.game.buff.excel;
 
 import com.game.buff.bean.ConcreteBuff;
 import com.game.annotation.ExcelAnnotation;
+import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
-import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -79,7 +79,7 @@ public class ReadBuff {
                     }
                 }
                 // 数据装入List
-                MapUtils.getBuffMap().put(buff.getName(),buff);
+                CacheUtils.getBuffMap().put(buff.getName(),buff);
             }
             System.out.println("buff静态数据加载完毕");
         } catch (IOException e) {

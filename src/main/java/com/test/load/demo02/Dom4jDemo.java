@@ -1,7 +1,7 @@
 package com.test.load.demo02;
 
 import com.game.map.bean.MapMapping;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -57,9 +57,9 @@ public class Dom4jDemo{
                     mapMapping.setDestMap(Integer.parseInt(node.getText()));
 
                 }
-                MapUtils.getListRole().add(mapMapping);
+                CacheUtils.getMapList().add(mapMapping);
             }
-            System.out.println(MapUtils.getListRole().size());
+            System.out.println(CacheUtils.getMapList().size());
         } catch (DocumentException e) {
             System.out.println(e.getMessage());
         }
@@ -69,7 +69,7 @@ public class Dom4jDemo{
     public static void main(String[] args) {
 //        createXml("mapMapping.xml");
         parserXml("mapMapping.xml");
-        Iterator<MapMapping> iterator = MapUtils.getListRole().iterator();
+        Iterator<MapMapping> iterator = CacheUtils.getMapList().iterator();
         while(iterator.hasNext()){
             MapMapping next = iterator.next();
             System.out.println(next.getId()+":"+next.getSrcMap()+":"+next.getDestMap());

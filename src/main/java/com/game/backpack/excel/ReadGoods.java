@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.game.annotation.ExcelAnnotation;
 import com.game.backpack.bean.Goods;
 import com.game.property.bean.PropertyType;
+import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
-import com.game.utils.MapUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -79,17 +79,17 @@ public class ReadGoods {
                     }
                 }
                 // 数据装入List
-                MapUtils.getGoodsMap().put(goods.getName(),goods);
+                CacheUtils.getGoodsMap().put(goods.getName(),goods);
             }
             //获取goodsMap
-            Map<String, Goods> goodsMap = MapUtils.getGoodsMap();
+            Map<String, Goods> goodsMap = CacheUtils.getGoodsMap();
             //获取goodsMap的entries
             Set<Map.Entry<String, Goods>> entries = goodsMap.entrySet();
             //获取迭代器
             Iterator<Map.Entry<String, Goods>> iterator = entries.iterator();
 
             //创建一个新List<Goods>
-            List<Goods> goodsList = MapUtils.getGoodsList();
+            List<Goods> goodsList = CacheUtils.getGoodsList();
             //遍历
             while (iterator.hasNext()) {
                 Map.Entry<String, Goods> next = iterator.next();

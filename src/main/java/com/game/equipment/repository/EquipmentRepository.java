@@ -2,9 +2,6 @@ package com.game.equipment.repository;
 
 import com.game.equipment.bean.EquipmentBox;
 import com.game.equipment.mapper.EquipmentMapper;
-import com.game.equipment.task.InsertEquipmentBoxTask;
-import com.game.equipment.task.UpdateEquipmentBoxTask;
-import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -39,8 +36,16 @@ public class EquipmentRepository {
      * @param equipmentBox 装备栏
      */
     public void updateEquipment(EquipmentBox equipmentBox) {
-        UpdateEquipmentBoxTask updateEquipmentBoxTask = new UpdateEquipmentBoxTask(equipmentBox);
-        UserThreadPool.ACCOUNT_SERVICE[0].submit(updateEquipmentBoxTask);
+        SqlSession session = SqlUtils.getSession();
+        try{
+            EquipmentMapper mapper = session.getMapper(EquipmentMapper.class);
+            mapper.updateEquipment(equipmentBox.getRoleId(),equipmentBox.getEquipmentBox());
+            session.commit();
+        }finally {
+            session.close();
+        }
+//        UpdateEquipmentBoxTask updateEquipmentBoxTask = new UpdateEquipmentBoxTask(equipmentBox);
+//        UserThreadPool.ACCOUNT_SERVICE[0].submit(updateEquipmentBoxTask);
     }
 
     /**
@@ -48,7 +53,16 @@ public class EquipmentRepository {
      * @param equipmentBox 装备栏
      */
     public void insertEquipment(EquipmentBox equipmentBox) {
-        InsertEquipmentBoxTask insertEquipmentBoxTask = new InsertEquipmentBoxTask(equipmentBox);
-        UserThreadPool.ACCOUNT_SERVICE[0].submit(insertEquipmentBoxTask);
+        SqlSession session = SqlUtils.getSession();
+        try{
+            EquipmentMapper mapper = session.getMapper(EquipmentMapper.class);
+            mapper.insertEquipment(equipmentBox.getRoleId(),equipmentBox.getEquipmentBox());
+            session.commit();
+        }finally {
+            session.close();
+        }
+//        InsertEquipmentBoxTask insertEquipmentBoxTask = new InsertEquipmentBoxTask(equipmentBox);
+//        UserThreadPool.ACCOUNT_SERVICE[0].submit(insertEquipmentBoxTask);
     }
+
 }

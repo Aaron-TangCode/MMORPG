@@ -14,7 +14,7 @@ import com.game.role.bean.ConcreteRole;
 import com.game.role.manager.InjectRoleProperty;
 import com.game.role.service.RoleService;
 import com.game.task.manager.InjectTaskData;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -49,6 +49,8 @@ public class InjectProperty {
      */
     @Autowired
     private BackpackService backpackService;
+
+    public static int count = 1;
     /**
      * 初始化属性总值
      * @param roleName
@@ -59,7 +61,12 @@ public class InjectProperty {
         //根据角色名，在db上查找role
         ConcreteRole roleDB = roleService.getRoleByRoleName(roleName);
         //从本地获取role
-        ConcreteRole role = MapUtils.getMapRolename_Role().get(roleDB.getName());
+        ConcreteRole role = CacheUtils.getMapRolename_Role().get(roleDB.getName());
+        //检查role
+        if(role==null){
+            CacheUtils.getMapRolename_Role().put(roleName,roleDB);
+            return;
+        }
         //注入任务数据
         injectTaskData.injectData(role);
         //注入角色的技能属性
@@ -105,39 +112,55 @@ public class InjectProperty {
         EquipmentBox equipmentBox = equipmentService.getEquipmet(roleDB.getId());
         role.setEquipmentBox(equipmentBox);
         //校验
-        if(equipmentBox==null){
-            return;
-        }
-        //获取装备
-        Equipment equipment = JSON.parseObject(equipmentBox.getEquipmentBox(),Equipment.class);
-        //数据格式："head":"1"--->装备类型：装备id
-        List<Goods> goodsList = backpackService.getGoodsByRoleId(role.getId());
+        if(equipmentBox!=null){
+            //获取装备
+            Equipment equipment = JSON.parseObject(equipmentBox.getEquipmentBox(),Equipment.class);
+            //数据格式："head":"1"--->装备类型：装备id
+            List<Goods> goodsList = backpackService.getGoodsByRoleId(role.getId());
 
-        List<Goods> ownEquipmentList = returnOwnEquipmentList(equipment, goodsList);
+            List<Goods> ownEquipmentList = returnOwnEquipmentList(equipment, goodsList);
 
-        //每一件装备
-        for (Goods goods : ownEquipmentList) {
-            //每一件装备的每一个属性
-            for (Map.Entry<PropertyType,Integer>  entry:goods.getPropertyMap().entrySet()) {
-                // 拿出玩家属性，加上装备属性，放回去
-                role.getTotalMap().put(
-                        entry.getKey(),
-                        role.getTotalMap().get(entry.getKey())+entry.getValue());
+            //每一件装备
+            for (Goods goods : ownEquipmentList) {
+                //每一件装备的每一个属性
+                for (Map.Entry<PropertyType,Integer>  entry:goods.getPropertyMap().entrySet()) {
+                    // 拿出玩家属性，加上装备属性，放回去
+                    role.getTotalMap().put(
+                            entry.getKey(),
+                            role.getTotalMap().get(entry.getKey())+entry.getValue());
+                }
+
             }
-
         }
+
         //把总值复制到当前值
         Set<Map.Entry<PropertyType, Integer>> entrySet = role.getTotalMap().entrySet();
         Iterator<Map.Entry<PropertyType, Integer>> iterator1 = entrySet.iterator();
-        while (iterator1.hasNext()) {
-            Map.Entry<PropertyType, Integer> map = iterator1.next();
-            role.getCurMap().put(map.getKey(),map.getValue());
+        if(count++==1){
+            while (iterator1.hasNext()) {
+                Map.Entry<PropertyType, Integer> map = iterator1.next();
+                role.getCurMap().put(map.getKey(),map.getValue());
+            }
+        }else{
+            while (iterator1.hasNext()) {
+                Map.Entry<PropertyType, Integer> map = iterator1.next();
+                if(map.getKey().name().equals("HP")){
+                    role.getCurMap().put(map.getKey(),role.getCurHp());
+                }else if(map.getKey().name().equals("MP") ){
+                    role.getCurMap().put(map.getKey(),role.getCurMp());
+                }else{
+                    role.getCurMap().put(map.getKey(),map.getValue());
+                }
+
+            }
         }
+
         //把属性模块的数据注入角色模块
         InjectRoleProperty.injectRoleProperty(role);
         //刷新role的缓存
-        MapUtils.getMapRolename_Role().put(role.getName(), role);
+        CacheUtils.getMapRolename_Role().put(role.getName(), role);
     }
+
 
     /**
      * 返回装备列表
@@ -155,27 +178,27 @@ public class InjectProperty {
 
         //遍历装备栏的所有装备，并存在List列表
         for (int i = 0; i < goodsList.size(); i++) {
-            if(head.equals(String.valueOf(goodsList.get(i).getId()))){
-                Goods goods = MapUtils.getGoodsMap().get(goodsList.get(i).getName());
+            if(head!=null&&head.equals(String.valueOf(goodsList.get(i).getId()))){
+                Goods goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
                 ownEquipmentList.add(goods);
                 System.out.println(ownEquipmentList.size());
-            }else if(clothes.equals(String.valueOf(goodsList.get(i).getId()))){
-                Goods goods = MapUtils.getGoodsMap().get(goodsList.get(i).getName());
+            }else if(clothes!=null&&clothes.equals(String.valueOf(goodsList.get(i).getId()))){
+                Goods goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
                 ownEquipmentList.add(goods);
-            }else if(pants.equals(String.valueOf(goodsList.get(i).getId()))){
-                Goods goods = MapUtils.getGoodsMap().get(goodsList.get(i).getName());
+            }else if(pants!=null&&pants.equals(String.valueOf(goodsList.get(i).getId()))){
+                Goods goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
                 ownEquipmentList.add(goods);
-            }else if(shoes.equals(String.valueOf(goodsList.get(i).getId()))){
-                Goods goods = MapUtils.getGoodsMap().get(goodsList.get(i).getName());
+            }else if(shoes!=null&&shoes.equals(String.valueOf(goodsList.get(i).getId()))){
+                Goods goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
                 ownEquipmentList.add(goods);
-            }else if(weapon.equals(String.valueOf(goodsList.get(i).getId()))){
-                Goods goods = MapUtils.getGoodsMap().get(goodsList.get(i).getName());
+            }else if(weapon!=null&&weapon.equals(String.valueOf(goodsList.get(i).getId()))){
+                Goods goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
                 ownEquipmentList.add(goods);
             }
         }
 
         //为ownEquipmentList的每一个goods对象注入propertyMap属性
-        List<Goods> list = MapUtils.getGoodsList();
+        List<Goods> list = CacheUtils.getGoodsList();
         for (int i = 0; i < ownEquipmentList.size(); i++) {
             if (ownEquipmentList.get(i).getName().equals(list.get(i).getName())) {
                 ownEquipmentList.get(i).setPropertyMap(list.get(i).getPropertyMap());

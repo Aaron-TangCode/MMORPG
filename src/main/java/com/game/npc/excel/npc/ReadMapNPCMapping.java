@@ -3,7 +3,7 @@ package com.game.npc.excel.npc;
 import com.game.annotation.ExcelAnnotation;
 import com.game.npc.bean.MapNPCMapping;
 import com.game.utils.ExcelUtils;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -59,7 +59,7 @@ public class ReadMapNPCMapping {
                     }
                 }
                 // 数据装入List
-                MapUtils.getMapNPCMappingList().add(mapNPCMapping);
+                CacheUtils.getMapNPCMappingList().add(mapNPCMapping);
             }
             System.out.println("Map-NPC映射静态数据加载完毕");
         }

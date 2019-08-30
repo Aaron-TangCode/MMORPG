@@ -6,7 +6,7 @@ import com.game.role.bean.ConcreteRole;
 import com.game.role.repository.RoleRepository;
 import com.game.server.SpringMain;
 import com.game.user.repository.LoginRepository;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.ibatis.javassist.ClassPool;
 import org.apache.ibatis.javassist.CtClass;
@@ -157,7 +157,7 @@ public class MyAnnotationUtil {
                 ConcreteRole role = roleRepository.getRole(roleId);
                 role.setChannel(ctx.channel());
                 //加角色名-角色对象
-                MapUtils.getMapRolename_Role().put(role.getName(),role);
+                CacheUtils.getMapRolename_Role().put(role.getName(),role);
             }
         }
         //将类的资源名和方法的进行拼接

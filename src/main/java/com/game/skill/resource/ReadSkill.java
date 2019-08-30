@@ -2,8 +2,8 @@ package com.game.skill.resource;
 
 import com.game.annotation.ExcelAnnotation;
 import com.game.skill.bean.ConcreteSkill;
+import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
-import com.game.utils.MapUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -69,8 +69,8 @@ public class ReadSkill {
                     }
                 }
                 // 数据装入List
-                MapUtils.getSkillMap_keyId().put(concreteSkill.getId(),concreteSkill);
-                MapUtils.getSkillMap_keyName().put(concreteSkill.getName()+concreteSkill.getLevel(),concreteSkill);
+                CacheUtils.getSkillMap_keyId().put(concreteSkill.getId(),concreteSkill);
+                CacheUtils.getSkillMap_keyName().put(concreteSkill.getName()+concreteSkill.getLevel(),concreteSkill);
             }
             System.out.println("Skill静态数据加载完毕");
         }

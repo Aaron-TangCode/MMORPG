@@ -11,7 +11,7 @@ import com.game.protobuf.protoc.MsgMapInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
 import com.game.user.manager.LocalUserMap;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ import static com.game.buff.handler.BuffType.RED;
  * @Date 2019/5/2921:05
  * @Version 1.0
  */
-@Service("MapService")
+@Service
 public class MapService {
     /**
      * 回村子事件
@@ -110,12 +110,12 @@ public class MapService {
         //获取目的地
         String dest = requestMapInfo.getDest();
         //获取角色的原地点
-        String src = role.getConcreteMap().getName();
+        String src = concreteMap.getName();
         //获取源地点和目的地点的id
         int src_id = getMapIdByMapName(src);
         int dest_id = getMapIdByMapName(dest);
         //判断是否可达
-        boolean isAccess = MapUtils.isReach(src_id,dest_id);
+        boolean isAccess = CacheUtils.isReach(src_id,dest_id);
         String content = null;
         if(isAccess){
             //激活buff
@@ -125,7 +125,7 @@ public class MapService {
             role.getConcreteMap().setName(dest);
             role.getConcreteMap().setId(dest_id);
             //更新本地缓存
-            MapUtils.getMapRolename_Role().put(role.getName(),role);
+            CacheUtils.getMapRolename_Role().put(role.getName(),role);
              content =  role.getName()+"从"+src+"移动到"+dest;
         }else{
              content =  "不能从"+src+"直接移动到"+dest;
@@ -141,7 +141,7 @@ public class MapService {
      * @param role 角色
      * @param dest 目的地
      */
-    private void buffHandle(ConcreteRole role,String dest) {
+    private void buffHandle(ConcreteRole role,String dest){
         startBuff(role,dest);
         stopBuff(role,dest);
     }
@@ -164,7 +164,9 @@ public class MapService {
             //取消红蓝buff
             attackedEvent.setRole(role);
             eventMap.submit(attackedEvent);
-            role.getQueue().remove();
+            if(role!=null&role.getQueue()!=null){
+                role.getQueue().clear();
+            }
         }
     }
     private void recovery(ConcreteRole role){
@@ -182,6 +184,11 @@ public class MapService {
         if(dest.equals("村子")){
             //激活Buff
             buffHandler.executeBuff(role.getName(),RED);
+            try {
+                Thread.sleep(2000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             buffHandler.executeBuff(role.getName(),BLUE);
         }
     }
@@ -194,24 +201,25 @@ public class MapService {
      */
     public String moveTo(String roleName,String dest) {
         //获取角色信息
-        ConcreteRole role = MapUtils.getMapRolename_Role().get(roleName);
+        ConcreteRole role = CacheUtils.getMapRolename_Role().get(roleName);
         //获取角色的原地点
         String src = role.getConcreteMap().getName();
         //获取源地点和目的地点的id
         int src_id = getMapIdByMapName(src);
         int dest_id = getMapIdByMapName(dest);
         //判断是否可达
-        boolean isAccess = MapUtils.isReach(src_id,dest_id);
+        boolean isAccess = CacheUtils.isReach(src_id,dest_id);
         if(isAccess){
             //从src移动到dest,更新数据库
             roleService.updateMap(role.getName(),dest_id);
             role.getConcreteMap().setName(dest);
             role.getConcreteMap().setId(dest_id);
             //更新本地缓存
-            MapUtils.getMapRolename_Role().put(roleName,role);
+            CacheUtils.getMapRolename_Role().put(roleName,role);
             return role.getName()+"从"+src+"移动到"+dest;
         }else{
             return "不能从"+src+"直接移动到"+dest;
         }
     }
+
 }

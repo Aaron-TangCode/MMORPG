@@ -30,16 +30,24 @@ NPC相关：
 背包相关：
 	 GetGoods：获取物品或装备
 	 DiscardGoods：丢弃物品或装备
+	 ShowGoods：显示玩家装备或物品
 技能相关：
 	 UpgradeSkill：升级技能
 	 StudySkill：学习新技能
 	 RolePK：角色PK
-	 UseSkill：释放技能
 装备相关：
 	 AddEquip：装备武器
 	 RemoveEquip：移除武器
+	 ShowEquip：展示武器
 副本相关：
-	 AttackBoss：刷副本
+	 EnterDuplicate：（单人）进入副本
+	 TeamEnterDuplicate：（组队）进入副本
+	 QueryTeam：查询队伍
+	 CreateTeam：创建队伍
+	 JoinTeam：加入队伍
+	 ExitTeam：退出队伍
+	 DismissTeam：解散队伍
+	 UseSkillAttackBoss：使用技能攻击boss
 商店相关：
 	 Buy：购买装备或物品
 聊天相关：
@@ -48,11 +56,11 @@ NPC相关：
 邮件相关：
 	 SendGoods：发送物品或装备
 交易相关：
+	 TradeGoods：交易
 	 RequestTrade：请求交易
 	 ConfirmTrade：确认交易
 	 TradingGoods：交易物品
 	 TradingMoney：交易金额
-	 TradeGoods：交易
 工会相关：
 	 CreateGang：创建工会
 	 JoinGang：加入工会
@@ -65,7 +73,7 @@ NPC相关：
 	 QueryAuction：查询拍卖行物品
 排行榜相关：
 	 QueryRank：排行榜
-排行榜相关：
+退出游戏相关：
 	 Exit：退出当前游戏
 任务相关：
 	 QueryReceivableTask：查询可接受任务

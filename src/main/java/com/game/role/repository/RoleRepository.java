@@ -1,11 +1,9 @@
 package com.game.role.repository;
 
-import com.game.role.mapper.RoleMapper;
 import com.game.role.bean.ConcreteRole;
-import com.game.role.task.InsertRoleTask;
+import com.game.role.mapper.RoleMapper;
 import com.game.role.task.RoleUpdateTask;
 import com.game.skill.task.RoleTask;
-import com.game.user.threadpool.UserThreadPool;
 import com.game.utils.SqlUtils;
 import com.game.utils.ThreadPoolUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -125,7 +123,15 @@ public class RoleRepository {
      * @param role role
      */
     public void insertRole(ConcreteRole role) {
-        InsertRoleTask insertRoleTask = new InsertRoleTask(role);
-        UserThreadPool.ACCOUNT_SERVICE[0].submit(insertRoleTask);
+        SqlSession session = SqlUtils.getSession();
+        try {
+            RoleMapper mapper = session.getMapper(RoleMapper.class);
+            mapper.insertRole(role);
+            session.commit();
+        }finally {
+            session.close();
+        }
+//        InsertRoleTask insertRoleTask = new InsertRoleTask(role);
+//        UserThreadPool.ACCOUNT_SERVICE[0].submit(insertRoleTask);
     }
 }

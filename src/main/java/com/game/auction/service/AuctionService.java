@@ -13,7 +13,7 @@ import com.game.role.service.RoleService;
 import com.game.server.manager.TaskMap;
 import com.game.user.manager.LocalUserMap;
 import com.game.user.threadpool.UserThreadPool;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import io.netty.util.concurrent.Future;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -220,7 +220,7 @@ public class AuctionService {
      * @return 返回角色
      */
     public ConcreteRole getRoleByRoleName(String name){
-       return MapUtils.getMapRolename_Role().get(name);
+       return CacheUtils.getMapRolename_Role().get(name);
     }
 
     /**

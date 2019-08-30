@@ -4,7 +4,7 @@ import com.game.protobuf.message.ContentType;
 import com.game.protobuf.protoc.MsgChatInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.user.manager.LocalUserMap;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ public class ChatService {
      */
     public MsgChatInfoProto.ResponseChatInfo chatAll(Channel channel, MsgChatInfoProto.RequestChatInfo requestChatInfo) {
         //获取角色map
-        Map<String, ConcreteRole> roleMap = MapUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
         Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
         //role
@@ -91,7 +91,7 @@ public class ChatService {
         //target
         String target = requestChatInfo.getTarget();
         //获取角色map
-        Map<String, ConcreteRole> roleMap = MapUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
         ConcreteRole role = roleMap.get(target);
         Channel channel1 = role.getChannel();
         String msg = "[私聊]"+tmpRole.getName()+":"+content;

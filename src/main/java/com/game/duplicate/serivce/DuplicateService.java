@@ -24,7 +24,7 @@ import com.game.server.manager.TaskMap;
 import com.game.skill.bean.ConcreteSkill;
 import com.game.skill.service.SkillService;
 import com.game.user.manager.LocalUserMap;
-import com.game.utils.MapUtils;
+import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import io.netty.util.concurrent.Future;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,7 +129,7 @@ public class DuplicateService {
     public String initRole(List<ConcreteRole> roleList,String bossName, String mapName, String skillName) {
         //role
         ConcreteRole tmpCaptain = roleList.get(0);
-        ConcreteRole captain = MapUtils.getMapRolename_Role().get(tmpCaptain.getName());
+        ConcreteRole captain = CacheUtils.getMapRolename_Role().get(tmpCaptain.getName());
         //移动
         mapService.moveTo(captain.getName(),mapName);
 
@@ -174,7 +174,7 @@ public class DuplicateService {
     private Map<String,ConcreteMonster> findConcreteMonster(ConcreteMap map, List<Integer> list) {
         Map<String, ConcreteMonster> monsterMap = map.getMonsterMap();
         for (int i = 0; i < list.size(); i++) {
-            ConcreteMonster monster = MapUtils.getMonsterMap().get(list.get(i));
+            ConcreteMonster monster = CacheUtils.getMonsterMap().get(list.get(i));
             ConcreteMonster boss = new ConcreteMonster(monster);
             monsterMap.put(boss.getName(),boss);
         }
@@ -245,7 +245,7 @@ public class DuplicateService {
         //怪物根据角色的职业的吸引值优先进行攻击
         //遍历角色的仇恨值，选出最大的一个来攻击
         ConcreteRole tmpRole = chooseRole(map);
-        ConcreteRole mostRole = MapUtils.getMapRolename_Role().get(tmpRole.getName());
+        ConcreteRole mostRole = CacheUtils.getMapRolename_Role().get(tmpRole.getName());
 
         //触发仇恨值最大的角色被攻击事件
         attackedEvent.setRole(mostRole);
@@ -462,16 +462,23 @@ public class DuplicateService {
     public MsgBossInfoProto.ResponseBossInfo useSkillAttackBoss(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
         //role
         ConcreteRole role = getRole(channel);
+        //判断角色状态
+        if(role.getCurHp()<=0){
+            return MsgBossInfoProto.ResponseBossInfo.newBuilder()
+                    .setContent("角色死亡了，不能攻击怪兽")
+                    .setType(MsgBossInfoProto.RequestType.USESKILLATTACKBOSS)
+                    .build();
+        }
         //map
         ConcreteMap map = RoleAndMap.getRoleAndMap().get(role.getName());
         //Skill
         String skillName = requestBossInfo.getSkillName();
         ConcreteSkill skill = null;
-        if(MapUtils.getSkillMap_keyName().get(skillName+1)!=null){
-            skill = MapUtils.getSkillMap_keyName().get(skillName+1);
+        if(CacheUtils.getSkillMap_keyName().get(skillName+1)!=null){
+            skill = CacheUtils.getSkillMap_keyName().get(skillName+1);
         }
-        if(MapUtils.getSkillMap_keyName().get(skillName+2)!=null){
-            skill = MapUtils.getSkillMap_keyName().get(skillName+2);
+        if(CacheUtils.getSkillMap_keyName().get(skillName+2)!=null){
+            skill = CacheUtils.getSkillMap_keyName().get(skillName+2);
         }
         role.setConcreteSkill(skill);
 
@@ -479,10 +486,13 @@ public class DuplicateService {
         String bossName = requestBossInfo.getBossName();
         //monster
         ConcreteMonster boss = map.getMonsterMap().get(bossName);
-        map.setMonster(boss);
+        //选择要攻击的怪兽
+        role.setMonster(boss);
         //return
         String content = null;
-        if(skill.getName().equals("召唤术")){
+        if(boss==null){
+            content = "Boss不存在";
+        } else if(skill.getName().equals("召唤术")){
             content = babyAttackBoss(role,map);
         }else{
             //角色攻击怪兽
@@ -502,7 +512,7 @@ public class DuplicateService {
      */
     private String playerAttackBoss(ConcreteRole role, ConcreteMap map) {
         //boss
-        ConcreteMonster boss = map.getMonster();
+        ConcreteMonster boss = role.getMonster();
         //获取角色伤害
         Integer attack = role.getAttack();
         //获取技能伤害
@@ -538,14 +548,17 @@ public class DuplicateService {
         if(boss.getHp()<=0){
             //通知
             NoticeUtils.notifyAllRoles(boss);
+
             //怪兽死亡事件
             monsterDeadEvent.setRole(role);
             monsterDeadEvent.setMonster(boss);
             //触发事件，记录怪兽死亡次数
             eventMap.submit(monsterDeadEvent);
+
             //掉落装备
             skillService.falldownEquip(role);
             //Move to 村子
+//            mapService.moveTo(role.getName(),"村子");
             //销毁副本
             map = null;
 
