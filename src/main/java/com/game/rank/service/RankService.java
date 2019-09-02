@@ -29,7 +29,7 @@ public class RankService {
 
     /**
      * 查询排行榜
-     * @return
+     * @return list
      */
     public List<RankBean> queryRank() {
         return rankRepository.queryRank();
@@ -50,11 +50,15 @@ public class RankService {
         //从积分高，到积分低排名
         for (int i = ranks.length - 1; i >= 0; i--) {
             if(rankBeans[i]!=null){
+                //获取战力
                 int comat = rankBeans[i].getComat();
+                //获取角色
                 ConcreteRole tmpRole = rankBeans[i].getRole();
+                //content
                 content.append(ranks[comat]+"\t\t"+tmpRole.getName()+"\t\t"+comat+"\n");
             }
         }
+        //返回协议信息
         return MsgRankInfoProto.ResponseRankInfo.newBuilder()
                 .setContent(content.toString())
                 .setType(MsgRankInfoProto.RequestType.QUERYRANK)

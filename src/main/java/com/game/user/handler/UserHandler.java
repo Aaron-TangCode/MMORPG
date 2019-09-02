@@ -44,9 +44,9 @@ public class UserHandler {
 
 	/**
 	 * 用户登录
-	 * @param username
-	 * @param password
-	 * @return
+	 * @param username 用户名
+	 * @param password 密码
+	 * @return 信息
 	 */
 	@RequestAnnotation("/login")
 	public String login(String username, String password) {
@@ -54,7 +54,7 @@ public class UserHandler {
 		ConcreteRole role = this.getRoleAfterLoginSuccess(username);
 		if(isSuccess){
 			//加用户名-角色对象
-			CacheUtils.getMapUsername_Role().put(username,role);
+			CacheUtils.getMapUsernameRole().put(username,role);
 			injectProperty.initProperty(role.getName());
 			//校验账号
 
@@ -67,11 +67,11 @@ public class UserHandler {
 
 	/**
 	 * 校验账号
-	 * @param username
-	 * @param role1
+	 * @param username 用户名
+	 * @param role1 角色
 	 */
 	private void checkAccount(String username, ConcreteRole role1) {
-		ConcreteRole role = CacheUtils.getMapRolename_Role().get(role1.getName());
+		ConcreteRole role = CacheUtils.getMapRoleNameRole().get(role1.getName());
 		Map<String, ConcreteRole> sessionMap = SessionMap.getSessionMap();
 		ConcreteRole localRole = sessionMap.get(username);
 		if(localRole==null){
@@ -85,44 +85,43 @@ public class UserHandler {
 
 	/**
 	 * 用户登出
-	 * @param username
-	 * @return
+	 * @param username 用户名
 	 */
 	@RequestAnnotation("/logout")
 	public void logout(String username) {
 		//通过username找到map中的role
-		ConcreteRole role = CacheUtils.getMapUsername_Role().get(username);
+		ConcreteRole role = CacheUtils.getMapUsernameRole().get(username);
 		//移除角色信息，下线
-		CacheUtils.getMapUsername_Role().remove(username);
+		CacheUtils.getMapUsernameRole().remove(username);
 		 role.getChannel().writeAndFlush(role.getName()+"下线了");
 	}
 
 	/**
 	 * 打印当前场景的所有角色信息
-	 * @param mapname
-	 * @return
+	 * @param mapName 地图名字
+	 * @return 信息
 	 */
 	@RequestAnnotation("/getRoleInfo")
-	public String getRoleInfo(String mapname) {
+	public String getRoleInfo(String mapName) {
 		//获取当前场景的所有角色信息
-		Map<String,ConcreteRole> map = CacheUtils.getMapUsername_Role();
-		return returnRoleInfo(map,mapname);
+		Map<String,ConcreteRole> map = CacheUtils.getMapUsernameRole();
+		return returnRoleInfo(map,mapName);
 	}
 
 	/**
 	 * 返回用户角色信息
-	 * @param map
-	 * @param mapname
+	 * @param map 地图
+	 * @param mapName 地图名字
 	 * @return
 	 */
-	private String returnRoleInfo(Map<String, ConcreteRole> map,String mapname) {
+	private String returnRoleInfo(Map<String, ConcreteRole> map,String mapName) {
 		Set<String> sets = map.keySet();
 		StringBuffer sb = new StringBuffer();
 		Iterator<String> iterator = sets.iterator();
 		while(iterator.hasNext()){
 			String name = iterator.next();
 			String map_name = map.get(name).getConcreteMap().getName();
-			if (map_name.equals(mapname)){
+			if (map_name.equals(mapName)){
 				sb.append(map.get(name).getName()+","+map.get(name).getConcreteMap().getName()+","+map.get(name).getCurHp());
 			}
 			if(iterator.hasNext()){
@@ -134,10 +133,10 @@ public class UserHandler {
 
 	/**
 	 * 注册
-	 * @param username
-	 * @param password
-	 * @param ackpassword
-	 * @return
+	 * @param username 用户名
+	 * @param password 密码
+	 * @param ackpassword 确认密码
+	 * @return 信息
 	 */
 	@RequestAnnotation("/registerService")
 	public String registerService(String username,String password,String ackpassword){
@@ -162,8 +161,8 @@ public class UserHandler {
 
 	/**
 	 * 成功登录后，获取用户对应人物角色
-	 * @param username
-	 * @return
+	 * @param username 用户名
+	 * @return 角色
 	 */
 	public ConcreteRole getRoleAfterLoginSuccess(String username){
 		int id = login.getUserRoleIdByUsername(username);

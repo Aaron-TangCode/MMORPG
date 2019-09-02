@@ -5,6 +5,7 @@ import com.game.annotation.ExcelAnnotation;
 import com.game.occupation.bean.Occupation;
 import com.game.occupation.manager.OccupationMap;
 import com.game.utils.ExcelUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -19,14 +20,17 @@ import java.io.InputStream;
  * @date 2017-3-15
  *
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadOccupation {
-	private static final String FILEPATH = "src/main/resources/resource/occupation.xls";
+    /**
+     * 文件路径
+     */
+	private static final String FILEPATH = "src/main/resources/excel/occupation.xls";
 
     /**
-     * 读取excel
-     * @return
+     * 读取excel文件
      */
 	@ExcelAnnotation
 	public static void readFromXLSX2007() {
@@ -75,7 +79,7 @@ public class ReadOccupation {
                 // 数据装入List
                 OccupationMap.getOccupationMap().put(occupation.getId(),occupation);
             }
-            System.out.println("occupation静态数据加载完毕");
+            log.info("occupation静态数据加载完毕");
         } catch (IOException e) {
             e.printStackTrace();
         }  catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {

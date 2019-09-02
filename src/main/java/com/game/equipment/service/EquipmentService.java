@@ -40,7 +40,9 @@ public class EquipmentService {
      */
     @Autowired
     private BackpackService backpackService;
-
+    /**
+     * 角色service
+     */
     @Autowired
     private RoleService roleService;
     /**

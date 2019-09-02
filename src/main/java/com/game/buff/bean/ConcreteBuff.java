@@ -21,7 +21,7 @@ public class ConcreteBuff {
     /**
      * 持续时间
      */
-    private long keeptime;
+    private long keepTime;
     /**
      * 时间段
      */
@@ -83,12 +83,12 @@ public class ConcreteBuff {
         this.name = name;
     }
 
-    public long getKeeptime() {
-        return keeptime;
+    public long getKeepTime() {
+        return keepTime;
     }
 
-    public void setKeeptime(long keeptime) {
-        this.keeptime = keeptime;
+    public void setKeepTime(long keepTime) {
+        this.keepTime = keepTime;
     }
 
     public long getPeriod() {
@@ -131,10 +131,10 @@ public class ConcreteBuff {
         this.role = role;
     }
 
-    public ConcreteBuff(int id, String name, long keeptime, long period, int effect, int hp, int mp, int defend, int attack, ConcreteRole role) {
+    public ConcreteBuff(int id, String name, long keepTime, long period, int effect, int hp, int mp, int defend, int attack, ConcreteRole role) {
         this.id = id;
         this.name = name;
-        this.keeptime = keeptime;
+        this.keepTime = keepTime;
         this.period = period;
         this.effect = effect;
         this.hp = hp;

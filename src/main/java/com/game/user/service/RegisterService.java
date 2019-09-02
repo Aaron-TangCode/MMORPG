@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
  */
 @Service("RegisterService")
 public class RegisterService {
+    /**
+     * 注册res
+     */
     @Autowired
     private RegisterRepository registerRepository;
 

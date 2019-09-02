@@ -15,6 +15,9 @@ import java.util.concurrent.Callable;
  * @Version 1.0
  */
 public class UpdateUserTask implements Callable {
+    /**
+     * 用户
+     */
     private User user;
 
     public UpdateUserTask(User user) {

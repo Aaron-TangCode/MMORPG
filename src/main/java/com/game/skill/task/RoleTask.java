@@ -13,6 +13,9 @@ import org.apache.ibatis.session.SqlSession;
  * @Version 1.0
  */
 public class RoleTask implements Runnable {
+    /**
+     * 角色
+     */
     private ConcreteRole concreteRole;
 
     public RoleTask(ConcreteRole concreteRole){

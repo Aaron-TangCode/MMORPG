@@ -16,6 +16,9 @@ import org.springframework.stereotype.Component;
 @EventAnnotation
 @Component
 public class Trade2Handler implements IHandler<TradeEvent>{
+    /**
+     * 处理器工具类
+     */
     @Autowired
     private HandlerUtils handlerUtils;
     @EventAnnotation

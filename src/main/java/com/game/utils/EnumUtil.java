@@ -9,7 +9,6 @@ package com.game.utils;
  */
 public class EnumUtil {
 
-
     public  static QuestType string2Enum(String s) {
        for (QuestType e : QuestType.values()) {
            if (e.toString().equals(s)) {

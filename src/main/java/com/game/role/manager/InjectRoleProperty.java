@@ -22,22 +22,22 @@ public class InjectRoleProperty {
         //获取属性模块数据
         Map<PropertyType, Integer> curMap = role.getCurMap();
         Map<PropertyType, Integer> totalMap = role.getTotalMap();
-
+        //注入属性
         Integer curHp = curMap.get(PropertyType.HP);
         Integer curMp = curMap.get(PropertyType.MP);
         Integer attack = totalMap.get(PropertyType.ATTACK);
         Integer defend = totalMap.get(PropertyType.DEFEND);
         Integer totalHp = totalMap.get(PropertyType.HP);
         Integer totalMp = totalMap.get(PropertyType.MP);
-
+        //更新数据
         role.setCurHp(curHp);
         role.setCurMp(curMp);
         role.setTotalHp(totalHp);
         role.setTotalMp(totalMp);
         role.setAttack(attack);
         role.setDefend(defend);
-
-        CacheUtils.getMapRolename_Role().put(role.getName(),role);
+        //写入缓存
+        CacheUtils.getMapRoleNameRole().put(role.getName(),role);
 
     }
 }

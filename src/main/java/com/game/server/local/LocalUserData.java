@@ -2,7 +2,7 @@ package com.game.server.local;
 
 /**
  * @ClassName LocalUserData
- * @Description TODO
+ * @Description 本地的用户数据
  * @Author DELL
  * @Date 2019/8/8 16:05
  * @Version 1.0

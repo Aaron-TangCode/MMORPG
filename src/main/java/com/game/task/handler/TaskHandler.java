@@ -21,16 +21,20 @@ import static com.game.server.request.RequestTaskInfoType.*;
 @Component
 @ChannelHandler.Sharable
 public class TaskHandler extends SimpleChannelInboundHandler<MsgTaskInfoProto.RequestTaskInfo> {
+    /**
+     * 任务服务
+     */
     @Autowired
     private TaskService taskService;
 
     private MsgTaskInfoProto.ResponseTaskInfo responseTaskInfo;
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MsgTaskInfoProto.RequestTaskInfo requestTaskInfo) throws Exception {
+        //Channel
         Channel channel = ctx.channel();
 
         int typeNum = requestTaskInfo.getType().getNumber();
-
+        //分发任务
         switch (typeNum) {
             case QUERYRECEIVABLETASK :
                 responseTaskInfo = taskService.queryReceivableTask(channel,requestTaskInfo);

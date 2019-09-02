@@ -15,6 +15,9 @@ import java.util.concurrent.Callable;
  * @Version 1.0
  */
 public class UpdateEquipmentBoxTask implements Callable {
+    /**
+     * 装备栏
+     */
     private EquipmentBox equipmentBox;
 
     public UpdateEquipmentBoxTask(EquipmentBox equipmentBox) {

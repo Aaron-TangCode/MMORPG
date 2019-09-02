@@ -1,8 +1,9 @@
-package com.game.map.reader;
+package com.game.map.excel;
 
 import com.game.annotation.ExcelAnnotation;
 import com.game.map.bean.MapMapping;
 import com.game.utils.CacheUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +18,14 @@ import java.io.InputStream;
  * @date 2017-3-15
  *
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadMapMapping {
-    private static final String FILEPATH = "src/main/resources/resource/MapMapping.xls";
+    /**
+     * 文件位置
+     */
+    private static final String FILEPATH = "src/main/resources/excel/MapMapping.xls";
 
     /**
      * 读取excel
@@ -83,7 +88,7 @@ public class ReadMapMapping {
                 CacheUtils.getMapList().add(mapMapping);
 
             }
-            System.out.println("MapMapping静态数据加载完毕");
+            log.info("MapMapping静态数据加载完毕");
         } catch (IOException e) {
             e.printStackTrace();
         }  catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {

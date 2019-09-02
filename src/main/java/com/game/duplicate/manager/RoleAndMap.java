@@ -13,7 +13,14 @@ import java.util.Map;
  * @Version 1.0
  */
 public class RoleAndMap {
+    /**
+     * 当前血量
+     */
     public static volatile Integer varHp = 0;
+    /**
+     * key:roleName
+     * value:map
+     */
     private static volatile Map<String, ConcreteMap> map = new HashMap<>();
 
     private RoleAndMap(){}

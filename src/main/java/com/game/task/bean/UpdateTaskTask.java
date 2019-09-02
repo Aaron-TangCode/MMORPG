@@ -8,12 +8,15 @@ import java.util.concurrent.Callable;
 
 /**
  * @ClassName UpdateTaskTask
- * @Description TODO
+ * @Description 更新任务
  * @Author DELL
  * @Date 2019/8/20 11:38
  * @Version 1.0
  */
 public class UpdateTaskTask  implements Callable {
+    /**
+     * 角色任务
+     */
     private RoleTask roleTask;
 
     public UpdateTaskTask(RoleTask roleTask) {

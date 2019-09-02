@@ -1,4 +1,4 @@
-package com.game.duplicate.mapper;
+package com.game.team.mapper;
 
 import org.apache.ibatis.annotations.Param;
 

@@ -29,7 +29,7 @@ public class ChatService {
      */
     public MsgChatInfoProto.ResponseChatInfo chatAll(Channel channel, MsgChatInfoProto.RequestChatInfo requestChatInfo) {
         //获取角色map
-        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRoleNameRole();
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
         Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
         //role
@@ -91,7 +91,7 @@ public class ChatService {
         //target
         String target = requestChatInfo.getTarget();
         //获取角色map
-        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRoleNameRole();
         ConcreteRole role = roleMap.get(target);
         Channel channel1 = role.getChannel();
         String msg = "[私聊]"+tmpRole.getName()+":"+content;

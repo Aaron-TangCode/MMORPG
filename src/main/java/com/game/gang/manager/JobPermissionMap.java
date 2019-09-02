@@ -13,6 +13,9 @@ import java.util.Map;
  * @Version 1.0
  */
 public class JobPermissionMap {
+    /**
+     * 职位和职位权限容器map
+     */
     private static volatile Map<String, JobResource> jobPermissionMap = null;
 
     private JobPermissionMap(){}

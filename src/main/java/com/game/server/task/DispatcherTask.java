@@ -14,8 +14,17 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class DispatcherTask implements Runnable {
+    /**
+     * 处理器
+     */
     private SimpleChannelInboundHandler<? extends Message> simpleChannelInboundHandler;
+    /**
+     * ctx
+     */
     private ChannelHandlerContext ctx;
+    /**
+     * 协议信息
+     */
     private Message msg;
 
     public DispatcherTask(SimpleChannelInboundHandler<? extends Message> simpleChannelInboundHandler, ChannelHandlerContext ctx, Message msg) {

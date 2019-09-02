@@ -14,7 +14,7 @@ import java.util.List;
 public interface RankMapper {
     /**
      * 查询排行榜
-     * @return
+     * @return list
      */
     public List<RankBean> queryRank();
 }

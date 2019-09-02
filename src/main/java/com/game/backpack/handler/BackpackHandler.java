@@ -2,7 +2,6 @@ package com.game.backpack.handler;
 
 import com.game.backpack.bean.Goods;
 import com.game.backpack.service.BackpackService;
-import com.game.dispatcher.RequestAnnotation;
 import com.game.role.bean.ConcreteRole;
 import com.game.utils.CacheUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,6 @@ public class BackpackHandler {
      * @param goodsName 物品名称
      * @return 返回消息
      */
-    @RequestAnnotation("/getGoods")
     public String getGoods(String roleName,String goodsName){
         //获取角色
         ConcreteRole role = getRole(roleName);
@@ -120,7 +118,7 @@ public class BackpackHandler {
      * @return 返回角色
      */
     private ConcreteRole getRole(String roleName) {
-        return CacheUtils.getMapRolename_Role().get(roleName);
+        return CacheUtils.getMapRoleNameRole().get(roleName);
     }
 
     /**

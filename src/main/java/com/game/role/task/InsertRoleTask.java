@@ -15,6 +15,9 @@ import java.util.concurrent.Callable;
  * @Version 1.0
  */
 public class InsertRoleTask implements Callable {
+    /**
+     * 角色
+     */
     private ConcreteRole role;
 
     public InsertRoleTask(ConcreteRole role) {

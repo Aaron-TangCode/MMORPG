@@ -1,4 +1,4 @@
-package com.game.duplicate.bean;
+package com.game.team.bean;
 
 import com.game.role.bean.ConcreteRole;
 
@@ -12,8 +12,17 @@ import java.util.List;
  * @Version 1.0
  */
 public class Team {
+    /**
+     * 队伍id
+     */
     private Integer id;
+    /**
+     * 队伍名字
+     */
     private String name;
+    /**
+     * 角色列表
+     */
     private List<ConcreteRole> roleList;
 
     public Integer getId() {

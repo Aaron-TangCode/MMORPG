@@ -19,6 +19,9 @@ import java.util.List;
 @Component
 @ExcelAnnotation
 public class RankManager {
+    /**
+     * 排行榜service
+     */
     @Autowired
     private RankService rankService;
     //排名数组：位置s是战斗力，rank[s]是排名

@@ -14,7 +14,13 @@ import static com.game.buff.handler.BuffType.*;
  * @Version 1.0
  */
 public class BuffTask implements Runnable {
+    /**
+     * buff
+     */
     private ConcreteBuff buff;
+    /**
+     * 角色
+     */
     private ConcreteRole role;
     public BuffTask(ConcreteBuff buff, ConcreteRole role){
         this.buff = buff;

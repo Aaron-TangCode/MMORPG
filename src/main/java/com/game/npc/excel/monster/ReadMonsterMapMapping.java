@@ -4,6 +4,7 @@ import com.game.annotation.ExcelAnnotation;
 import com.game.npc.bean.MonsterMapMapping;
 import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -19,10 +20,14 @@ import java.io.IOException;
  * @Date 2019/6/11 11:23
  * @Version 1.0
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadMonsterMapMapping {
-    private static final String FILEPATH = "src/main/resources/resource/monster_map_mapping.xls";
+    /**
+     * 文件路径
+     */
+    private static final String FILEPATH = "src/main/resources/excel/monster_map_mapping.xls";
     /**
      * 读取excel
      * @return
@@ -61,6 +66,6 @@ public class ReadMonsterMapMapping {
                 // 数据装入List
                 CacheUtils.getMonsterMapMappingList().add(monsterMapMapping);
             }
-            System.out.println("Map-Monster映射静态数据加载完毕");
+            log.info("Map-Monster映射静态数据加载完毕");
         }
 }

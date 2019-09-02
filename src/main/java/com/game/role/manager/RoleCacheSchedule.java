@@ -19,6 +19,9 @@ import java.util.concurrent.TimeUnit;
 @Component
 @ExcelAnnotation
 public class RoleCacheSchedule {
+    /**
+     * 角色service
+     */
     @Autowired
     private RoleService roleService;
     @ExcelAnnotation

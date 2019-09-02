@@ -212,7 +212,7 @@ public class UserService {
         // 绑定 channel-userId
         LocalUserMap.getChannelUserMap().put(channel,userId);
         //roleName-role
-        CacheUtils.getMapRolename_Role().put(role.getName(),role);
+        CacheUtils.getMapRoleNameRole().put(role.getName(),role);
     }
 
     /**
@@ -229,7 +229,7 @@ public class UserService {
 
         LocalUserMap.getChannelUserMap().remove(channel);
 
-        CacheUtils.getMapRolename_Role().remove(role.getName());
+        CacheUtils.getMapRoleNameRole().remove(role.getName());
 
         role = null;
     }

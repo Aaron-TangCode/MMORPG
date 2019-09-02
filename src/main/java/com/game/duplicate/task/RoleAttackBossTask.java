@@ -18,8 +18,17 @@ import java.util.Set;
  * @Version 1.0
  */
 public class RoleAttackBossTask implements Runnable {
+    /**
+     * 角色
+     */
     private ConcreteRole role;
+    /**
+     * 技能service
+     */
     private SkillService skillService;
+    /**
+     * 地图
+     */
     private ConcreteMap map;
 
     public RoleAttackBossTask(ConcreteRole role,SkillService skillService, ConcreteMap map) {

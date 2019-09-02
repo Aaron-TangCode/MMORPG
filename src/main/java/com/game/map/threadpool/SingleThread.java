@@ -15,6 +15,9 @@ import java.util.concurrent.TimeUnit;
  * @Version 1.0
  */
 public class SingleThread extends SingleThreadEventExecutor {
+    /**
+     * 索引
+     */
     private int index;
 
     protected SingleThread(int index,EventExecutorGroup parent, ThreadFactory threadFactory, boolean addTaskWakesUp) {
@@ -42,6 +45,14 @@ public class SingleThread extends SingleThreadEventExecutor {
         super.addTask(task);
     }
 
+    /**
+     * 定时执行器
+     * @param command 任务
+     * @param initialDelay 初始延迟时间
+     * @param period 时间段
+     * @param unit 时间单位
+     * @return future
+     */
     @Override
     public ScheduledFuture<?> scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit) {
         return super.scheduleAtFixedRate(command, initialDelay, period, unit);

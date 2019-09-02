@@ -2,7 +2,7 @@ package com.game.duplicate.serivce;
 
 import com.game.buff.bean.ConcreteBuff;
 import com.game.duplicate.manager.RoleAndMap;
-import com.game.duplicate.manager.TeamMapManager;
+import com.game.team.manager.TeamMapManager;
 import com.game.duplicate.task.RoleAttackBossTask;
 import com.game.event.beanevent.AttackedEvent;
 import com.game.event.beanevent.MonsterDeadEvent;
@@ -42,8 +42,14 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class DuplicateService {
+    /**
+     * 怪兽死亡事件
+     */
     @Autowired
     private MonsterDeadEvent monsterDeadEvent;
+    /**
+     * 事件容器
+     */
     @Autowired
     private EventMap eventMap;
     /**
@@ -61,7 +67,9 @@ public class DuplicateService {
      */
     @Autowired
     private AttackedEvent attackedEvent;
-
+    /**
+     * 技能service
+     */
     @Autowired
     private SkillService skillService;
 
@@ -78,13 +86,13 @@ public class DuplicateService {
         //roleTeamMap --> getTeam
         Map<String, String> roleTeamMap = TeamMapManager.getRoleTeamMap();
         String teamName = roleTeamMap.get(role.getName());
-        //getTeam
+        //getTeam获取team
         Map<String, List<ConcreteRole>> teamMap = TeamMapManager.getTeamMap();
-        //roleList
+        //roleList角色列表
         List<ConcreteRole> roleList = teamMap.get(teamName);
-        //bossName
+        //bossName怪兽名称
         String bossName = requestBossInfo.getBossName();
-        //mapName
+        //mapName地图名称
         String mapName = requestBossInfo.getMapName();
 
         //初始化角色
@@ -103,7 +111,7 @@ public class DuplicateService {
     public MsgBossInfoProto.ResponseBossInfo enterDuplicate(Channel channel, MsgBossInfoProto.RequestBossInfo requestBossInfo) {
         //role
         ConcreteRole tmpRole = getRole(channel);
-        //mapName
+        //mapName地图名称
         String mapName = requestBossInfo.getMapName();
         //队伍列表
         List<ConcreteRole> roleList = new ArrayList<>();
@@ -129,7 +137,7 @@ public class DuplicateService {
     public String initRole(List<ConcreteRole> roleList,String bossName, String mapName, String skillName) {
         //role
         ConcreteRole tmpCaptain = roleList.get(0);
-        ConcreteRole captain = CacheUtils.getMapRolename_Role().get(tmpCaptain.getName());
+        ConcreteRole captain = CacheUtils.getMapRoleNameRole().get(tmpCaptain.getName());
         //移动
         mapService.moveTo(captain.getName(),mapName);
 
@@ -178,12 +186,12 @@ public class DuplicateService {
             ConcreteMonster boss = new ConcreteMonster(monster);
             monsterMap.put(boss.getName(),boss);
         }
-        roleAndMapRelaition(map);
+        roleAndMapRelation(map);
 
         return monsterMap;
     }
 
-    private void roleAndMapRelaition(ConcreteMap map) {
+    private void roleAndMapRelation(ConcreteMap map) {
         List<ConcreteRole> roleList = map.getRoleList();
         for (int i = 0; i < roleList.size(); i++) {
             RoleAndMap.getRoleAndMap().put(map.getRoleList().get(i).getName(),map);
@@ -245,7 +253,7 @@ public class DuplicateService {
         //怪物根据角色的职业的吸引值优先进行攻击
         //遍历角色的仇恨值，选出最大的一个来攻击
         ConcreteRole tmpRole = chooseRole(map);
-        ConcreteRole mostRole = CacheUtils.getMapRolename_Role().get(tmpRole.getName());
+        ConcreteRole mostRole = CacheUtils.getMapRoleNameRole().get(tmpRole.getName());
 
         //触发仇恨值最大的角色被攻击事件
         attackedEvent.setRole(mostRole);
@@ -474,11 +482,11 @@ public class DuplicateService {
         //Skill
         String skillName = requestBossInfo.getSkillName();
         ConcreteSkill skill = null;
-        if(CacheUtils.getSkillMap_keyName().get(skillName+1)!=null){
-            skill = CacheUtils.getSkillMap_keyName().get(skillName+1);
+        if(CacheUtils.getSkillMapKeyName().get(skillName+1)!=null){
+            skill = CacheUtils.getSkillMapKeyName().get(skillName+1);
         }
-        if(CacheUtils.getSkillMap_keyName().get(skillName+2)!=null){
-            skill = CacheUtils.getSkillMap_keyName().get(skillName+2);
+        if(CacheUtils.getSkillMapKeyName().get(skillName+2)!=null){
+            skill = CacheUtils.getSkillMapKeyName().get(skillName+2);
         }
         role.setConcreteSkill(skill);
 

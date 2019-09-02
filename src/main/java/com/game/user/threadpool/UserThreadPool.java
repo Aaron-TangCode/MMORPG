@@ -18,7 +18,13 @@ import java.util.concurrent.TimeUnit;
  * @Version 1.0
  */
 public class UserThreadPool {
+    /**
+     * 线程数量
+     */
     public static final int DEFAULT_THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
+    /**
+     * 线程名字
+     */
     public static final String FACTORY_NAME = "user_thread";
     /**
      * 声明
@@ -44,10 +50,10 @@ public class UserThreadPool {
 
     /**
      * 执行任务
-     * @param threadIndex
-     * @param initialDelay
-     * @param period
-     * @param timeUnit
+     * @param threadIndex 线程索引
+     * @param initialDelay 初始化延迟时间
+     * @param period 时间段
+     * @param timeUnit 时间单位
      */
     public static Future executeTask(ConcreteRole role,int threadIndex, long initialDelay, long period, TimeUnit timeUnit){
         ScheduledFuture<?> scheduledFuture = UserThreadPool.getThreadPool(threadIndex).scheduleAtFixedRate(() -> {

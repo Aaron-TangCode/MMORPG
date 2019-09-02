@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Login {
-
+    /**
+     * 登录res
+     */
     @Autowired
    private LoginRepository loginRepository;
 
@@ -41,6 +43,11 @@ public class Login {
         return loginRepository.getUserRoleIdByUsername(username);
     }
 
+    /**
+     * 校验用户
+     * @param username 用户名
+     * @return 用户
+     */
     public User checkUser(String username) {
         return loginRepository.checkUser(username);
     }

@@ -15,6 +15,9 @@ import java.util.concurrent.Callable;
  * @Version 1.0
  */
 public class InsertGoodsTask implements Callable {
+    /**
+     * 拍卖行
+     */
     private Auction auction;
 
     public InsertGoodsTask(Auction auction) {

@@ -32,7 +32,7 @@ public class BuffHandler {
      */
     public void executeBuff(String roleName,String buffName){
         //获取角色
-        ConcreteRole role = CacheUtils.getMapRolename_Role().get(roleName);
+        ConcreteRole role = CacheUtils.getMapRoleNameRole().get(roleName);
         //获取本地buff
         Map<String, ConcreteBuff> buffMap = CacheUtils.getBuffMap();
         ConcreteBuff buff = null;

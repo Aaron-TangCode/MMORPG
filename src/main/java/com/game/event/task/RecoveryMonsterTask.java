@@ -12,8 +12,13 @@ import com.game.role.bean.ConcreteRole;
  * @Version 1.0
  */
 public class RecoveryMonsterTask implements Runnable {
+    /**
+     * 怪兽
+     */
     private ConcreteMonster monster;
-
+    /**
+     * 角色
+     */
     private ConcreteRole role;
     public RecoveryMonsterTask(ConcreteMonster monster,ConcreteRole role) {
         this.monster = monster;

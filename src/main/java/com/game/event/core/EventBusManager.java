@@ -22,6 +22,10 @@ public class EventBusManager implements IEventBusManager {
      */
     private static Map<Class<? extends IEvent>, List<IHandler>> eventMap = new HashMap<>();
 
+    /**
+     * 事件容器map
+     * @return
+     */
     public static Map<Class<? extends IEvent>, List<IHandler>> getEventMap(){
         return eventMap;
     }

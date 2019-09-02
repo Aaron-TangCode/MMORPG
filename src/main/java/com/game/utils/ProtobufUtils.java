@@ -10,6 +10,9 @@ import io.netty.channel.ChannelHandlerContext;
  * @Version 1.0
  */
 public class ProtobufUtils {
+    /**
+     * 发送协议
+     */
     public static void sendProtobufMessage(ChannelHandlerContext ctx,Object protobufObject){
         ctx.writeAndFlush(protobufObject);
     }

@@ -17,6 +17,9 @@ import java.util.Map;
  */
 @Component
 public class EventMap {
+    /**
+     * 事件容器map
+     */
     private static volatile Map<Class<? extends IEvent>, List<IHandler>> eventMap = new HashMap<>();
 
 
@@ -32,11 +35,11 @@ public class EventMap {
      * @param event
      */
     public void submit(IEvent event){
-
+        //获取class
         Class<? extends IEvent> clazz = event.getClass();
         //触发Handler
         List<IHandler> handlerList = EventMap.getEventMap().get(clazz);
-
+        //遍历执行
         for (int i = 0; i < handlerList.size(); i++) {
             handlerList.get(i).exec(event);
         }

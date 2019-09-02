@@ -101,7 +101,7 @@ public class GangService {
         String gangName = requestGangInfo.getGangName();
         //创建工会
         String content = buildGang(flag, gangName, role);
-
+        //返回协议消息
         return MsgGangInfoProto.ResponseGangInfo.newBuilder()
                 .setContent(content)
                 .setType(MsgGangInfoProto.RequestType.CREATEGANG)
@@ -243,6 +243,6 @@ public class GangService {
      * @return 角色
      */
     public ConcreteRole getRoleByRoleName(String roleName){
-        return CacheUtils.getMapRolename_Role().get(roleName);
+        return CacheUtils.getMapRoleNameRole().get(roleName);
     }
 }

@@ -220,7 +220,7 @@ public class AuctionService {
      * @return 返回角色
      */
     public ConcreteRole getRoleByRoleName(String name){
-       return CacheUtils.getMapRolename_Role().get(name);
+       return CacheUtils.getMapRoleNameRole().get(name);
     }
 
     /**

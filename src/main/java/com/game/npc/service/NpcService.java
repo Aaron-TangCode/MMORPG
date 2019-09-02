@@ -23,8 +23,14 @@ import java.util.List;
  */
 @Service
 public class NpcService {
+    /**
+     * 谈话事件
+     */
     @Autowired
     private TalkEvent talkEvent;
+    /**
+     * 事件容器map
+     */
     @Autowired
     private EventMap eventMap;
     /**
@@ -43,7 +49,7 @@ public class NpcService {
         //获取当前玩家所在场景
         final int mapId = role.getConcreteMap().getId();
         //获取场景的npc
-        List<Integer> npcIdList = CacheUtils.mapIdnpcIdMap().get(mapId);
+        List<Integer> npcIdList = CacheUtils.mapIdNpcIdMap().get(mapId);
         //和npc交谈
         String content = talkNPC(npcIdList,role.getName(),npcName);
         //如果是NPC1好，触发事件

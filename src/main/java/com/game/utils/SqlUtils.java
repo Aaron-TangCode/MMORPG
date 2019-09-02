@@ -18,6 +18,9 @@ import java.io.InputStream;
  */
 @Component
 public class SqlUtils {
+    /**
+     * 获取session
+     */
     public static SqlSession getSession(){
         String resource = "config/mybatis-config.xml";
         InputStream inputStream = null;
@@ -27,7 +30,9 @@ public class SqlUtils {
             e.printStackTrace();
         }
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        //获取session
         SqlSession session = sqlSessionFactory.openSession();
+        //返回session
         return session;
     }
 

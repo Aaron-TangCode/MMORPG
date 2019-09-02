@@ -5,6 +5,7 @@ import com.game.task.bean.ConcreteTask;
 import com.game.task.manager.TaskMap;
 import com.game.utils.EnumUtil;
 import com.game.utils.ExcelUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +20,14 @@ import java.io.InputStream;
  * @date 2019
  *
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadTask {
-	private static final String FILEPATH = "src/main/resources/resource/task.xls";
+    /**
+     * 文件路径
+     */
+	private static final String FILEPATH = "src/main/resources/excel/task.xls";
 
     /**
      * 读取excel
@@ -75,7 +80,7 @@ public class ReadTask {
                 // 数据装入map
                 TaskMap.getTaskMap().put(task.getId(),task);
             }
-            System.out.println("task静态数据加载完毕");
+            log.info("task静态数据加载完毕");
         } catch (IOException e) {
             e.printStackTrace();
         }  catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {

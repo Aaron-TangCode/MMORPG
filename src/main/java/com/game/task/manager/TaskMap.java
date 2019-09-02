@@ -13,6 +13,9 @@ import java.util.Map;
  * @Version 1.0
  */
 public class TaskMap {
+    /**
+     * 任务容器map
+     */
     private static volatile Map<Integer, ConcreteTask> taskMap = new HashMap<>();
 
     private TaskMap(){}

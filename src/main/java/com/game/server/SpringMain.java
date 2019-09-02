@@ -93,6 +93,7 @@ public class SpringMain {
                     }
                 }
             }
+            //读取数据
         LocalMessageMap.readAllMessageType();
 
         }

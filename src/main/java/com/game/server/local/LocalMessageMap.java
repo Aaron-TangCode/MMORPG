@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LocalMessageMap {
-
+    /**
+     * 消息容器map
+     */
     public static Map<Class<Message>, Integer> messageMap = new HashMap<>();
 
     public static void readAllMessageType(){

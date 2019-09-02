@@ -20,8 +20,6 @@ public class AttackedEvent extends IEvent {
      */
     private ConcreteRole role;
 
-
-
     public void setRole(ConcreteRole role) {
         this.role = role;
     }

@@ -13,6 +13,9 @@ import org.apache.ibatis.session.SqlSession;
  * @Version 1.0
  */
 public class BackpackInsertTask implements Runnable {
+    /**
+     * 物品
+     */
     private Goods goods;
     public BackpackInsertTask(Goods goods){
         this.goods = goods;

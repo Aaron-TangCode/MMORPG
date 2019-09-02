@@ -15,6 +15,9 @@ import java.util.concurrent.TimeUnit;
  * @Version 1.0
  */
 public class SingleThread extends SingleThreadEventExecutor {
+    /**
+     * 坐标
+     */
     private int index;
 
     protected SingleThread(int index,EventExecutorGroup parent, ThreadFactory threadFactory, boolean addTaskWakesUp) {

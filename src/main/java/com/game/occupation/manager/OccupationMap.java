@@ -13,9 +13,16 @@ import java.util.Map;
  * @Version 1.0
  */
 public class OccupationMap {
+    /**
+     * 职业容器map
+     */
     private static volatile Map<Integer, Occupation> occupationMap = null;
     private OccupationMap(){}
 
+    /**
+     * 获取职业容器map
+     * @return map
+     */
     public static Map<Integer, Occupation> getOccupationMap(){
         if(occupationMap==null){
             synchronized (OccupationMap.class){

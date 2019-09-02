@@ -4,6 +4,7 @@ import com.game.annotation.ExcelAnnotation;
 import com.game.npc.bean.MapNPCMapping;
 import com.game.utils.ExcelUtils;
 import com.game.utils.CacheUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -19,10 +20,14 @@ import java.io.IOException;
  * @Date 2019/6/11 11:23
  * @Version 1.0
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadMapNPCMapping {
-    private static final String FILEPATH = "src/main/resources/resource/map_npc_mapping.xls";
+    /**
+     * 文件路径
+     */
+    private static final String FILEPATH = "src/main/resources/excel/map_npc_mapping.xls";
     /**
      * 读取excel
      * @return
@@ -59,8 +64,8 @@ public class ReadMapNPCMapping {
                     }
                 }
                 // 数据装入List
-                CacheUtils.getMapNPCMappingList().add(mapNPCMapping);
+                CacheUtils.getMapNpcMappingList().add(mapNPCMapping);
             }
-            System.out.println("Map-NPC映射静态数据加载完毕");
+            log.info("Map-NPC映射静态数据加载完毕");
         }
 }

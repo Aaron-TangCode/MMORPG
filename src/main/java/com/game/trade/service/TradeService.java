@@ -27,14 +27,24 @@ import java.util.UUID;
  */
 @Service
 public class TradeService {
-
+    /**
+     * 背包处理器
+     */
     @Autowired
     private BackpackHandler backpackHandler;
+    /**
+     * 角色service
+     */
     @Autowired
     private RoleService roleService;
+    /**
+     * 交易事件
+     */
     @Autowired
     private TradeEvent tradeEvent;
-
+    /**
+     * 事件容器map
+     */
     @Autowired
     private EventMap eventMap;
 
@@ -62,7 +72,9 @@ public class TradeService {
                 .build();
 
         to.getChannel().writeAndFlush(info);
+        //返回内容
         String content = "等待"+roleName2+"确认交易";
+        //返回消息
         return MsgTradeInfoProto.ResponseTradeInfo.newBuilder()
                 .setContent(content)
                 .setType(MsgTradeInfoProto.RequestType.REQUESTTRADE)
@@ -235,7 +247,7 @@ public class TradeService {
      * @return role
      */
     public ConcreteRole getRoleByRoleName(String roleName){
-        ConcreteRole role = CacheUtils.getMapRolename_Role().get(roleName);
+        ConcreteRole role = CacheUtils.getMapRoleNameRole().get(roleName);
         return role;
     }
     /**

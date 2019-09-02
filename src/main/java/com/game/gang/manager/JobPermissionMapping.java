@@ -17,8 +17,15 @@ import java.util.Map;
  * @Version 1.0
  */
 public class JobPermissionMapping {
+    /**
+     * 职位-职位权限映射关系容器map
+     */
     public static Map<String, List<JobPermission>> jobPermissionListMap = new HashMap<>();
 
+    /**
+     * 处理job和权限的匹配关系
+     * @param jobPermissionMap map
+     */
     public static void handleRelation(Map<String, JobResource> jobPermissionMap){
         //遍历map，匹配job和permision
         for (Map.Entry<String, JobResource> stringJobResourceEntry : jobPermissionMap.entrySet()) {

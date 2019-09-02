@@ -12,7 +12,13 @@ import org.apache.ibatis.session.SqlSession;
  * @Version 1.0
  */
 public class BackpackUpdateDelTask implements Runnable {
+    /**
+     * 角色id
+     */
     private int roleId;
+    /**
+     * 物品id
+     */
     private Integer goodsId;
 
     public BackpackUpdateDelTask(int roleId, Integer goodsId) {

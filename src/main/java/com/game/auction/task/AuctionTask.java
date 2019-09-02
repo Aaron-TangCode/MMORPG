@@ -18,12 +18,21 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AuctionTask implements  Runnable{
+    /**
+     * 拍卖行
+     */
     private Auction auction;
-
+    /**
+     * 拍卖服务
+     */
     private AuctionService auctionService;
-
+    /**
+     * 背包处理器
+     */
     private BackpackHandler backpackHandler;
-
+    /**
+     * 角色服务
+     */
     private RoleService roleService;
 
     public AuctionTask(Auction auction, AuctionService auctionService, BackpackHandler backpackHandler, RoleService roleService){
@@ -81,6 +90,6 @@ public class AuctionTask implements  Runnable{
 
     }
     public ConcreteRole getRole(String roleName){
-        return CacheUtils.getMapRolename_Role().get(roleName);
+        return CacheUtils.getMapRoleNameRole().get(roleName);
     }
 }

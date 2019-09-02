@@ -5,6 +5,7 @@ import com.game.annotation.ExcelAnnotation;
 import com.game.property.bean.Property;
 import com.game.role.bean.ConcreteRole;
 import com.game.utils.ExcelUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -19,14 +20,17 @@ import java.io.InputStream;
  * @date 2017-3-15
  *
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadProperty {
-	private static final String FILEPATH = "src/main/resources/resource/property.xls";
+    /**
+     * 文件路径
+     */
+	private static final String FILEPATH = "src/main/resources/excel/property.xls";
 
     /**
      * 读取excel
-     * @return
      */
 	@ExcelAnnotation
 	public static void readFromXLSX2007() {
@@ -68,7 +72,7 @@ public class ReadProperty {
                 // 数据装入List
                 ConcreteRole.getBasicPropertyMap().put(property.getId(),property.getPropertyJson());
             }
-            System.out.println("property静态数据加载完毕");
+            log.info("property静态数据加载完毕");
         } catch (IOException e) {
             e.printStackTrace();
         }  catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {

@@ -4,6 +4,7 @@ import com.game.annotation.ExcelAnnotation;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -19,10 +20,14 @@ import java.io.IOException;
  * @Date 2019/6/11 11:23
  * @Version 1.0
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadMonster {
-    private static final String FILEPATH = "src/main/resources/resource/Monster.xls";
+    /**
+     * 文件路径
+     */
+    private static final String FILEPATH = "src/main/resources/excel/Monster.xls";
     /**
      * 读取excel
      * @return
@@ -67,6 +72,6 @@ public class ReadMonster {
                 // 数据装入List
                 CacheUtils.getMonsterMap().put(concreteMonster.getId(),concreteMonster);
             }
-            System.out.println("Monster静态数据加载完毕");
+            log.info("Monster静态数据加载完毕");
         }
 }

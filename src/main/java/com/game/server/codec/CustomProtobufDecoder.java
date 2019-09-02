@@ -5,6 +5,7 @@ import com.google.protobuf.MessageLite;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
+import io.netty.util.ReferenceCountUtil;
 
 import java.util.List;
 
@@ -48,7 +49,8 @@ public class CustomProtobufDecoder extends ByteToMessageDecoder {
                 bodyByteBuf.getBytes(bodyByteBuf.readerIndex(), array, 0, readableLen);
                 offset = 0;
             }
-
+            //释放内存
+            ReferenceCountUtil.release(bodyByteBuf);
             //反序列化
             MessageLite result = decodeBody(dataType, array, offset, readableLen);
             out.add(result);

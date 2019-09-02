@@ -9,12 +9,15 @@ import java.util.concurrent.Callable;
 
 /**
  * @ClassName UpdateGangEntityTask
- * @Description TODO
+ * @Description 更新工会成员任务器
  * @Author DELL
  * @Date 2019/8/19 20:14
  * @Version 1.0
  */
 public class UpdateGangEntityTask implements Callable {
+    /**
+     * 工会
+     */
     private GangEntity gangEntity;
 
     public UpdateGangEntityTask(GangEntity gangEntity) {

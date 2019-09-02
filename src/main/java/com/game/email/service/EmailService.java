@@ -37,12 +37,14 @@ public class EmailService {
         //goodsName
         String goodsName = requestEmailInfo.getGoodsName();
         //获取所有玩家
-        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRoleNameRole();
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
         Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
         //发送物品
         sendGoods(iterator,goodsName);
+        //content
         String cotent = "系统发送一个物品："+goodsName;
+        //返回协议信息
         return MsgEmailInfoProto.ResponseEmailInfo.newBuilder()
                 .setContent(cotent)
                 .setType(MsgEmailInfoProto.RequestType.SENDGOODS)
@@ -56,11 +58,17 @@ public class EmailService {
      */
     private void sendGoods(Iterator<Map.Entry<String, ConcreteRole>> iterator,String goodsName) {
         while (iterator.hasNext()) {
+            //迭代器
             Map.Entry<String, ConcreteRole> next = iterator.next();
+            //获取role
             ConcreteRole role = next.getValue();
+            //获取channel
             Channel channel = role.getChannel();
+            //获取物品
             backpackHandler.getGoods(role.getName(),goodsName);
+            //content
             String msg = "[系统]"+role.getName()+"获得："+goodsName;
+            //返回消息
             channel.writeAndFlush(msg);
         }
     }

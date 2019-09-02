@@ -13,10 +13,17 @@ import java.util.Map;
  * @Version 1.0
  */
 public class TradeMap {
+    /**
+     * 交易容器map
+     */
     private static volatile Map<String, Trade> tradeMap = null;
 
     private TradeMap(){}
 
+    /**
+     * 获取交易map
+     * @return map
+     */
     public static Map<String,Trade> getTradeMap(){
         if(tradeMap==null){
             synchronized (TradeMap.class){

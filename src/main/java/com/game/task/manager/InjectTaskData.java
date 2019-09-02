@@ -50,13 +50,14 @@ public class InjectTaskData {
      */
     private void allocateTask(Map<Integer, ConcreteTask> taskMap,ConcreteRole role) {
         if(role==null){
+            System.out.println("role is null");
             return;
         }
         //赋值
         Map<Integer,ConcreteTask> raMap = new HashMap<>();
         Map<Integer,ConcreteTask> rMap = new HashMap<>();
         Map<Integer,ConcreteTask> fMap = new HashMap<>();
-
+        //注入数据
         role.setReceivedTaskMap(rMap);
         role.setFinishedTaskMap(fMap);
         RoleTask roleTask = taskService.queryTask(role.getId());

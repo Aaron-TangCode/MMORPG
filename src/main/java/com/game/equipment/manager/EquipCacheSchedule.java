@@ -19,6 +19,9 @@ import java.util.concurrent.TimeUnit;
 @Component
 @ExcelAnnotation
 public class EquipCacheSchedule {
+    /**
+     * 装备service
+     */
     @Autowired
     private EquipmentService equipmentService;
     @ExcelAnnotation

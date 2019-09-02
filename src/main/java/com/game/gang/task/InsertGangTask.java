@@ -8,12 +8,15 @@ import java.util.concurrent.Callable;
 
 /**
  * @ClassName InsertGangTask
- * @Description TODO
+ * @Description 添加工会任务器
  * @Author DELL
  * @Date 2019/8/19 20:10
  * @Version 1.0
  */
 public class InsertGangTask implements Callable {
+    /**
+     * 工会名字
+     */
     private String gangName;
 
     public InsertGangTask(String gangName) {

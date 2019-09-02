@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration >
     <!-- 引入配置文件 -->
-    <!-- 	<properties resource="db.properties"/> -->
+    <!-- 	<properties excel="db.properties"/> -->
     <!-- 指定数据连接驱动jar地址 -->
     <classPathEntry location="C:\project\mmorpg\mysql\mysql-connector-java-5.1.47.jar"/>
     <!-- 一个数据库一个context -->

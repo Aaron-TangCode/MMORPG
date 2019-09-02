@@ -19,9 +19,12 @@ import java.util.Set;
  * @Version 1.0
  */
 public class BossAutoAttackTask implements Runnable{
+    /**
+     * 地图
+     */
     private ConcreteMap map;
     /**
-     * role
+     * 角色
      */
     private ConcreteRole role;
     /**
@@ -60,7 +63,6 @@ public class BossAutoAttackTask implements Runnable{
      */
     private void bossAttack(ConcreteMonster boss, ConcreteRole role) {
         //boss的攻击力
-
         Integer attack = boss.getAttack();
         //角色的当前血量
         int curHp = role.getCurHp();
@@ -77,9 +79,9 @@ public class BossAutoAttackTask implements Runnable{
                 .setType(MsgBossInfoProto.RequestType.ENTERDUPLICATE)
                 .setContent(content)
                 .build();
-
+        //发送协议
         channel.writeAndFlush(responseBossInfo);
-
+        //检验
         if(role.getCurHp()<=0){
             String content2 = "角色死亡，执行副本任务失败";
             //打包信息

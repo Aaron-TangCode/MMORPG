@@ -26,9 +26,14 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class KillMonsterHandler implements IHandler<MonsterDeadEvent> {
 
-
+    /**
+     * 处理器工具类
+     */
     @Autowired
     private HandlerUtils handlerUtils;
+    /**
+     * 任务service
+     */
     @Autowired
     private TaskService taskService;
 

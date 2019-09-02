@@ -15,7 +15,9 @@ import java.util.Map;
  * @Version 1.0
  */
 public class EventTaskMap {
-
+    /**
+     * 事件和任务的容器map
+     */
     private static volatile Map<Class<? extends IEvent>, List<ConcreteTask>> eventTaskMap = new HashMap<>();
     private EventTaskMap(){}
 
@@ -25,6 +27,5 @@ public class EventTaskMap {
 
     public void register(IEvent event) {
         Class<? extends IEvent> aClass = event.getClass();
-
     }
 }

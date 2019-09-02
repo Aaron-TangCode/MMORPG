@@ -1,9 +1,10 @@
 package com.game.backpack.excel;
 
-import com.game.backpack.bean.Type;
+import com.game.backpack.bean.GoodsType;
 import com.game.annotation.ExcelAnnotation;
 import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +15,11 @@ import java.io.InputStream;
 /**
  * 读取excel文件
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadGoodsType {
-	private static final String FILEPATH = "src/main/resources/resource/goods_type.xls";
+	private static final String FILEPATH = "src/main/resources/excel/goods_type.xls";
 
     /**
      * 读取excel
@@ -40,7 +42,7 @@ public class ReadGoodsType {
             // 开始循环遍历行，表头不处理，从1开始
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 // 实例化对象
-                Type type = new Type();
+                GoodsType type = new GoodsType();
                 // 获取行对象
             	Row row = sheet.getRow(i);
                 // 如果为空，不处理
@@ -63,7 +65,7 @@ public class ReadGoodsType {
                 // 数据装入List
                 CacheUtils.getTypeMap().put(type.getId(),type);
             }
-            System.out.println("type(物品类型)静态数据加载完毕");
+            log.info("type(物品类型)静态数据加载完毕");
         } catch (IOException e) {
             e.printStackTrace();
         }  catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {

@@ -1,6 +1,6 @@
-package com.game.duplicate.repository;
+package com.game.team.repository;
 
-import com.game.duplicate.mapper.TeamMapper;
+import com.game.team.mapper.TeamMapper;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;

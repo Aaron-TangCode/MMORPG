@@ -13,8 +13,17 @@ import org.apache.ibatis.session.SqlSession;
  * @Version 1.0
  */
 public class UserRegisterTask implements Runnable {
+    /**
+     * 用户名
+     */
     private String username;
+    /**
+     * 密码
+     */
     private String password;
+    /**
+     * 用户
+     */
     private User user;
 
     public UserRegisterTask(String username, String password, User user) {
@@ -28,11 +37,11 @@ public class UserRegisterTask implements Runnable {
         SqlSession session = SqlUtils.getSession();
         UserMapper mapper = session.getMapper(UserMapper.class);
         try {
-            User new_user = new User();
-            new_user.setUsername(username);
-            new_user.setPassword(password);
+            User newUser = new User();
+            newUser.setUsername(username);
+            newUser.setPassword(password);
             //注册用户
-            mapper.addUser(new_user);
+            mapper.addUser(newUser);
             session.commit();
         }finally {
             session.close();

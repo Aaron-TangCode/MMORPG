@@ -13,6 +13,9 @@ import java.util.Map;
  * @Version 1.0
  */
 public class SessionMap {
+    /**
+     * session容器map
+     */
     private static volatile Map<String, ConcreteRole> sessionMap = new HashMap<>();
 
     private SessionMap(){}

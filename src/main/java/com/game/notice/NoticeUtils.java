@@ -33,7 +33,7 @@ public class NoticeUtils {
             }
         }
         //通过mapId找到该场景下的所有玩家
-        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRoleNameRole();
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
         Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
         while(iterator.hasNext()){
@@ -42,13 +42,16 @@ public class NoticeUtils {
             int id = name.getValue().getConcreteMap().getId();
             //id匹配，通知玩家
             if(mapId==id){
+                //content
                 String msg = monster.getName()+"状态:"+monster.getState();
+                //获取角色
                 ConcreteRole role = name.getValue();
                 //玩家收到通知
                 MsgSkillInfoProto.ResponseSkillInfo responseSkillInfo = MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
                         .setContent(msg)
                         .setType(MsgSkillInfoProto.RequestType.USESKILL)
                         .build();
+                //发送消息
                 role.getChannel().writeAndFlush(responseSkillInfo);
             }
         }

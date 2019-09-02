@@ -6,6 +6,7 @@ import com.game.backpack.bean.Goods;
 import com.game.property.bean.PropertyType;
 import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -18,10 +19,11 @@ import java.util.*;
 /**
  * 读取excel文件
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadGoods {
-	private static final String FILEPATH = "src/main/resources/resource/goods.xls";
+	private static final String FILEPATH = "src/main/resources/excel/goods.xls";
 
     /**
      * 读取excel
@@ -110,7 +112,7 @@ public class ReadGoods {
                 }
                 goodsList.add(goods);
             }
-            System.out.println("Goods静态数据加载完毕");
+            log.info("Goods静态数据加载完毕");
         } catch (IOException e) {
             e.printStackTrace();
         }  catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {

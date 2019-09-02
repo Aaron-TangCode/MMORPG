@@ -55,7 +55,9 @@ public class Goods {
      * 商品价值
      */
     private Integer cost;
-
+    /**
+     * 属性的容器map
+     */
     private Map<PropertyType,Integer> propertyMap;
 
 

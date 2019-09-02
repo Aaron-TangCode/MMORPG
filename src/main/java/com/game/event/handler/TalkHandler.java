@@ -16,6 +16,9 @@ import org.springframework.stereotype.Component;
 @EventAnnotation
 @Component
 public class TalkHandler implements IHandler<TalkEvent> {
+    /**
+     * 处理器工具类
+     */
     @Autowired
     private HandlerUtils handlerUtils;
 

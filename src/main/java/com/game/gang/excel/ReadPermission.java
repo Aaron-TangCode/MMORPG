@@ -5,6 +5,7 @@ import com.game.gang.bean.JobResource;
 import com.game.gang.manager.JobPermissionMap;
 import com.game.gang.manager.JobPermissionMapping;
 import com.game.utils.ExcelUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +20,11 @@ import java.io.InputStream;
  * @date 2019
  *
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadPermission {
-	private static final String FILEPATH = "src/main/resources/resource/permission.xls";
+	private static final String FILEPATH = "src/main/resources/excel/permission.xls";
 
     /**
      * 读取excel
@@ -70,7 +72,7 @@ public class ReadPermission {
                 // 数据装入map
                 JobPermissionMap.getJobPermissionMap().put(jobResource.getJob(),jobResource);
             }
-            System.out.println("JobPermission静态数据加载完毕");
+            log.info("JobPermission静态数据加载完毕");
             JobPermissionMapping.handleRelation(JobPermissionMap.getJobPermissionMap());
         } catch (IOException e) {
             e.printStackTrace();

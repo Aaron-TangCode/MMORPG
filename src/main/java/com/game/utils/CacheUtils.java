@@ -1,7 +1,7 @@
 package com.game.utils;
 
 import com.game.backpack.bean.Goods;
-import com.game.backpack.bean.Type;
+import com.game.backpack.bean.GoodsType;
 import com.game.buff.bean.ConcreteBuff;
 import com.game.map.bean.ConcreteMap;
 import com.game.map.bean.MapMapping;
@@ -26,11 +26,11 @@ public class CacheUtils {
     /**
      * 用户名-角色缓存
      */
-    private static volatile Map<String, ConcreteRole> mapUsername_Role = null;
+    private static volatile Map<String, ConcreteRole> mapUsernameRole = null;
     /**
      * 角色名-角色缓存
      */
-    private static volatile Map<String,ConcreteRole> mapRolename_Role = null;
+    private static volatile Map<String,ConcreteRole> mapRoleNameRole = null;
     /**
      * 地图映射缓存
      */
@@ -39,11 +39,11 @@ public class CacheUtils {
     /**
      * id_地图缓存
      */
-    private static volatile Map<Integer, ConcreteMap> id_ConcreteMap_Map = null;
+    private static volatile Map<Integer, ConcreteMap> idConcreteMapMap = null;
     /**
      * name_地图缓存
      */
-    private static volatile Map<String, ConcreteMap> name_ConcreteMap_Map = null;
+    private static volatile Map<String, ConcreteMap> nameConcreteMapMap = null;
     /**
      * NPC容器
      */
@@ -83,7 +83,7 @@ public class CacheUtils {
      * key:id
      * values:type
      */
-    private static volatile Map<Integer, Type> typeMap = null;
+    private static volatile Map<Integer, GoodsType> typeMap = null;
     /**
      * key:id
      * value:ConcreteBuff
@@ -106,25 +106,15 @@ public class CacheUtils {
         return goodsList;
     }
 
-    public static Map<String, ConcreteMap>  getName_ConcreteMap_Map(){
-        if(name_ConcreteMap_Map==null){
+    public static Map<String, ConcreteMap> getNameConcreteMapMap(){
+        if(nameConcreteMapMap ==null){
             synchronized (CacheUtils.class){
-                if(name_ConcreteMap_Map==null){
-                    name_ConcreteMap_Map = new HashMap<>();
+                if(nameConcreteMapMap ==null){
+                    nameConcreteMapMap = new HashMap<>();
                 }
             }
         }
-        return name_ConcreteMap_Map;
-    }
-    public static Map<Integer, ConcreteMap>  getId_ConcreteMap_Map(){
-        if(id_ConcreteMap_Map==null){
-            synchronized (CacheUtils.class){
-                if(id_ConcreteMap_Map==null){
-                    id_ConcreteMap_Map = new HashMap<>();
-                }
-            }
-        }
-        return id_ConcreteMap_Map;
+        return nameConcreteMapMap;
     }
     /**
      * buff的map
@@ -159,7 +149,7 @@ public class CacheUtils {
      * 物品类型map
      * @return
      */
-    public static Map<Integer, Type> getTypeMap(){
+    public static Map<Integer, GoodsType> getTypeMap(){
         if(typeMap==null){
             synchronized (CacheUtils.class){
                 if(typeMap==null){
@@ -173,7 +163,7 @@ public class CacheUtils {
      * 技能map容器
      * @return
      */
-    public static Map<String,ConcreteSkill> getSkillMap_keyName(){
+    public static Map<String,ConcreteSkill> getSkillMapKeyName(){
         if(skillMap2==null){
             synchronized (CacheUtils.class){
                 if(skillMap2==null){
@@ -187,7 +177,7 @@ public class CacheUtils {
      * 技能map容器
      * @return
      */
-    public static Map<String,ConcreteSkill> getSkillMap_keyId(){
+    public static Map<String,ConcreteSkill> getSkillMapKeyId(){
         if(skillMap==null){
            synchronized (CacheUtils.class){
                if(skillMap==null){
@@ -232,8 +222,8 @@ public class CacheUtils {
     /**
      * map<mapId,list<npcId>>
      */
-    public static Map<Integer,List<Integer>> mapIdnpcIdMap(){
-        Iterator<MapNPCMapping> iterator = getMapNPCMappingList().iterator();
+    public static Map<Integer,List<Integer>> mapIdNpcIdMap(){
+        Iterator<MapNPCMapping> iterator = getMapNpcMappingList().iterator();
         Map<Integer,List<Integer>> mapID_npcId_Map = new HashMap<>();
         List<Integer> list = null;
         while(iterator.hasNext()){
@@ -253,7 +243,7 @@ public class CacheUtils {
      * 地图map和npc的映射容器
      * @return
      */
-    public static List<MapNPCMapping> getMapNPCMappingList(){
+    public static List<MapNPCMapping> getMapNpcMappingList(){
         if(mapNPCMappingList==null){
             synchronized (CacheUtils.class){
                 if(mapNPCMappingList==null){
@@ -267,16 +257,16 @@ public class CacheUtils {
      * 地图角色map
      * @return 用户名(非角色名)，role实体
      */
-    public static Map<String, ConcreteRole> getMapUsername_Role() {
-        if (mapUsername_Role == null) {
+    public static Map<String, ConcreteRole> getMapUsernameRole() {
+        if (mapUsernameRole == null) {
             synchronized (CacheUtils.class) {
-                if (mapUsername_Role == null) {
-                    mapUsername_Role = new HashMap<>();
-                    return mapUsername_Role;
+                if (mapUsernameRole == null) {
+                    mapUsernameRole = new HashMap<>();
+                    return mapUsernameRole;
                 }
             }
         }
-        return mapUsername_Role;
+        return mapUsernameRole;
     }
 
     /**
@@ -284,16 +274,16 @@ public class CacheUtils {
      * value:Role实体类
      * @return
      */
-    public static Map<String, ConcreteRole> getMapRolename_Role() {
-        if (mapRolename_Role == null) {
+    public static Map<String, ConcreteRole> getMapRoleNameRole() {
+        if (mapRoleNameRole == null) {
             synchronized (CacheUtils.class) {
-                if (mapRolename_Role == null) {
-                    mapRolename_Role = new HashMap<>();
-                    return mapRolename_Role;
+                if (mapRoleNameRole == null) {
+                    mapRoleNameRole = new HashMap<>();
+                    return mapRoleNameRole;
                 }
             }
         }
-        return mapRolename_Role;
+        return mapRoleNameRole;
     }
 
     /**
@@ -329,15 +319,15 @@ public class CacheUtils {
     /**
      * 切换地图是否可达
      *
-     * @param src_id
-     * @param dest_id
+     * @param srcId
+     * @param destId
      * @return
      */
-    public static boolean isReach(int src_id, int dest_id) {
+    public static boolean isReach(int srcId, int destId) {
         Iterator<MapMapping> iterator = getMapList().iterator();
         while (iterator.hasNext()) {
             MapMapping mapMapping = iterator.next();
-            if (mapMapping.getSrcMap() == src_id && mapMapping.getDestMap() == dest_id) {
+            if (mapMapping.getSrcMap() == srcId && mapMapping.getDestMap() == destId) {
                 return true;
             }
         }
@@ -346,7 +336,7 @@ public class CacheUtils {
 
     /**
      * 打印map
-     * @param map
+     * @param map map
      */
     public static void printMap(Map map){
         Set set = map.entrySet();

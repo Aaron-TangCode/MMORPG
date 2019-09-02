@@ -16,6 +16,9 @@ import org.springframework.stereotype.Component;
 @EventAnnotation
 @Component
 public class UseGoodsHandler implements IHandler<GoodsEvent> {
+    /**
+     * 处理器工具类
+     */
     @Autowired
     private HandlerUtils handlerUtils;
     @EventAnnotation

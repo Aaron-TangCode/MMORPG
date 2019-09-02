@@ -29,7 +29,9 @@ public class ConcreteMap {
      */
     private Map<String, ConcreteMonster> monsterMap = new HashMap<>();
 
-
+    /**
+     * 角色列表
+     */
     private List<ConcreteRole> roleList = new ArrayList<>();
 
     public void setMonsterMap(Map<String, ConcreteMonster> monsterMap) {

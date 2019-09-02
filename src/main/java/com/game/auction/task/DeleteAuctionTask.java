@@ -14,6 +14,9 @@ import java.util.concurrent.Callable;
  * @Version 1.0
  */
 public class DeleteAuctionTask implements Callable {
+    /**
+     * 拍卖id
+     */
     private int auctionId;
 
     public DeleteAuctionTask(int auctionId) {

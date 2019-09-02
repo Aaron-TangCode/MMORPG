@@ -11,8 +11,22 @@ public enum  Job {
     /**
      * 工会会长
      */
-    CHARIMEN("会长"),VICE_CHARIMEN("副会长"), ELITE("精英"), GENERAL("普通成员");
-
+    CHARIMEN("会长"),
+    /**
+     * 副会长
+     */
+    VICE_CHARIMEN("副会长"),
+    /**
+     * 精英
+     */
+    ELITE("精英"),
+    /**
+     * 普通成员
+     */
+    GENERAL("普通成员");
+    /**
+     * 职位
+     */
     private String name;
 
     public String getName() {

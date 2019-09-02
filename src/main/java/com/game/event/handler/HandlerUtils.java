@@ -25,8 +25,14 @@ import java.util.Map;
  */
 @Component
 public class HandlerUtils {
+    /**
+     * 角色service
+     */
     @Autowired
     private RoleService roleService;
+    /**
+     * 任务service
+     */
     @Autowired
     private TaskService taskService;
 

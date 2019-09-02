@@ -15,7 +15,9 @@ import java.util.Set;
  * @Version 1.0
  */
 public class UpdateRoleMsgTask implements Runnable {
-
+    /**
+     * 角色服务
+     */
     private RoleService roleService;
 
     public UpdateRoleMsgTask(RoleService roleService) {
@@ -26,7 +28,7 @@ public class UpdateRoleMsgTask implements Runnable {
     @Override
     public void run() {
         //获取缓存
-        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRoleNameRole();
 
         Set<Map.Entry<String, ConcreteRole>> entries = roleMap.entrySet();
         //遍历更新

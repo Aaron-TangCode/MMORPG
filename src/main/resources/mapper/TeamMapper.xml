@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.game.duplicate.mapper.TeamMapper">
+<mapper namespace="com.game.team.mapper.TeamMapper">
     <insert id="addTeam">
         insert into team(name,roleId1) values (#(teamName),#(roleId))
     </insert>

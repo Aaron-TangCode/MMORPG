@@ -4,6 +4,7 @@ import com.game.buff.bean.ConcreteBuff;
 import com.game.annotation.ExcelAnnotation;
 import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 
@@ -18,10 +19,11 @@ import java.io.InputStream;
  * @date 2017-3-15
  *
  */
+@Slf4j
 @ExcelAnnotation
 @Component
 public class ReadBuff {
-	private static final String FILEPATH = "src/main/resources/resource/buff.xls";
+	private static final String FILEPATH = "src/main/resources/excel/buff.xls";
 
     /**
      * 读取excel
@@ -63,7 +65,7 @@ public class ReadBuff {
                     }else if (j == 1) {
                         buff.setName(cellStr);
                     }else if (j == 2) {
-                        buff.setKeeptime(new Double(cellStr).longValue());
+                        buff.setKeepTime(new Double(cellStr).longValue());
                     }else if (j == 3) {
                         buff.setPeriod(new Double(cellStr).longValue());
                     }else if (j == 4) {
@@ -81,7 +83,7 @@ public class ReadBuff {
                 // 数据装入List
                 CacheUtils.getBuffMap().put(buff.getName(),buff);
             }
-            System.out.println("buff静态数据加载完毕");
+            log.info("buff静态数据加载完毕");
         } catch (IOException e) {
             e.printStackTrace();
         }  catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {

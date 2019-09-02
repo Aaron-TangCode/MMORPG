@@ -1,4 +1,4 @@
-package com.game.duplicate.manager;
+package com.game.team.manager;
 
 import com.game.role.bean.ConcreteRole;
 

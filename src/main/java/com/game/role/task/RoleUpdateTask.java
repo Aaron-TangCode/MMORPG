@@ -12,7 +12,13 @@ import org.apache.ibatis.session.SqlSession;
  * @Version 1.0
  */
 public class RoleUpdateTask implements Runnable {
+    /**
+     * 角色名
+     */
     private String roleName;
+    /**
+     * 目的地
+     */
     private Integer dest;
 
     public RoleUpdateTask(String roleName, Integer dest) {

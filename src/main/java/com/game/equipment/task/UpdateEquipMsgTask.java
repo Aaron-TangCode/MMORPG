@@ -16,6 +16,9 @@ import java.util.Set;
  * @Version 1.0
  */
 public class UpdateEquipMsgTask implements Runnable {
+    /**
+     * 装备栏
+     */
     private EquipmentService equipmentService;
 
     public UpdateEquipMsgTask(EquipmentService equipmentService) {
@@ -24,7 +27,7 @@ public class UpdateEquipMsgTask implements Runnable {
 
     @Override
     public void run() {
-        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRolename_Role();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRoleNameRole();
 
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
 

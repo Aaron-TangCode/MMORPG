@@ -1,13 +1,13 @@
 package com.game.backpack.bean;
 
 /**
- * @ClassName Type
+ * @ClassName GoodsType
  * @Description 商品种类
  * @Author DELL
  * @Date 2019/6/17 18:29
  * @Version 1.0
  */
-public class Type {
+public class GoodsType {
     /**
      * 类型唯一id
      */
