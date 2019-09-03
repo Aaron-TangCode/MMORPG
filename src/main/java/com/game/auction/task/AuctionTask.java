@@ -57,15 +57,12 @@ public class AuctionTask implements  Runnable{
         //把物品给购买者
         backpackHandler.getGoods(buyer,auction.getGoodsName());
 
-        //更新生产者的钱
-        Integer money = sellRole.getMoney();
-        Integer price = auction.getPrice();
-        sellRole.setMoney(money+price);
-        roleService.updateRole(sellRole);
         //移除任务
         sellRole.getQueue().remove();
         //返回信息
         if(buyer.equals(seller)){
+            //删除竞拍数据
+            auctionService.deleteAuction(this.auction.getId());
             String content = "物品没人购买，已退回";
             MsgAuctionInfoProto.ResponseAuctionInfo info = MsgAuctionInfoProto.ResponseAuctionInfo.newBuilder()
                     .setType(MsgAuctionInfoProto.RequestType.BIDDING)
@@ -73,6 +70,14 @@ public class AuctionTask implements  Runnable{
                     .build();
             sellRole.getChannel().writeAndFlush(info);
         }else{
+            //删除竞拍数据
+            auctionService.deleteAuction(this.auction.getId());
+            //更新生产者的钱
+            Integer money = sellRole.getMoney();
+            Integer price = auction.getPrice();
+            sellRole.setMoney(money+price);
+            roleService.updateRole(sellRole);
+
             String buyContent = "成功拍到物品："+auction.getGoodsName();
             String sellContent = "物品成功售出，获得金币："+price;
             MsgAuctionInfoProto.ResponseAuctionInfo buyInfo = MsgAuctionInfoProto.ResponseAuctionInfo.newBuilder()

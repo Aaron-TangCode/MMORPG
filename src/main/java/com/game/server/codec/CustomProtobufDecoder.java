@@ -54,8 +54,6 @@ public class CustomProtobufDecoder extends ByteToMessageDecoder {
             //反序列化
             MessageLite result = decodeBody(dataType, array, offset, readableLen);
             out.add(result);
-
-
         }
     }
 

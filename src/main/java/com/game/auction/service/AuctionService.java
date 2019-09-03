@@ -237,6 +237,9 @@ public class AuctionService {
         String oldBuyer = auction.getBuyer();
         //设置新的竞拍者
         auction.setBuyer(buyRole.getName());
+        //更新新购买者的金币
+        Integer money2 = buyRole.getMoney();
+        buyRole.setMoney(money2-Integer.parseInt(money));
         //校验价格
         if(Integer.parseInt(money)<=oldMoney){
             return "你的竞拍价格需要高于目前价格";
@@ -252,6 +255,7 @@ public class AuctionService {
             oldRole.setMoney(oldRole.getMoney()+oldMoney);
             roleService.updateRole(oldRole);
 
+            roleService.updateRole(buyRole);
             String content = "你的竞拍的物品："+auction.getGoodsName()+"竞拍价格没"+buyRole.getName()+"高,你之前的竞拍金币已退回";
             MsgAuctionInfoProto.ResponseAuctionInfo auctionInfo = MsgAuctionInfoProto.ResponseAuctionInfo.newBuilder()
                     .setType(MsgAuctionInfoProto.RequestType.BIDDING)
@@ -334,7 +338,7 @@ public class AuctionService {
                         }
 
                     },
-                    60L,5L, TimeUnit.SECONDS);
+                    60L,60L, TimeUnit.SECONDS);
             return  "【竞拍模式】:成功发布物品"+goods.getName();
         }
     }
