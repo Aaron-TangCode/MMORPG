@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.backpack.mapper.BackPack2Mapper">
+    <select id="getGoodsEntityByRoleId" resultType="com.game.backpack.bean.GoodsEntity">
+        select * from backpack2 where roleId=#{roleId}
+    </select>
+
+    <select id="getGoodsEntity" resultType="com.game.backpack.bean.GoodsEntity">
+        select * from backpack2
+    </select>
+    <!--保存：插入或更新-->
+    <insert id="saveGoodsInfo" parameterType="com.game.backpack.bean.GoodsEntity" useGeneratedKeys="true"
+    keyProperty="roleId" keyColumn="roleId">
+        insert into backpack2 values
+        (#{roleId},#{goodsBag})
+        ON DUPLICATE KEY UPDATE
+        goodsBag = #{goodsBag}
+    </insert>
+</mapper>

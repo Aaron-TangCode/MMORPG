@@ -1,7 +1,7 @@
 package com.game.role.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.service.BackpackService;
 import com.game.event.beanevent.GoodsEvent;
 import com.game.event.manager.EventMap;
@@ -221,9 +221,9 @@ public class RoleService {
         //获取角色
         ConcreteRole role = CacheUtils.getMapRoleNameRole().get(tmpRole.getName());
         //获取角色的物品列表
-        List<Goods> goodsList = backpackService.getGoodsByRoleId(role.getId());
+        List<GoodsResource> goodsList = backpackService.getGoodsByRoleId(role.getId());
         //获取角色的具体物品
-        Goods goods = getGoods(goodsList,goodsName);
+        GoodsResource goods = getGoods(goodsList,goodsName);
         //判断物品是否存在
         boolean isExisted = checkGoodsIsExist(goods);
         //判断物品的功能、使用物品
@@ -253,8 +253,8 @@ public class RoleService {
      * @param goodsName 物品名称
      * @return 物品
      */
-    private Goods getGoods(List<Goods> goodsList, String goodsName) {
-        Goods goods = null;
+    private GoodsResource getGoods(List<GoodsResource> goodsList, String goodsName) {
+        GoodsResource goods = null;
         for (int i = 0; i < goodsList.size(); i++) {
             if(goodsList.get(i).getName().equals(goodsName)){
                 goods = goodsList.get(i);
@@ -267,7 +267,7 @@ public class RoleService {
      * @param goods 物品
      * @return true or false
      */
-    private boolean checkGoodsIsExist(Goods goods) {
+    private boolean checkGoodsIsExist(GoodsResource goods) {
         if(goods==null||goods.getCount()<=0){
             return false;
         }
@@ -280,14 +280,14 @@ public class RoleService {
      * @param isExisted true or false
      * @return 协议信息
      */
-    private String checkAndUseGoodsFunction(ConcreteRole role,Goods goods,boolean isExisted) {
+    private String checkAndUseGoodsFunction(ConcreteRole role, GoodsResource goods, boolean isExisted) {
         if(isExisted){
             //检查物品的类型
             Integer type = goods.getType();
             if(type>1){
                 return "无法使用该物品,该物品既不是血包，也不是蓝包";
             }
-            Goods localGoods = CacheUtils.getGoodsMap().get(goods.getName());
+            GoodsResource localGoods = CacheUtils.getGoodsMap().get(goods.getName());
             //检查物品是血包，还是蓝包（0：血包；1：蓝包）
             if(localGoods.getType()==0){
                 //检查角色的血是否已满

@@ -1,6 +1,6 @@
 package com.game.utils;
 
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.bean.GoodsType;
 import com.game.buff.bean.ConcreteBuff;
 import com.game.map.bean.ConcreteMap;
@@ -68,7 +68,7 @@ public class CacheUtils {
      * key:name
      * value:goods
      */
-    private static volatile Map<String, Goods> goodsMap = null;
+    private static volatile Map<String, GoodsResource> goodsMap = null;
     /**
      * key:技能id
      * value:ConcreteSkill
@@ -92,10 +92,21 @@ public class CacheUtils {
 
 
 
-    private static volatile List<Goods> goodsList = null;
+    private static volatile List<GoodsResource> goodsList = null;
 
+    private static volatile Map<Integer,ConcreteMap> mapMap = null;
 
-    public static List<Goods> getGoodsList(){
+    public static  Map<Integer,ConcreteMap> getMapMap(){
+        if(mapMap ==null){
+            synchronized (CacheUtils.class){
+                if(mapMap ==null){
+                    mapMap = new HashMap<>();
+                }
+            }
+        }
+        return mapMap;
+    }
+    public static List<GoodsResource> getGoodsList(){
         if(goodsList==null){
             synchronized (CacheUtils.class){
                 if(goodsList==null){
@@ -134,7 +145,7 @@ public class CacheUtils {
      * 物品类型map
      * @return
      */
-    public static Map<String, Goods> getGoodsMap(){
+    public static Map<String, GoodsResource> getGoodsMap(){
         if(goodsMap==null){
             synchronized (CacheUtils.class){
                 if(goodsMap==null){

@@ -121,6 +121,9 @@ public class DuplicateService {
         roleList.add(role);
         //初始化角色
         String content = initRole(roleList,null,mapName,null);
+
+
+
         return MsgBossInfoProto.ResponseBossInfo.newBuilder()
                 .setContent(content)
                 .setType(MsgBossInfoProto.RequestType.ENTERDUPLICATE)
@@ -140,16 +143,12 @@ public class DuplicateService {
         ConcreteRole captain = CacheUtils.getMapRoleNameRole().get(tmpCaptain.getName());
         //移动
         mapService.moveTo(captain.getName(),mapName);
-
-
         //获取地图id
         int mapId = captain.getConcreteMap().getId();
         //获取临时地图
         ConcreteMap tmpMap = mapService.getMap(mapId);
-
         //新副本
         ConcreteMap map = new ConcreteMap(tmpMap);
-
         //把角色添加到新副本
         for(ConcreteRole role:roleList){
             String roleName = role.getName();
@@ -348,6 +347,9 @@ public class DuplicateService {
         teamMap.put(teamName,roleList);
         //content
         String content = role.getName()+"成功创建队伍:"+teamName;
+
+
+
         return MsgBossInfoProto.ResponseBossInfo.newBuilder()
                 .setType(MsgBossInfoProto.RequestType.CREATETEAM)
                 .setContent(content)
@@ -372,6 +374,8 @@ public class DuplicateService {
         roleList.add(role);
         //content
         String content = role.getName()+"成功加入队伍:"+teamName;
+
+
         return MsgBossInfoProto.ResponseBossInfo.newBuilder()
                 .setType(MsgBossInfoProto.RequestType.JOINTEAM)
                 .setContent(content)
@@ -395,6 +399,8 @@ public class DuplicateService {
         roleList.remove(role);
         //content
         String content = role.getName()+"成功离开队伍:"+teamName;
+
+
         return MsgBossInfoProto.ResponseBossInfo.newBuilder()
                 .setType(MsgBossInfoProto.RequestType.EXITTEAM)
                 .setContent(content)
@@ -427,6 +433,8 @@ public class DuplicateService {
         }else{
             content = role.getName()+"不是队长，无法解散队伍";
         }
+
+
         //return
         return MsgBossInfoProto.ResponseBossInfo.newBuilder()
                 .setType(MsgBossInfoProto.RequestType.DISMISSTEAM)
@@ -454,6 +462,7 @@ public class DuplicateService {
             }
             content.append("\n");
         }
+
         //return
         return MsgBossInfoProto.ResponseBossInfo.newBuilder()
                 .setType(MsgBossInfoProto.RequestType.QUERYTEAM)

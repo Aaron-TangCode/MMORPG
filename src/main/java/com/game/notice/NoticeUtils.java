@@ -1,13 +1,12 @@
 package com.game.notice;
 
+import com.game.map.bean.ConcreteMap;
 import com.game.npc.bean.ConcreteMonster;
 import com.game.protobuf.protoc.MsgSkillInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.utils.CacheUtils;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @ClassName NoticeUtils
@@ -26,34 +25,31 @@ public class NoticeUtils {
         //通知该场景下的所有玩家
         int mapId = 0;
         for (int i = 0; i < CacheUtils.getMonsterMapMappingList().size(); i++) {
+            //怪兽id
             int mid = CacheUtils.getMonsterMapMappingList().get(i).getMonsterId();
             if(mid==monster.getId()){
+                //地图
                mapId = CacheUtils.getMonsterMapMappingList().get(i).getMapId();
                break;
             }
         }
-        //通过mapId找到该场景下的所有玩家
-        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRoleNameRole();
-        Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
-        Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
-        while(iterator.hasNext()){
-            Map.Entry<String, ConcreteRole> name = iterator.next();
-            //所有玩家的地图id
-            int id = name.getValue().getConcreteMap().getId();
-            //id匹配，通知玩家
-            if(mapId==id){
-                //content
-                String msg = monster.getName()+"状态:"+monster.getState();
-                //获取角色
-                ConcreteRole role = name.getValue();
-                //玩家收到通知
+        //获取地图
+        ConcreteMap map = CacheUtils.getMapMap().get(mapId);
+        //获取角色
+        List<ConcreteRole> roleList = map.getRoleList();
+        if(roleList==null){
+            return;
+        }
+        //遍历
+        for (int i = 0; i < roleList.size(); i++) {
+            String msg = monster.getName()+"状态:"+monster.getState();
+            //玩家收到通知
                 MsgSkillInfoProto.ResponseSkillInfo responseSkillInfo = MsgSkillInfoProto.ResponseSkillInfo.newBuilder()
                         .setContent(msg)
                         .setType(MsgSkillInfoProto.RequestType.USESKILL)
                         .build();
                 //发送消息
-                role.getChannel().writeAndFlush(responseSkillInfo);
-            }
+                roleList.get(i).getChannel().writeAndFlush(responseSkillInfo);
         }
     }
 

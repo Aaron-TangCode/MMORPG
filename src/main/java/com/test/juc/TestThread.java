@@ -12,7 +12,9 @@ public class TestThread {
     public static void main(String[] args) {
         MyThread r = new MyThread();
         Thread t1 = new Thread(r);
+        t1.setPriority(8);
         t1.start();
+        t1.setPriority(1);
         t1.start();
     }
 }

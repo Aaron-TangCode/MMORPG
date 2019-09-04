@@ -1,6 +1,6 @@
 package com.game.backpack.task;
 
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.mapper.BackpackMapper;
 import com.game.utils.SqlUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -16,8 +16,8 @@ public class BackpackInsertTask implements Runnable {
     /**
      * 物品
      */
-    private Goods goods;
-    public BackpackInsertTask(Goods goods){
+    private GoodsResource goods;
+    public BackpackInsertTask(GoodsResource goods){
         this.goods = goods;
     }
     @Override

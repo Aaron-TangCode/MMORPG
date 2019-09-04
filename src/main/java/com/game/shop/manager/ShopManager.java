@@ -1,7 +1,7 @@
 package com.game.shop.manager;
 
 import com.game.annotation.ExcelAnnotation;
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import com.game.utils.CacheUtils;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +23,8 @@ public class ShopManager {
     /**
      * 商店缓存map
      */
-    private static volatile Map<String,Goods> shopMap = null;
-    public static Map<String,Goods> getShopMap(){
+    private static volatile Map<String, GoodsResource> shopMap = null;
+    public static Map<String, GoodsResource> getShopMap(){
         if(shopMap==null){
             synchronized (ShopManager.class){
                 if (shopMap==null){
@@ -40,12 +40,12 @@ public class ShopManager {
      */
     @ExcelAnnotation
     public void init(){
-        Map<String,Goods> map = getShopMap();
-        Set<Map.Entry<String, Goods>> entrySet = CacheUtils.getGoodsMap().entrySet();
-        Iterator<Map.Entry<String, Goods>> iterator = entrySet.iterator();
+        Map<String, GoodsResource> map = getShopMap();
+        Set<Map.Entry<String, GoodsResource>> entrySet = CacheUtils.getGoodsMap().entrySet();
+        Iterator<Map.Entry<String, GoodsResource>> iterator = entrySet.iterator();
         //遍历注入值
         while (iterator.hasNext()) {
-            Map.Entry<String, Goods> next = iterator.next();
+            Map.Entry<String, GoodsResource> next = iterator.next();
             map.put(next.getKey(),next.getValue());
         }
     }

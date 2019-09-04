@@ -6,13 +6,13 @@ import com.game.property.bean.PropertyType;
 import java.util.Map;
 
 /**
- * @ClassName Goods
+ * @ClassName GoodsResource
  * @Description 商品实体类
  * @Author DELL
  * @Date 2019/6/17 15:10
  * @Version 1.0
  */
-public class Goods {
+public class GoodsResource {
     /**
      * 商品唯一id
      */

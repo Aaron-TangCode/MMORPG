@@ -112,18 +112,22 @@ public class MapService {
         //获取角色的原地点
         String src = concreteMap.getName();
         //获取源地点和目的地点的id
-        int src_id = getMapIdByMapName(src);
-        int dest_id = getMapIdByMapName(dest);
+        int srcId = getMapIdByMapName(src);
+        int destId = getMapIdByMapName(dest);
         //判断是否可达
-        boolean isAccess = CacheUtils.isReach(src_id,dest_id);
+        boolean isAccess = CacheUtils.isReach(srcId,destId);
         String content = null;
         if(isAccess){
             //激活buff
             buffHandle(role,dest);
+            //添加role到map
+            addRole2Map(role,destId);
+            //从map移除role
+            rmRoleFromMap(role,srcId);
             //从src移动到dest,更新数据库
-            roleService.updateMap(role.getName(),dest_id);
+            roleService.updateMap(role.getName(),destId);
             role.getConcreteMap().setName(dest);
-            role.getConcreteMap().setId(dest_id);
+            role.getConcreteMap().setId(destId);
             //更新本地缓存
             CacheUtils.getMapRoleNameRole().put(role.getName(),role);
              content =  role.getName()+"从"+src+"移动到"+dest;
@@ -134,6 +138,25 @@ public class MapService {
                 .setType(MsgMapInfoProto.RequestType.MOVE)
                 .setContent(content)
                 .build();
+    }
+
+    private void rmRoleFromMap(ConcreteRole role, int srcId) {
+        //获取地图
+        ConcreteMap map = CacheUtils.getMapMap().get(srcId);
+        //移除role
+        map.getRoleList().remove(role);
+    }
+
+    /**
+     * 添加role到map
+     * @param role
+     * @param destId
+     */
+    private void addRole2Map(ConcreteRole role,int destId) {
+        //获取地图
+        ConcreteMap map = CacheUtils.getMapMap().get(destId);
+        //添加role
+        map.getRoleList().add(role);
     }
 
     /**
@@ -205,15 +228,19 @@ public class MapService {
         //获取角色的原地点
         String src = role.getConcreteMap().getName();
         //获取源地点和目的地点的id
-        int src_id = getMapIdByMapName(src);
-        int dest_id = getMapIdByMapName(dest);
+        int srcId = getMapIdByMapName(src);
+        int destId = getMapIdByMapName(dest);
         //判断是否可达
-        boolean isAccess = CacheUtils.isReach(src_id,dest_id);
+        boolean isAccess = CacheUtils.isReach(srcId,destId);
         if(isAccess){
             //从src移动到dest,更新数据库
-            roleService.updateMap(role.getName(),dest_id);
+            roleService.updateMap(role.getName(),destId);
             role.getConcreteMap().setName(dest);
-            role.getConcreteMap().setId(dest_id);
+            role.getConcreteMap().setId(destId);
+            //添加role到map
+            addRole2Map(role,destId);
+            //从map移除role
+            rmRoleFromMap(role,srcId);
             //更新本地缓存
             CacheUtils.getMapRoleNameRole().put(roleName,role);
             return role.getName()+"从"+src+"移动到"+dest;

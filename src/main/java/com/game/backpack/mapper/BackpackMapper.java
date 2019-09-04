@@ -1,6 +1,6 @@
 package com.game.backpack.mapper;
 
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,13 +18,13 @@ public interface BackpackMapper {
      * @param roleId
      * @return
      */
-    public List<Goods> getGoodsByRoleId(int roleId);
+    public List<GoodsResource> getGoodsByRoleId(int roleId);
 
     /**
      * 增加物品
      * @param newGoods
      */
-    public void insertGoods(Goods newGoods);
+    public void insertGoods(GoodsResource newGoods);
 
     /**
      * 更新物品（加）
@@ -50,5 +50,5 @@ public interface BackpackMapper {
      * @param roleId
      * @return
      */
-    public Goods getGoodsById(int roleId);
+    public GoodsResource getGoodsById(int roleId);
 }

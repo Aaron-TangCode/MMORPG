@@ -1,5 +1,6 @@
 package com.game.user.service;
 
+import com.game.backpack.manager.LoadGoodsData;
 import com.game.property.manager.InjectProperty;
 import com.game.protobuf.message.ContentType;
 import com.game.protobuf.message.ResultCode;
@@ -24,6 +25,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
+    @Autowired
+    private LoadGoodsData loadGoodsData;
     /**
      * 用户数据范文
      */
@@ -116,6 +119,8 @@ public class UserService {
 
             //初始化玩家数据
             initUserState(user.getId(), role, channel);
+            //注入物品信息
+            loadGoodsData.loadingGoodsData(role.getId());
             //注入属性
             injectProperty.initProperty(role.getName());
             // 成功消息返回

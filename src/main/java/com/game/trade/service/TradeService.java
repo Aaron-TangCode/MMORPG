@@ -1,6 +1,6 @@
 package com.game.trade.service;
 
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.handler.BackpackHandler;
 import com.game.event.beanevent.TradeEvent;
 import com.game.event.manager.EventMap;
@@ -125,7 +125,7 @@ public class TradeService {
         //买家
         ConcreteRole buyer = trade.getTo();
         //获取物品
-        Goods goods = CacheUtils.getGoodsMap().get(goodsName);
+        GoodsResource goods = CacheUtils.getGoodsMap().get(goodsName);
 
         boolean success = bigDeal(seller, buyer, goods);
         //内容
@@ -212,8 +212,8 @@ public class TradeService {
         ConcreteRole seller = getRoleByChannel(channel);
         ConcreteRole buyer = getRoleByRoleName(roleName2);
         //获取物品
-        Map<String, Goods> goodsMap = CacheUtils.getGoodsMap();
-        Goods goods = goodsMap.get(goodsName);
+        Map<String, GoodsResource> goodsMap = CacheUtils.getGoodsMap();
+        GoodsResource goods = goodsMap.get(goodsName);
         //交易物品
         boolean success = bigDeal(seller,buyer,goods);
         //交易完成
@@ -257,7 +257,7 @@ public class TradeService {
      * @param goods 物品
      * @return 消息
      */
-    private boolean bigDeal(ConcreteRole seller, ConcreteRole buyer, Goods goods) {
+    private boolean bigDeal(ConcreteRole seller, ConcreteRole buyer, GoodsResource goods) {
         try {
             //玩家1：物品减少，增加金币
             backpackHandler.discardGoods(seller.getName(),goods.getName());

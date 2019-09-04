@@ -1,6 +1,6 @@
 package com.game.shop.ShopService;
 
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.handler.BackpackHandler;
 import com.game.protobuf.protoc.MsgShopInfoProto;
 import com.game.role.bean.ConcreteRole;
@@ -43,7 +43,7 @@ public class ShopService {
         //goodsName
         String goodsName = requestShopInfo.getGoodsName();
         //从商店获取商品
-        Goods goods = ShopManager.getShopMap().get(goodsName);
+        GoodsResource goods = ShopManager.getShopMap().get(goodsName);
         //购物
         Integer money = role.getMoney();
         //物品价格

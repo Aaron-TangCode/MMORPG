@@ -1,6 +1,8 @@
 package com.game.backpack.service;
 
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsEntity;
+import com.game.backpack.bean.GoodsResource;
+import com.game.backpack.handler.BackpackHandler;
 import com.game.backpack.repository.BackpackRepository;
 import com.game.protobuf.protoc.MsgGoodsInfoProto;
 import com.game.role.bean.ConcreteRole;
@@ -33,12 +35,15 @@ public class BackpackService {
     @Autowired
     private BackpackRepository backpackRepository;
 
+    @Autowired
+    private BackpackHandler backpackHandler;
+
     /**
      * 通过角色id获取物品
      * @param roleId 角色id
      * @return 返回物品列表
      */
-    public List<Goods> getGoodsByRoleId(int roleId) {
+    public List<GoodsResource> getGoodsByRoleId(int roleId) {
         return backpackRepository.getGoodsByRoleId(roleId);
     }
 
@@ -46,7 +51,7 @@ public class BackpackService {
      * 插入物品
      * @param goods 物品
      */
-    public void insertGoods(Goods goods) {
+    public void insertGoods(GoodsResource goods) {
         backpackRepository.insertGoods(goods);
     }
 
@@ -73,7 +78,7 @@ public class BackpackService {
      * @param goodsId 物品id
      * @return 返回物品
      */
-    public Goods getGoodsById(String goodsId) {
+    public GoodsResource getGoodsById(String goodsId) {
         return backpackRepository.getGoodsById(goodsId);
     }
 
@@ -91,7 +96,8 @@ public class BackpackService {
         //获取物品名称
         String goodsName = requestGoodsInfo.getGoodsName();
         //逻辑处理
-        String content = handleGoods(goodsName,role);
+//        String content = handleGoods(goodsName,role);
+        String content = backpackHandler.getGoods(role.getName(),goodsName);
         //返回消息
         return MsgGoodsInfoProto.ResponseGoodsInfo.newBuilder()
                 .setType(MsgGoodsInfoProto.RequestType.GETGOODS)
@@ -129,11 +135,11 @@ public class BackpackService {
      */
     private String handleGoods(String goodsName, ConcreteRole role) {
         //在数据库查询，根据角色id查询是否具有物品
-        List<Goods> list = getGoodsByRoleId(role.getId());
+        List<GoodsResource> list = getGoodsByRoleId(role.getId());
         //找物品(数据库)
-        Goods goods_db =findGoods(list,goodsName);
+        GoodsResource goods_db =findGoods(list,goodsName);
         //找物品（本地缓存）
-        Goods goods_local = CacheUtils.getGoodsMap().get(goodsName);
+        GoodsResource goods_local = CacheUtils.getGoodsMap().get(goodsName);
         //更新本地的count信息
         if(goods_db!=null){
             goods_db.setRepeat(goods_local.getRepeat());
@@ -152,7 +158,7 @@ public class BackpackService {
      * @param role 角色
      * @return 字符串
      */
-    private String chooseWay(List<Goods> list,Goods goods,String goodsName,ConcreteRole role) {
+    private String chooseWay(List<GoodsResource> list, GoodsResource goods, String goodsName, ConcreteRole role) {
         //角色拥有物品的数量
         int existedGoods = list.size();
         //不存在或物品数量已满且背包未满，就增加
@@ -162,7 +168,7 @@ public class BackpackService {
 
         if(flag1){
             //在本地缓存拿装备的详细信息,在数据库中没信息，依赖roleName在本地缓存中查询
-            Goods localGoods = CacheUtils.getGoodsMap().get(goodsName);
+            GoodsResource localGoods = CacheUtils.getGoodsMap().get(goodsName);
             if(localGoods==null){
                 return "装备不存在本地缓存";
             }
@@ -185,8 +191,8 @@ public class BackpackService {
      * @param goodsName 物品名称
      * @return 物品
      */
-    private Goods findGoods(List<Goods> list,String goodsName) {
-        Goods goods = null;
+    private GoodsResource findGoods(List<GoodsResource> list, String goodsName) {
+        GoodsResource goods = null;
         //遍历物品
         for (int i = 0; i < list.size(); i++) {
             if(list.get(i).getName().equals(goodsName)){
@@ -224,11 +230,11 @@ public class BackpackService {
      */
     private String discardHandle(ConcreteRole role, String goodsName) {
         //在数据库查询，根据角色id查询是否具有物品
-        List<Goods> list = getGoodsByRoleId(role.getId());
+        List<GoodsResource> list = getGoodsByRoleId(role.getId());
         //找物品(数据库)
-        Goods goods_db =findGoods(list,goodsName);
+        GoodsResource goods_db =findGoods(list,goodsName);
         //找物品（本地缓存）
-        Goods goods_local = CacheUtils.getGoodsMap().get(goodsName);
+        GoodsResource goods_local = CacheUtils.getGoodsMap().get(goodsName);
         //更新本地的count信息
         if(goods_db!=null){
             goods_db.setRepeat(goods_local.getRepeat());
@@ -246,7 +252,7 @@ public class BackpackService {
      * @param role 角色
      * @return 消息
      */
-    private String discardWay(Goods goods, String goodsName, ConcreteRole role) {
+    private String discardWay(GoodsResource goods, String goodsName, ConcreteRole role) {
         //物品数量-1
         updateGoodsByRoleIdDel(role.getId(),goods.getId());
         return role.getName()+"的"+goodsName+"数量-1";
@@ -260,10 +266,10 @@ public class BackpackService {
      */
     public MsgGoodsInfoProto.ResponseGoodsInfo showGoods(Channel channel, MsgGoodsInfoProto.RequestGoodsInfo requestGoodsInfo) {
         ConcreteRole role = getRole(channel);
-        List<Goods> goodsList = backpackRepository.getGoodsByRoleId(role.getId());
+        List<GoodsResource> goodsList = backpackRepository.getGoodsByRoleId(role.getId());
         StringBuilder content = new StringBuilder();
         for (int i = 0; i < goodsList.size(); i++) {
-            Goods goods = goodsList.get(i);
+            GoodsResource goods = goodsList.get(i);
             if(goods.getCount()<=0){
                 continue;
             }
@@ -287,5 +293,21 @@ public class BackpackService {
         Integer useId = LocalUserMap.getChannelUserMap().get(channel);
         ConcreteRole role = LocalUserMap.getUserRoleMap().get(useId);
         return role;
+    }
+
+    /**
+     * 根据角色id获取物品
+     * @param roleId 角色id
+     * @return 物品
+     */
+    public GoodsEntity getGoodsEntityByRoleId(int roleId) {
+        return backpackRepository.getGoodsEntityByRoleId(roleId);
+    }
+
+    /**
+     * 保存物品信息
+     */
+    public void saveGoodsInfo(GoodsEntity goodsEntity) {
+        backpackRepository.saveGoodsInfo(goodsEntity);
     }
 }

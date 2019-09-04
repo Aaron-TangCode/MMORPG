@@ -2,7 +2,7 @@ package com.game.equipment.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.service.BackpackService;
 import com.game.equipment.bean.Equipment;
 import com.game.equipment.bean.EquipmentBox;
@@ -89,9 +89,9 @@ public class EquipmentService {
 //        }
 
         //获取玩家物品列表
-        List<Goods> goodsList = backpackService.getGoodsByRoleId(role.getId());
+        List<GoodsResource> goodsList = backpackService.getGoodsByRoleId(role.getId());
         //获取具体装备
-        Goods goods = handleEquipement(role,equipmentBox,goodsList,goodsName);
+        GoodsResource goods = handleEquipement(role,equipmentBox,goodsList,goodsName);
 
         if(goods==null){
             return MsgEquipInfoProto.ResponseEquipInfo.newBuilder()
@@ -115,7 +115,7 @@ public class EquipmentService {
      * @param goods
      * @param goodsList from db
      */
-    private void handleProperty(ConcreteRole role,Goods goods,List<Goods> goodsList) {
+    private void handleProperty(ConcreteRole role, GoodsResource goods, List<GoodsResource> goodsList) {
         //记录属性总值的临时变量
         Map<PropertyType, Integer> tmpTotalMap = role.getTotalMap();
         //属性模块发生变化
@@ -145,9 +145,9 @@ public class EquipmentService {
      * 注入商品
      * @param goods 商品
      */
-    private void injectGoods(Goods goods) {
+    private void injectGoods(GoodsResource goods) {
         //获取物品
-        Goods newGoods = CacheUtils.getGoodsMap().get(goods.getName());
+        GoodsResource newGoods = CacheUtils.getGoodsMap().get(goods.getName());
         //物品属性
         JSONObject jsonObject1 = newGoods.getProperty();
         //遍历物品，注入属性
@@ -172,8 +172,8 @@ public class EquipmentService {
      * @param goodsName 物品名称
      * @return 物品
      */
-    private Goods  handleEquipement(ConcreteRole role,EquipmentBox equipmentBox,List<Goods> goodsList,String goodsName) {
-        Goods goods = getGoods(goodsList,goodsName);
+    private GoodsResource handleEquipement(ConcreteRole role, EquipmentBox equipmentBox, List<GoodsResource> goodsList, String goodsName) {
+        GoodsResource goods = getGoods(goodsList,goodsName);
         if(goods==null){
             return goods;
         }
@@ -185,7 +185,7 @@ public class EquipmentService {
             //json转实体类
             Equipment equipment = JSON.parseObject(equipmentBox.getEquipmentBox(),Equipment.class);
             //返回被替换的装备
-            Goods goods1 = returnOldEquipmemt(eName,equipment);
+            GoodsResource goods1 = returnOldEquipmemt(eName,equipment);
             //设置新的装备栏（覆盖）
             JSON json = setEquipmentValueAndReturnJson(eName, equipment, goods);
             //把json设置在装备栏
@@ -193,7 +193,7 @@ public class EquipmentService {
             //更新装备栏
             updateEquipment(equipmentBox);
             if(goods1!=null){
-                Goods goods2 = CacheUtils.getGoodsMap().get(goods1.getName());
+                GoodsResource goods2 = CacheUtils.getGoodsMap().get(goods1.getName());
                 goods2.setRoleId(goods1.getRoleId());
                 //把被替换装备放回背包
                 backpackService.insertGoods(goods2);
@@ -222,7 +222,7 @@ public class EquipmentService {
      * @param equipment 装备
      * @return 物品
      */
-    private Goods returnOldEquipmemt(String eName,Equipment equipment) {
+    private GoodsResource returnOldEquipmemt(String eName, Equipment equipment) {
         String goodsId = null;
         switch (eName) {
             case "head":
@@ -277,15 +277,15 @@ public class EquipmentService {
      * @param role 角色
      * @param goods 物品
      */
-    private void changeProperty(ConcreteRole role,Goods goods,List<Goods> goodsList) {
+    private void changeProperty(ConcreteRole role, GoodsResource goods, List<GoodsResource> goodsList) {
         //获取装备栏
         EquipmentBox equipmentBox = role.getEquipmentBox();
         //Json转对象
         Equipment equipment = JSON.parseObject(equipmentBox.getEquipmentBox(),Equipment.class);
         //返回装备列表
-        List<Goods> list = InjectProperty.returnOwnEquipmentList(equipment, goodsList);
+        List<GoodsResource> list = InjectProperty.returnOwnEquipmentList(equipment, goodsList);
         //总值减去-装备属性=基础属性
-        for (Goods goods2 : list) {
+        for (GoodsResource goods2 : list) {
             //每一件装备的每一个属性
             for (Map.Entry<PropertyType,Integer>  entry:goods2.getPropertyMap().entrySet()) {
                 // 拿出玩家属性，加上装备属性，放回去
@@ -309,7 +309,7 @@ public class EquipmentService {
                 list.add(goods);
             }
         }
-        for (Goods goods2 : list) {
+        for (GoodsResource goods2 : list) {
             //每一件装备的每一个属性
             for (Map.Entry<PropertyType,Integer>  entry:goods2.getPropertyMap().entrySet()) {
                 // 拿出玩家属性，加上装备属性，放回去
@@ -333,7 +333,7 @@ public class EquipmentService {
      * @param goods 物品
      * @return json数据
      */
-    private JSON setEquipmentValueAndReturnJson(String eName,Equipment equipment,Goods goods) {
+    private JSON setEquipmentValueAndReturnJson(String eName, Equipment equipment, GoodsResource goods) {
         switch (eName){
             case "head":
                 equipment.setHead(String.valueOf(goods.getId()));
@@ -364,8 +364,8 @@ public class EquipmentService {
      * @param goodsName 物品名
      * @return 物品
      */
-    private Goods getGoods(List<Goods> goodsList, String goodsName) {
-        Goods goods = null;
+    private GoodsResource getGoods(List<GoodsResource> goodsList, String goodsName) {
+        GoodsResource goods = null;
         //遍历物品
         for (int i = 0; i < goodsList.size(); i++) {
             if(goodsList.get(i).getName().equals(goodsName)&&goodsList.get(i).getCount()>0){
@@ -420,31 +420,31 @@ public class EquipmentService {
         Equipment equipment = JSONObject.parseObject(equipmentBox, Equipment.class);
 
         //获取本地goods
-        Map<String, Goods> goodsMap = CacheUtils.getGoodsMap();
+        Map<String, GoodsResource> goodsMap = CacheUtils.getGoodsMap();
         //获取各种装备
         if(equipment.getHead()!=null){
-            Goods tmpHead = backpackService.getGoodsById(equipment.getHead());
-            Goods head = goodsMap.get(tmpHead.getName());
+            GoodsResource tmpHead = backpackService.getGoodsById(equipment.getHead());
+            GoodsResource head = goodsMap.get(tmpHead.getName());
             content.append("装备名称:\t"+head.getName()+"\t装备属性:\t"+head.getProperty()+"\n");
         }
         if(equipment.getClothes()!=null){
-            Goods tmpClothes = backpackService.getGoodsById(equipment.getClothes());
-            Goods clothes = goodsMap.get(tmpClothes.getName());
+            GoodsResource tmpClothes = backpackService.getGoodsById(equipment.getClothes());
+            GoodsResource clothes = goodsMap.get(tmpClothes.getName());
             content.append("装备名称:\t"+clothes.getName()+"\t装备属性:\t"+clothes.getProperty()+"\n");
         }
         if(equipment.getShoes()!=null){
-            Goods tmpShoes = backpackService.getGoodsById(equipment.getShoes());
-            Goods shoes = goodsMap.get(tmpShoes.getName());
+            GoodsResource tmpShoes = backpackService.getGoodsById(equipment.getShoes());
+            GoodsResource shoes = goodsMap.get(tmpShoes.getName());
             content.append("装备名称:\t"+shoes.getName()+"\t装备属性:\t"+shoes.getProperty()+"\n");
         }
         if(equipment.getWeapon()!=null){
-            Goods tmpWeapon = backpackService.getGoodsById(equipment.getWeapon());
-            Goods weapon = goodsMap.get(tmpWeapon.getName());
+            GoodsResource tmpWeapon = backpackService.getGoodsById(equipment.getWeapon());
+            GoodsResource weapon = goodsMap.get(tmpWeapon.getName());
             content.append("装备名称:\t"+weapon.getName()+"\t装备属性:\t"+weapon.getProperty()+"\n");
         }
         if(equipment.getPants()!=null){
-            Goods tmpPants = backpackService.getGoodsById(equipment.getPants());
-            Goods pants = goodsMap.get(tmpPants.getName());
+            GoodsResource tmpPants = backpackService.getGoodsById(equipment.getPants());
+            GoodsResource pants = goodsMap.get(tmpPants.getName());
             content.append("装备名称:\t"+pants.getName()+"\t装备属性:\t"+pants.getProperty()+"\n");
         }
 

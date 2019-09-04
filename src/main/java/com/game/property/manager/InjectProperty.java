@@ -2,7 +2,7 @@ package com.game.property.manager;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.service.BackpackService;
 import com.game.equipment.bean.Equipment;
 import com.game.equipment.bean.EquipmentBox;
@@ -116,12 +116,12 @@ public class InjectProperty {
             //获取装备
             Equipment equipment = JSON.parseObject(equipmentBox.getEquipmentBox(),Equipment.class);
             //数据格式："head":"1"--->装备类型：装备id
-            List<Goods> goodsList = backpackService.getGoodsByRoleId(role.getId());
+            List<GoodsResource> goodsList = backpackService.getGoodsByRoleId(role.getId());
 
-            List<Goods> ownEquipmentList = returnOwnEquipmentList(equipment, goodsList);
+            List<GoodsResource> ownEquipmentList = returnOwnEquipmentList(equipment, goodsList);
 
             //每一件装备
-            for (Goods goods : ownEquipmentList) {
+            for (GoodsResource goods : ownEquipmentList) {
                 //每一件装备的每一个属性
                 for (Map.Entry<PropertyType,Integer>  entry:goods.getPropertyMap().entrySet()) {
                     // 拿出玩家属性，加上装备属性，放回去
@@ -168,37 +168,37 @@ public class InjectProperty {
      * @param goodsList 物品列表
      * @return 物品列表
      */
-    public static List<Goods> returnOwnEquipmentList(Equipment equipment,List<Goods> goodsList) {
+    public static List<GoodsResource> returnOwnEquipmentList(Equipment equipment, List<GoodsResource> goodsList) {
         String clothes = equipment.getClothes();
         String head = equipment.getHead();
         String pants = equipment.getPants();
         String shoes = equipment.getShoes();
         String weapon = equipment.getWeapon();
-        List<Goods> ownEquipmentList = new ArrayList<>();
+        List<GoodsResource> ownEquipmentList = new ArrayList<>();
 
         //遍历装备栏的所有装备，并存在List列表
         for (int i = 0; i < goodsList.size(); i++) {
             if(head!=null&&head.equals(String.valueOf(goodsList.get(i).getId()))){
-                Goods goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
+                GoodsResource goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
                 ownEquipmentList.add(goods);
                 System.out.println(ownEquipmentList.size());
             }else if(clothes!=null&&clothes.equals(String.valueOf(goodsList.get(i).getId()))){
-                Goods goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
+                GoodsResource goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
                 ownEquipmentList.add(goods);
             }else if(pants!=null&&pants.equals(String.valueOf(goodsList.get(i).getId()))){
-                Goods goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
+                GoodsResource goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
                 ownEquipmentList.add(goods);
             }else if(shoes!=null&&shoes.equals(String.valueOf(goodsList.get(i).getId()))){
-                Goods goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
+                GoodsResource goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
                 ownEquipmentList.add(goods);
             }else if(weapon!=null&&weapon.equals(String.valueOf(goodsList.get(i).getId()))){
-                Goods goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
+                GoodsResource goods = CacheUtils.getGoodsMap().get(goodsList.get(i).getName());
                 ownEquipmentList.add(goods);
             }
         }
 
         //为ownEquipmentList的每一个goods对象注入propertyMap属性
-        List<Goods> list = CacheUtils.getGoodsList();
+        List<GoodsResource> list = CacheUtils.getGoodsList();
         for (int i = 0; i < ownEquipmentList.size(); i++) {
             if (ownEquipmentList.get(i).getName().equals(list.get(i).getName())) {
                 ownEquipmentList.get(i).setPropertyMap(list.get(i).getPropertyMap());

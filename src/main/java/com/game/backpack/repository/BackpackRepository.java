@@ -1,6 +1,12 @@
 package com.game.backpack.repository;
 
-import com.game.backpack.bean.Goods;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.game.backpack.bean.GoodsBag;
+import com.game.backpack.bean.GoodsEntity;
+import com.game.backpack.bean.GoodsResource;
+import com.game.backpack.mapper.BackPack2Mapper;
 import com.game.backpack.mapper.BackpackMapper;
 import com.game.backpack.task.BackpackUpdateTask;
 import com.game.utils.SqlUtils;
@@ -24,11 +30,11 @@ public class BackpackRepository {
      * @param roleId 角色id
      * @return
      */
-    public List<Goods> getGoodsByRoleId(int roleId) {
+    public List<GoodsResource> getGoodsByRoleId(int roleId) {
         SqlSession session = SqlUtils.getSession();
         try{
             BackpackMapper mapper = session.getMapper(BackpackMapper.class);
-            List<Goods> goods = mapper.getGoodsByRoleId(roleId);
+            List<GoodsResource> goods = mapper.getGoodsByRoleId(roleId);
             return goods;
         }finally {
             session.close();
@@ -39,7 +45,7 @@ public class BackpackRepository {
      * 增加物品
      * @param goods 物品
      */
-    public void insertGoods(Goods goods) {
+    public void insertGoods(GoodsResource goods) {
 //        BackpackInsertTask task = new BackpackInsertTask(goods);
 //        ThreadPoolUtils.getThreadPool().execute(task);
         SqlSession session = SqlUtils.getSession();
@@ -101,11 +107,60 @@ public class BackpackRepository {
      * @param goodsId 物品id
      * @return 返回物品
      */
-    public Goods getGoodsById(String goodsId) {
+    public GoodsResource getGoodsById(String goodsId) {
         SqlSession session = SqlUtils.getSession();
         try{
             BackpackMapper mapper = session.getMapper(BackpackMapper.class);
           return mapper.getGoodsById(Integer.parseInt(goodsId));
+        }finally {
+            session.close();
+        }
+    }
+
+    /**
+     * 根据角色id查询物品
+     * @param roleId 角色id
+     * @return 物品
+     */
+    public GoodsEntity getGoodsEntityByRoleId(int roleId) {
+        SqlSession session = SqlUtils.getSession();
+        try{
+            BackPack2Mapper mapper = session.getMapper(BackPack2Mapper.class);
+            return mapper.getGoodsEntityByRoleId(roleId);
+        }finally {
+            session.close();
+        }
+    }
+
+    /**
+     * 获取所有物品
+     * @return 物品
+     */
+    public List<GoodsEntity> getGoodsEntity() {
+        SqlSession session = SqlUtils.getSession();
+        try{
+            BackPack2Mapper mapper = session.getMapper(BackPack2Mapper.class);
+            return mapper.getGoodsEntity();
+        }finally {
+            session.close();
+        }
+    }
+    public static void main(String[] args) {
+        BackpackRepository backpackRepository = new BackpackRepository();
+        GoodsEntity goodsEntity = backpackRepository.getGoodsEntityByRoleId(4);
+        JSONArray array = JSON.parseArray(goodsEntity.getGoodsBag());
+
+        for (Object o : array) {
+            GoodsBag goodsBag = JSONObject.parseObject(o.toString(), GoodsBag.class);
+        }
+    }
+
+    public void saveGoodsInfo(GoodsEntity goodsEntity) {
+        SqlSession session = SqlUtils.getSession();
+        try{
+            BackPack2Mapper mapper = session.getMapper(BackPack2Mapper.class);
+            mapper.saveGoodsInfo(goodsEntity);
+            session.commit();
         }finally {
             session.close();
         }

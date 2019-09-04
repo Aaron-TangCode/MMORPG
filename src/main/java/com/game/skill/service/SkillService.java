@@ -1,6 +1,6 @@
 package com.game.skill.service;
 
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.service.BackpackService;
 import com.game.event.beanevent.MonsterDeadEvent;
 import com.game.event.manager.EventMap;
@@ -63,7 +63,7 @@ public class SkillService {
         //获取技能名称
         String skillName = requestSkillInfo.getSkillName();
         //判断角色有没有技能包
-        Goods consumeGoods = findGoods(role);
+        GoodsResource consumeGoods = findGoods(role);
         if(consumeGoods==null){
             //内容
             String content =  role.getName()+"没技能包";
@@ -92,7 +92,7 @@ public class SkillService {
      * @param consumeGoods 消耗物品
      * @return 消息
      */
-    private String handleSkill(ConcreteSkill skill,String skillName,ConcreteRole role,Goods consumeGoods) {
+    private String handleSkill(ConcreteSkill skill, String skillName, ConcreteRole role, GoodsResource consumeGoods) {
         if(skill!=null){
             //skill:1,2,3
             final String[] skills = skill.getId().split(",");
@@ -112,7 +112,7 @@ public class SkillService {
      * @param consumeGoods 消耗物品
      * @return 协议消息
      */
-    private String handleSkills(String[] skills, String skillName,ConcreteRole role,Goods consumeGoods) {
+    private String handleSkills(String[] skills, String skillName, ConcreteRole role, GoodsResource consumeGoods) {
         ConcreteSkill lowSkill = findSkill(skills,skillName);
         if(lowSkill!=null){
             //升级技能
@@ -129,7 +129,7 @@ public class SkillService {
      * @param consumeGoods 消耗物品
      * @return 协议消息
      */
-    private String upSkill(ConcreteSkill lowSkill,ConcreteRole role,String skillName,Goods consumeGoods) {
+    private String upSkill(ConcreteSkill lowSkill, ConcreteRole role, String skillName, GoodsResource consumeGoods) {
         if(lowSkill.getLevel()==2){
             return role.getName()+"的"+skillName+"技能等级已满";
         }
@@ -178,9 +178,9 @@ public class SkillService {
      * @param role role
      * @return goods
      */
-    private Goods findGoods(ConcreteRole role) {
-        List<Goods> goods = backpackService.getGoodsByRoleId(role.getId());
-        Goods consumeGoods = null;
+    private GoodsResource findGoods(ConcreteRole role) {
+        List<GoodsResource> goods = backpackService.getGoodsByRoleId(role.getId());
+        GoodsResource consumeGoods = null;
         for (int i = 0; i < goods.size(); i++) {
             if (goods.get(i).getName().equals("技能包")) {
                 consumeGoods = goods.get(i);
@@ -491,7 +491,7 @@ public class SkillService {
     }
 
     public void falldownEquip(ConcreteRole localRole) {
-        List<Goods> goodsList = CacheUtils.getGoodsList();
+        List<GoodsResource> goodsList = CacheUtils.getGoodsList();
         //掉落装备数量
         int num = (int)((Math.random())*goodsList.size()+1);
 
@@ -499,7 +499,7 @@ public class SkillService {
             //掉落装备id
             int goodsId = (int)(Math.random()*goodsList.size());
             //获取装备
-            Goods goods = goodsList.get(goodsId);
+            GoodsResource goods = goodsList.get(goodsId);
 
             //拾取装备
             backpackService.getGoods(localRole.getChannel(),goods.getName());

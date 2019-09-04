@@ -73,7 +73,30 @@ public class RankService {
      * @return 协议信息
      */
     public MsgRankInfoProto.ResponseRankInfo insertRankInfo(Channel channel, MsgRankInfoProto.RequestRankInfo requestRankInfo) {
-        return null;
+        //获取role
+        ConcreteRole role = getRole(channel);
+        //添加到本地缓存
+        int[] ranks = RankManager.getRanks();
+        RankBean[] rankBeans = RankManager.getRankBeans();
+        //插入role
+//        rankBeans[role.getAttack()] = role;
+        //根据战力（攻击力），插入排行榜
+        Integer attack = role.getAttack();
+        //获取当前排名
+        int index = RankManager.getIndex();
+        //判断attack位置有没有元素,0:没元素；非0：有元素，向滑动一位
+        if(ranks[attack]==0){
+            ranks[attack] = index++;
+        }else{
+            if(attack-1>=0){
+                ranks[attack-1] = index++;
+            }
+        }
+        //新建
+        return MsgRankInfoProto.ResponseRankInfo.newBuilder()
+                .setType(MsgRankInfoProto.RequestType.INSERTRANK)
+                .setContent("成功插入排行榜")
+                .build();
     }
 
     /**

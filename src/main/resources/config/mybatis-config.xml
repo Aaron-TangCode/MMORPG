@@ -31,5 +31,6 @@
         <mapper resource="mapper/TaskMapper.xml"/>
         <mapper resource="mapper/RankMapper.xml"/>
         <mapper resource="mapper/TeamMapper.xml"/>
+        <mapper resource="mapper/Backpack2Mapper.xml"/>
     </mappers>
 </configuration>

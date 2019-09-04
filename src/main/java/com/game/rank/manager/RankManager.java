@@ -27,7 +27,7 @@ public class RankManager {
     //排名数组：位置s是战斗力，rank[s]是排名
     private static RankBean[] rankBeans = new RankBean[10000];
     private static int[] ranks = new int[10000];
-
+    private static int index = 1;
     private RankManager(){}
 
     public static RankBean[] getRankBeans(){
@@ -36,6 +36,11 @@ public class RankManager {
     public static int[] getRanks(){
         return ranks;
     }
+
+    public static int getIndex() {
+        return index;
+    }
+
     @ExcelAnnotation
     public void initData(){
         //查询数据
@@ -50,9 +55,9 @@ public class RankManager {
             ranks[rankBean.getComat()] = -1;
         }
         //排名
-        for (int i = ranks.length - 1,j = 1; i >= 0; i--) {
+        for (int i = ranks.length - 1; i >= 0; i--) {
             if(ranks[i]==-1){
-                ranks[i] = j++;
+                ranks[i] = index++;
             }
         }
     }

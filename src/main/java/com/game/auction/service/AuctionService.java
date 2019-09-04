@@ -3,7 +3,7 @@ package com.game.auction.service;
 import com.game.auction.bean.Auction;
 import com.game.auction.repository.AuctionRepository;
 import com.game.auction.task.AuctionTask;
-import com.game.backpack.bean.Goods;
+import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.handler.BackpackHandler;
 import com.game.backpack.service.BackpackService;
 import com.game.map.threadpool.TaskQueue;
@@ -160,7 +160,7 @@ public class AuctionService {
         //isNow
         String isNow = requestAuctionInfo.getIsNow();
         //获取商品
-        Goods goods = getGoods(role.getId(),goodsName);
+        GoodsResource goods = getGoods(role.getId(),goodsName);
         //发布商品
         String content = publishGoods(role,goods,number,money,isNow);
         return MsgAuctionInfoProto.ResponseAuctionInfo.newBuilder()
@@ -274,10 +274,10 @@ public class AuctionService {
      * @param goodsName 物品名称
      * @return 返回物品
      */
-    private Goods getGoods(int roleId,String goodsName) {
-        Goods goods = null;
+    private GoodsResource getGoods(int roleId, String goodsName) {
+        GoodsResource goods = null;
         //获取物品列表
-        List<Goods> goodsList = backpackService.getGoodsByRoleId(roleId);
+        List<GoodsResource> goodsList = backpackService.getGoodsByRoleId(roleId);
         //遍历列表，找出具体物品
         for (int i = 0; i < goodsList.size(); i++) {
             if (goodsList.get(i).getName().equals(goodsName)) {
@@ -295,7 +295,7 @@ public class AuctionService {
      * @param price 价格
      * @param isNow true:一口价模式、false:竞拍模式
      */
-    private String publishGoods(ConcreteRole role, Goods goods, String number, String price, String isNow) {
+    private String publishGoods(ConcreteRole role, GoodsResource goods, String number, String price, String isNow) {
         //创建竞拍
         Auction auction = new Auction();
         //注入数据

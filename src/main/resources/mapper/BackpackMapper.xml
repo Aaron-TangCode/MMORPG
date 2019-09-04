@@ -4,15 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.game.backpack.mapper.BackpackMapper">
 <!--    通过id查找goods-->
-    <select id="getGoodsById" resultType="com.game.backpack.bean.Goods">
+    <select id="getGoodsById" resultType="com.game.backpack.bean.GoodsResource">
         select id,name,count,role_id,type from backpack where id=#{id}
     </select>
 <!--    通过角色id找物品-->
-    <select id="getGoodsByRoleId" resultType="com.game.backpack.bean.Goods">
+    <select id="getGoodsByRoleId" resultType="com.game.backpack.bean.GoodsResource">
         select id,name,count,role_id,type from backpack where role_id=#{roleId}
     </select>
 <!--增加物品-->
-    <insert id="insertGoods" parameterType="com.game.backpack.bean.Goods">
+    <insert id="insertGoods" parameterType="com.game.backpack.bean.GoodsResource">
         insert into backpack(name,count,role_id,type) values(#{name},#{count},#{roleId},#{type})
     </insert>
 <!--    更新物品数量(加)-->
