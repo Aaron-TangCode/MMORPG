@@ -2,9 +2,12 @@ package com.game.buff.handler;
 
 import com.game.buff.bean.ConcreteBuff;
 import com.game.buff.manager.BuffManager;
+import com.game.buff.manager.IBuff;
 import com.game.role.bean.ConcreteRole;
 
-import static com.game.buff.handler.BuffType.*;
+import java.util.Map;
+
+import static com.game.buff.handler.BuffType.getBuffType;
 
 /**
  * @ClassName BuffTask
@@ -30,18 +33,15 @@ public class BuffTask implements Runnable {
     public void run() {
         //获取buff名字
         String name = buff.getName();
-        switch (name){
-            case RED :
-                BuffManager.redBuff(buff,role);
-                break;
-            case BLUE :
-                BuffManager.blueBuff(buff,role);
-                break;
-            case DEFEND:
-                BuffManager.defendBuff(buff,role);
-                break;
-                default:
-                    break;
-        }
+        //获取buff类型
+        BuffType buffType = getBuffType(name);
+        //map
+        Map<BuffType, IBuff> buffTypeIBuffMap = BuffManager.getiBuffMap();
+        //iBuff
+        IBuff iBuff = buffTypeIBuffMap.get(buffType);
+        //获取buffManager
+        BuffManager buffManager = new BuffManager(iBuff);
+        //执行buff
+        buffManager.execBuff(buff,role);
     }
 }

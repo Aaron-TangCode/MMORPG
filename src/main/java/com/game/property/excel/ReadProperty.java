@@ -27,7 +27,7 @@ public class ReadProperty {
     /**
      * 文件路径
      */
-	private static final String FILEPATH = "src/main/resources/excel/property.xls";
+	private static final String FILEPATH = "src/main/resources/excel/Property.xls";
 
     /**
      * 读取excel

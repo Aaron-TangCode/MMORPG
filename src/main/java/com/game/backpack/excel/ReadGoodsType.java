@@ -19,7 +19,7 @@ import java.io.InputStream;
 @ExcelAnnotation
 @Component
 public class ReadGoodsType {
-	private static final String FILEPATH = "src/main/resources/excel/goods_type.xls";
+	private static final String FILEPATH = "src/main/resources/excel/GoodsType.xls";
 
     /**
      * 读取excel

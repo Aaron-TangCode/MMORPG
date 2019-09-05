@@ -14,8 +14,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
-import static com.game.buff.handler.BuffType.*;
-
 /**
  * @ClassName BuffController
  * @Description buff控制器
@@ -34,26 +32,11 @@ public class BuffHandler {
         //获取角色
         ConcreteRole role = CacheUtils.getMapRoleNameRole().get(roleName);
         //获取本地buff
-        Map<String, ConcreteBuff> buffMap = CacheUtils.getBuffMap();
+        Map<BuffType, ConcreteBuff> buffMap = CacheUtils.getBuffMap();
         ConcreteBuff buff = null;
         //选择Buff
-        switch (buffName) {
-            case RED :
-                buff = buffMap.get("REDBUFF");
-                break;
-            case BLUE:
-                buff = buffMap.get("BLUEBUFF");
-                break;
-            case DEFEND :
-                buff = buffMap.get("DEFENDBUFF");
-                break;
-            case ATTACK :
-                buff = buffMap.get("ATTACKBUFF");
-                break;
-                default:
-                    buff = new ConcreteBuff();
-                    break;
-        }
+        BuffType buffType = BuffType.getBuffType(buffName);
+        buff = buffMap.get(buffType);
         //任务队列
         Queue<Runnable> queue = null;
         //任务map

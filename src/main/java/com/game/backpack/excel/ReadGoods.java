@@ -23,7 +23,7 @@ import java.util.*;
 @ExcelAnnotation
 @Component
 public class ReadGoods {
-	private static final String FILEPATH = "src/main/resources/excel/goods.xls";
+	private static final String FILEPATH = "src/main/resources/excel/Goods.xls";
 
     /**
      * 读取excel

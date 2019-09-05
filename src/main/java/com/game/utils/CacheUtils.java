@@ -3,6 +3,7 @@ package com.game.utils;
 import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.bean.GoodsType;
 import com.game.buff.bean.ConcreteBuff;
+import com.game.buff.handler.BuffType;
 import com.game.map.bean.ConcreteMap;
 import com.game.map.bean.MapMapping;
 import com.game.npc.bean.ConcreteMonster;
@@ -88,7 +89,7 @@ public class CacheUtils {
      * key:id
      * value:ConcreteBuff
      */
-    private static volatile Map<String, ConcreteBuff> buffMap = null;
+    private static volatile Map<BuffType, ConcreteBuff> buffMap = null;
 
 
 
@@ -131,7 +132,7 @@ public class CacheUtils {
      * buff的map
      * @return
      */
-    public static Map<String, ConcreteBuff>  getBuffMap(){
+    public static Map<BuffType, ConcreteBuff>  getBuffMap(){
         if(buffMap==null){
             synchronized (CacheUtils.class){
                 if(buffMap==null){

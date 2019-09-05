@@ -27,7 +27,7 @@ public class ReadMapNPCMapping {
     /**
      * 文件路径
      */
-    private static final String FILEPATH = "src/main/resources/excel/map_npc_mapping.xls";
+    private static final String FILEPATH = "src/main/resources/excel/MapNpcMapping.xls";
     /**
      * 读取excel
      * @return

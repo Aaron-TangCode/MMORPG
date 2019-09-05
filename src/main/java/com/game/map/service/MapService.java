@@ -206,13 +206,13 @@ public class MapService {
     private void startBuff(ConcreteRole role, String dest) {
         if(dest.equals("村子")){
             //激活Buff
-            buffHandler.executeBuff(role.getName(),RED);
+            buffHandler.executeBuff(role.getName(),RED.name());
             try {
                 Thread.sleep(2000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            buffHandler.executeBuff(role.getName(),BLUE);
+            buffHandler.executeBuff(role.getName(),BLUE.name());
         }
     }
 

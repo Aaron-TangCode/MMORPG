@@ -24,7 +24,7 @@ import java.io.IOException;
 @ExcelAnnotation
 @Component
 public class ReadSkill {
-    private static final String FILEPATH = "src/main/resources/excel/skill.xls";
+    private static final String FILEPATH = "src/main/resources/excel/Skill.xls";
     /**
      * 读取excel
      * @return

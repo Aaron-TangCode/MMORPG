@@ -27,7 +27,7 @@ public class ReadOccupation {
     /**
      * 文件路径
      */
-	private static final String FILEPATH = "src/main/resources/excel/occupation.xls";
+	private static final String FILEPATH = "src/main/resources/excel/Occupation.xls";
 
     /**
      * 读取excel文件

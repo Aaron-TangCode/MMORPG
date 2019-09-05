@@ -2,6 +2,7 @@ package com.game.buff.excel;
 
 import com.game.buff.bean.ConcreteBuff;
 import com.game.annotation.ExcelAnnotation;
+import com.game.buff.handler.BuffType;
 import com.game.utils.CacheUtils;
 import com.game.utils.ExcelUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,7 @@ import java.io.InputStream;
 @ExcelAnnotation
 @Component
 public class ReadBuff {
-	private static final String FILEPATH = "src/main/resources/excel/buff.xls";
+	private static final String FILEPATH = "src/main/resources/excel/Buff.xls";
 
     /**
      * 读取excel
@@ -80,8 +81,9 @@ public class ReadBuff {
                         buff.setAttack(new Double(cellStr).intValue());
                     }
                 }
+                BuffType buffType = BuffType.getBuffType(buff.getName());
                 // 数据装入List
-                CacheUtils.getBuffMap().put(buff.getName(),buff);
+                CacheUtils.getBuffMap().put(buffType,buff);
             }
             log.info("buff静态数据加载完毕");
         } catch (IOException e) {

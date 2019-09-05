@@ -27,7 +27,7 @@ public class ReadMonsterMapMapping {
     /**
      * 文件路径
      */
-    private static final String FILEPATH = "src/main/resources/excel/monster_map_mapping.xls";
+    private static final String FILEPATH = "src/main/resources/excel/MonsterMapMapping.xls";
     /**
      * 读取excel
      * @return

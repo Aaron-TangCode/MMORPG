@@ -26,7 +26,7 @@ public class ReadNPC {
     /**
      * 文件路径
      */
-    private static final String FILEPATH = "src/main/resources/excel/npc.xls";
+    private static final String FILEPATH = "src/main/resources/excel/Npc.xls";
     /**
      * 读取excel
      * @return

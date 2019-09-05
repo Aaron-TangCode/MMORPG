@@ -27,7 +27,7 @@ public class ReadTask {
     /**
      * 文件路径
      */
-	private static final String FILEPATH = "src/main/resources/excel/task.xls";
+	private static final String FILEPATH = "src/main/resources/excel/Task.xls";
 
     /**
      * 读取excel

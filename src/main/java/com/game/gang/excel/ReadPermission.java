@@ -24,7 +24,7 @@ import java.io.InputStream;
 @ExcelAnnotation
 @Component
 public class ReadPermission {
-	private static final String FILEPATH = "src/main/resources/excel/permission.xls";
+	private static final String FILEPATH = "src/main/resources/excel/Permission.xls";
 
     /**
      * 读取excel

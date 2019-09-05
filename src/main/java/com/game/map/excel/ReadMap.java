@@ -25,7 +25,7 @@ public class ReadMap {
     /**
      * 文件位置
      */
-    private static final String FILEPATH = "src/main/resources/excel/map.xlsx";
+    private static final String FILEPATH = "src/main/resources/excel/Map.xlsx";
 
     /**
      * 读取excel
