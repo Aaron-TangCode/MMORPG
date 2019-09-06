@@ -37,7 +37,7 @@ public class InjectRoleProperty {
         role.setAttack(attack);
         role.setDefend(defend);
         //写入缓存
-        CacheUtils.getMapRoleNameRole().put(role.getName(),role);
+        CacheUtils.addRole(role.getName(),role);
 
     }
 }

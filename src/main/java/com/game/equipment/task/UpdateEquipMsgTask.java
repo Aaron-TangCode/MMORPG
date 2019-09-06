@@ -27,7 +27,7 @@ public class UpdateEquipMsgTask implements Runnable {
 
     @Override
     public void run() {
-        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRoleNameRole();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getRoleByName();
 
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
 

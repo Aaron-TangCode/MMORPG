@@ -2,7 +2,7 @@ package com.game.backpack.service;
 
 import com.game.backpack.bean.GoodsEntity;
 import com.game.backpack.bean.GoodsResource;
-import com.game.backpack.handler.BackpackHandler;
+import com.game.backpack.handler.BackpackMsgHandler;
 import com.game.backpack.repository.BackpackRepository;
 import com.game.protobuf.protoc.MsgGoodsInfoProto;
 import com.game.role.bean.ConcreteRole;
@@ -36,7 +36,7 @@ public class BackpackService {
     private BackpackRepository backpackRepository;
 
     @Autowired
-    private BackpackHandler backpackHandler;
+    private BackpackMsgHandler backpackHandler;
 
     /**
      * 通过角色id获取物品

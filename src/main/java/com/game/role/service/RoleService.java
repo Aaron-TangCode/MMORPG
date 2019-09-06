@@ -197,7 +197,7 @@ public class RoleService {
     public MsgRoleInfoProto.ResponseRoleInfo roleInfo(Channel channel, MsgRoleInfoProto.RequestRoleInfo requestRoleInfo) {
         //获取role
         ConcreteRole tmpRole = getRole(channel);
-        ConcreteRole role = CacheUtils.getMapRoleNameRole().get(tmpRole.getName());
+        ConcreteRole role = CacheUtils.getRole(tmpRole.getName());
         injectProperty.initProperty(role.getName());
         //返回信息
         return MsgRoleInfoProto.ResponseRoleInfo.newBuilder()
@@ -219,7 +219,7 @@ public class RoleService {
         //goodsName
         String goodsName = requestRoleInfo.getGoodsName();
         //获取角色
-        ConcreteRole role = CacheUtils.getMapRoleNameRole().get(tmpRole.getName());
+        ConcreteRole role = CacheUtils.getRole(tmpRole.getName());
         //获取角色的物品列表
         List<GoodsResource> goodsList = backpackService.getGoodsByRoleId(role.getId());
         //获取角色的具体物品
@@ -308,7 +308,7 @@ public class RoleService {
                 curMap.put(PropertyType.HP,setHp);
                 //通知角色更新
                 InjectRoleProperty.injectRoleProperty(role);
-                CacheUtils.getMapRoleNameRole().put(role.getName(),role);
+                CacheUtils.addRole(role.getName(),role);
                 backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
                 //激活事件
                 goodsEvent.setRole(role);
@@ -330,7 +330,7 @@ public class RoleService {
                 curMap.put(PropertyType.MP,setMp);
                 //通知角色更新
                 InjectRoleProperty.injectRoleProperty(role);
-                CacheUtils.getMapRoleNameRole().put(role.getName(),role);
+                CacheUtils.addRole(role.getName(),role);
                 backpackService.updateGoodsByRoleIdDel(role.getId(),goods.getId());
                 return "成功使用"+goods.getName()+"\t加蓝后："+role.getCurMp();
             }

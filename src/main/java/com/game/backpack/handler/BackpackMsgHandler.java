@@ -21,7 +21,7 @@ import java.util.Map;
  * @Version 1.0
  */
 @Component
-public class BackpackHandler {
+public class BackpackMsgHandler {
 
     @Autowired
     private BackpackService backpackService;
@@ -34,7 +34,7 @@ public class BackpackHandler {
      */
     public String getGoods(String roleName,String goodsName){
         //获取角色
-        ConcreteRole role = getRole(roleName);
+        ConcreteRole role = CacheUtils.getRole(roleName);
         //物品逻辑处理
 //        String msg = handleGoods(goodsName,role);
         String msg = getGoodsHandler(goodsName, role);
@@ -50,7 +50,7 @@ public class BackpackHandler {
         //找具体物品
         GoodsResource goodsResource = findGoodsResource(goodsBagList,goodsName);
        //选择添加或更新
-        String msg = chooseWay2HandleGoods(goodsResource,goodsBagList,role,goodsName);
+        String msg = doAddWays(goodsResource,goodsBagList,role,goodsName);
         return msg;
     }
 
@@ -78,7 +78,7 @@ public class BackpackHandler {
         //返回信息
         return msg;
     }
-    private String chooseWay2HandleGoods(GoodsResource goodsResource, List<GoodsBag> goodsBagList, ConcreteRole role, String goodsName) {
+    private String doAddWays(GoodsResource goodsResource, List<GoodsBag> goodsBagList, ConcreteRole role, String goodsName) {
         //goodsResource为空，就添加；不为空，就更新
         if(goodsResource!=null){
             //获取物品数量
@@ -229,14 +229,7 @@ public class BackpackHandler {
         return goodsResource;
     }
 
-    /**
-     * 返回角色
-     * @param roleName 角色名
-     * @return 返回角色
-     */
-    private ConcreteRole getRole(String roleName) {
-        return CacheUtils.getMapRoleNameRole().get(roleName);
-    }
+
 
     /**
      * 丢掉物品
@@ -245,7 +238,7 @@ public class BackpackHandler {
      * @return 返回消息
      */
     public String discardGoods(String roleName,String goodsName){
-        ConcreteRole role = getRole(roleName);
+        ConcreteRole role = CacheUtils.getRole(roleName);
         //逻辑处理
         String msg = discardHandle(role,goodsName);
         return msg;

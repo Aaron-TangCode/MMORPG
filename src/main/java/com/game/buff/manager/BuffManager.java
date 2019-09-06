@@ -29,10 +29,14 @@ public class BuffManager {
 
     @Autowired
     private AttackBuff attackBuff;
+
     private IBuff iBuff;
 
     public BuffManager(IBuff iBuff) {
         this.iBuff = iBuff;
+    }
+
+    public BuffManager() {
     }
 
     public void execBuff(ConcreteBuff buff, ConcreteRole role){

@@ -120,7 +120,7 @@ public class GangService {
         //判断是否已经有工会
         GangMemberEntity entity = belongGang(tmpRole);
         //查询角色
-        ConcreteRole role = getRoleByRoleName(tmpRole.getName());
+        ConcreteRole role = CacheUtils.getRole(tmpRole.getName());
         //gangName
         String gangName = requestGangInfo.getGangName();
         //加入工会
@@ -237,12 +237,5 @@ public class GangService {
         }else{//有工会就返回提示信息
             return role.getName()+"已经有工会了!\t工会："+flag.getGang().getName();
         }
-    }
-    /**
-     * 获取角色
-     * @return 角色
-     */
-    public ConcreteRole getRoleByRoleName(String roleName){
-        return CacheUtils.getMapRoleNameRole().get(roleName);
     }
 }

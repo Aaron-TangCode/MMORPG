@@ -140,7 +140,7 @@ public class DuplicateService {
     public String initRole(List<ConcreteRole> roleList,String bossName, String mapName, String skillName) {
         //role
         ConcreteRole tmpCaptain = roleList.get(0);
-        ConcreteRole captain = CacheUtils.getMapRoleNameRole().get(tmpCaptain.getName());
+        ConcreteRole captain = CacheUtils.getRole(tmpCaptain.getName());
         //移动
         mapService.moveTo(captain.getName(),mapName);
         //获取地图id
@@ -252,7 +252,7 @@ public class DuplicateService {
         //怪物根据角色的职业的吸引值优先进行攻击
         //遍历角色的仇恨值，选出最大的一个来攻击
         ConcreteRole tmpRole = chooseRole(map);
-        ConcreteRole mostRole = CacheUtils.getMapRoleNameRole().get(tmpRole.getName());
+        ConcreteRole mostRole = CacheUtils.getRole(tmpRole.getName());
 
         //触发仇恨值最大的角色被攻击事件
         attackedEvent.setRole(mostRole);

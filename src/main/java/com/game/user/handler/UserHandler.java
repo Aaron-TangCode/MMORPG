@@ -71,7 +71,7 @@ public class UserHandler {
 	 * @param role1 角色
 	 */
 	private void checkAccount(String username, ConcreteRole role1) {
-		ConcreteRole role = CacheUtils.getMapRoleNameRole().get(role1.getName());
+		ConcreteRole role = CacheUtils.getRole(role1.getName());
 		Map<String, ConcreteRole> sessionMap = SessionMap.getSessionMap();
 		ConcreteRole localRole = sessionMap.get(username);
 		if(localRole==null){

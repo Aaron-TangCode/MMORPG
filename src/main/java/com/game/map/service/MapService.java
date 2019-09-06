@@ -129,7 +129,7 @@ public class MapService {
             role.getConcreteMap().setName(dest);
             role.getConcreteMap().setId(destId);
             //更新本地缓存
-            CacheUtils.getMapRoleNameRole().put(role.getName(),role);
+            CacheUtils.addRole(role.getName(),role);
              content =  role.getName()+"从"+src+"移动到"+dest;
         }else{
              content =  "不能从"+src+"直接移动到"+dest;
@@ -224,7 +224,7 @@ public class MapService {
      */
     public String moveTo(String roleName,String dest) {
         //获取角色信息
-        ConcreteRole role = CacheUtils.getMapRoleNameRole().get(roleName);
+        ConcreteRole role = CacheUtils.getRole(roleName);
         //获取角色的原地点
         String src = role.getConcreteMap().getName();
         //获取源地点和目的地点的id
@@ -242,7 +242,7 @@ public class MapService {
             //从map移除role
             rmRoleFromMap(role,srcId);
             //更新本地缓存
-            CacheUtils.getMapRoleNameRole().put(roleName,role);
+            CacheUtils.addRole(roleName,role);
             return role.getName()+"从"+src+"移动到"+dest;
         }else{
             return "不能从"+src+"直接移动到"+dest;

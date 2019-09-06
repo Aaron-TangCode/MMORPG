@@ -157,7 +157,7 @@ public class MyAnnotationUtil {
                 ConcreteRole role = roleRepository.getRole(roleId);
                 role.setChannel(ctx.channel());
                 //加角色名-角色对象
-                CacheUtils.getMapRoleNameRole().put(role.getName(),role);
+                CacheUtils.addRole(role.getName(),role);
             }
         }
         //将类的资源名和方法的进行拼接

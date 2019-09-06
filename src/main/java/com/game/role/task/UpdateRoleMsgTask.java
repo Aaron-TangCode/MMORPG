@@ -28,7 +28,7 @@ public class UpdateRoleMsgTask implements Runnable {
     @Override
     public void run() {
         //获取缓存
-        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRoleNameRole();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getRoleByName();
 
         Set<Map.Entry<String, ConcreteRole>> entries = roleMap.entrySet();
         //遍历更新

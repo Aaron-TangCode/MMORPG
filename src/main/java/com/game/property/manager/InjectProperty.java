@@ -61,10 +61,10 @@ public class InjectProperty {
         //根据角色名，在db上查找role
         ConcreteRole roleDB = roleService.getRoleByRoleName(roleName);
         //从本地获取role
-        ConcreteRole role = CacheUtils.getMapRoleNameRole().get(roleDB.getName());
+        ConcreteRole role = CacheUtils.getRole(roleDB.getName());
         //检查role
         if(role==null){
-            CacheUtils.getMapRoleNameRole().put(roleName,roleDB);
+            CacheUtils.addRole(roleName,roleDB);
             return;
         }
         //注入任务数据
@@ -158,7 +158,7 @@ public class InjectProperty {
         //把属性模块的数据注入角色模块
         InjectRoleProperty.injectRoleProperty(role);
         //刷新role的缓存
-        CacheUtils.getMapRoleNameRole().put(role.getName(), role);
+        CacheUtils.addRole(role.getName(), role);
     }
 
 

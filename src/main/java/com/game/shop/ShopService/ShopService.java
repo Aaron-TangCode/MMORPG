@@ -1,7 +1,7 @@
 package com.game.shop.ShopService;
 
 import com.game.backpack.bean.GoodsResource;
-import com.game.backpack.handler.BackpackHandler;
+import com.game.backpack.handler.BackpackMsgHandler;
 import com.game.protobuf.protoc.MsgShopInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
@@ -29,7 +29,7 @@ public class ShopService {
      * 背包控制器
      */
     @Autowired
-    private BackpackHandler backpackHandler;
+    private BackpackMsgHandler backpackHandler;
 
     /**
      * 购物

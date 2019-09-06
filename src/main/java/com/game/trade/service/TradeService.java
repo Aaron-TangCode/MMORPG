@@ -1,7 +1,7 @@
 package com.game.trade.service;
 
 import com.game.backpack.bean.GoodsResource;
-import com.game.backpack.handler.BackpackHandler;
+import com.game.backpack.handler.BackpackMsgHandler;
 import com.game.event.beanevent.TradeEvent;
 import com.game.event.manager.EventMap;
 import com.game.protobuf.protoc.MsgTradeInfoProto;
@@ -31,7 +31,7 @@ public class TradeService {
      * 背包处理器
      */
     @Autowired
-    private BackpackHandler backpackHandler;
+    private BackpackMsgHandler backpackHandler;
     /**
      * 角色service
      */
@@ -61,7 +61,7 @@ public class TradeService {
         ConcreteRole from = getRoleByChannel(channel);
         //rolename
         String roleName2 = requestTradeInfo.getRoleName();
-        ConcreteRole to = getRoleByRoleName(roleName2);
+        ConcreteRole to = CacheUtils.getRole(roleName2);
         //构建交易Bean
         Trade trade = new Trade(uuid,from,to);
         TradeMap.getTradeMap().put(uuid,trade);
@@ -92,7 +92,7 @@ public class TradeService {
         String roleName2 = requestTradeInfo.getRoleName();
         //uuid
         String uuid = requestTradeInfo.getUuid();
-        ConcreteRole to = getRoleByRoleName(roleName2);
+        ConcreteRole to = CacheUtils.getRole(roleName2);
 
         //内容d
         String content = "进入交易("+uuid+")";
@@ -210,7 +210,7 @@ public class TradeService {
         String roleName2 = requestTradeInfo.getRoleName();
         //获取玩家1、获取玩家2
         ConcreteRole seller = getRoleByChannel(channel);
-        ConcreteRole buyer = getRoleByRoleName(roleName2);
+        ConcreteRole buyer = CacheUtils.getRole(roleName2);
         //获取物品
         Map<String, GoodsResource> goodsMap = CacheUtils.getGoodsMap();
         GoodsResource goods = goodsMap.get(goodsName);
@@ -241,15 +241,6 @@ public class TradeService {
         return role;
     }
 
-    /**
-     * 获取角色
-     * @param roleName 角色名
-     * @return role
-     */
-    public ConcreteRole getRoleByRoleName(String roleName){
-        ConcreteRole role = CacheUtils.getMapRoleNameRole().get(roleName);
-        return role;
-    }
     /**
      * 处理交易逻辑
      * @param seller 卖家

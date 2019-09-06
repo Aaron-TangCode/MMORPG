@@ -1,6 +1,6 @@
 package com.game.email.service;
 
-import com.game.backpack.handler.BackpackHandler;
+import com.game.backpack.handler.BackpackMsgHandler;
 import com.game.protobuf.protoc.MsgEmailInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.utils.CacheUtils;
@@ -25,7 +25,7 @@ public class EmailService {
      * 背包控制器
      */
     @Autowired
-    private BackpackHandler backpackHandler;
+    private BackpackMsgHandler backpackHandler;
 
     /**
      * 发送物品
@@ -37,7 +37,7 @@ public class EmailService {
         //goodsName
         String goodsName = requestEmailInfo.getGoodsName();
         //获取所有玩家
-        Map<String, ConcreteRole> roleMap = CacheUtils.getMapRoleNameRole();
+        Map<String, ConcreteRole> roleMap = CacheUtils.getRoleByName();
         Set<Map.Entry<String, ConcreteRole>> entrySet = roleMap.entrySet();
         Iterator<Map.Entry<String, ConcreteRole>> iterator = entrySet.iterator();
         //发送物品

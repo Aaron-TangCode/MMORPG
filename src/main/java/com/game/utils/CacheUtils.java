@@ -11,6 +11,7 @@ import com.game.npc.bean.ConcreteNPC;
 import com.game.npc.bean.MapNPCMapping;
 import com.game.npc.bean.MonsterMapMapping;
 import com.game.role.bean.ConcreteRole;
+import com.game.role.service.RoleService;
 import com.game.skill.bean.ConcreteSkill;
 
 import java.util.*;
@@ -23,6 +24,7 @@ import java.util.*;
  * @Version 1.0
  */
 public class CacheUtils {
+
     private CacheUtils() {}
     /**
      * 用户名-角色缓存
@@ -31,7 +33,7 @@ public class CacheUtils {
     /**
      * 角色名-角色缓存
      */
-    private static volatile Map<String,ConcreteRole> mapRoleNameRole = null;
+    private static volatile Map<String,ConcreteRole> name2RoleMap = null;
     /**
      * 地图映射缓存
      */
@@ -286,18 +288,42 @@ public class CacheUtils {
      * value:Role实体类
      * @return
      */
-    public static Map<String, ConcreteRole> getMapRoleNameRole() {
-        if (mapRoleNameRole == null) {
+    public static Map<String, ConcreteRole> getRoleByName() {
+        if (name2RoleMap == null) {
             synchronized (CacheUtils.class) {
-                if (mapRoleNameRole == null) {
-                    mapRoleNameRole = new HashMap<>();
-                    return mapRoleNameRole;
+                if (name2RoleMap == null) {
+                    name2RoleMap = new HashMap<>();
+                    return name2RoleMap;
                 }
             }
         }
-        return mapRoleNameRole;
+        return name2RoleMap;
+    }
+    /**
+     * 获取角色
+     * @param name 角色名
+     * @return 返回角色
+     */
+    public static ConcreteRole getRole(String name){
+        ConcreteRole role = CacheUtils.getRoleByName().get(name);
+        //如果为Null,就去数据找role
+        if(role==null){
+            RoleService roleService = new RoleService();
+            role = roleService.getRoleByRoleName(name);
+            //存储在本地
+            addRole(name,role);
+        }
+        return role;
     }
 
+    /**
+     * 添加角色
+     * @param name 角色名
+     * @param role 角色
+     */
+    public static void addRole(String name,ConcreteRole role){
+        CacheUtils.getRoleByName().put(name,role);
+    }
     /**
      * 地图映射列表
      *

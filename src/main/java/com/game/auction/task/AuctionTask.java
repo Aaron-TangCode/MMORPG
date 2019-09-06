@@ -2,7 +2,7 @@ package com.game.auction.task;
 
 import com.game.auction.bean.Auction;
 import com.game.auction.service.AuctionService;
-import com.game.backpack.handler.BackpackHandler;
+import com.game.backpack.handler.BackpackMsgHandler;
 import com.game.protobuf.protoc.MsgAuctionInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.service.RoleService;
@@ -29,13 +29,13 @@ public class AuctionTask implements  Runnable{
     /**
      * 背包处理器
      */
-    private BackpackHandler backpackHandler;
+    private BackpackMsgHandler backpackHandler;
     /**
      * 角色服务
      */
     private RoleService roleService;
 
-    public AuctionTask(Auction auction, AuctionService auctionService, BackpackHandler backpackHandler, RoleService roleService){
+    public AuctionTask(Auction auction, AuctionService auctionService, BackpackMsgHandler backpackHandler, RoleService roleService){
         this.auction = auction;
         this.auctionService = auctionService;
         this.backpackHandler = backpackHandler;
@@ -49,10 +49,10 @@ public class AuctionTask implements  Runnable{
         Auction auction = auctionService.queryAutionById(this.auction.getId());
         //生产者
         String seller = auction.getSeller();
-        ConcreteRole sellRole = getRole(seller);
+        ConcreteRole sellRole = CacheUtils.getRole(seller);
         //购买者
         String buyer = auction.getBuyer();
-        ConcreteRole buyRole = getRole(buyer);
+        ConcreteRole buyRole = CacheUtils.getRole(buyer);
 
         //把物品给购买者
         backpackHandler.getGoods(buyer,auction.getGoodsName());
@@ -93,8 +93,5 @@ public class AuctionTask implements  Runnable{
             sellRole.getChannel().writeAndFlush(sellInfo);
         }
 
-    }
-    public ConcreteRole getRole(String roleName){
-        return CacheUtils.getMapRoleNameRole().get(roleName);
     }
 }

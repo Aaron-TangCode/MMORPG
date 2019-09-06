@@ -4,7 +4,7 @@ import com.game.auction.bean.Auction;
 import com.game.auction.repository.AuctionRepository;
 import com.game.auction.task.AuctionTask;
 import com.game.backpack.bean.GoodsResource;
-import com.game.backpack.handler.BackpackHandler;
+import com.game.backpack.handler.BackpackMsgHandler;
 import com.game.backpack.service.BackpackService;
 import com.game.map.threadpool.TaskQueue;
 import com.game.protobuf.protoc.MsgAuctionInfoProto;
@@ -13,7 +13,6 @@ import com.game.role.service.RoleService;
 import com.game.server.manager.TaskMap;
 import com.game.user.manager.LocalUserMap;
 import com.game.user.threadpool.UserThreadPool;
-import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import io.netty.util.concurrent.Future;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ public class AuctionService {
      * 背包控制器
      */
     @Autowired
-    private BackpackHandler backpackHandler;
+    private BackpackMsgHandler backpackHandler;
     /**
      * 背包服务
      */
@@ -214,14 +213,6 @@ public class AuctionService {
         return role;
     }
 
-    /**
-     * 获取角色
-     * @param name 角色名
-     * @return 返回角色
-     */
-    public ConcreteRole getRoleByRoleName(String name){
-       return CacheUtils.getMapRoleNameRole().get(name);
-    }
 
     /**
      * 处理竞拍物品
