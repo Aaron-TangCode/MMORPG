@@ -6,6 +6,7 @@ import com.game.event.beanevent.GoVillageEvent;
 import com.game.event.manager.EventMap;
 import com.game.map.bean.ConcreteMap;
 import com.game.map.repository.MapRepository;
+import com.game.npc.bean.MonsterMapMapping;
 import com.game.protobuf.message.ResultCode;
 import com.game.protobuf.protoc.MsgMapInfoProto;
 import com.game.role.bean.ConcreteRole;
@@ -15,6 +16,9 @@ import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.game.buff.handler.BuffType.BLUE;
 import static com.game.buff.handler.BuffType.RED;
@@ -248,5 +252,21 @@ public class MapService {
             return "不能从"+src+"直接移动到"+dest;
         }
     }
-
+    /**
+     * 找怪兽
+     * @param mapId 地图id
+     * @return monster
+     */
+    public List<Integer> findMonster(int mapId){
+        List<Integer> monsterList = new ArrayList<>();
+        //地图和怪兽的映射列表
+        List<MonsterMapMapping> monsterMapMappingList = CacheUtils.getMonsterMapMappingList();
+        //遍历找出具体的怪兽列表
+        for (int i = 0; i < monsterMapMappingList.size(); i++) {
+            if(monsterMapMappingList.get(i).getMapId()==mapId){
+                monsterList.add(monsterMapMappingList.get(i).getMonsterId());
+            }
+        }
+        return monsterList;
+    }
 }

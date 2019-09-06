@@ -74,9 +74,9 @@ public class ConcreteMap {
                 '}';
     }
 
-    public ConcreteMap(ConcreteMap map){
-        this.id = map.getId();
-        this.name = map.getName();
+    public ConcreteMap(int id,String name){
+        this.id = id;
+        this.name = name;
     }
 
     public ConcreteMap(){}

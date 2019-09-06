@@ -5,9 +5,9 @@ import com.game.backpack.service.BackpackService;
 import com.game.event.beanevent.MonsterDeadEvent;
 import com.game.event.manager.EventMap;
 import com.game.map.bean.ConcreteMap;
+import com.game.map.service.MapService;
 import com.game.notice.NoticeUtils;
 import com.game.npc.bean.ConcreteMonster;
-import com.game.npc.bean.MonsterMapMapping;
 import com.game.property.bean.PropertyType;
 import com.game.protobuf.protoc.MsgSkillInfoProto;
 import com.game.role.bean.ConcreteRole;
@@ -31,6 +31,8 @@ import java.util.*;
  */
 @Service
 public class SkillService {
+    @Autowired
+    private MapService mapService;
     /**
      * 背包服务
      */
@@ -532,26 +534,10 @@ public class SkillService {
         //获取地图id
         int mapId = concreteRole.getConcreteMap().getId();
        //找出怪兽列表
-        return findMonster(mapId);
+        return mapService.findMonster(mapId);
     }
 
-    /**
-     * 找怪兽
-     * @param mapId 地图id
-     * @return monster
-     */
-    public List<Integer> findMonster(int mapId){
-        List<Integer> monsterList = new ArrayList<>();
-        //地图和怪兽的映射列表
-        List<MonsterMapMapping> monsterMapMappingList = CacheUtils.getMonsterMapMappingList();
-        //遍历找出具体的怪兽列表
-        for (int i = 0; i < monsterMapMappingList.size(); i++) {
-            if(monsterMapMappingList.get(i).getMapId()==mapId){
-                monsterList.add(monsterMapMappingList.get(i).getMonsterId());
-            }
-        }
-        return monsterList;
-    }
+
 
     /**
      * 获取角色

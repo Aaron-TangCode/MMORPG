@@ -2,12 +2,12 @@ package com.game.duplicate.serivce;
 
 import com.game.buff.bean.ConcreteBuff;
 import com.game.duplicate.manager.RoleAndMap;
-import com.game.team.manager.TeamMapManager;
 import com.game.duplicate.task.RoleAttackBossTask;
 import com.game.event.beanevent.AttackedEvent;
 import com.game.event.beanevent.MonsterDeadEvent;
 import com.game.event.manager.EventMap;
 import com.game.map.bean.ConcreteMap;
+import com.game.map.manager.MapFactory;
 import com.game.map.service.MapService;
 import com.game.map.task.BossAutoAttackTask;
 import com.game.map.threadpool.MapThreadPool;
@@ -18,11 +18,11 @@ import com.game.property.bean.PropertyType;
 import com.game.protobuf.protoc.MsgBossInfoProto;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.manager.InjectRoleProperty;
-import com.game.role.service.RoleService;
 import com.game.server.manager.BuffMap;
 import com.game.server.manager.TaskMap;
 import com.game.skill.bean.ConcreteSkill;
 import com.game.skill.service.SkillService;
+import com.game.team.manager.TeamMapManager;
 import com.game.user.manager.LocalUserMap;
 import com.game.utils.CacheUtils;
 import io.netty.channel.Channel;
@@ -52,11 +52,6 @@ public class DuplicateService {
      */
     @Autowired
     private EventMap eventMap;
-    /**
-     * 角色服务
-     */
-    @Autowired
-    private RoleService roleService;
     /**
      * 地图服务
      */
@@ -90,18 +85,33 @@ public class DuplicateService {
         Map<String, List<ConcreteRole>> teamMap = TeamMapManager.getTeamMap();
         //roleList角色列表
         List<ConcreteRole> roleList = teamMap.get(teamName);
-        //bossName怪兽名称
-        String bossName = requestBossInfo.getBossName();
+        //roleNameList,赋值给roleNameList
+        List<String> roleNameList = transferList(roleList);
         //mapName地图名称
         String mapName = requestBossInfo.getMapName();
 
         //初始化角色
-        String content = initRole(roleList,bossName,mapName,null);
+        String content = initRole(roleNameList,mapName);
         return MsgBossInfoProto.ResponseBossInfo.newBuilder()
                 .setContent(content)
                 .setType(MsgBossInfoProto.RequestType.TEAMENTERDUPLICATE)
                 .build();
     }
+
+    /**
+     * 角色集合-->角色名集合
+     * @param roleList 角色集合
+     * @return 角色名集合
+     */
+    private List<String> transferList(List<ConcreteRole> roleList) {
+        List<String> roleNameList = new ArrayList<>();
+        for (int i = 0; i < roleList.size(); i++) {
+            ConcreteRole role = roleList.get(i);
+            roleNameList.add(role.getName());
+        }
+        return roleNameList;
+    }
+
     /**
      * 攻击boss
      * @param channel channel
@@ -113,17 +123,13 @@ public class DuplicateService {
         ConcreteRole tmpRole = getRole(channel);
         //mapName地图名称
         String mapName = requestBossInfo.getMapName();
-        //队伍列表
-        List<ConcreteRole> roleList = new ArrayList<>();
-        //获取角色信息
-        ConcreteRole role = roleService.getRoleByRoleName(tmpRole.getName());
+        //队伍角色姓名列表
+        List<String> roleNameList = new ArrayList<>();
         //把角色添加到队伍列表
-        roleList.add(role);
+        roleNameList.add(tmpRole.getName());
         //初始化角色
-        String content = initRole(roleList,null,mapName,null);
-
-
-
+        String content = initRole(roleNameList,mapName);
+        //返回信息
         return MsgBossInfoProto.ResponseBossInfo.newBuilder()
                 .setContent(content)
                 .setType(MsgBossInfoProto.RequestType.ENTERDUPLICATE)
@@ -131,29 +137,27 @@ public class DuplicateService {
     }
     /**
      * 副本模块的统一入口，初始化副本
-     * @param roleList 角色列表
-     * @param bossName boss名字
      * @param mapName 地图名字
-     * @param skillName 技能
      * @return 消息
      */
-    public String initRole(List<ConcreteRole> roleList,String bossName, String mapName, String skillName) {
-        //role
-        ConcreteRole tmpCaptain = roleList.get(0);
-        ConcreteRole captain = CacheUtils.getRole(tmpCaptain.getName());
+    public String initRole(List<String> roleNameList, String mapName) {
+        ConcreteRole captain = CacheUtils.getRole(roleNameList.get(0));
         //移动
         mapService.moveTo(captain.getName(),mapName);
+        //获取地图
+        ConcreteMap concreteMap = captain.getConcreteMap();
         //获取地图id
-        int mapId = captain.getConcreteMap().getId();
+        int mapId = concreteMap.getId();
         //获取临时地图
         ConcreteMap tmpMap = mapService.getMap(mapId);
         //新副本
-        ConcreteMap map = new ConcreteMap(tmpMap);
+        ConcreteMap map = MapFactory.createMap(tmpMap.getId(),tmpMap.getName());
         //把角色添加到新副本
-        for(ConcreteRole role:roleList){
-            String roleName = role.getName();
+        for(String roleName:roleNameList){
             //切换地图
             mapService.moveTo(roleName, mapName);
+            //获取role
+            ConcreteRole role = CacheUtils.getRole(roleName);
             //把角色添加到地图
             map.getRoleList().add(role);
         }
