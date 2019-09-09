@@ -3,7 +3,7 @@ package com.game.role.repository;
 import com.game.role.bean.ConcreteRole;
 import com.game.role.mapper.RoleMapper;
 import com.game.role.task.RoleUpdateTask;
-import com.game.skill.task.RoleTask;
+import com.game.role.task.RoleTask;
 import com.game.utils.SqlUtils;
 import com.game.utils.ThreadPoolUtils;
 import org.apache.ibatis.session.SqlSession;

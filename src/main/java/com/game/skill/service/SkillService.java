@@ -311,12 +311,12 @@ public class SkillService {
         //总攻击力
         Integer totalAttack = hurt + attack;
         //技能消耗角色的mp值(更新属性系统和通知角色更新属性)
-        attackRole.getCurMap().put(PropertyType.MP,leftMp-costMp);
+        attackRole.getCurStatMap().put(PropertyType.MP,leftMp-costMp);
         InjectRoleProperty.injectRoleProperty(attackRole);
         //获取怪兽的生命值
         int curHp = attackedRole.getCurHp();
         //怪兽的生命值减少并通知角色属性更新
-        Map<PropertyType, Integer> curMap = attackedRole.getCurMap();
+        Map<PropertyType, Integer> curMap = attackedRole.getCurStatMap();
         //被攻击的角色生命值减少，更新属性模块
         curMap.put(PropertyType.HP,curHp-totalAttack);
         InjectRoleProperty.injectRoleProperty(attackedRole);
@@ -412,7 +412,12 @@ public class SkillService {
         if(monster.getHp()<=0){
             content = monster.getName()+"已死，不能再攻击";
         }else {
-            content = attack(monster,skillName,role.getName(),monster.getName(),map);
+            if(monster==null){
+                content = "地图："+role.getConcreteMap().getName()+"没怪兽";
+            }else{
+                content = attack(monster,skillName,role.getName(),monster.getName(),map);
+            }
+
         }
         ConcreteRole tmpRole = CacheUtils.getRole(role.getName());
         //获取技能---使用技能---判断是否具备攻击条件--攻击--返回信息
@@ -434,10 +439,6 @@ public class SkillService {
     private String attack(ConcreteMonster monster,String skillName,String roleName,String monsterName,ConcreteMap map) {
         //从local获取本地角色
         ConcreteRole localRole = CacheUtils.getRole(roleName);
-        //检查当期地图是否存在怪兽
-        if(monster==null){
-            return "地图："+localRole.getConcreteMap().getName()+"没怪兽:"+monsterName;
-        }
         //获取技能和使用技能
         ConcreteSkill skill = localRole.getConcreteSkill();
         String[] skills = skill.getId().split(",");
@@ -467,7 +468,7 @@ public class SkillService {
             //总攻击力
             Integer totalAttack = hurt + attack;
             //技能消耗角色的mp值(更新属性系统和通知角色更新属性)
-            localRole.getCurMap().put(PropertyType.MP,leftMp-costMp);
+            localRole.getCurStatMap().put(PropertyType.MP,leftMp-costMp);
             InjectRoleProperty.injectRoleProperty(localRole);
             //怪兽的生命值减少
             monster.setHp(monster.getHp()-totalAttack);
@@ -534,6 +535,7 @@ public class SkillService {
         //获取地图id
         int mapId = concreteRole.getConcreteMap().getId();
        //找出怪兽列表
+
         return mapService.findMonster(mapId);
     }
 

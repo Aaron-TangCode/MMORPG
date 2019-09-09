@@ -88,7 +88,7 @@ public class InjectProperty {
             //获取value
             String value = json.getString(key);
             //存储基础数据到总值
-            role.getTotalMap().put(propertyType,Integer.parseInt(value));
+            role.getTotalStatMap().put(propertyType,Integer.parseInt(value));
         }
         //todo:注入职业值
         //获取角色职业
@@ -103,7 +103,7 @@ public class InjectProperty {
             String key = iterator2.next();
             PropertyType propertyType = PropertyType.map.get(key);
             String value = jsonObject.getString(key);
-            Map<PropertyType, Integer> totalMap = role.getTotalMap();
+            Map<PropertyType, Integer> totalMap = role.getTotalStatMap();
             //存进去
             totalMap.put(propertyType,totalMap.get(propertyType)+Integer.parseInt(value));
         }
@@ -125,31 +125,31 @@ public class InjectProperty {
                 //每一件装备的每一个属性
                 for (Map.Entry<PropertyType,Integer>  entry:goods.getPropertyMap().entrySet()) {
                     // 拿出玩家属性，加上装备属性，放回去
-                    role.getTotalMap().put(
+                    role.getTotalStatMap().put(
                             entry.getKey(),
-                            role.getTotalMap().get(entry.getKey())+entry.getValue());
+                            role.getTotalStatMap().get(entry.getKey())+entry.getValue());
                 }
 
             }
         }
 
         //把总值复制到当前值
-        Set<Map.Entry<PropertyType, Integer>> entrySet = role.getTotalMap().entrySet();
+        Set<Map.Entry<PropertyType, Integer>> entrySet = role.getTotalStatMap().entrySet();
         Iterator<Map.Entry<PropertyType, Integer>> iterator1 = entrySet.iterator();
         if(count++==1){
             while (iterator1.hasNext()) {
                 Map.Entry<PropertyType, Integer> map = iterator1.next();
-                role.getCurMap().put(map.getKey(),map.getValue());
+                role.getCurStatMap().put(map.getKey(),map.getValue());
             }
         }else{
             while (iterator1.hasNext()) {
                 Map.Entry<PropertyType, Integer> map = iterator1.next();
                 if(map.getKey().name().equals("HP")){
-                    role.getCurMap().put(map.getKey(),role.getCurHp());
+                    role.getCurStatMap().put(map.getKey(),role.getCurHp());
                 }else if(map.getKey().name().equals("MP") ){
-                    role.getCurMap().put(map.getKey(),role.getCurMp());
+                    role.getCurStatMap().put(map.getKey(),role.getCurMp());
                 }else{
-                    role.getCurMap().put(map.getKey(),map.getValue());
+                    role.getCurStatMap().put(map.getKey(),map.getValue());
                 }
 
             }

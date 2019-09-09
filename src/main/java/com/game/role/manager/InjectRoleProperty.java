@@ -20,8 +20,8 @@ public class InjectRoleProperty {
      */
     public static void injectRoleProperty(ConcreteRole role){
         //获取属性模块数据
-        Map<PropertyType, Integer> curMap = role.getCurMap();
-        Map<PropertyType, Integer> totalMap = role.getTotalMap();
+        Map<PropertyType, Integer> curMap = role.getCurStatMap();
+        Map<PropertyType, Integer> totalMap = role.getTotalStatMap();
         //注入属性
         Integer curHp = curMap.get(PropertyType.HP);
         Integer curMp = curMap.get(PropertyType.MP);

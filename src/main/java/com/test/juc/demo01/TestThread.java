@@ -1,4 +1,4 @@
-package com.test.juc;
+package com.test.juc.demo01;
 
 /**
  * @ClassName TestThread

@@ -163,7 +163,7 @@ public class DuplicateService {
         }
 
         //获取Boss列表
-        List<Integer> list = skillService.findMonster(map.getRoleList().get(0).getConcreteMap().getId());
+        List<Integer> list = mapService.findMonster(map.getRoleList().get(0).getConcreteMap().getId());
 
         //找出地图的boss
         Map<String, ConcreteMonster> bossMap = findConcreteMonster(map, list);
@@ -227,8 +227,8 @@ public class DuplicateService {
         //更新
         role.setCurHp(RoleAndMap.varHp);
         //update property
-        role.getCurMap().put(PropertyType.MP,curMp-costMp);
-        role.getCurMap().put(PropertyType.HP,RoleAndMap.varHp);
+        role.getCurStatMap().put(PropertyType.MP,curMp-costMp);
+        role.getCurStatMap().put(PropertyType.HP,RoleAndMap.varHp);
         InjectRoleProperty.injectRoleProperty(role);
         //roleName
         String roleName = role.getName();
@@ -562,8 +562,8 @@ public class DuplicateService {
         role.setCurMp(curMp-costMp);
         role.setCurHp(RoleAndMap.varHp);
         //update property
-        role.getCurMap().put(PropertyType.MP,curMp-costMp);
-        role.getCurMap().put(PropertyType.HP,RoleAndMap.varHp);
+        role.getCurStatMap().put(PropertyType.MP,curMp-costMp);
+        role.getCurStatMap().put(PropertyType.HP,RoleAndMap.varHp);
         InjectRoleProperty.injectRoleProperty(role);
         //怪兽死亡，通知该地图所有玩家
         if(boss.getHp()<=0){

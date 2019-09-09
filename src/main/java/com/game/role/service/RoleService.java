@@ -300,7 +300,7 @@ public class RoleService {
                 //获取Hp
                 String hp = property.getString("hp");
                 //获取当前的属性map
-                Map<PropertyType, Integer> curMap = role.getCurMap();
+                Map<PropertyType, Integer> curMap = role.getCurStatMap();
                 //获取旧的hp
                 Integer oldHp = curMap.get(PropertyType.HP);
                 int tmpHp = oldHp+Integer.parseInt(hp);
@@ -321,7 +321,7 @@ public class RoleService {
                     return "蓝已满，无需使用"+localGoods.getName();
                 }
                 //获取属性系统
-                Map<PropertyType, Integer> curMap = role.getCurMap();
+                Map<PropertyType, Integer> curMap = role.getCurStatMap();
                 Integer mp = curMap.get(PropertyType.MP);
                 JSONObject property = localGoods.getProperty();
                 String oldMp = property.getString("mp");

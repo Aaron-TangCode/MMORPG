@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @Date 2019/8/27 20:39
  * @Version 1.0
  */
-@Component
+@Component("prototype")
 public class TalkEvent extends IEvent {
     /**
      * 角色

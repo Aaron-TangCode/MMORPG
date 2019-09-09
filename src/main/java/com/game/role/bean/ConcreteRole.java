@@ -30,7 +30,6 @@ import java.util.Queue;
 @Component
 public class ConcreteRole {
 
-
     /**
      * 角色id
      */
@@ -187,9 +186,14 @@ public class ConcreteRole {
         this.money = money;
     }
 
-    private Map<PropertyType,Integer> totalMap = new HashMap<>();
-
-    private Map<PropertyType,Integer> curMap = new HashMap<>();
+    /**
+     * 总属性信息
+     */
+    private Map<PropertyType,Integer> totalStatMap = new HashMap<>();
+    /**
+     * 当前属性信息
+     */
+    private Map<PropertyType,Integer> curStatMap = new HashMap<>();
 
     public int getTotalHp() {
         return totalHp;
@@ -207,20 +211,20 @@ public class ConcreteRole {
         this.totalMp = totalMp;
     }
 
-    public void setTotalMap(Map<PropertyType, Integer> totalMap) {
-        this.totalMap = totalMap;
+    public void setTotalStatMap(Map<PropertyType, Integer> totalStatMap) {
+        this.totalStatMap = totalStatMap;
     }
 
-    public void setCurMap(Map<PropertyType, Integer> curMap) {
-        this.curMap = curMap;
+    public void setCurStatMap(Map<PropertyType, Integer> curStatMap) {
+        this.curStatMap = curStatMap;
     }
 
 
-    public Map<PropertyType, Integer> getTotalMap() {
-        return totalMap;
+    public Map<PropertyType, Integer> getTotalStatMap() {
+        return totalStatMap;
     }
-    public Map<PropertyType, Integer> getCurMap() {
-        return curMap;
+    public Map<PropertyType, Integer> getCurStatMap() {
+        return curStatMap;
     }
     public int getId() {
         return id;

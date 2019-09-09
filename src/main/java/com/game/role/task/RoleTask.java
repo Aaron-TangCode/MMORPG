@@ -1,4 +1,4 @@
-package com.game.skill.task;
+package com.game.role.task;
 
 import com.game.role.bean.ConcreteRole;
 import com.game.role.mapper.RoleMapper;

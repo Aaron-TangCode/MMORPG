@@ -117,7 +117,7 @@ public class EquipmentService {
      */
     private void handleProperty(ConcreteRole role, GoodsResource goods, List<GoodsResource> goodsList) {
         //记录属性总值的临时变量
-        Map<PropertyType, Integer> tmpTotalMap = role.getTotalMap();
+        Map<PropertyType, Integer> tmpTotalMap = role.getTotalStatMap();
         //属性模块发生变化
         //属性总值=装备属性+基础属性
         changeProperty(role,goods,goodsList);
@@ -203,7 +203,7 @@ public class EquipmentService {
             Equipment equipment = new Equipment();
             equipmentBox = new EquipmentBox();
             role.setEquipmentBox(equipmentBox);
-            role.getEquipmentBox().setEquipmentBox("{"+"head" +":"+"\""+"\""+","+"weapon"+":"+"\""+"\""+","+"shoes"+":"+"\""+"\""+","+"pants"+":"+"\""+"\""+","+"clothes"+":"+"\""+"\""+"}");
+           // role.getEquipmentBox().setEquipmentBox("{"+"head" +":"+"\""+"\""+","+"weapon"+":"+"\""+"\""+","+"shoes"+":"+"\""+"\""+","+"pants"+":"+"\""+"\""+","+"clothes"+":"+"\""+"\""+"}");
             //绑定角色和装备栏
             equipmentBox.setRoleId(role.getId());
             //设置新的装备到装备栏
@@ -254,8 +254,8 @@ public class EquipmentService {
      * @param tmpTotalMap 容器map
      */
     private void changeMPHP(ConcreteRole role, Map<PropertyType, Integer> tmpTotalMap) {
-        Map<PropertyType, Integer> totalMap = role.getTotalMap();
-        Map<PropertyType, Integer> curMap = role.getCurMap();
+        Map<PropertyType, Integer> totalMap = role.getTotalStatMap();
+        Map<PropertyType, Integer> curMap = role.getCurStatMap();
         Integer newHp = totalMap.get(PropertyType.HP);
         Integer newMp = totalMap.get(PropertyType.MP);
         Integer oldHp = tmpTotalMap.get(PropertyType.HP);
@@ -289,13 +289,13 @@ public class EquipmentService {
             //每一件装备的每一个属性
             for (Map.Entry<PropertyType,Integer>  entry:goods2.getPropertyMap().entrySet()) {
                 // 拿出玩家属性，加上装备属性，放回去
-                role.getTotalMap().put(
+                role.getTotalStatMap().put(
                         entry.getKey(),
-                        role.getTotalMap().get(entry.getKey())-entry.getValue());
+                        role.getTotalStatMap().get(entry.getKey())-entry.getValue());
                 if(entry.getKey().equals(PropertyType.ATTACK)||entry.getKey().equals(PropertyType.DEFEND)){
-                    role.getCurMap().put(
+                    role.getCurStatMap().put(
                             entry.getKey(),
-                            role.getCurMap().get(entry.getKey())-entry.getValue());
+                            role.getCurStatMap().get(entry.getKey())-entry.getValue());
                 }
 
             }
@@ -315,11 +315,11 @@ public class EquipmentService {
                 // 拿出玩家属性，加上装备属性，放回去
                 PropertyType key = entry.getKey();
                 Integer value = entry.getValue();
-                Map<PropertyType, Integer> totalMap = role.getTotalMap();
+                Map<PropertyType, Integer> totalMap = role.getTotalStatMap();
                 totalMap.put(key,totalMap.get(key)+value);
 
                 if(key.equals(PropertyType.ATTACK)||key.equals(PropertyType.DEFEND)) {
-                    Map<PropertyType, Integer> curMap = role.getCurMap();
+                    Map<PropertyType, Integer> curMap = role.getCurStatMap();
                     curMap.put(key,curMap.get(key)+value);
                 }
             }
