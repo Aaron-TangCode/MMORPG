@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@aliyun" uuid="5be7332f-c28a-4271-8217-7bfc0cfc599e">
+    <data-source source="LOCAL" name="aliyun" uuid="12662824-c36c-4d1e-9549-35c06cbc41ef">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://www.hailintang.top:3306</jdbc-url>
+      <jdbc-url>jdbc:mysql://www.hailintang.top:3306/game</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="CONVERT_TO_NULL" />
