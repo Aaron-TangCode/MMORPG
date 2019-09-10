@@ -1,9 +1,16 @@
-﻿#客户端的输入指令
-```
-//游戏介绍
-本游戏是一款MMORPG游戏，多人在线角色扮演游戏。游戏玩法：有玩家PK，刷副本，掉装备，排行榜，玩家互动，拍卖行，工会等新奇有趣玩法。  
+﻿#游戏操作手册
+
+### 游戏介绍
+> 本游戏是一款MMORPG游戏，多人在线角色扮演游戏。游戏玩法：有玩家PK，刷副本，掉装备，排行榜，玩家互动，拍卖行，工会等新奇有趣玩法。  
 游戏名字：江湖传奇
-//操作指引
+### 环境部署
+- 在服务端启动相应的脚本文件
+    - windows系统：运行serProbuf.bat文件
+    - linux系统：运行serProbuf.sh文件
+- 在客户端启动相应的脚本文件
+    - windows系统：运行cliProbuf.bat文件
+    - linux系统：运行cliProbuf.sh文件
+### 操作指引
 - 1、启动服务端：com.game.server.SpringMain
 - 2、启动客户端：com.hailintang.client.StartClient
 - 3、在客户端端口输入相关指令
@@ -14,6 +21,7 @@
 Connect to Server Successfully!
 
 输入Help指令，会有相关操作文档出现：
+```
 游戏的指令有：
 用户相关：
 	 Login：登录
