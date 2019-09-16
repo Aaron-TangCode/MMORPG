@@ -82,6 +82,7 @@ public class ReadGoods {
                 }
                 // 数据装入List
                 CacheUtils.getGoodsMap().put(goods.getName(),goods);
+                CacheUtils.getGoodsMapById().put(goods.getId(),goods);
             }
             //获取goodsMap
             Map<String, GoodsResource> goodsMap = CacheUtils.getGoodsMap();

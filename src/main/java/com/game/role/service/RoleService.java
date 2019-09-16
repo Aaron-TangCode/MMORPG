@@ -1,7 +1,9 @@
 package com.game.role.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.game.backpack.bean.GoodsBag;
 import com.game.backpack.bean.GoodsResource;
+import com.game.backpack.manager.LocalGoodsManager;
 import com.game.backpack.service.BackpackService;
 import com.game.event.beanevent.GoodsEvent;
 import com.game.event.manager.EventMap;
@@ -221,9 +223,9 @@ public class RoleService {
         //获取角色
         ConcreteRole role = CacheUtils.getRole(tmpRole.getName());
         //获取角色的物品列表
-        List<GoodsResource> goodsList = backpackService.getGoodsByRoleId(role.getId());
+        List<GoodsBag> goodsBagList = LocalGoodsManager.getLocalGoodsMap().get(role.getId());
         //获取角色的具体物品
-        GoodsResource goods = getGoods(goodsList,goodsName);
+        GoodsResource goods = getGoods(goodsBagList,goodsName);
         //判断物品是否存在
         boolean isExisted = checkGoodsIsExist(goods);
         //判断物品的功能、使用物品
@@ -253,11 +255,13 @@ public class RoleService {
      * @param goodsName 物品名称
      * @return 物品
      */
-    private GoodsResource getGoods(List<GoodsResource> goodsList, String goodsName) {
+    private GoodsResource getGoods(List<GoodsBag> goodsList, String goodsName) {
         GoodsResource goods = null;
+        Map<Integer, GoodsResource> goodsMapById = CacheUtils.getGoodsMapById();
         for (int i = 0; i < goodsList.size(); i++) {
-            if(goodsList.get(i).getName().equals(goodsName)){
-                goods = goodsList.get(i);
+            GoodsResource goodsResource = goodsMapById.get(Integer.parseInt(goodsList.get(i).getGoodsId()));
+            if (goodsResource!=null&&goodsResource.getName().equals(goodsName)) {
+                goods = goodsResource;
             }
         }
         return goods;

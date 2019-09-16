@@ -11,7 +11,7 @@ import com.game.npc.bean.ConcreteNPC;
 import com.game.npc.bean.MapNPCMapping;
 import com.game.npc.bean.MonsterMapMapping;
 import com.game.role.bean.ConcreteRole;
-import com.game.role.service.RoleService;
+import com.game.role.repository.RoleRepository;
 import com.game.skill.bean.ConcreteSkill;
 
 import java.util.*;
@@ -72,6 +72,11 @@ public class CacheUtils {
      * value:goods
      */
     private static volatile Map<String, GoodsResource> goodsMap = null;
+    /**
+     * key:id
+     * value:goods
+     */
+    private static volatile Map<Integer, GoodsResource> goodsMapById = null;
     /**
      * key:技能id
      * value:ConcreteSkill
@@ -159,6 +164,20 @@ public class CacheUtils {
         return goodsMap;
     }
 
+    /**
+     * 物品类型map
+     * @return
+     */
+    public static Map<Integer, GoodsResource> getGoodsMapById(){
+        if(goodsMapById==null){
+            synchronized (CacheUtils.class){
+                if(goodsMapById==null){
+                    goodsMapById = new HashMap<>();
+                }
+            }
+        }
+        return goodsMapById;
+    }
     /**
      * 物品类型map
      * @return
@@ -308,8 +327,8 @@ public class CacheUtils {
         ConcreteRole role = CacheUtils.getRoleByName().get(name);
         //如果为Null,就去数据找role
         if(role==null){
-            RoleService roleService = new RoleService();
-            role = roleService.getRoleByRoleName(name);
+            RoleRepository roleRepository = new RoleRepository();
+            role = roleRepository.getRoleByRoleName(name);
             //存储在本地
             addRole(name,role);
         }

@@ -1,8 +1,10 @@
 package com.game.backpack.service;
 
+import com.game.backpack.bean.GoodsBag;
 import com.game.backpack.bean.GoodsEntity;
 import com.game.backpack.bean.GoodsResource;
 import com.game.backpack.handler.BackpackMsgHandler;
+import com.game.backpack.manager.LocalGoodsManager;
 import com.game.backpack.repository.BackpackRepository;
 import com.game.protobuf.protoc.MsgGoodsInfoProto;
 import com.game.role.bean.ConcreteRole;
@@ -79,7 +81,7 @@ public class BackpackService {
      * @return 返回物品
      */
     public GoodsResource getGoodsById(String goodsId) {
-        return backpackRepository.getGoodsById(goodsId);
+        return CacheUtils.getGoodsMapById().get(Integer.parseInt(goodsId));
     }
 
     /**
@@ -117,7 +119,7 @@ public class BackpackService {
         //获取role
         ConcreteRole role = LocalUserMap.getUserRoleMap().get(userId);
         //逻辑处理
-        String content ="掉落物品："+goodsName+"\t"+handleGoods(goodsName,role);
+        String content ="获得物品："+goodsName+"\t"+handleGoods(goodsName,role);
 
         //返回消息
         MsgGoodsInfoProto.ResponseGoodsInfo info = MsgGoodsInfoProto.ResponseGoodsInfo.newBuilder()
@@ -266,15 +268,22 @@ public class BackpackService {
      */
     public MsgGoodsInfoProto.ResponseGoodsInfo showGoods(Channel channel, MsgGoodsInfoProto.RequestGoodsInfo requestGoodsInfo) {
         ConcreteRole role = getRole(channel);
-        List<GoodsResource> goodsList = backpackRepository.getGoodsByRoleId(role.getId());
+        //从缓存获取物品
+        List<GoodsBag> goodsBagList = LocalGoodsManager.getLocalGoodsMap().get(role.getId());
         StringBuilder content = new StringBuilder();
-        for (int i = 0; i < goodsList.size(); i++) {
-            GoodsResource goods = goodsList.get(i);
-            if(goods.getCount()<=0){
-                continue;
+        if(goodsBagList!=null){
+            for (int i = 0; i < goodsBagList.size(); i++) {
+                GoodsBag goodsBag = goodsBagList.get(i);
+                String goodsId = goodsBag.getGoodsId();
+                GoodsResource goods = CacheUtils.getGoodsMapById().get(Integer.parseInt(goodsId));
+                if(Integer.parseInt(goodsBag.getCount())<=0){
+                    continue;
+                }
+                content.append(goods.getName()+"\t").append(goods.getCount()+"\t").append("\n");
             }
-            content.append(goods.getName()+"\t").append(goods.getCount()+"\t").append("\n");
         }
+
+
         //moneyRole
         ConcreteRole moneyRole = roleService.getRole(role.getId());
         content.append("金币：\t"+moneyRole.getMoney());

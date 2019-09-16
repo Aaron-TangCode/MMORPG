@@ -6,14 +6,17 @@ import com.alibaba.fastjson.JSONObject;
 import com.game.backpack.bean.GoodsBag;
 import com.game.backpack.bean.GoodsEntity;
 import com.game.backpack.bean.GoodsResource;
+import com.game.backpack.manager.LocalGoodsManager;
 import com.game.backpack.mapper.BackPack2Mapper;
 import com.game.backpack.mapper.BackpackMapper;
 import com.game.backpack.task.BackpackUpdateTask;
+import com.game.utils.CacheUtils;
 import com.game.utils.SqlUtils;
 import com.game.utils.ThreadPoolUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,14 +34,13 @@ public class BackpackRepository {
      * @return
      */
     public List<GoodsResource> getGoodsByRoleId(int roleId) {
-        SqlSession session = SqlUtils.getSession();
-        try{
-            BackpackMapper mapper = session.getMapper(BackpackMapper.class);
-            List<GoodsResource> goods = mapper.getGoodsByRoleId(roleId);
-            return goods;
-        }finally {
-            session.close();
+        List<GoodsResource> goodsResourceList = new ArrayList<>();
+        List<GoodsBag> goodsBags = LocalGoodsManager.getLocalGoodsMap().get(roleId);
+        for (int i = 0; i < goodsBags.size(); i++) {
+            GoodsResource goodsResource = CacheUtils.getGoodsMapById().get(Integer.parseInt(goodsBags.get(i).getGoodsId()));
+            goodsResourceList.add(goodsResource);
         }
+        return goodsResourceList;
     }
 
     /**
