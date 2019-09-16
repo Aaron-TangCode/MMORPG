@@ -8,39 +8,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26638e92-5c45-4e48-8c5e-15d3c05ce239" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/acm/Array2BigNum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/acm/Find1Num.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/annotation/acm/UglyNum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/juc/damondemo/MyTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/juc/sleepdemo/SleepTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/juc/yielddemo/YieldTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/lambda/demo01/Myfunc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/lambda/demo01/TestLambda.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/lambda/demo02/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/lambda/demo02/TestLambda.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/lambda/demo03/MyFunc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/lambda/demo03/TestLambda.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/lambda/demo04/MyFunc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/lambda/demo04/TestLambda.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/lambda/demo05/TestLambda.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/lambda/demo06/TestMethodRef.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serProbuf.sh" beforeDir="false" afterPath="$PROJECT_DIR$/serProbuf.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hailintang/protobuf/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/game/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/game/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameclient2/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/MapInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/map/MapInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/gameserver2/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/netty_http_test/TestServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student$Builder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/protobuf_netty/PersonInfo$Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/read_write_monitor/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/client/MyChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_chat_server_multiclient/server/MyChatServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_client/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/socket_server_multiclient/MyServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyWebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hailintang/web_socket_demo01/MyWebSocketServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/AIO/AioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/BIO/BioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/BIO/BioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/BIO/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/BIO/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/io/NIO/NioServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/io/NIO/NioServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/jdk8/lambda/Demo01.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/jdk8/lambda/Demo01.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/load/demo01/TestMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/load/demo01/TestMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ClientTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/ClientTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/TimeServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/test/testgameserverclient/TimeServer.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -77,78 +61,101 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/skill/service/SkillService.java">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/function/Consumer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6330">
-              <caret line="444" column="22" selection-start-line="444" selection-start-column="22" selection-end-line="444" selection-end-column="22" />
+            <state relative-caret-position="256">
+              <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/serProbuf.sh">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/function/Supplier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="64" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="64" />
+            <state relative-caret-position="255">
+              <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/function/Predicate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2325">
-              <caret line="155" column="21" selection-start-line="155" selection-start-column="21" selection-end-line="155" selection-end-column="21" />
+            <state relative-caret-position="240">
+              <caret line="39" column="17" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/occupation/excel/ReadOccupation.java">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/function/Function.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="80" column="13" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
+            <state relative-caret-position="420">
+              <caret line="51" column="72" lean-forward="true" selection-start-line="51" selection-start-column="72" selection-end-line="51" selection-end-column="72" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/SpringMain.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo06/TestMethodRef.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
+            <state relative-caret-position="420">
+              <caret line="29" column="51" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/12662824-c36c-4d1e-9549-35c06cbc41ef/console.sql">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/request/RequestSkillInfoType.java">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/Comparator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+            <state relative-caret-position="178">
+              <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/Goods.proto">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/function/BiPredicate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="75" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="75" />
+            <state relative-caret-position="176">
+              <caret line="42" column="23" lean-forward="true" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/game/map/service/MapService.java">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/lang/System.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3345">
-              <caret line="248" column="46" selection-start-line="248" selection-start-column="46" selection-end-line="248" selection-end-column="46" />
+            <state relative-caret-position="191">
+              <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/test/jdk8/lambda/Demo01.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo05/TestLambda.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="92" column="32" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#392#393#0" expanded="true" />
+                <element signature="e#428#429#0" expanded="true" />
+                <element signature="e#1457#1458#0" expanded="true" />
+                <element signature="e#1499#1500#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -208,22 +215,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/game/backpack/task/UpdateMapMsgTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/backpack/repository/BackpackRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/backpack/mapper/BackPack2Mapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/backpack/manager/MapCacheSchedule.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/Backpack2Mapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/backpack/manager/LoadGoodsData.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/backpack/service/BackpackService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/test/Main1(3).java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/buff/handler/BuffType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/buff/excel/ReadBuff.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/buff/manager/IBuff.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/buff/handler/BuffTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/auction/service/AuctionService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/auction/task/AuctionTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/buff/handler/BuffHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/game/dispatcher/MyAnnotationUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/gang/service/GangService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/property/manager/InjectProperty.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/game/role/manager/InjectRoleProperty.java" />
@@ -259,6 +250,22 @@
         <option value="$PROJECT_DIR$/src/main/resources/Readme.md" />
         <option value="$PROJECT_DIR$/serProbuf.sh" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/juc/yielddemo/YieldTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/juc/sleepdemo/SleepTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/lambda/demo01/Myfunc.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/lambda/demo01/TestLambda.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/lambda/demo02/Employee.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/lambda/demo02/TestLambda.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/lambda/demo03/MyFunc.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/lambda/demo03/TestLambda.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/lambda/demo04/MyFunc.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/lambda/demo04/TestLambda.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/juc/damondemo/MyTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/annotation/acm/Find1Num.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/annotation/acm/Array2BigNum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/annotation/acm/UglyNum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/lambda/demo05/TestLambda.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/test/lambda/demo06/TestMethodRef.java" />
       </list>
     </option>
   </component>
@@ -313,7 +320,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -357,85 +364,101 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SpringMain">
-    <configuration name="SpringMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.game.server.SpringMain" />
+  <component name="RunManager" selected="JUnit.TestMethodRef.test02">
+    <configuration name="TestLambda.test02" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MMORPG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.game.server.*" />
+          <option name="PATTERN" value="com.test.lambda.demo05.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.test.lambda.demo05" />
+      <option name="MAIN_CLASS_NAME" value="com.test.lambda.demo05.TestLambda" />
+      <option name="METHOD_NAME" value="test02" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.test.juc.demo04.Test" />
+    <configuration name="TestLambda.test03" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MMORPG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.test.juc.demo04.*" />
+          <option name="PATTERN" value="com.test.lambda.demo05.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.test.lambda.demo05" />
+      <option name="MAIN_CLASS_NAME" value="com.test.lambda.demo05.TestLambda" />
+      <option name="METHOD_NAME" value="test03" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.test.juc.demo03.Test" />
+    <configuration name="TestLambda.test04" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MMORPG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.test.juc.demo03.*" />
+          <option name="PATTERN" value="com.test.lambda.demo05.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.test.lambda.demo05" />
+      <option name="MAIN_CLASS_NAME" value="com.test.lambda.demo05.TestLambda" />
+      <option name="METHOD_NAME" value="test04" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestInterrupt" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.test.juc.demo02.TestInterrupt" />
+    <configuration name="TestMethodRef.test01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MMORPG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.test.juc.demo02.*" />
+          <option name="PATTERN" value="com.test.lambda.demo06.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.test.lambda.demo06" />
+      <option name="MAIN_CLASS_NAME" value="com.test.lambda.demo06.TestMethodRef" />
+      <option name="METHOD_NAME" value="test01" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="server.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+    <configuration name="TestMethodRef.test02" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MMORPG" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="PROJECT_INTERPRETER" value="false" />
-      <option name="WORKING_DIRECTORY" value="C:\Users\DELL\IdeaProjects\MMORPG" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\DELL\IdeaProjects\MMORPG\server.sh" />
-      <option name="PARAMETERS" value="" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.test.lambda.demo06.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.test.lambda.demo06" />
+      <option name="MAIN_CLASS_NAME" value="com.test.lambda.demo06.TestMethodRef" />
+      <option name="METHOD_NAME" value="test02" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.SpringMain" />
-      <item itemvalue="Application.TestInterrupt" />
-      <item itemvalue="Application.Test" />
-      <item itemvalue="Application.Test (1)" />
-      <item itemvalue="Bash.server.sh" />
+      <item itemvalue="JUnit.TestLambda.test02" />
+      <item itemvalue="JUnit.TestLambda.test03" />
+      <item itemvalue="JUnit.TestLambda.test04" />
+      <item itemvalue="JUnit.TestMethodRef.test01" />
+      <item itemvalue="JUnit.TestMethodRef.test02" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SpringMain" />
-        <item itemvalue="Application.Test (1)" />
-        <item itemvalue="Application.TestInterrupt" />
-        <item itemvalue="Application.Test" />
+        <item itemvalue="JUnit.TestMethodRef.test02" />
+        <item itemvalue="JUnit.TestMethodRef.test01" />
+        <item itemvalue="JUnit.TestLambda.test04" />
+        <item itemvalue="JUnit.TestLambda.test03" />
+        <item itemvalue="JUnit.TestLambda.test02" />
       </list>
     </recent_temporary>
   </component>
@@ -492,7 +515,7 @@
       <workItem from="1568086106547" duration="1655000" />
       <workItem from="1568097541989" duration="798000" />
       <workItem from="1568102720465" duration="1360000" />
-      <workItem from="1568104421648" duration="722000" />
+      <workItem from="1568104421648" duration="21177000" />
     </task>
     <task id="LOCAL-00001" summary="来自mac的问候">
       <created>1559789455544</created>
@@ -816,43 +839,50 @@
       <option name="project" value="LOCAL" />
       <updated>1568086885191</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="mmorpg-v1.8.5-修改脚本文件">
+      <created>1568106616423</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1568106616423</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestDemo01_test01 - 2019.06.19 at 12h 38m 40s.xml">
-      <configuration name="TestDemo01.test01" configurationId="JUnit" />
+    <history-entry file="TestLambda_test01 - 2019.09.12 at 12h 21m 37s.xml">
+      <configuration name="TestLambda.test01" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestDemo01_test01 - 2019.06.19 at 14h 47m 47s.xml">
-      <configuration name="TestDemo01.test01" configurationId="JUnit" />
+    <history-entry file="TestLambda_test01_(1) - 2019.09.16 at 09h 46m 38s.xml">
+      <configuration name="TestLambda.test01 (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestDemo01_test01 - 2019.06.19 at 14h 48m 00s.xml">
-      <configuration name="TestDemo01.test01" configurationId="JUnit" />
+    <history-entry file="TestLambda_test02 - 2019.09.16 at 09h 53m 51s.xml">
+      <configuration name="TestLambda.test02" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestDemo01_test01 - 2019.06.19 at 14h 48m 51s.xml">
-      <configuration name="TestDemo01.test01" configurationId="JUnit" />
+    <history-entry file="TestLambda_test03 - 2019.09.16 at 10h 06m 51s.xml">
+      <configuration name="TestLambda.test03" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestDemo01_test01 - 2019.06.19 at 14h 51m 45s.xml">
-      <configuration name="TestDemo01.test01" configurationId="JUnit" />
+    <history-entry file="TestLambda_test03 - 2019.09.16 at 10h 07m 40s.xml">
+      <configuration name="TestLambda.test03" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestDemo01_test01 - 2019.06.19 at 14h 52m 07s.xml">
-      <configuration name="TestDemo01.test01" configurationId="JUnit" />
+    <history-entry file="TestLambda_test04 - 2019.09.16 at 10h 14m 59s.xml">
+      <configuration name="TestLambda.test04" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestDemo01_test01 - 2019.06.19 at 14h 53m 16s.xml">
-      <configuration name="TestDemo01.test01" configurationId="JUnit" />
+    <history-entry file="TestLambda_test04 - 2019.09.16 at 10h 15m 11s.xml">
+      <configuration name="TestLambda.test04" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestDemo01_test01 - 2019.06.19 at 15h 01m 30s.xml">
-      <configuration name="TestDemo01.test01" configurationId="JUnit" />
+    <history-entry file="TestMethodRef_test01 - 2019.09.16 at 10h 46m 01s.xml">
+      <configuration name="TestMethodRef.test01" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestDemo01_test01 - 2019.06.19 at 15h 03m 00s.xml">
-      <configuration name="TestDemo01.test01" configurationId="JUnit" />
+    <history-entry file="TestMethodRef_test02 - 2019.09.16 at 10h 49m 00s.xml">
+      <configuration name="TestMethodRef.test02" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestDemo01_test01 - 2019.06.19 at 15h 03m 08s.xml">
-      <configuration name="TestDemo01.test01" configurationId="JUnit" />
+    <history-entry file="TestMethodRef_test02 - 2019.09.16 at 10h 49m 11s.xml">
+      <configuration name="TestMethodRef.test02" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="893419000" />
+    <option name="totallyTimeSpent" value="913874000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -866,17 +896,17 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.24901186" visible="true" weight="0.2353362" />
-      <window_info id="Structure" order="1" sideWeight="0.7509881" side_tool="true" weight="0.23927614" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.24832214" visible="true" weight="0.2353362" />
+      <window_info id="Structure" order="1" sideWeight="0.7516779" side_tool="true" weight="0.2353362" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.28328612" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.2825279" />
       <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.49932975" weight="0.33002833" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49798927" visible="true" weight="0.3110285" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49798927" visible="true" weight="0.32961586" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -890,16 +920,17 @@
       <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.3286119" />
       <window_info anchor="bottom" id="Docker" order="15" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Console" order="16" weight="0.3286119" />
+      <window_info anchor="right" x="0" y="0" width="310" height="700" id="Documentation" sideWeight="0.5009242" side_tool="true" visible="true" weight="0.24964234" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" weight="0.3297587" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" sideWeight="0.4990758" visible="true" weight="0.24964234" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.3297568" />
-      <window_info anchor="right" id="Database" order="9" visible="true" weight="0.15665236" />
+      <window_info anchor="right" id="Database" order="9" sideWeight="0.49913645" weight="0.15665236" />
       <window_info anchor="right" id="Maven" order="10" weight="0.25067025" />
     </layout>
     <layout-to-restore>
@@ -983,7 +1014,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="阶段四--完成交易行系统" />
     <MESSAGE value="阶段四--完成任务系统的初步逻辑" />
     <MESSAGE value="阶段四--完成任务系统的初步逻辑2" />
     <MESSAGE value="阶段四--完成任务系统的初步逻辑3" />
@@ -1008,7 +1038,8 @@
     <MESSAGE value="Demo-v1.8.2-优化副本duplicate模块" />
     <MESSAGE value="Demo-v1.8.3-优化地图map和角色role模块" />
     <MESSAGE value="Demo-v1.8.4-添加自动生成类的脚步文件（linux&amp;windows）" />
-    <option name="LAST_COMMIT_MESSAGE" value="Demo-v1.8.4-添加自动生成类的脚步文件（linux&amp;windows）" />
+    <MESSAGE value="mmorpg-v1.8.5-修改脚本文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="mmorpg-v1.8.5-修改脚本文件" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1350,247 +1381,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/juc/demo04/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/juc/demo04/MyThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding>
-            <element signature="e#218#219#0" expanded="true" />
-            <element signature="e#254#255#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/service/ProtoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/rank/service/RankService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
-          <caret line="83" column="30" selection-start-line="83" selection-start-column="30" selection-end-line="83" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/bean/ConcreteRole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="65" column="23" lean-forward="true" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="26" />
-          <folding>
-            <element signature="e#3657#3658#0" expanded="true" />
-            <element signature="e#3687#3688#0" expanded="true" />
-            <element signature="e#3730#3731#0" expanded="true" />
-            <element signature="e#3768#3769#0" expanded="true" />
-            <element signature="e#3799#3800#0" expanded="true" />
-            <element signature="e#3829#3830#0" expanded="true" />
-            <element signature="e#3872#3873#0" expanded="true" />
-            <element signature="e#3910#3911#0" expanded="true" />
-            <element signature="e#3978#3979#0" expanded="true" />
-            <element signature="e#4018#4019#0" expanded="true" />
-            <element signature="e#4082#4083#0" expanded="true" />
-            <element signature="e#4118#4119#0" expanded="true" />
-            <element signature="e#4174#4175#0" expanded="true" />
-            <element signature="e#4205#4206#0" expanded="true" />
-            <element signature="e#4257#4258#0" expanded="true" />
-            <element signature="e#4286#4287#0" expanded="true" />
-            <element signature="e#4311#4312#0" expanded="true" />
-            <element signature="e#4336#4337#0" expanded="true" />
-            <element signature="e#4369#4370#0" expanded="true" />
-            <element signature="e#4397#4398#0" expanded="true" />
-            <element signature="e#4428#4429#0" expanded="true" />
-            <element signature="e#4455#4456#0" expanded="true" />
-            <element signature="e#4495#4496#0" expanded="true" />
-            <element signature="e#4527#4528#0" expanded="true" />
-            <element signature="e#4570#4571#0" expanded="true" />
-            <element signature="e#4604#4605#0" expanded="true" />
-            <element signature="e#4663#4664#0" expanded="true" />
-            <element signature="e#4709#4710#0" expanded="true" />
-            <element signature="e#4738#4739#0" expanded="true" />
-            <element signature="e#4766#4767#0" expanded="true" />
-            <element signature="e#4805#4806#0" expanded="true" />
-            <element signature="e#4839#4840#0" expanded="true" />
-            <element signature="e#4868#4869#0" expanded="true" />
-            <element signature="e#4896#4897#0" expanded="true" />
-            <element signature="e#4935#4936#0" expanded="true" />
-            <element signature="e#4969#4970#0" expanded="true" />
-            <element signature="e#4998#4999#0" expanded="true" />
-            <element signature="e#5026#5027#0" expanded="true" />
-            <element signature="e#5065#5066#0" expanded="true" />
-            <element signature="e#5099#5100#0" expanded="true" />
-            <element signature="e#5146#5147#0" expanded="true" />
-            <element signature="e#5182#5183#0" expanded="true" />
-            <element signature="e#5247#5248#0" expanded="true" />
-            <element signature="e#5297#5298#0" expanded="true" />
-            <element signature="e#5332#5333#0" expanded="true" />
-            <element signature="e#5362#5363#0" expanded="true" />
-            <element signature="e#5409#5410#0" expanded="true" />
-            <element signature="e#5447#5448#0" expanded="true" />
-            <element signature="e#5492#5493#0" expanded="true" />
-            <element signature="e#5527#5528#0" expanded="true" />
-            <element signature="e#5589#5590#0" expanded="true" />
-            <element signature="e#5637#5638#0" expanded="true" />
-            <element signature="e#5674#5675#0" expanded="true" />
-            <element signature="e#5705#5706#0" expanded="true" />
-            <element signature="e#5755#5756#0" expanded="true" />
-            <element signature="e#5795#5796#0" expanded="true" />
-            <element signature="e#5829#5830#0" expanded="true" />
-            <element signature="e#5858#5859#0" expanded="true" />
-            <element signature="e#5903#5904#0" expanded="true" />
-            <element signature="e#5939#5940#0" expanded="true" />
-            <element signature="e#5973#5974#0" expanded="true" />
-            <element signature="e#6002#6003#0" expanded="true" />
-            <element signature="e#6047#6048#0" expanded="true" />
-            <element signature="e#6083#6084#0" expanded="true" />
-            <element signature="e#6127#6128#0" expanded="true" />
-            <element signature="e#6166#6167#0" expanded="true" />
-            <element signature="e#6231#6232#0" expanded="true" />
-            <element signature="e#6287#6288#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/buff/bean/ConcreteBuff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/equipment/bean/Equipment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="75" column="48" lean-forward="true" selection-start-line="75" selection-start-column="48" selection-end-line="75" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5be7332f-c28a-4271-8217-7bfc0cfc599e/schema/game/table/equipment" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/equipment/service/EquipmentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="205" column="13" selection-start-line="205" selection-start-column="13" selection-end-line="205" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.3.RELEASE/spring-context-5.1.3.RELEASE.jar!/org/springframework/stereotype/Component.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/event/beanevent/TalkEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="17" column="7" lean-forward="true" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/task/bean/RoleTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-434">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/npc/service/NpcService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/role/task/RoleTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/npc/bean/ConcreteMonster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-732">
-          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/npc/excel/monster/ReadMonster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="72" column="62" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/backpack/task/UpdateMapMsgTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/buff/handler/BuffType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/buff/excel/ReadBuff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/buff/handler/BuffHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/protoc/MsgRankInfoProto.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/protoc/MsgGoodsInfoProto.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/MsgAuctionInfo.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/Map.proto">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/Npc.proto">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/protobuf/Role.proto">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/buff/manager/DefendBuff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="49" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/auction/service/AuctionService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.sh" />
     <entry file="file://$PROJECT_DIR$/serProbuf.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-104" />
@@ -1695,13 +1485,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2325">
-          <caret line="155" column="21" selection-start-line="155" selection-start-column="21" selection-end-line="155" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/12662824-c36c-4d1e-9549-35c06cbc41ef/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1733,17 +1516,305 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/occupation/excel/ReadOccupation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="80" column="13" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/game/server/SpringMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
           <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/game/occupation/excel/ReadOccupation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="54" column="27" lean-forward="true" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="155" column="18" lean-forward="true" selection-start-line="155" selection-start-column="18" selection-end-line="155" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/concurrent/Executors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="581" column="32" lean-forward="true" selection-start-line="581" selection-start-column="32" selection-end-line="581" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="1526" column="47" selection-start-line="1526" selection-start-column="47" selection-end-line="1526" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/juc/yielddemo/YieldTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+          <folding>
+            <element signature="e#397#398#0" expanded="true" />
+            <element signature="e#424#425#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo01/TestLambda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/juc/sleepdemo/SleepTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#263#264#0" expanded="true" />
+            <element signature="e#294#295#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo02/Employee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+          <folding>
+            <element signature="e#263#264#0" expanded="true" />
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#324#325#0" expanded="true" />
+            <element signature="e#355#356#0" expanded="true" />
+            <element signature="e#382#383#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="e#507#508#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#572#573#0" expanded="true" />
+            <element signature="e#605#606#0" expanded="true" />
+            <element signature="e#634#635#0" expanded="true" />
+            <element signature="e#678#679#0" expanded="true" />
+            <element signature="e#714#715#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo01/TestLambda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="61" column="60" selection-start-line="61" selection-start-column="60" selection-end-line="61" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#306#307#0" expanded="true" />
+            <element signature="e#358#359#0" expanded="true" />
+            <element signature="e#1088#1089#0" expanded="true" />
+            <element signature="e#1143#1144#0" expanded="true" />
+            <element signature="e#1205#1206#0" expanded="true" />
+            <element signature="e#1272#1273#0" expanded="true" />
+            <element signature="e#1282#1283#0" expanded="true" />
+            <element signature="e#1312#1313#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo02/TestLambda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo03/MyFunc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="25" lean-forward="true" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo03/TestLambda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+          <folding>
+            <element signature="e#197#198#0" expanded="true" />
+            <element signature="e#229#230#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo01/Myfunc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo04/MyFunc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo04/TestLambda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+          <folding>
+            <element signature="e#237#238#0" expanded="true" />
+            <element signature="e#269#270#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="1005" column="28" lean-forward="true" selection-start-line="1005" selection-start-column="28" selection-end-line="1005" selection-end-column="28" />
+          <folding>
+            <element signature="e#5559#5560#0" expanded="true" />
+            <element signature="e#5600#5601#0" expanded="true" />
+            <element signature="e#15020#15021#0" expanded="true" />
+            <element signature="e#15084#15085#0" expanded="true" />
+            <element signature="e#15704#15705#0" expanded="true" />
+            <element signature="e#15770#15771#0" expanded="true" />
+            <element signature="e#36709#36710#0" expanded="true" />
+            <element signature="e#36767#36768#0" expanded="true" />
+            <element signature="e#44253#44254#0" expanded="true" />
+            <element signature="e#44281#44282#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/juc/damondemo/MyTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-46">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding>
+            <element signature="e#185#186#0" expanded="true" />
+            <element signature="e#208#209#0" expanded="true" />
+            <element signature="e#417#418#0" expanded="true" />
+            <element signature="e#440#441#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/Arrays.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="1430" column="44" selection-start-line="1430" selection-start-column="44" selection-end-line="1430" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/annotation/acm/UglyNum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/annotation/acm/Array2BigNum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-196">
+          <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/annotation/acm/Find1Num.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/function/Supplier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/function/Predicate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="39" column="17" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/jdk8/lambda/Demo01.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo05/TestLambda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="92" column="32" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#392#393#0" expanded="true" />
+            <element signature="e#428#429#0" expanded="true" />
+            <element signature="e#1457#1458#0" expanded="true" />
+            <element signature="e#1499#1500#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/function/Consumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/function/Function.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="51" column="72" lean-forward="true" selection-start-line="51" selection-start-column="72" selection-end-line="51" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/Comparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/util/function/BiPredicate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="42" column="23" lean-forward="true" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/lambda/demo06/TestMethodRef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="29" column="51" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
